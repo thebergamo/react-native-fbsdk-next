@@ -1,15 +1,18 @@
 {
-  "name": "react-native-fbsdk",
-  "version": "3.0.0",
+  "name": "react-native-fbsdk-next",
+  "version": "3.0.1",
   "description": "Facebook SDK support for React Native apps.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "react-native": "src/index.js",
   "sideEffects": false,
   "author": {
-    "name": "Zhuowen Deng"
+    "name": "Marcos Bérgamo"
   },
   "contributors": [
+    {
+      "name": "Zhuowen Deng"
+    },
     {
       "name": "Chris Hackmann"
     },
@@ -25,9 +28,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/facebook/react-native-fbsdk.git"
+    "url": "git+https://github.com/thebergamo/react-native-fbsdk-next.git"
   },
-  "homepage": "https://github.com/facebook/react-native-fbsdk/",
+  "homepage": "https://github.com/thebergamo/react-native-fbsdk-next/",
   "keywords": [
     "react",
     "react-native",
@@ -37,7 +40,7 @@
     "facebook",
     "core"
   ],
-  "license": "Facebook Platform License",
+  "license": "MIT",
   "scripts": {
     "start": "react-native start",
     "prepare": "bob build",
@@ -59,7 +62,7 @@
     "src",
     "LICENSE.txt",
     "README.md",
-    "react-native-fbsdk.podspec"
+    "react-native-fbsdk-next.podspec"
   ],
   "dependencies": {},
   "peerDependencies": {
