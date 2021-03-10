@@ -23,7 +23,7 @@
 
 import React, {Component} from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {LoginButton, ShareDialog} from 'react-native-fbsdk';
+import {LoginButton, ShareDialog} from 'react-native-fbsdk-next';
 
 const SHARE_LINK_CONTENT = {
   contentType: 'link',

@@ -2,5 +2,5 @@ rootProject.name = 'RNFBSDKExample'
 
 include ':app'
 
-include ':react-native-fbsdk'
-project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../../android')
+include ':react-native-fbsdk-next'
+project(':react-native-fbsdk-next').projectDir = new File(rootProject.projectDir, '../../android')
