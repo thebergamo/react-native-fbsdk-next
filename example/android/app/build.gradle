@@ -206,7 +206,7 @@ dependencies {
       implementation jscFlavor
     }
 
-    implementation project(":react-native-fbsdk")
+    implementation project(":react-native-fbsdk-next")
 }
 
 // Run this once to be able to run the application with BUCK

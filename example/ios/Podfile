@@ -10,5 +10,5 @@ platform :ios, "10.0"
 target 'RNFBSDKExample' do
   use_react_native!(path: $react_native_path)
 
-  pod 'react-native-fbsdk', :path => '../../'
+  pod 'react-native-fbsdk-next', :path => '../../'
 end

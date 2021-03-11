@@ -1,6 +1,6 @@
 <!-- 
-    `react-native-fbsdk` is a wrapper around the Facebook SDKs for iOS and Android. 
-    GitHub Issues in the `facebook/react-native-fbsdk` repository are used exclusively 
+    `react-native-fbsdk-sdk` is a wrapper around the Facebook SDKs for iOS and Android. 
+    GitHub Issues in the `thebergamo/react-native-fbsdk-next` repository are used exclusively 
     for tracking bugs in the React Native wrapper around the Facebook SDK.
 
     To report a bug in the iOS or Android Facebook SDK, please visit https://developers.facebook.com/bugs/.
