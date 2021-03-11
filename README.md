@@ -162,6 +162,34 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 
 ## Usage
 
+### SDK Initialization
+
+The `autoInitEnabled` option is removed from [facebook-ios-sdk#v9.0.0](https://github.com/facebook/facebook-ios-sdk/blob/master/CHANGELOG.md#900). 
+
+On iOS, developers are required to initialize the sdk after app launched, implement the code below in your `AppDelegate.m`:
+
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  [FBSDKApplicationDelegate initializeSDK:launchOptions]; // <- add this
+
+  // your other stuff
+}
+```
+
+Or call `Settings.initializeSDK` in anywhere else if you want the sdk to be initialized in react-native
+
+```js
+import { Platform } from 'react-native';
+import { Settings } from 'react-native-fbsdk-next';
+
+if(Platform.OS === 'ios'){
+  Settings.initializeSDK();
+}
+```
+
+> NOTE: `Settings.initializeSDK` is also functional for Android, if you want to comply with [GDPR](https://developers.facebook.com/docs/app-events/gdpr-compliance), `Settings.initializeSDK` can be called after an end user provides consent.
+
 ### [Login](https://developers.facebook.com/docs/facebook-login)
 
 #### Login Button + Access Token
