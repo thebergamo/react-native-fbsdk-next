@@ -164,9 +164,27 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 
 ### SDK Initialization
 
-The `autoInitEnabled` option is removed from [facebook-ios-sdk#v9.0.0](https://github.com/facebook/facebook-ios-sdk/blob/master/CHANGELOG.md#900). 
+To comply with Apple privacy requirements, for iOS the `autoInitEnabled` option is removed from [facebook-ios-sdk#v9.0.0](https://github.com/facebook/facebook-ios-sdk/blob/master/CHANGELOG.md#900).
 
-On iOS, developers are required to initialize the sdk after app launched, implement the code below in your `AppDelegate.m`:
+Using this module, there are two options to comply with this requirement, one is platform-neutral and can be used from your javascript code whenever it makes sense for your app, and one is native.
+
+#### Platform-neutral SDK initialization
+
+If you do not need to handle a [GDPR-type opt-in flow](https://developers.facebook.com/docs/app-events/gdpr-compliance), on iOS you should include the following javascript code as early in startup as possible. For Android auto-init is the default still, so this is not strictly necessary for Android but will work.
+
+If you need to handle a GDPR-type flow, make sure your SDK is configured natively to delay all logging activity according to [the GDPR instructions](https://developers.facebook.com/docs/app-events/gdpr-compliance), ask for user consent, and after obtaining consent include code similar to this:
+
+```js
+import { Settings } from 'react-native-fbsdk-next';
+
+// Ask for consent first if necessary
+// Possibly only do this for iOS if no need to handle a GDPR-type flow
+Settings.initializeSDK();
+```
+
+#### iOS Native Initialization
+
+If you would like to initialize the Facebook SDK even earlier in startup for iOS, you need to include this code in your AppDelegate.m file now that auto-initialization is removed.
 
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -176,19 +194,6 @@ On iOS, developers are required to initialize the sdk after app launched, implem
   // your other stuff
 }
 ```
-
-Or call `Settings.initializeSDK` in anywhere else if you want the sdk to be initialized in react-native
-
-```js
-import { Platform } from 'react-native';
-import { Settings } from 'react-native-fbsdk-next';
-
-if(Platform.OS === 'ios'){
-  Settings.initializeSDK();
-}
-```
-
-> NOTE: `Settings.initializeSDK` is also functional for Android, if you want to comply with [GDPR](https://developers.facebook.com/docs/app-events/gdpr-compliance), `Settings.initializeSDK` can be called after an end user provides consent.
 
 ### [Login](https://developers.facebook.com/docs/facebook-login)
 
