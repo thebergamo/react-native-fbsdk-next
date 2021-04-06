@@ -24,6 +24,9 @@
     },
     {
       "name": "Janic Duplessis"
+    },
+    {
+      "name": "Georges DIMITRY"
     }
   ],
   "repository": {
@@ -111,5 +114,6 @@
       ],
       "module"
     ]
-  }
+  },
+  "types": "types/index.d.ts"
 }
