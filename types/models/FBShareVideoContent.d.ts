@@ -40,4 +40,3 @@ export type ShareVideoContent = {
      */
   previewPhoto?: SharePhoto;
 };
-// # sourceMappingURL=FBShareVideoContent.d.ts.map

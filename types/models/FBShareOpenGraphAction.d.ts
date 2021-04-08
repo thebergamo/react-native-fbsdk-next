@@ -10,4 +10,3 @@ class ShareOpenGraphAction extends ShareOpenGraphValueContainer {
   constructor(actionType: string);
 }
 export default ShareOpenGraphAction;
-// # sourceMappingURL=FBShareOpenGraphAction.d.ts.map

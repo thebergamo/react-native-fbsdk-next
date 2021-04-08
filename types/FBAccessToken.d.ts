@@ -124,4 +124,3 @@ class FBAccessToken {
   getUserId(): string;
 }
 export default FBAccessToken;
-// # sourceMappingURL=FBAccessToken.d.ts.map

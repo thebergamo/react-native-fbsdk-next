@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable react/static-property-placement */
 import * as React from 'react';
 import type {
   DefaultAudience,
@@ -58,4 +56,3 @@ const styles: {
   };
 };
 export default LoginButton;
-// # sourceMappingURL=FBLoginButton.d.ts.map

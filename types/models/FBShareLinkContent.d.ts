@@ -43,4 +43,3 @@ export type ShareLinkContent = {
      */
   quote?: string;
 };
-// # sourceMappingURL=FBShareLinkContent.d.ts.map

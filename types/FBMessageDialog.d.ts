@@ -17,4 +17,3 @@ const defaultExport: {
   setShouldFailOnDataError(shouldFailOnDataError: boolean): void;
 };
 export = defaultExport;
-// # sourceMappingURL=FBMessageDialog.d.ts.map

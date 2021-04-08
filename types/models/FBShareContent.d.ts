@@ -34,4 +34,3 @@ export type ShareContentCommonParameters = {
      */
   hashtag?: string;
 };
-// # sourceMappingURL=FBShareContent.d.ts.map

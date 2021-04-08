@@ -38,4 +38,3 @@ class ShareOpenGraphValueContainer {
   getEntry(key: string): OpenGraphValue;
 }
 export default ShareOpenGraphValueContainer;
-// # sourceMappingURL=FBShareOpenGraphValueContainer.d.ts.map

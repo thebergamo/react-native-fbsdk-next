@@ -77,4 +77,3 @@ declare module 'react-native-fbsdk-next' {
   };
   export = defaultVar;
 }
-// # sourceMappingURL=index.d.ts.map

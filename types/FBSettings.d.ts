@@ -19,4 +19,3 @@ const defaultExport: {
   initializeSDK(): void;
 };
 export = defaultExport;
-// # sourceMappingURL=FBSettings.d.ts.map

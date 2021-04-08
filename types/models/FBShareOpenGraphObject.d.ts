@@ -5,4 +5,3 @@ import ShareOpenGraphValueContainer from './FBShareOpenGraphValueContainer';
 class ShareOpenGraphObject extends ShareOpenGraphValueContainer {
 }
 export default ShareOpenGraphObject;
-// # sourceMappingURL=FBShareOpenGraphObject.d.ts.map

@@ -27,4 +27,3 @@ export type ShareOpenGraphContent = {
      */
   previewPropertyName: string;
 };
-// # sourceMappingURL=FBShareOpenGraphContent.d.ts.map

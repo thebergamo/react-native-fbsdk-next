@@ -25,4 +25,3 @@ export type SharePhotoContent = {
      */
   photos: Array<SharePhoto>;
 };
-// # sourceMappingURL=FBSharePhotoContent.d.ts.map

@@ -48,4 +48,3 @@ class FBGraphRequest {
   addStringParameter(paramString: string, key: string): void;
 }
 export default FBGraphRequest;
-// # sourceMappingURL=FBGraphRequest.d.ts.map

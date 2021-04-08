@@ -19,4 +19,3 @@ export type SharePhoto = {
      */
   caption?: string;
 };
-// # sourceMappingURL=FBSharePhoto.d.ts.map

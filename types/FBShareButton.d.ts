@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable react/static-property-placement */
-/* eslint-disable react/prefer-stateless-function */
 import * as React from 'react';
 import type {
   ShareContent,
@@ -28,4 +25,3 @@ const styles: {
   };
 };
 export default ShareButton;
-// # sourceMappingURL=FBShareButton.d.ts.map

@@ -13,4 +13,3 @@ const defaultExport: {
   show(gameRequestContent: GameRequestContent): Promise<any>;
 };
 export = defaultExport;
-// # sourceMappingURL=FBGameRequestDialog.d.ts.map

@@ -7,4 +7,3 @@ export type ShareVideo = {
      */
   localUrl: string;
 };
-// # sourceMappingURL=FBShareVideo.d.ts.map
