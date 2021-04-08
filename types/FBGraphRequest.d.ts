@@ -23,7 +23,7 @@ type GraphRequestParameters = {
 /**
  * Represents a Graph API request and provides batch request supports.
  */
-class FBGraphRequest {
+export default class FBGraphRequest {
   /**
      * The Graph API endpoint to use for the request, for example "me".
      */
@@ -47,4 +47,3 @@ class FBGraphRequest {
      */
   addStringParameter(paramString: string, key: string): void;
 }
-export default FBGraphRequest;

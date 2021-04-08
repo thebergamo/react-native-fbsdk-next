@@ -3,7 +3,7 @@ import type {
   ShareContent,
 } from './models/FBShareContent';
 
-class ShareButton extends React.Component<{
+export default class ShareButton extends React.Component<{
   /**
      * Content to be shared.
      */
@@ -18,10 +18,9 @@ class ShareButton extends React.Component<{
   };
   render(): JSX.Element;
 }
-const styles: {
+export const styles: {
   defaultButtonStyle: {
     height: number;
     width: number;
   };
 };
-export default ShareButton;

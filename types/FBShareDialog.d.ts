@@ -25,7 +25,7 @@ type ShareDialogModeIOS = 'automatic' | 'browser' | 'webview'
  * The native dialog is used.
  */
 | 'native';
-const defaultExport: {
+export default class FBShareDialog {
   /**
      * Check if the dialog can be shown.
      */
@@ -42,5 +42,4 @@ const defaultExport: {
      * Sets whether or not the native share dialog should fail when it encounters a data error.
      */
   setShouldFailOnDataError(shouldFailOnDataError: boolean): void;
-};
-export = defaultExport;
+}

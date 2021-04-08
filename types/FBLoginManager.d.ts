@@ -24,7 +24,7 @@ export type LoginResult = {
   grantedPermissions?: Array<string>;
   declinedPermissions?: Array<string>;
 };
-const defaultExport: {
+export default class FBLoginManager {
   /**
      * Logs the user in with the requested permissions.
      */
@@ -49,5 +49,4 @@ const defaultExport: {
      * Logs out the user.
      */
   logOut(): void;
-};
-export default defaultExport;
+}

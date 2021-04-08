@@ -1,4 +1,4 @@
-const defaultExport: {
+export default class FBSettings {
   /**
      * For iOS only, get AdvertiserTrackingEnabled status.
      * @platform ios
@@ -17,5 +17,4 @@ const defaultExport: {
      * Initialize the sdk
      */
   initializeSDK(): void;
-};
-export = defaultExport;
+}

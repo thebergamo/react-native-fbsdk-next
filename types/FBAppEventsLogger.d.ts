@@ -31,7 +31,7 @@ type UserData = Readonly<{
   zip?: string | null;
   country?: string | null;
 }>;
-const defaultExport: {
+export default class FBAppEventsLogger {
   /**
      * Sets the current event flushing behavior specifying when events
      * are sent back to Facebook servers.
@@ -100,5 +100,4 @@ const defaultExport: {
      * @platform Android
      */
   setPushNotificationsRegistrationId(registrationId: string): void;
-};
-export = defaultExport;
+}

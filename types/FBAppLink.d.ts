@@ -1,4 +1,3 @@
-const defaultExport: {
+export default class FBAppLink {
   fetchDeferredAppLink(): Promise<string | null>;
-};
-export = defaultExport;
+}

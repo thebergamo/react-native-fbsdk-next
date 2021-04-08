@@ -3,7 +3,7 @@ import type {
   ShareContent,
 } from './models/FBShareContent';
 
-class SendButton extends React.Component<{
+export default class SendButton extends React.Component<{
   /**
      * Content to be shared.
      */
@@ -18,10 +18,9 @@ class SendButton extends React.Component<{
   };
   render(): JSX.Element;
 }
-const styles: {
+export const styles: {
   defaultButtonStyle: {
     height: number;
     width: number;
   };
 };
-export default SendButton;

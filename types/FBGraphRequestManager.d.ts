@@ -1,7 +1,7 @@
 import type GraphRequest from './FBGraphRequest';
 
 type Callback = (error?: any | null, result?: any | null) => void;
-class FBGraphRequestManager {
+export default class FBGraphRequestManager {
   requestBatch: Array<GraphRequest>;
 
   requestCallbacks: Array<Callback | undefined | null>;
@@ -30,4 +30,3 @@ class FBGraphRequestManager {
      */
   start(timeout?: number | null): void;
 }
-export default FBGraphRequestManager;

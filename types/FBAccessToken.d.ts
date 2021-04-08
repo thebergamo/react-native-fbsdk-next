@@ -13,7 +13,7 @@ type AccessTokenMap = {
 /**
  * Represents an immutable access token for using Facebook services.
  */
-class FBAccessToken {
+export default class FBAccessToken {
   /**
      * The access token string.
      */
@@ -123,4 +123,3 @@ class FBAccessToken {
      */
   getUserId(): string;
 }
-export default FBAccessToken;
