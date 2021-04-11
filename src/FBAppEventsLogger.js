@@ -57,6 +57,8 @@ type UserData = $ReadOnly<{|
   country?: ?string,
 |}>;
 
+const {StandardEvents, EventParams} = AppEventsLogger.getConstants();
+
 module.exports = {
   /**
    * Sets the current event flushing behavior specifying when events
@@ -182,4 +184,14 @@ module.exports = {
   setPushNotificationsRegistrationId(registrationId: string) {
     AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
   },
+
+  /**
+   * Predefined event names for logging events common to many apps.
+   */
+  StandardEvents,
+
+  /**
+   *  Predefined event name parameters for common additional information to accompany events logged through the `logEvent` family.
+   */
+  EventParams,
 };
