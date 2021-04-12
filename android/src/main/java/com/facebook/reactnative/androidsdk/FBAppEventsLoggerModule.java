@@ -360,7 +360,7 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
         appEventParams.put("SearchString", AppEventsConstants.EVENT_PARAM_SEARCH_STRING);
         appEventParams.put("Success", AppEventsConstants.EVENT_PARAM_SUCCESS);
         appEventParams.put("ValueNo", AppEventsConstants.EVENT_PARAM_VALUE_NO);
-        appEventParams.put("ValueYES", AppEventsConstants.EVENT_PARAM_VALUE_YES);
+        appEventParams.put("ValueYes", AppEventsConstants.EVENT_PARAM_VALUE_YES);
         constants.put("AppEventParams", appEventParams);
 
         return constants;
