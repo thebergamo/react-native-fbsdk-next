@@ -81,7 +81,6 @@ type AppEvent = {
   Subscribe: string,
   UnlockedAchievement: string,
   ViewedContent: string,
-  AppEvents: string,
 };
 
 type AppEventParam = {
@@ -100,7 +99,7 @@ type AppEventParam = {
   SearchString: string,
   Success: string,
   ValueNo: string,
-  ValueYES: string,
+  ValueYes: string,
 };
 
 const {
