@@ -400,6 +400,11 @@ import { AppEventsLogger } from "react-native-fbsdk-next";
 
 // Log a $15 purchase.
 AppEventsLogger.logPurchase(15, "USD", { param: "value" });
+
+// Log standard event. e.g. completed registration
+AppEventsLogger.logEvent(AppEventsLogger.AppEvents.CompletedRegistration, {
+  [AppEventsLogger.AppEventParams.RegistrationMethod]: "email",
+});
 ```
 
 ### [Graph API](https://developers.facebook.com/docs/graph-api)
