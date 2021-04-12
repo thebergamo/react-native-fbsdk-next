@@ -146,7 +146,7 @@ RCT_EXPORT_METHOD(setPushNotificationsDeviceToken:(NSString *)deviceToken)
 
 - (NSDictionary *)constantsToExport {
   return @{
-    @"StandardEvents": @{
+    @"AppEvents": @{
       @"AchievedLevel": FBSDKAppEventNameAchievedLevel,
       @"AdClick": FBSDKAppEventNameAdClick,
       @"AdImpression": FBSDKAppEventNameAdImpression,
@@ -171,7 +171,7 @@ RCT_EXPORT_METHOD(setPushNotificationsDeviceToken:(NSString *)deviceToken)
       @"UnlockedAchievement": FBSDKAppEventNameUnlockedAchievement,
       @"ViewedContent": FBSDKAppEventNameViewedContent,
     },
-    @"EventParams": @{
+    @"AppEventParams": @{
       @"AddType": FBSDKAppEventParameterNameAdType,
       @"Content": FBSDKAppEventParameterNameContent,
       @"ContentID": FBSDKAppEventParameterNameContentID,

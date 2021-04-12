@@ -57,7 +57,7 @@ type UserData = $ReadOnly<{|
   country?: ?string,
 |}>;
 
-const {StandardEvents, EventParams} = AppEventsLogger.getConstants();
+const {AppEvents, AppEventParams} = AppEventsLogger.getConstants();
 
 module.exports = {
   /**
@@ -188,10 +188,10 @@ module.exports = {
   /**
    * Predefined event names for logging events common to many apps.
    */
-  StandardEvents,
+  AppEvents,
 
   /**
-   *  Predefined event name parameters for common additional information to accompany events logged through the `logEvent` family.
+   *  Predefined event name parameters for common additional information to accompany events logged through the `logEvent`.
    */
-  EventParams,
+  AppEventParams,
 };
