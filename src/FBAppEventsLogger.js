@@ -57,7 +57,59 @@ type UserData = $ReadOnly<{|
   country?: ?string,
 |}>;
 
-const {AppEvents, AppEventParams} = AppEventsLogger.getConstants();
+type AppEvent = {
+  AchievedLevel: string,
+  AdClick: string,
+  AdImpression: string,
+  AddedPaymentInfo: string,
+  AddedToCart: string,
+  AddedToWishlist: string,
+  CompletedRegistration: string,
+  CompletedTutorial: string,
+  Contact: string,
+  CustomizeProduct: string,
+  Donate: string,
+  FindLocation: string,
+  InitiatedCheckout: string,
+  Purchased: string,
+  Rated: string,
+  Searched: string,
+  SpentCredits: string,
+  Schedule: string,
+  StartTrial: string,
+  SubmitApplication: string,
+  Subscribe: string,
+  UnlockedAchievement: string,
+  ViewedContent: string,
+  AppEvents: string,
+};
+
+type AppEventParam = {
+  AddType: string,
+  Content: string,
+  ContentID: string,
+  ContentType: string,
+  Currency: string,
+  Description: string,
+  Level: string,
+  NumItems: string,
+  MaxRatingValue: string,
+  OrderId: string,
+  PaymentInfoAvailable: string,
+  RegistrationMethod: string,
+  SearchString: string,
+  Success: string,
+  ValueNo: string,
+  ValueYES: string,
+};
+
+const {
+  AppEvents,
+  AppEventParams,
+}: {
+  AppEvents: AppEvent,
+  AppEventParams: AppEventParam,
+} = AppEventsLogger.getConstants();
 
 module.exports = {
   /**
