@@ -10,7 +10,7 @@ type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 /**
  * A button that initiates a log in or log out flow upon tapping.
  */
-export default class LoginButton extends React.Component<{
+export class LoginButton extends React.Component<{
   /**
      * Represents the permissions to request when the login button
      * is pressed.

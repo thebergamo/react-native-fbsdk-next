@@ -1,3 +1,3 @@
-export default class FBAppLink {
+export type FBAppLink = {
   fetchDeferredAppLink(): Promise<string | null>;
-}
+};

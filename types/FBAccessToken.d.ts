@@ -13,7 +13,7 @@ type AccessTokenMap = {
 /**
  * Represents an immutable access token for using Facebook services.
  */
-export default class FBAccessToken {
+export class FBAccessToken {
   /**
      * The access token string.
      */

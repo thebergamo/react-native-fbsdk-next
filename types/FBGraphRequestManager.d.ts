@@ -1,8 +1,10 @@
-import type GraphRequest from './FBGraphRequest';
+import type {
+   FBGraphRequest,
+} from './FBGraphRequest';
 
 type Callback = (error?: any | null, result?: any | null) => void;
-export default class FBGraphRequestManager {
-  requestBatch: Array<GraphRequest>;
+export class FBGraphRequestManager {
+  requestBatch: Array<FBGraphRequest>;
 
   requestCallbacks: Array<Callback | undefined | null>;
 
@@ -11,7 +13,7 @@ export default class FBGraphRequestManager {
   /**
      * Add a graph request.
      */
-  addRequest(request: GraphRequest): FBGraphRequestManager;
+  addRequest(request: FBGraphRequest): FBGraphRequestManager;
   /**
      * Add call back to the GraphRequestManager. Only one callback can be added.
      * Note that invocation of the batch callback does not indicate success of every

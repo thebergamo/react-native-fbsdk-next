@@ -3,7 +3,7 @@ import type {
   ShareContent,
 } from './models/FBShareContent';
 
-export default class ShareButton extends React.Component<{
+export class ShareButton extends React.Component<{
   /**
      * Content to be shared.
      */

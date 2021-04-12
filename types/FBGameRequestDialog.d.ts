@@ -2,7 +2,7 @@ import type {
   GameRequestContent,
 } from './models/FBGameRequestContent';
 
-export default class FBGameRequestDialog {
+export type FBGameRequestDialog = {
   /**
      * Check if the dialog can be shown.
      */
@@ -11,4 +11,4 @@ export default class FBGameRequestDialog {
      * Shows the dialog using the specified content.
      */
   show(gameRequestContent: GameRequestContent): Promise<any>;
-}
+};

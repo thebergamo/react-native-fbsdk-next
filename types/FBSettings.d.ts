@@ -1,4 +1,4 @@
-export default class FBSettings {
+export type FBSettings = {
   /**
      * For iOS only, get AdvertiserTrackingEnabled status.
      * @platform ios
@@ -17,4 +17,4 @@ export default class FBSettings {
      * Initialize the sdk
      */
   initializeSDK(): void;
-}
+};

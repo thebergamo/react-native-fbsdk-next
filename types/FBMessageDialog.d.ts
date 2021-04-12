@@ -2,7 +2,7 @@ import type {
   ShareContent,
 } from './models/FBShareContent';
 
-export default class FBMessageDialog {
+export type FBMessageDialog = {
   /**
      * Check if the dialog can be shown.
      */
@@ -15,4 +15,4 @@ export default class FBMessageDialog {
      * Sets whether or not the native message dialog should fail when it encounters a data error.
      */
   setShouldFailOnDataError(shouldFailOnDataError: boolean): void;
-}
+};

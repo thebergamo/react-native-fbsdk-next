@@ -13,7 +13,7 @@ type OpenGraphValueType = 'number' | 'open-graph-object' | 'photo' | 'string';
 /**
  * Represents an interface for adding and retrieving values to open graph objects and actions.
  */
-export default class ShareOpenGraphValueContainer {
+export class ShareOpenGraphValueContainer {
   _properties: OpenGraphProperties;
   constructor(properties?: OpenGraphProperties | null);
   /**

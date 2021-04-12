@@ -1,8 +1,10 @@
-import ShareOpenGraphValueContainer from './FBShareOpenGraphValueContainer';
+import {
+  ShareOpenGraphValueContainer,
+} from './FBShareOpenGraphValueContainer';
 /**
  * Represents an open graph action.
  */
-export default class ShareOpenGraphAction extends ShareOpenGraphValueContainer {
+export class ShareOpenGraphAction extends ShareOpenGraphValueContainer {
   /**
      * The action type.
      */

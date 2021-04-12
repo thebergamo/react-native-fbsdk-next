@@ -1,4 +1,6 @@
-import ShareOpenGraphAction from './FBShareOpenGraphAction';
+import {
+   ShareOpenGraphAction,
+} from './FBShareOpenGraphAction';
 import type {
   ShareContentCommonParameters,
 } from './FBShareContent';

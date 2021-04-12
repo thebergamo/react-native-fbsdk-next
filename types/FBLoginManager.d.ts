@@ -24,7 +24,7 @@ export type LoginResult = {
   grantedPermissions?: Array<string>;
   declinedPermissions?: Array<string>;
 };
-export default class FBLoginManager {
+export type FBLoginManager = {
   /**
      * Logs the user in with the requested permissions.
      */
@@ -49,4 +49,4 @@ export default class FBLoginManager {
      * Logs out the user.
      */
   logOut(): void;
-}
+};
