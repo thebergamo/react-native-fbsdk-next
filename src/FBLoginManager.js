@@ -65,7 +65,9 @@ export type LoginTracking = 'enabled' | 'limited';
 
 module.exports = {
   /**
-   * Limited Log in with the requested permissions. 
+   * Log in with the requested permissions.
+   * IOS only: loginTracking: 'enabled' | 'limited'
+   * IOS only: nonce - Nonce that the configuration was created with. A unique nonce will be used if none is provided to the factory method. 
    */
    logInWithPermissions(
     permissions: Array<string>,
