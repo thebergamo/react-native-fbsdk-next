@@ -61,11 +61,20 @@ export type LoginResult = {
   declinedPermissions?: Array<string>,
 };
 
+export type LoginTracking = 'enabled' | 'limited';
+
 module.exports = {
   /**
-   * Logs the user in with the requested permissions.
+   * Limited Log in with the requested permissions. 
    */
-  logInWithPermissions(permissions: Array<string>): Promise<LoginResult> {
+   logInWithPermissions(
+    permissions: Array<string>,
+    loginTracking: LoginTracking = 'enabled',
+    nonce: ?string,
+  ): Promise<LoginResult> {
+    if (Platform.OS === 'ios') {
+      return LoginManager.logInWithPermissions(permissions, loginTracking, nonce);
+    }
     return LoginManager.logInWithPermissions(permissions);
   },
 
