@@ -24,6 +24,9 @@
     },
     {
       "name": "Janic Duplessis"
+    },
+    {
+      "name": "Georges DIMITRY"
     }
   ],
   "repository": {
@@ -63,7 +66,8 @@
     "src",
     "LICENSE.txt",
     "README.md",
-    "react-native-fbsdk-next.podspec"
+    "react-native-fbsdk-next.podspec",
+    "types"
   ],
   "dependencies": {},
   "peerDependencies": {
@@ -111,5 +115,6 @@
       ],
       "module"
     ]
-  }
+  },
+  "types": "types/index.d.ts"
 }
