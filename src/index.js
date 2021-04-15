@@ -63,6 +63,9 @@ module.exports = {
   get MessageDialog() {
     return require('./FBMessageDialog');
   },
+  get Profile() {
+    return require('./FBProfile');
+  },
   get Settings() {
     return require('./FBSettings');
   },

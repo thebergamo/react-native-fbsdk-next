@@ -27,6 +27,7 @@
 		93E005141CE3D2D3000598E3 /* RCTFBSDKShareButtonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E005061CE3D2D3000598E3 /* RCTFBSDKShareButtonManager.m */; };
 		93E005151CE3D2D3000598E3 /* RCTFBSDKShareDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E005081CE3D2D3000598E3 /* RCTFBSDKShareDialog.m */; };
 		93E005161CE3D2D3000598E3 /* RCTFBSDKShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E0050A1CE3D2D3000598E3 /* RCTFBSDKShareHelper.m */; };
+		B34601D02628529500AC1860 /* RCTFBSDKProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */; };
 		F1191EC92560474100A8767F /* RCTFBSDKAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		93E005081CE3D2D3000598E3 /* RCTFBSDKShareDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareDialog.m; path = share/RCTFBSDKShareDialog.m; sourceTree = "<group>"; };
 		93E005091CE3D2D3000598E3 /* RCTFBSDKShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKShareHelper.h; path = share/RCTFBSDKShareHelper.h; sourceTree = "<group>"; };
 		93E0050A1CE3D2D3000598E3 /* RCTFBSDKShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareHelper.m; path = share/RCTFBSDKShareHelper.m; sourceTree = "<group>"; };
+		B34601CE2628525600AC1860 /* RCTFBSDKProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFBSDKProfile.h; sourceTree = "<group>"; };
+		B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKProfile.m; path = core/RCTFBSDKProfile.m; sourceTree = "<group>"; };
 		F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKAppLink.m; path = core/RCTFBSDKAppLink.m; sourceTree = "<group>"; };
 		F1191ECB25604E4B00A8767F /* RCTFBSDKAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKAppLink.h; path = core/RCTFBSDKAppLink.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +156,8 @@
 				F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */,
 				10E3C0CE2626E85700016645 /* RCTFBSDKAuthenticationToken.m */,
 				10E3C0D12626E87A00016645 /* RCTFBSDKAuthenticationToken.h */,
+				B34601CE2628525600AC1860 /* RCTFBSDKProfile.h */,
+				B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34601D02628529500AC1860 /* RCTFBSDKProfile.m in Sources */,
 				93E005151CE3D2D3000598E3 /* RCTFBSDKShareDialog.m in Sources */,
 				93E004E51CE3D292000598E3 /* RCTFBSDKAppEvents.m in Sources */,
 				93E004E61CE3D292000598E3 /* RCTFBSDKGraphRequestManager.m in Sources */,
