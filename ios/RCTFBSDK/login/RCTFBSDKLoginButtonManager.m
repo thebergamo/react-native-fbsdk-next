@@ -45,6 +45,10 @@ RCT_EXPORT_VIEW_PROPERTY(permissions, NSStringArray)
 
 RCT_EXPORT_VIEW_PROPERTY(defaultAudience, FBSDKDefaultAudience)
 
+RCT_EXPORT_VIEW_PROPERTY(nonce, NSString)
+
+RCT_EXPORT_VIEW_PROPERTY(loginTracking, FBSDKLoginTracking)
+
 RCT_CUSTOM_VIEW_PROPERTY(tooltipBehaviorIOS, FBSDKLoginButtonTooltipBehavior, FBSDKLoginButton)
 {
   [view setTooltipBehavior:json ? [RCTConvert FBSDKLoginButtonTooltipBehavior:json] : FBSDKLoginButtonTooltipBehaviorAutomatic];
