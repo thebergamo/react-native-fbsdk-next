@@ -46,7 +46,7 @@ const { Platform, NativeModules } = require('react-native');
     */
    static getAuthenticationToken(): Promise<?FBAuthenticationToken> {
      if (Platform.OS === 'android') {
-       return;
+       return Promise.resolve(null);
       }
       return new Promise((resolve, reject) => {
        AuthenticationToken.getAuthenticationToken((tokenMap) => {

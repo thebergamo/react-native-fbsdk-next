@@ -84,14 +84,11 @@ class FBProfile {
   static getCurrentProfile(): Promise<?FBProfile> {
     if (Platform.OS === 'android') {
       // TODO: Not implemented in Android yet
-      return;
+      return Promise.resolve(null);
     }
 
     return new Promise((resolve, reject) => {
       Profile.getCurrentProfile((profileMap) => {
-
-        console.log("profileMap => ", profileMap);
-
         if (profileMap) {
           resolve(new FBProfile(profileMap));
         } else {
