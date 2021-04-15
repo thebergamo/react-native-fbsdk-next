@@ -31,6 +31,49 @@ type UserData = Readonly<{
   zip?: string | null;
   country?: string | null;
 }>;
+type AppEvent = {
+  AchievedLevel: string;
+  AdClick: string;
+  AdImpression: string;
+  AddedPaymentInfo: string;
+  AddedToCart: string;
+  AddedToWishlist: string;
+  CompletedRegistration: string;
+  CompletedTutorial: string;
+  Contact: string;
+  CustomizeProduct: string;
+  Donate: string;
+  FindLocation: string;
+  InitiatedCheckout: string;
+  Purchased: string;
+  Rated: string;
+  Searched: string;
+  SpentCredits: string;
+  Schedule: string;
+  StartTrial: string;
+  SubmitApplication: string;
+  Subscribe: string;
+  UnlockedAchievement: string;
+  ViewedContent: string;
+};
+type AppEventParam = {
+  AddType: string;
+  Content: string;
+  ContentID: string;
+  ContentType: string;
+  Currency: string;
+  Description: string;
+  Level: string;
+  NumItems: string;
+  MaxRatingValue: string;
+  OrderId: string;
+  PaymentInfoAvailable: string;
+  RegistrationMethod: string;
+  SearchString: string;
+  Success: string;
+  ValueNo: string;
+  ValueYes: string;
+};
 export type FBAppEventsLogger = {
   /**
      * Sets the current event flushing behavior specifying when events
@@ -100,4 +143,12 @@ export type FBAppEventsLogger = {
      * @platform Android
      */
   setPushNotificationsRegistrationId(registrationId: string): void;
+  /**
+   * Predefined event names for logging events common to many apps.
+   */
+  AppEvents: AppEvent,
+  /**
+   *  Predefined event name parameters for common additional information to accompany events logged through the `logEvent`.
+   */
+  AppEventParams: AppEventParam,
 };
