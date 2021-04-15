@@ -27,44 +27,44 @@ class FBProfile {
   /**
    * The user id
    */
-  userID: string;
+  userID: ?string;
 
   /**
    * The user's email.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'email' permission.
    */
-  email: string;
+  email: ?string;
 
   /**
    * The user's complete name
    */
-  name: string;
+  name: ?string;
 
   /**
    * The user's first name
    */
-  firstName: string;
+  firstName: ?string;
 
   /**
    * The user's last name
    */
-  lastName: string;
+  lastName: ?string;
 
   /**
    * The user's middle name
    */
-  middleName: string;
+  middleName: ?string;
 
   /**
    * A URL to the user's profile.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_link' permission
    */
-  linkURL: string;
+  linkURL: ?string;
 
   /**
    * A URL to use for fetching a user's profile image.
    */
-  imageURL: string;
+  imageURL: ?string;
 
   constructor(profileMap: ProfileMap) {
     this.firstName = profileMap.firstName;
