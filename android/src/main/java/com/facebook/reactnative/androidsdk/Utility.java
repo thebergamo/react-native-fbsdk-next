@@ -60,22 +60,17 @@ import androidx.annotation.Nullable;
 public final class Utility {
 
     public static AccessToken buildAccessToken(ReadableMap accessTokenMap) {
-        AccessTokenSource accessTokenSource = AccessTokenSource
-                .valueOf(accessTokenMap.getString("accessTokenSource"));
-        Date expirationTime = new Date((long) accessTokenMap.getDouble("expirationTime"));
-        Date lastRefreshTime = new Date((long) accessTokenMap.getDouble("lastRefreshTime"));
-        Date dataAccessExpirationTime = new Date((long) accessTokenMap.getDouble("dataAccessExpirationTime"));
         return new AccessToken(
                 accessTokenMap.getString("accessToken"),
                 accessTokenMap.getString("applicationID"),
                 accessTokenMap.getString("userID"),
-                reactArrayToStringList(accessTokenMap.getArray("permissions")),
-                reactArrayToStringList(accessTokenMap.getArray("declinedPermissions")),
-                reactArrayToStringList(accessTokenMap.getArray("expiredPermissions")),
-                accessTokenSource,
-                expirationTime,
-                lastRefreshTime,
-                dataAccessExpirationTime
+                accessTokenMap.hasKey("permissions") && !accessTokenMap.isNull("permissions") ? reactArrayToStringList(accessTokenMap.getArray("permissions")) : null,
+                accessTokenMap.hasKey("declinedPermissions") && !accessTokenMap.isNull("declinedPermissions") ? reactArrayToStringList(accessTokenMap.getArray("declinedPermissions")) : null,
+                accessTokenMap.hasKey("expiredPermissions") && !accessTokenMap.isNull("expiredPermissions") ? reactArrayToStringList(accessTokenMap.getArray("expiredPermissions")) : null,
+                accessTokenMap.hasKey("accessTokenSource") && !accessTokenMap.isNull("accessTokenSource") ? AccessTokenSource.valueOf(accessTokenMap.getString("accessTokenSource")) : null,
+                accessTokenMap.hasKey("expirationTime") && !accessTokenMap.isNull("expirationTime") ? new Date((long) accessTokenMap.getDouble("expirationTime")) : null,
+                accessTokenMap.hasKey("lastRefreshTime") && !accessTokenMap.isNull("lastRefreshTime") ? new Date((long) accessTokenMap.getDouble("lastRefreshTime")) : null,
+                accessTokenMap.hasKey("dataAccessExpirationTime") && !accessTokenMap.isNull("dataAccessExpirationTime") ? new Date((long) accessTokenMap.getDouble("dataAccessExpirationTime")) : null
         );
     }
 
