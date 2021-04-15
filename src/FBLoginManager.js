@@ -66,12 +66,12 @@ export type LoginTracking = 'enabled' | 'limited';
 module.exports = {
   /**
    * Log in with the requested permissions.
-   * IOS only: loginTracking: 'enabled' | 'limited', default 'enabled'
-   * IOS only: nonce - Nonce that the configuration was created with. A unique nonce will be used if none is provided to the factory method. 
+   * @param loginTracking IOS only: loginTracking: 'enabled' | 'limited', default 'enabled'.
+   * @param nonce IOS only: Nonce that the configuration was created with. A unique nonce will be used if none is provided to the factory method. 
    */
    logInWithPermissions(
     permissions: Array<string>,
-    loginTracking?: LoginTracking = 'enabled',
+    loginTracking?: LoginTracking,
     nonce?: string,
   ): Promise<LoginResult> {
     if (Platform.OS === 'ios') {
