@@ -82,11 +82,6 @@ class FBProfile {
   * Getter the current logged profile
   */
   static getCurrentProfile(): Promise<?FBProfile> {
-    if (Platform.OS === 'android') {
-      // TODO: Not implemented in Android yet
-      return Promise.resolve(null);
-    }
-
     return new Promise((resolve, reject) => {
       Profile.getCurrentProfile((profileMap) => {
         if (profileMap) {
