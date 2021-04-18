@@ -3,27 +3,26 @@
  * @format
  */
 
- 'use strict';
+'use strict';
 
-const { Platform, NativeModules } = require('react-native');
-  const Profile = NativeModules.FBProfile;
+const {Platform, NativeModules} = require('react-native');
+const Profile = NativeModules.FBProfile;
 
-  type ProfileMap = {
-    firstName: string,
-    lastName: string,
-    middleName: string,
-    imageURL: string,
-    linkURL: string,
-    userID: string,
-    email: string,
-    name: string,
-  };
- 
+type ProfileMap = {
+  firstName: string,
+  lastName: string,
+  middleName: string,
+  imageURL: string,
+  linkURL: string,
+  userID: string,
+  email: string,
+  name: string,
+};
+
 /**
-* Rappresent the current profile logged
-*/
+ * Rappresent the current profile logged
+ */
 class FBProfile {
-  
   /**
    * The user id
    */
@@ -79,8 +78,8 @@ class FBProfile {
   }
 
   /**
-  * Getter the current logged profile
-  */
+   * Getter the current logged profile
+   */
   static getCurrentProfile(): Promise<?FBProfile> {
     if (Platform.OS === 'android') {
       // TODO: Not implemented in Android yet
@@ -98,6 +97,5 @@ class FBProfile {
     });
   }
 }
- 
- module.exports = FBProfile;
- 
+
+module.exports = FBProfile;
