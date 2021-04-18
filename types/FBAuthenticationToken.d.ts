@@ -29,7 +29,7 @@ type AuthenticationTokenMap = {
    /**
     * Getter for the authentication token
     */
-   static getAuthenticationToken(): Promise<FBAuthenticationToken | null>;
+   static getAuthenticationTokenIOS(): Promise<FBAuthenticationToken | null>;
  }
  
 
