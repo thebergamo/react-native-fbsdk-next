@@ -24,6 +24,7 @@ import android.net.Uri;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenSource;
+import com.facebook.Profile;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -97,6 +98,69 @@ public final class Utility {
         map.putDouble("expirationTime", (double) accessToken.getExpires().getTime());
         map.putDouble("lastRefreshTime", (double) accessToken.getLastRefresh().getTime());
         map.putDouble("dataAccessExpirationTime", (double) accessToken.getDataAccessExpirationTime().getTime());
+        return map;
+    }
+
+    public static WritableMap profileToReactMap(Profile profile) {
+        WritableMap map = Arguments.createMap();
+
+        String firstName = profile.getFirstName();
+        if (firstName == null) {
+            map.putNull("firstName");
+        } else {
+            map.putString("firstName", firstName);
+        }
+
+        String lastName = profile.getLastName();
+        if (lastName == null) {
+            map.putNull("lastName");
+        } else {
+            map.putString("lastName", lastName);
+        }
+
+        String middleName = profile.getMiddleName();
+        if (middleName == null) {
+            map.putNull("middleName");
+        } else {
+            map.putString("middleName", middleName);
+        }
+
+        Uri profilePictureUri = profile.getProfilePictureUri(1, 1);
+        if (profilePictureUri == null) {
+            map.putNull("imageURL");
+        } else {
+            // NOTE: Removing the width and height query params from url in order to retrieve the default sized image from Facebook.
+            // Maybe it can be implemented a separated method for retrieve a profile image using width and height params in the future.
+            // But this is not in the scope of the currentProfile method.
+            String urlStringImage = profilePictureUri.toString();
+            map.putString("imageURL", urlStringImage.replace("height=1&width=1&", ""));
+        }
+
+        Uri linkUri = profile.getLinkUri();
+        if (linkUri == null) {
+            map.putNull("linkURL");
+        } else {
+            map.putString("linkURL", linkUri.toString());
+        }
+
+        String userId = profile.getId();
+        if (userId == null) {
+            map.putNull("userID");
+        } else {
+            map.putString("userID", userId);
+        }
+
+        // NOTE: Email doesn't get retrieved directly by the profile instance after a login. You have to fetch the graph API in
+        // order to get this value.
+        map.putNull("email");
+
+        String name = profile.getName();
+        if (name == null) {
+            map.putNull("name");
+        } else {
+            map.putString("name", name);
+        }
+
         return map;
     }
 
