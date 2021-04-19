@@ -77,13 +77,13 @@ class LoginButton extends React.Component<{
    * whitespace. An invalid nonce will not be set. Instead, default unique nonces will be used for login attempts.
    * @platform ios
    */
-  nonce?: string,
+  nonceIOS?: string,
 
   /**
    * Gets or sets the desired tracking preference to use for login attempts. Defaults to `enabled`
    * @platform ios
    */
-  loginTracking?: LoginTracking,
+  loginTrackingIOS?: LoginTracking,
 
   /**
    * View style, if any.
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
 
 LoginButton.defaultProps = {
   style: styles.defaultButtonStyle,
-  loginTracking: 'enabled',
 };
 
 const RCTFBLoginButton = requireNativeComponent<any>('RCTFBLoginButton');

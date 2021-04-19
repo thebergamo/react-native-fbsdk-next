@@ -32,9 +32,4 @@ RCT_ENUM_CONVERTER(FBSDKLoginButtonTooltipBehavior, (@{
   @"disable": @(FBSDKLoginButtonTooltipBehaviorDisable),
 }), FBSDKLoginButtonTooltipBehaviorAutomatic, unsignedIntegerValue)
 
-RCT_ENUM_CONVERTER(FBSDKLoginTracking, (@{
-    @"enabled": @(FBSDKLoginTrackingEnabled),
-    @"limited": @(FBSDKLoginTrackingLimited),
-}), FBSDKLoginTrackingEnabled, unsignedLongValue)
-
 @end
