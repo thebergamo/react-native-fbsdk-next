@@ -387,7 +387,7 @@ ShareApi.canShare(this.state.shareLinkContent).then(
 );
 ```
 
-### [Analytics](https://developers.facebook.com/docs/app-events)
+### [App Events](https://developers.facebook.com/docs/app-events)
 
 #### App events
 
