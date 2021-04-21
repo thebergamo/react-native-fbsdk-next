@@ -35,6 +35,8 @@ import com.facebook.react.module.annotations.ReactModule;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -311,5 +313,56 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setPushNotificationsRegistrationId(String registrationId) {
         AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
+    }
+
+    @Override
+    public Map<String, Object> getConstants() {
+        final Map<String, Object> constants = new HashMap<>();
+        final Map<String, Object> appEvents = new HashMap<>();
+        appEvents.put("AchievedLevel", AppEventsConstants.EVENT_NAME_ACHIEVED_LEVEL);
+        appEvents.put("AdClick", AppEventsConstants.EVENT_NAME_AD_CLICK);
+        appEvents.put("AdImpression", AppEventsConstants.EVENT_NAME_AD_IMPRESSION);
+        appEvents.put("AddedPaymentInfo", AppEventsConstants.EVENT_NAME_ADDED_PAYMENT_INFO);
+        appEvents.put("AddedToCart", AppEventsConstants.EVENT_NAME_ADDED_TO_CART);
+        appEvents.put("AddedToWishlist", AppEventsConstants.EVENT_NAME_ADDED_TO_WISHLIST);
+        appEvents.put("CompletedRegistration", AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION);
+        appEvents.put("CompletedTutorial", AppEventsConstants.EVENT_NAME_COMPLETED_TUTORIAL);
+        appEvents.put("Contact", AppEventsConstants.EVENT_NAME_CONTACT);
+        appEvents.put("CustomizeProduct", AppEventsConstants.EVENT_NAME_CUSTOMIZE_PRODUCT);
+        appEvents.put("Donate", AppEventsConstants.EVENT_NAME_DONATE);
+        appEvents.put("FindLocation", AppEventsConstants.EVENT_NAME_FIND_LOCATION);
+        appEvents.put("InitiatedCheckout", AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT);
+        appEvents.put("Purchased", AppEventsConstants.EVENT_NAME_PURCHASED);
+        appEvents.put("Rated", AppEventsConstants.EVENT_NAME_RATED);
+        appEvents.put("Searched", AppEventsConstants.EVENT_NAME_SEARCHED);
+        appEvents.put("SpentCredits", AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
+        appEvents.put("Schedule", AppEventsConstants.EVENT_NAME_SCHEDULE);
+        appEvents.put("StartTrial", AppEventsConstants.EVENT_NAME_START_TRIAL);
+        appEvents.put("SubmitApplication", AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION);
+        appEvents.put("Subscribe", AppEventsConstants.EVENT_NAME_SUBSCRIBE);
+        appEvents.put("UnlockedAchievement", AppEventsConstants.EVENT_NAME_UNLOCKED_ACHIEVEMENT);
+        appEvents.put("ViewedContent", AppEventsConstants.EVENT_NAME_VIEWED_CONTENT);
+        constants.put("AppEvents", appEvents);
+
+        final Map<String, Object> appEventParams = new HashMap<>();
+        appEventParams.put("AddType", AppEventsConstants.EVENT_PARAM_AD_TYPE);
+        appEventParams.put("Content", AppEventsConstants.EVENT_PARAM_CONTENT);
+        appEventParams.put("ContentID", AppEventsConstants.EVENT_PARAM_CONTENT_ID);
+        appEventParams.put("ContentType", AppEventsConstants.EVENT_PARAM_CONTENT_TYPE);
+        appEventParams.put("Currency", AppEventsConstants.EVENT_PARAM_CURRENCY);
+        appEventParams.put("Description", AppEventsConstants.EVENT_PARAM_DESCRIPTION);
+        appEventParams.put("Level", AppEventsConstants.EVENT_PARAM_LEVEL);
+        appEventParams.put("NumItems", AppEventsConstants.EVENT_PARAM_NUM_ITEMS);
+        appEventParams.put("MaxRatingValue", AppEventsConstants.EVENT_PARAM_MAX_RATING_VALUE);
+        appEventParams.put("OrderId", AppEventsConstants.EVENT_PARAM_ORDER_ID);
+        appEventParams.put("PaymentInfoAvailable", AppEventsConstants.EVENT_PARAM_PAYMENT_INFO_AVAILABLE);
+        appEventParams.put("RegistrationMethod", AppEventsConstants.EVENT_PARAM_REGISTRATION_METHOD);
+        appEventParams.put("SearchString", AppEventsConstants.EVENT_PARAM_SEARCH_STRING);
+        appEventParams.put("Success", AppEventsConstants.EVENT_PARAM_SUCCESS);
+        appEventParams.put("ValueNo", AppEventsConstants.EVENT_PARAM_VALUE_NO);
+        appEventParams.put("ValueYes", AppEventsConstants.EVENT_PARAM_VALUE_YES);
+        constants.put("AppEventParams", appEventParams);
+
+        return constants;
     }
 }

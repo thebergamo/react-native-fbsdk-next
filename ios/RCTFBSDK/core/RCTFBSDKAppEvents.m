@@ -144,6 +144,58 @@ RCT_EXPORT_METHOD(setPushNotificationsDeviceToken:(NSString *)deviceToken)
   [FBSDKAppEvents setPushNotificationsDeviceToken:[RCTConvert NSData:deviceToken]];
 }
 
+- (NSDictionary *)constantsToExport {
+  return @{
+    @"AppEvents": @{
+      @"AchievedLevel": FBSDKAppEventNameAchievedLevel,
+      @"AdClick": FBSDKAppEventNameAdClick,
+      @"AdImpression": FBSDKAppEventNameAdImpression,
+      @"AddedPaymentInfo": FBSDKAppEventNameAddedPaymentInfo,
+      @"AddedToCart": FBSDKAppEventNameAddedToCart,
+      @"AddedToWishlist": FBSDKAppEventNameAddedToWishlist,
+      @"CompletedRegistration": FBSDKAppEventNameCompletedRegistration,
+      @"CompletedTutorial": FBSDKAppEventNameCompletedTutorial,
+      @"Contact": FBSDKAppEventNameContact,
+      @"CustomizeProduct": FBSDKAppEventNameCustomizeProduct,
+      @"Donate": FBSDKAppEventNameDonate,
+      @"FindLocation": FBSDKAppEventNameFindLocation,
+      @"InitiatedCheckout": FBSDKAppEventNameInitiatedCheckout,
+      @"Purchased": FBSDKAppEventNamePurchased,
+      @"Rated": FBSDKAppEventNameRated,
+      @"Searched": FBSDKAppEventNameSearched,
+      @"SpentCredits": FBSDKAppEventNameSpentCredits,
+      @"Schedule": FBSDKAppEventNameSchedule,
+      @"StartTrial": FBSDKAppEventNameStartTrial,
+      @"SubmitApplication": FBSDKAppEventNameSubmitApplication,
+      @"Subscribe": FBSDKAppEventNameSubscribe,
+      @"UnlockedAchievement": FBSDKAppEventNameUnlockedAchievement,
+      @"ViewedContent": FBSDKAppEventNameViewedContent,
+    },
+    @"AppEventParams": @{
+      @"AddType": FBSDKAppEventParameterNameAdType,
+      @"Content": FBSDKAppEventParameterNameContent,
+      @"ContentID": FBSDKAppEventParameterNameContentID,
+      @"ContentType": FBSDKAppEventParameterNameContentType,
+      @"Currency": FBSDKAppEventParameterNameCurrency,
+      @"Description": FBSDKAppEventParameterNameDescription,
+      @"Level": FBSDKAppEventParameterNameLevel,
+      @"NumItems": FBSDKAppEventParameterNameNumItems,
+      @"MaxRatingValue": FBSDKAppEventParameterNameMaxRatingValue,
+      @"OrderId": FBSDKAppEventParameterNameOrderID,
+      @"PaymentInfoAvailable": FBSDKAppEventParameterNamePaymentInfoAvailable,
+      @"RegistrationMethod": FBSDKAppEventParameterNameRegistrationMethod,
+      @"SearchString": FBSDKAppEventParameterNameSearchString,
+      @"Success": FBSDKAppEventParameterNameSuccess,
+      @"ValueNo": FBSDKAppEventParameterValueNo,
+      @"ValueYes": FBSDKAppEventParameterValueYes,
+    }
+  };
+}
+
++ (BOOL)requiresMainQueueSetup {
+  return YES;
+}
+
 static NSDictionary<NSString *, id> *RCTDictionaryWithoutNullValues(NSDictionary<NSString *, id> *input)
 {
   if (input == nil) {
