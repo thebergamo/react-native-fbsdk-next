@@ -71,14 +71,14 @@ module.exports = {
    */
   logInWithPermissions(
     permissions: Array<string>,
-    loginTracking?: LoginTracking,
-    nonce?: string,
+    loginTrackingIOS?: LoginTracking,
+    nonceIOS?: string,
   ): Promise<LoginResult> {
     if (Platform.OS === 'ios') {
       return LoginManager.logInWithPermissions(
         permissions,
-        loginTracking,
-        nonce,
+        loginTrackingIOS,
+        nonceIOS,
       );
     }
     return LoginManager.logInWithPermissions(permissions);
