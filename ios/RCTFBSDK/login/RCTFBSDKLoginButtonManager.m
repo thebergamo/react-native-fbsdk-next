@@ -45,13 +45,15 @@ RCT_EXPORT_VIEW_PROPERTY(permissions, NSStringArray)
 
 RCT_EXPORT_VIEW_PROPERTY(defaultAudience, FBSDKDefaultAudience)
 
- RCT_CUSTOM_VIEW_PROPERTY(nonceIOS, NSString, FBSDKLoginButton){
-   [view setNonce:json ? json : nil];
- }
+RCT_CUSTOM_VIEW_PROPERTY(nonceIOS, NSString, FBSDKLoginButton)
+{
+    [view setNonce:json ? json : nil];
+}
 
- RCT_CUSTOM_VIEW_PROPERTY(loginTrackingIOS, NSString, FBSDKLoginButton){
-   [view setLoginTracking:(json && [json  isEqual: @"limited"]) ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled];
- }
+RCT_CUSTOM_VIEW_PROPERTY(loginTrackingIOS, NSString, FBSDKLoginButton)
+{
+    [view setLoginTracking:([json isEqualToString:@"limited"]) ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled];
+}
 
 RCT_CUSTOM_VIEW_PROPERTY(tooltipBehaviorIOS, FBSDKLoginButtonTooltipBehavior, FBSDKLoginButton)
 {
