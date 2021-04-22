@@ -76,7 +76,7 @@ RCT_EXPORT_METHOD(logInWithPermissions:(NSArray<NSString *> *)permissions
         }
     };
     FBSDKLoginConfiguration *configuration;
-    FBSDKLoginTracking tracking = [loginTracking  isEqual: @"limited"] ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled;
+    FBSDKLoginTracking tracking = [loginTracking  isEqualToString: @"limited"] ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled;
     
     if ( ( ![nonce isEqual:[NSNull null]] ) && ( [nonce length] != 0 ) ) {
         configuration =
