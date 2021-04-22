@@ -104,6 +104,13 @@ public final class Utility {
     public static WritableMap profileToReactMap(Profile profile) {
         WritableMap map = Arguments.createMap();
 
+        String name = profile.getName();
+        if (name == null) {
+            map.putNull("name");
+        } else {
+            map.putString("name", name);
+        }
+
         String firstName = profile.getFirstName();
         if (firstName == null) {
             map.putNull("firstName");
@@ -125,15 +132,11 @@ public final class Utility {
             map.putString("middleName", middleName);
         }
 
-        Uri profilePictureUri = profile.getProfilePictureUri(1, 1);
+        Uri profilePictureUri = profile.getProfilePictureUri(100, 100);
         if (profilePictureUri == null) {
             map.putNull("imageURL");
         } else {
-            // NOTE: Removing the width and height query params from url in order to retrieve the default sized image from Facebook.
-            // Maybe it can be implemented a separated method for retrieve a profile image using width and height params in the future.
-            // But this is not in the scope of the currentProfile method.
-            String urlStringImage = profilePictureUri.toString();
-            map.putString("imageURL", urlStringImage.replace("height=1&width=1&", ""));
+            map.putString("imageURL", profilePictureUri.toString());
         }
 
         Uri linkUri = profile.getLinkUri();
@@ -148,17 +151,6 @@ public final class Utility {
             map.putNull("userID");
         } else {
             map.putString("userID", userId);
-        }
-
-        // NOTE: Email doesn't get retrieved directly by the profile instance after a login. You have to fetch the graph API in
-        // order to get this value.
-        map.putNull("email");
-
-        String name = profile.getName();
-        if (name == null) {
-            map.putNull("name");
-        } else {
-            map.putString("name", name);
         }
 
         return map;

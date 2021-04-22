@@ -10,7 +10,8 @@ type ProfileMap = {
 };
  
 /**
-* Rappresent the current profile logged
+ * Represents an immutable Facebook profile
+ * This class provides a global "currentProfile" instance to more easily add social context to your application.
 */
 export class FBProfile {
   
@@ -63,5 +64,3 @@ export class FBProfile {
   */
   static getCurrentProfile(): Promise<FBProfile | null>;
 }
- 
- 
