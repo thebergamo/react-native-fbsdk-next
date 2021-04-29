@@ -260,6 +260,36 @@ LoginManager.logInWithPermissions(["public_profile"]).then(
 );
 ```
 
+#### Get profile information
+
+You can retrieve the profile information after a succesfull login attempt. The data returned will be related to the type of
+authentication you are using (limited or not) and the permission granted by the login method.
+
+```js
+// ...
+
+import { Profile } from "react-native-fbsdk-next";
+
+// ...
+
+const currentProfile = Profile.getCurrentProfile().then(
+  function(currentProfile) {
+    if (currentProfile) {
+      console.log("The current logged user is: " +
+        currentProfile.name
+        + ". His profile id is: " +
+        currentProfile.userID
+      );
+    }
+  }
+);
+```
+
+There's some platform related specific behaviours that you need to consider:
+- On Android, the `email` field doesn't get retrieved even if the `[..., 'email', ...]` permission will be request.
+In fact, the `email` field doesn't exist in the native Java SDK provided by Facebook at the moment (https://developers.facebook.com/docs/reference/androidsdk/current/facebook/com/facebook/profile.html/?locale=it_IT)
+- The width and height query params for the profile picture uri will be 100 (iOS SDK default values).
+
 ### [Sharing](https://developers.facebook.com/docs/sharing)
 
 #### Share dialogs
