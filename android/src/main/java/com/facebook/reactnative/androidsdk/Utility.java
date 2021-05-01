@@ -105,53 +105,25 @@ public final class Utility {
         WritableMap map = Arguments.createMap();
 
         String name = profile.getName();
-        if (name == null) {
-            map.putNull("name");
-        } else {
-            map.putString("name", name);
-        }
+        Utility.putStringOrNull(map, "name", name);
 
         String firstName = profile.getFirstName();
-        if (firstName == null) {
-            map.putNull("firstName");
-        } else {
-            map.putString("firstName", firstName);
-        }
+        Utility.putStringOrNull(map, "firstName", firstName);
 
         String lastName = profile.getLastName();
-        if (lastName == null) {
-            map.putNull("lastName");
-        } else {
-            map.putString("lastName", lastName);
-        }
+        Utility.putStringOrNull(map, "lastName", lastName);
 
         String middleName = profile.getMiddleName();
-        if (middleName == null) {
-            map.putNull("middleName");
-        } else {
-            map.putString("middleName", middleName);
-        }
+        Utility.putStringOrNull(map, "middleName", middleName);
 
         Uri profilePictureUri = profile.getProfilePictureUri(100, 100);
-        if (profilePictureUri == null) {
-            map.putNull("imageURL");
-        } else {
-            map.putString("imageURL", profilePictureUri.toString());
-        }
+        Utility.putStringOrNull(map, "imageURL", profilePictureUri.toString());
 
         Uri linkUri = profile.getLinkUri();
-        if (linkUri == null) {
-            map.putNull("linkURL");
-        } else {
-            map.putString("linkURL", linkUri.toString());
-        }
+        Utility.putStringOrNull(map, "linkURL", linkUri.toString());
 
         String userId = profile.getId();
-        if (userId == null) {
-            map.putNull("userID");
-        } else {
-            map.putString("userID", userId);
-        }
+        Utility.putStringOrNull(map, "userID", userId);
 
         return map;
     }
@@ -385,5 +357,13 @@ public final class Utility {
             array[i++] = e;
         }
         return array;
+    }
+
+    private static void putStringOrNull(WritableMap map, String key, String value) {
+        if (value == null) {
+            map.putNull(key);
+        } else {
+            map.putString(key, value);
+        }
     }
 }
