@@ -24,6 +24,7 @@ import android.net.Uri;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenSource;
+import com.facebook.Profile;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -92,6 +93,33 @@ public final class Utility {
         map.putDouble("expirationTime", (double) accessToken.getExpires().getTime());
         map.putDouble("lastRefreshTime", (double) accessToken.getLastRefresh().getTime());
         map.putDouble("dataAccessExpirationTime", (double) accessToken.getDataAccessExpirationTime().getTime());
+        return map;
+    }
+
+    public static WritableMap profileToReactMap(Profile profile) {
+        WritableMap map = Arguments.createMap();
+
+        String name = profile.getName();
+        Utility.putStringOrNull(map, "name", name);
+
+        String firstName = profile.getFirstName();
+        Utility.putStringOrNull(map, "firstName", firstName);
+
+        String lastName = profile.getLastName();
+        Utility.putStringOrNull(map, "lastName", lastName);
+
+        String middleName = profile.getMiddleName();
+        Utility.putStringOrNull(map, "middleName", middleName);
+
+        Uri profilePictureUri = profile.getProfilePictureUri(100, 100);
+        Utility.putStringOrNull(map, "imageURL", profilePictureUri.toString());
+
+        Uri linkUri = profile.getLinkUri();
+        Utility.putStringOrNull(map, "linkURL", linkUri.toString());
+
+        String userId = profile.getId();
+        Utility.putStringOrNull(map, "userID", userId);
+
         return map;
     }
 
@@ -324,5 +352,13 @@ public final class Utility {
             array[i++] = e;
         }
         return array;
+    }
+
+    private static void putStringOrNull(WritableMap map, String key, String value) {
+        if (value == null) {
+            map.putNull(key);
+        } else {
+            map.putString(key, value);
+        }
     }
 }

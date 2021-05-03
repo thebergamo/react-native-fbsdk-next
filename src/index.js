@@ -39,6 +39,9 @@ module.exports = {
   get AccessToken() {
     return require('./FBAccessToken');
   },
+  get AuthenticationToken() {
+    return require('./FBAuthenticationToken');
+  },
   get AppEventsLogger() {
     return require('./FBAppEventsLogger');
   },
@@ -59,6 +62,9 @@ module.exports = {
   },
   get MessageDialog() {
     return require('./FBMessageDialog');
+  },
+  get Profile() {
+    return require('./FBProfile');
   },
   get Settings() {
     return require('./FBSettings');

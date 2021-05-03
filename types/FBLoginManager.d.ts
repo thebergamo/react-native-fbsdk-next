@@ -24,11 +24,20 @@ export type LoginResult = {
   grantedPermissions?: Array<string>;
   declinedPermissions?: Array<string>;
 };
+
+export type LoginTracking = 'enabled' | 'limited';
+
 export type FBLoginManager = {
   /**
-     * Logs the user in with the requested permissions.
-     */
-  logInWithPermissions(permissions: Array<string>): Promise<LoginResult>;
+   * Log in with the requested permissions.
+   * @param loginTrackingIOS IOS only: loginTracking: 'enabled' | 'limited', default 'enabled'.
+   * @param nonceIOS IOS only: Nonce that the configuration was created with. A unique nonce will be used if none is provided to the factory method. 
+   */
+   logInWithPermissions(
+      permissions: Array<string>,
+      loginTrackingIOS?: LoginTracking,
+      nonceIOS?: string
+   ): Promise<LoginResult>;
   /**
      * Getter for the login behavior.
      */

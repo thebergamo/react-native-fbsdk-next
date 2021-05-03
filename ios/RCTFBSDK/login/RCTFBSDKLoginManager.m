@@ -63,18 +63,39 @@ RCT_REMAP_METHOD(getDefaultAudience, getDefaultAudience_resolver:(RCTPromiseReso
 }
 
 RCT_EXPORT_METHOD(logInWithPermissions:(NSArray<NSString *> *)permissions
+                  loginTracking: (NSString *)loginTracking
+                  nonce: (NSString *)nonce
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-  FBSDKLoginManagerLoginResultBlock requestHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-    if (error) {
-      reject(@"FacebookSDK", @"Login Failed", error);
+    FBSDKLoginManagerLoginResultBlock requestHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            reject(@"FacebookSDK", @"Login Failed", error);
+        } else {
+            resolve(RCTBuildResultDictionary(result));
+        }
+    };
+    FBSDKLoginConfiguration *configuration;
+    FBSDKLoginTracking tracking = [loginTracking  isEqualToString: @"limited"] ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled;
+    
+    if ( ( ![nonce isEqual:[NSNull null]] ) && ( [nonce length] != 0 ) ) {
+        configuration =
+        [[FBSDKLoginConfiguration alloc] initWithPermissions:permissions
+                                                    tracking: tracking
+                                                       nonce:nonce
+         ];
     } else {
-      resolve(RCTBuildResultDictionary(result));
+        configuration =
+        [[FBSDKLoginConfiguration alloc] initWithPermissions:permissions
+                                                    tracking: tracking
+         ];
     }
-  };
-
-  [_loginManager logInWithPermissions:permissions fromViewController:nil handler:requestHandler];
+    
+    
+    [_loginManager
+     logInFromViewController: nil
+     configuration:configuration
+     completion:requestHandler];
 };
 
 RCT_EXPORT_METHOD(logOut)

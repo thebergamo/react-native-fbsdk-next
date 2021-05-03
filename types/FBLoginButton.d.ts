@@ -3,6 +3,7 @@ import type {
   DefaultAudience,
   LoginBehaviorAndroid,
   LoginResult,
+  LoginTracking,
 } from './FBLoginManager';
 
 type Event = any;
@@ -37,7 +38,21 @@ export class LoginButton extends React.Component<{
      * For iOS only, the desired tooltip behavior.
      * @platform ios
      */
-  tooltipBehaviorIOS?: TooltipBehaviorIOS;
+   tooltipBehaviorIOS?: TooltipBehaviorIOS;
+  
+   /**
+    * Gets or sets an optional nonce to use for login attempts. A valid nonce must be a non-empty string without
+    * whitespace. An invalid nonce will not be set. Instead, default unique nonces will be used for login attempts.
+    * @platform ios
+  */
+  nonceIOS?: string,
+
+  /**
+    * Gets or sets the desired tracking preference to use for login attempts. Defaults to `enabled`
+    * @platform ios
+  */
+   loginTrackingIOS?: LoginTracking,
+  
   /**
      * View style, if any.
      */

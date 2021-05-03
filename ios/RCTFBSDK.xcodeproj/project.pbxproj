@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10E3C0CF2626E85700016645 /* RCTFBSDKAuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E3C0CE2626E85700016645 /* RCTFBSDKAuthenticationToken.m */; };
 		93B905C21D2D987F0013CC92 /* RCTFBSDKGraphRequestConnectionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B905C11D2D987F0013CC92 /* RCTFBSDKGraphRequestConnectionContainer.m */; };
 		93E0043A1CE3C33F000598E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E004371CE3C33F000598E3 /* FBSDKCoreKit.framework */; };
 		93E0043B1CE3C33F000598E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E004381CE3C33F000598E3 /* FBSDKLoginKit.framework */; };
@@ -26,6 +27,7 @@
 		93E005141CE3D2D3000598E3 /* RCTFBSDKShareButtonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E005061CE3D2D3000598E3 /* RCTFBSDKShareButtonManager.m */; };
 		93E005151CE3D2D3000598E3 /* RCTFBSDKShareDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E005081CE3D2D3000598E3 /* RCTFBSDKShareDialog.m */; };
 		93E005161CE3D2D3000598E3 /* RCTFBSDKShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E0050A1CE3D2D3000598E3 /* RCTFBSDKShareHelper.m */; };
+		B34601D02628529500AC1860 /* RCTFBSDKProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */; };
 		F1191EC92560474100A8767F /* RCTFBSDKAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10E3C0CE2626E85700016645 /* RCTFBSDKAuthenticationToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKAuthenticationToken.m; path = core/RCTFBSDKAuthenticationToken.m; sourceTree = "<group>"; };
+		10E3C0D12626E87A00016645 /* RCTFBSDKAuthenticationToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKAuthenticationToken.h; path = core/RCTFBSDKAuthenticationToken.h; sourceTree = "<group>"; };
 		9350E0F11CE3B0920041D815 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTFBSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B905C01D2D987F0013CC92 /* RCTFBSDKGraphRequestConnectionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKGraphRequestConnectionContainer.h; path = core/RCTFBSDKGraphRequestConnectionContainer.h; sourceTree = "<group>"; };
 		93B905C11D2D987F0013CC92 /* RCTFBSDKGraphRequestConnectionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKGraphRequestConnectionContainer.m; path = core/RCTFBSDKGraphRequestConnectionContainer.m; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 		93E005081CE3D2D3000598E3 /* RCTFBSDKShareDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareDialog.m; path = share/RCTFBSDKShareDialog.m; sourceTree = "<group>"; };
 		93E005091CE3D2D3000598E3 /* RCTFBSDKShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKShareHelper.h; path = share/RCTFBSDKShareHelper.h; sourceTree = "<group>"; };
 		93E0050A1CE3D2D3000598E3 /* RCTFBSDKShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKShareHelper.m; path = share/RCTFBSDKShareHelper.m; sourceTree = "<group>"; };
+		B34601CE2628525600AC1860 /* RCTFBSDKProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFBSDKProfile.h; sourceTree = "<group>"; };
+		B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKProfile.m; path = core/RCTFBSDKProfile.m; sourceTree = "<group>"; };
 		F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKAppLink.m; path = core/RCTFBSDKAppLink.m; sourceTree = "<group>"; };
 		F1191ECB25604E4B00A8767F /* RCTFBSDKAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKAppLink.h; path = core/RCTFBSDKAppLink.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +154,10 @@
 				93E004E21CE3D292000598E3 /* RCTFBSDKGraphRequestManager.m */,
 				F1191ECB25604E4B00A8767F /* RCTFBSDKAppLink.h */,
 				F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */,
+				10E3C0CE2626E85700016645 /* RCTFBSDKAuthenticationToken.m */,
+				10E3C0D12626E87A00016645 /* RCTFBSDKAuthenticationToken.h */,
+				B34601CE2628525600AC1860 /* RCTFBSDKProfile.h */,
+				B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -245,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34601D02628529500AC1860 /* RCTFBSDKProfile.m in Sources */,
 				93E005151CE3D2D3000598E3 /* RCTFBSDKShareDialog.m in Sources */,
 				93E004E51CE3D292000598E3 /* RCTFBSDKAppEvents.m in Sources */,
 				93E004E61CE3D292000598E3 /* RCTFBSDKGraphRequestManager.m in Sources */,
@@ -253,6 +264,7 @@
 				93E005111CE3D2D3000598E3 /* RCTFBSDKMessageDialog.m in Sources */,
 				93E0050F1CE3D2D3000598E3 /* RCTFBSDKGameRequestDialog.m in Sources */,
 				93E004E31CE3D292000598E3 /* RCTConvert+FBSDKAccessToken.m in Sources */,
+				10E3C0CF2626E85700016645 /* RCTFBSDKAuthenticationToken.m in Sources */,
 				93E004F01CE3D2B4000598E3 /* RCTFBSDKLoginButtonManager.m in Sources */,
 				93E004EF1CE3D2B4000598E3 /* RCTConvert+FBSDKLogin.m in Sources */,
 				93E005161CE3D2D3000598E3 /* RCTFBSDKShareHelper.m in Sources */,
