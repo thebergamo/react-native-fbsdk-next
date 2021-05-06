@@ -16,6 +16,10 @@ import androidx.annotation.NonNull;
 public class FBProfileModule extends ReactContextBaseJavaModule {
     public static final String NAME = "FBProfile";
 
+    public FBProfileModule(@NonNull ReactApplicationContext reactContext) {
+      super(reactContext);
+    }
+
     @NonNull
     @Override
     public String getName() {
