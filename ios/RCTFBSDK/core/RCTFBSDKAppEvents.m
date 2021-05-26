@@ -21,7 +21,7 @@
 #import <React/RCTUtils.h>
 
 #import "RCTConvert+FBSDKAccessToken.h"
-#import "FBSDKCoreKit/FBSDKAppEventsUtility.h"
+#import <FBSDKCoreKit/FBSDKAppEventsUtility.h>
 
 @implementation RCTConvert (RCTFBSDKAppEvents)
 
@@ -98,7 +98,7 @@ RCT_EXPORT_METHOD(getAdvertiserID:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   @try {
-    NSString *advertiserID = [FBSDKAppEventsUtility advertiserID];
+    NSString *advertiserID = [[FBSDKAppEventsUtility shared] advertiserID];
     resolve(advertiserID);
   }
   @catch (NSError *error) {
