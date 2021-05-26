@@ -76,6 +76,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Install pods
-        run: cd example/ios && pod install
+        run: cd example/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
         run: cd example/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator -configuration Debug
