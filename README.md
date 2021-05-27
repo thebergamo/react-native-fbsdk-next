@@ -64,7 +64,7 @@ If you can't or don't want to use the CLI tool, you can also manually link the l
 Either follow the [instructions in the React Native documentation](https://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking) to manually link the framework or link using [Cocoapods](https://cocoapods.org) by adding this to your `Podfile`:
 
 ```ruby
-pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+pod 'react-native-fbsdk-next', :path => '../node_modules/react-native-fbsdk-next'
 ```
 
 </details>
