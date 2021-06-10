@@ -195,6 +195,8 @@ Settings.initializeSDK();
 If you would like to initialize the Facebook SDK even earlier in startup for iOS, you need to include this code in your AppDelegate.m file now that auto-initialization is removed.
 
 ```objective-c
+#import <FBSDKCoreKit/FBSDKCoreKit.h> // <- Add This Import
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FBSDKApplicationDelegate initializeSDK:launchOptions]; // <- add this
