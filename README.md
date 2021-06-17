@@ -181,7 +181,7 @@ Undefined symbols for architecture x86_64:
     ld: symbol(s) not found for architecture x86_64
 ```
    
-   After **facebook-ios-sdk v7** you need to create a swift file like so ([File.Swift](https://github.com/facebook/react-native-fbsdk/blob/master/example/ios/RNFBSDKExample/File.swift)) in the main project folder. When you add an empty swift file, XCode will ask you if you want to "Create Bridging Header".
+   After **facebook-ios-sdk v7** you need to create a swift file like so ([File.Swift](https://github.com/thebergamo/react-native-fbsdk-next/blob/master/example/ios/RNFBSDKExample/File.swift)) in the main project folder. When you add an empty swift file, XCode will ask you if you want to "Create Bridging Header".
 
    It will include to the Header Search Path on your build settings:
 ```
