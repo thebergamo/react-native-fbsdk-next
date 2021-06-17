@@ -164,9 +164,33 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 
 - Your Xcode version is too old. Upgrade to Xcode 10.0+.
 
-4. After **facebook-ios-sdk v7** you need to create a swift file into the main project folder:
+4. You get a compilation error with the error `Undefined symbols for architecture x86_64`
+```
+Undefined symbols for architecture x86_64:
+    "_swift_FORCE_LOAD$_swiftUniformTypeIdentifiers", referenced from:
+    _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+    (maybe you meant: _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit)
+    "_swift_FORCE_LOAD$_swiftCoreMIDI", referenced from:
+    _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+    (maybe you meant: _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit)
+    "_swift_FORCE_LOAD$_swiftWebKit", referenced from:
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(AccessToken.o)
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Permission.o)
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Settings.o)
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(FBLoginButton.o)
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(LoginManager.o)
+    _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+    (maybe you meant: _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit, _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit , _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit )
+    ld: symbol(s) not found for architecture x86_64
+```
+   
+   After **facebook-ios-sdk v7** you need to create a swift file like so ([File.Swift](https://github.com/thebergamo/react-native-fbsdk-next/blob/master/example/ios/RNFBSDKExample/File.swift)) in the main project folder. When you add an empty swift file, XCode will ask you if you want to "Create Bridging Header".
 
-- [File.Swift](https://github.com/facebook/react-native-fbsdk/blob/master/example/ios/RNFBSDKExample/File.swift)
+   It will include to the Header Search Path on your build settings:
+```
+$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
+$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
+```
 
 ## Usage
 
