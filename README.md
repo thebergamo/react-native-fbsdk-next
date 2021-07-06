@@ -183,14 +183,32 @@ Undefined symbols for architecture x86_64:
     (maybe you meant: _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit, _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit , _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit )
     ld: symbol(s) not found for architecture x86_64
 ```
-   
-   After **facebook-ios-sdk v7** you need to create a swift file like so ([File.Swift](https://github.com/thebergamo/react-native-fbsdk-next/blob/master/example/ios/RNFBSDKExample/File.swift)) in the main project folder. When you add an empty swift file, XCode will ask you if you want to "Create Bridging Header".
 
-   It will include to the Header Search Path on your build settings:
+   After **facebook-ios-sdk v7** (written with Swift parts) you need to coordinate Swift language usage with Objective-C for iOS.
+
+   Either:
+
+- add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header" 
+The empty swift file makes this change to the Header Search Path on your build settings:
 ```
 $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
 $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
 ```
+
+- or add this stanza in the postinstall section of your Podfile as a possible workaround (then `pod deintegrate && pod install`):
+
+   ```ruby
+    # Mixing Swift and Objective-C in a react-native project may be problematic.
+    # Workaround:  https://github.com/facebookarchive/react-native-fbsdk/issues/755#issuecomment-787488994
+    installer.aggregate_targets.first.user_project.native_targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
+      end
+    end
+   ```
+
+  Both result in fixing search paths.
+  
 
 ## Usage
 
