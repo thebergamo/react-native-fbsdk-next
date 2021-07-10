@@ -20,14 +20,14 @@ To use this library you need to ensure you match up with the correct version of 
 
 | FB SDK    | lib version                           | Required React Native Version |
 | --------- | ------------------------------------- | ----------------------------- |
-| >= 9.3.0+ | `react-native-fbsdk-next` `> 4.3.0`   | `>=0.63.3`                    |
+| >= 9.3.0+ | `react-native-fbsdk-next` `> 4.3.0`   | `>=0.63.3`*                   |
 | >= 9.0.0+ | `react-native-fbsdk-next` `>= 3.0.1`  | `>= 0.60`                     |
 | <= 8.0.1  | `react-native-fbsdk` `>= 1.0.0`       | `>= 0.60`                     |
 | <= 8.0.1  | `react-native-fbsdk` `<= 0.10`        | `<= 0.59.x`                   |
 
-> ⚠️ Attention
+> ⚠️ * Attention
 > 
-> Please notice that this module in versions after 4.2.0 only supports React Native versions above 0.63.3 as it's the oldest version of React Native which support latest XCode version. In case you need to use latest version of FB SDK, please consider solution from [this comment](https://github.com/facebook/react-native/issues/29633#issuecomment-694187116).
+> Please notice that this module in versions after 4.2.0 only supports React Native versions above 0.63.3 as it's the oldest version of React Native which support latest XCode version. Technically, it may work on older versions (test it to be sure) but **they are not supported**. Changes that accidentally break older react-native versions may be issued without regard to semantic versioning constraints because we do not test against the older versions. Please see [this issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/30) for an example of a previous break. Please update to current react-native versions.
 
 ### 1. Install the library
 
