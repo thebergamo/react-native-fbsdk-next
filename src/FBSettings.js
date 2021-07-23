@@ -53,9 +53,11 @@ module.exports = {
     Settings.setDataProcessingOptions(options, country, state);
   },
   /**
-   * Initialize the sdk
+   * setAutoLogAppEventsEnabled
    */
-  initializeSDK() {
-    Settings.initializeSDK();
+  setAutoLogAppEventsEnabled(ATE: boolean) {
+    if (Platform.OS === 'ios') {
+      return Settings.setAutoLogAppEventsEnabled();
+    }
   },
 };

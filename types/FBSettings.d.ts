@@ -14,7 +14,7 @@ export type FBSettings = {
      */
   setDataProcessingOptions(options: Array<string>, ...args: Array<number>): void;
   /**
-     * Initialize the sdk
+     * setAutoLogAppEventsEnabled
      */
-  initializeSDK(): void;
+  setAutoLogAppEventsEnabled(ATE: boolean): void;
 };
