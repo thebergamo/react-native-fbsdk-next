@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build android example app
-        run: cd example/android && ./gradlew assembleDebug
+        run: cd RNFBSDKExample && yarn && cd android && ./gradlew assembleDebug
   ios-build:
     runs-on: macOS-latest
     steps:
@@ -74,8 +74,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install
+        run: yarn install && cd RNFBSDKExample && yarn
       - name: Install pods
-        run: cd example/ios && rm -f Podfile.lock && pod install
+        run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
-        run: cd example/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator -configuration Debug
+        run: cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator -configuration Debug

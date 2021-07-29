@@ -50,11 +50,11 @@
     "flow": "flow",
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn validate:flow",
-    "validate:eslint": "eslint \"src/**/*\" \"example/src/**/*\"",
+    "validate:eslint": "eslint \"src/**/*\"",
     "validate:flow": "flow",
-    "validate:prettier": "prettier \"src/**/*.js\" \"example/src/**/*.js\" --check",
-    "example:ios": "cd ./example && react-native run-ios",
-    "example:android": "cd ./example && react-native run-android --no-jetifier",
+    "validate:prettier": "prettier \"src/**/*.js\" --check",
+    "example:ios": "cd ./RNFBSDKExample && yarn ios",
+    "example:android": "cd ./RNFBSDKExample && yarn android --no-jetifier",
     "semantic-release": "semantic-release"
   },
   "files": [
