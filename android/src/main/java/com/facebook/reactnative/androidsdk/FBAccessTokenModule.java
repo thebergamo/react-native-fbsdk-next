@@ -105,6 +105,16 @@ public class FBAccessTokenModule extends ReactContextBaseJavaModule {
         AccessToken.setCurrentAccessToken(accessToken);
     }
 
+    @ReactMethod
+    public void addListener(String eventName) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
     /**
      * Updates the current access token with up to date permissions, and extends the expiration
      * date, if extension is possible.
