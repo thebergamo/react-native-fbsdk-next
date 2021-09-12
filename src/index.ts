@@ -39,6 +39,7 @@ import FBLoginButton from './FBLoginButton';
 import FBSendButton from './FBSendButton';
 import FBShareButton from './FBShareButton';
 
+// TODO: [TS Migration]: Removed getters and used normal export. Discuss before merging.
 export {
   //native models
   ShareOpenGraphAction,
