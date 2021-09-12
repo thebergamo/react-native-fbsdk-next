@@ -20,7 +20,6 @@
 
  * @format
  */
-'use strict';
 
 import type {ShareLinkContent} from './FBShareLinkContent';
 import type {ShareOpenGraphContent} from './FBShareOpenGraphContent';

@@ -3,7 +3,6 @@
  * @format
  */
 
-'use strict';
 
 import {Platform, NativeModules} from 'react-native';
 const AuthenticationToken = NativeModules.FBAuthenticationToken;

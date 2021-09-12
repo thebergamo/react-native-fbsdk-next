@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 export default {
   //native models

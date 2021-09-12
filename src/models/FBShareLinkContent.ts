@@ -20,7 +20,6 @@
 
  * @format
  */
-'use strict';
 
 import type {ShareContentCommonParameters} from './FBShareContent';
 

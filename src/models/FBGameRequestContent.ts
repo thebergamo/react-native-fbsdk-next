@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 type ActionType =
   // The user is sending an object to their friends.

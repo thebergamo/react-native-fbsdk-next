@@ -20,7 +20,6 @@
 
  * @format
  */
-'use strict';
 
 /**
  * A video for sharing.
