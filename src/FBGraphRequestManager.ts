@@ -91,7 +91,11 @@ class FBGraphRequestManager {
    */
   start(timeout?: number) {
     const that = this;
-    const callback = (error: Object, result: Object, response: Array<Array<Object>>) => {
+    const callback = (
+      error: Object,
+      result: Object,
+      response: Array<Array<Object>>,
+    ) => {
       if (response) {
         that.requestCallbacks.forEach((innerCallback, index) => {
           if (innerCallback) {

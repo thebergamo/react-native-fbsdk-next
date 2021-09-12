@@ -45,7 +45,6 @@ export {
   ShareOpenGraphAction,
   FBShareOpenGraphObject as ShareOpenGraphObject,
   FBShareOpenGraphValueContainer as ShareOpenGraphValueContainer,
-
   //native modules
   FBAccessToken as AccessToken,
   FBAuthenticationToken as AuthenticationToken,
@@ -59,7 +58,6 @@ export {
   FBProfile as Profile,
   FBSettings as Settings,
   FBShareDialog as ShareDialog,
-
   //native components
   FBLoginButton as LoginButton,
   FBSendButton as SendButton,
