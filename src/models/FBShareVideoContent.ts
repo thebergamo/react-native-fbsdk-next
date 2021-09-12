@@ -21,9 +21,9 @@
  * @format
  */
 
-import type {ShareContentCommonParameters} from './FBShareContent';
-import type {SharePhoto} from './FBSharePhoto';
-import type {ShareVideo} from './FBShareVideo';
+import {ShareContentCommonParameters} from './FBShareContent';
+import {SharePhoto} from './FBSharePhoto';
+import {ShareVideo} from './FBShareVideo';
 
 /**
  * A model for video content to be shared.

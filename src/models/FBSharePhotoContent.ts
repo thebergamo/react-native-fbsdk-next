@@ -21,8 +21,8 @@
  * @format
  */
 
-import type {ShareContentCommonParameters} from './FBShareContent';
-import type {SharePhoto} from './FBSharePhoto';
+import {ShareContentCommonParameters} from './FBShareContent';
+import {SharePhoto} from './FBSharePhoto';
 
 /**
  * A model for photo content to be shared.

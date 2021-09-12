@@ -22,7 +22,7 @@
  */
 
 
-import type {SharePhoto} from './FBSharePhoto';
+import {SharePhoto} from './FBSharePhoto';
 
 type OpenGraphProperties = {[key: string]: OpenGraphValue};
 type OpenGraphValue = {

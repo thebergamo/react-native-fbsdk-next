@@ -21,10 +21,10 @@
  * @format
  */
 
-import type {ShareLinkContent} from './FBShareLinkContent';
-import type {ShareOpenGraphContent} from './FBShareOpenGraphContent';
-import type {SharePhotoContent} from './FBSharePhotoContent';
-import type {ShareVideoContent} from './FBShareVideoContent';
+import {ShareLinkContent} from './FBShareLinkContent';
+import {ShareOpenGraphContent} from './FBShareOpenGraphContent';
+import {SharePhotoContent} from './FBSharePhotoContent';
+import {ShareVideoContent} from './FBShareVideoContent';
 
 export type ShareContent =
   | ShareLinkContent

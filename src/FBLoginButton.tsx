@@ -24,7 +24,7 @@
 import * as React from 'react';
 import {requireNativeComponent, StyleSheet} from 'react-native';
 
-import type {
+import {
   DefaultAudience,
   LoginBehaviorAndroid,
   LoginResult,

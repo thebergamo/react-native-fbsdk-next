@@ -26,7 +26,7 @@ import {
 } from 'react-native';
 
 const ShareDialog = NativeModules.FBShareDialog;
-import type {ShareContent} from './models/FBShareContent';
+import {ShareContent} from './models/FBShareContent';
 
 type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
 type ShareDialogModeAndroid =
