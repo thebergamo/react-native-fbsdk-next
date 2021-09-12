@@ -17,13 +17,17 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-const AppEventsLogger = require('react-native').NativeModules.FBAppEventsLogger;
-const {Platform} = require('react-native');
+import {
+  NativeModules,
+} from 'react-native';
+
+const AppEventsLogger = NativeModules.FBAppEventsLogger;
+import {Platform} from 'react-native';
 /**
  * Controls when an AppEventsLogger sends log events to the server
  */
@@ -44,18 +48,18 @@ type Params = {[key: string]: string | number};
  * See https://developers.facebook.com/docs/app-events/advanced-matching for
  * more info about the expected format of each field.
  */
-type UserData = $ReadOnly<{|
-  email?: ?string,
-  firstName?: ?string,
-  lastName?: ?string,
-  phone?: ?string,
-  dateOfBirth?: ?string,
-  gender?: ?('m' | 'f'),
-  city?: ?string,
-  state?: ?string,
-  zip?: ?string,
-  country?: ?string,
-|}>;
+type UserData = Readonly<{
+  email?: string,
+  firstName?: string,
+  lastName?: string,
+  phone?: string,
+  dateOfBirth?: string,
+  gender?: ('m' | 'f'),
+  city?: string,
+  state?: string,
+  zip?: string,
+  country?: string,
+}>;
 
 type AppEvent = {
   AchievedLevel: string,
@@ -110,7 +114,7 @@ const {
   AppEventParams: AppEventParam,
 } = AppEventsLogger.getConstants();
 
-module.exports = {
+export default {
   /**
    * Sets the current event flushing behavior specifying when events
    * are sent back to Facebook servers.
@@ -131,7 +135,7 @@ module.exports = {
   logEvent(eventName: string, ...args: Array<number | Params>) {
     let valueToSum = 0;
     if (typeof args[0] === 'number') {
-      valueToSum = args.shift();
+      valueToSum = args.shift() as number;
     }
     let parameters = null;
     if (typeof args[0] === 'object') {
@@ -146,7 +150,7 @@ module.exports = {
   logPurchase(
     purchaseAmount: number,
     currencyCode: string,
-    parameters?: ?Params,
+    parameters?: Params,
   ) {
     AppEventsLogger.logPurchase(purchaseAmount, currencyCode, parameters);
   },
@@ -154,7 +158,7 @@ module.exports = {
   /**
    * Logs an app event that tracks that the application was open via Push Notification.
    */
-  logPushNotificationOpen(payload: ?Object) {
+  logPushNotificationOpen(payload?: Object) {
     AppEventsLogger.logPushNotificationOpen(payload);
   },
 
@@ -176,21 +180,21 @@ module.exports = {
   /**
    * Returns user id or null if not set
    */
-  async getUserID(): Promise<?string> {
+  async getUserID(): Promise<string | null> {
     return await AppEventsLogger.getUserID();
   },
 
   /**
    * Returns anonymous id or null if not set
    */
-  async getAnonymousID(): Promise<?string> {
+  async getAnonymousID(): Promise<string | null> {
     return await AppEventsLogger.getAnonymousID();
   },
 
   /**
    * Returns advertiser id or null if not set
    */
-  async getAdvertiserID(): Promise<?string> {
+  async getAdvertiserID(): Promise<string | null> {
     return await AppEventsLogger.getAdvertiserID();
   },
 
@@ -198,7 +202,7 @@ module.exports = {
    * Returns advertiser id or null if not set.
    * @platform android
    */
-  async getAttributionID(): Promise<?string> {
+  async getAttributionID(): Promise<string | null> {
     if (Platform.OS === 'ios') {
       return null;
     }

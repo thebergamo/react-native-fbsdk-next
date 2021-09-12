@@ -17,27 +17,35 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-const GameRequestDialog = require('react-native').NativeModules
-  .FBGameRequestDialog;
-import type {GameRequestContent} from './models/FBGameRequestContent';
+import type {ShareContentCommonParameters} from './FBShareContent';
+import type {SharePhoto} from './FBSharePhoto';
 
-module.exports = {
+/**
+ * A model for photo content to be shared.
+ */
+export type SharePhotoContent = {
   /**
-   * Check if the dialog can be shown.
+   * The type of content to be shared is photo.
    */
-  canShow(): Promise<any> {
-    return GameRequestDialog.canShow();
-  },
+  contentType: 'photo',
 
   /**
-   * Shows the dialog using the specified content.
+   * Common parameters for share content;
    */
-  show(gameRequestContent: GameRequestContent): Promise<any> {
-    return GameRequestDialog.show(gameRequestContent);
-  },
+  commonParameters?: ShareContentCommonParameters,
+
+  /**
+   * URL for the content being shared.
+   */
+  contentUrl?: string,
+
+  /**
+   * Photos to be shared.
+   */
+  photos: Array<SharePhoto>,
 };

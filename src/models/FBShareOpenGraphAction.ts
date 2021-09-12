@@ -17,13 +17,13 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 
 'use strict';
 
-const ShareOpenGraphValueContainer = require('./FBShareOpenGraphValueContainer');
+import ShareOpenGraphValueContainer from './FBShareOpenGraphValueContainer';
 
 /**
  * Represents an open graph action.
@@ -40,4 +40,4 @@ class ShareOpenGraphAction extends ShareOpenGraphValueContainer {
   }
 }
 
-module.exports = ShareOpenGraphAction;
+export default ShareOpenGraphAction;

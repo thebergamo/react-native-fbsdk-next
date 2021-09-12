@@ -17,12 +17,16 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-const ShareDialog = require('react-native').NativeModules.FBShareDialog;
+import {
+  NativeModules,
+} from 'react-native';
+
+const ShareDialog = NativeModules.FBShareDialog;
 import type {ShareContent} from './models/FBShareContent';
 
 type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
@@ -61,7 +65,7 @@ type ShareDialogModeIOS =
    */
   | 'native';
 
-module.exports = {
+export default {
   /**
    * Check if the dialog can be shown.
    */

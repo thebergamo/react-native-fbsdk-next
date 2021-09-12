@@ -23,9 +23,13 @@
 
 'use strict';
 
-const AccessToken = require('react-native').NativeModules.FBAccessToken;
+import {
+  NativeModules,
+  NativeEventEmitter,
+} from 'react-native';
 
-const NativeEventEmitter = require('react-native').NativeEventEmitter;
+const AccessToken = NativeModules.FBAccessToken;
+
 const eventEmitter = new NativeEventEmitter(AccessToken);
 
 type AccessTokenMap = {
@@ -97,7 +101,7 @@ class FBAccessToken {
    * The source of access token.
    * @platform android
    */
-  accessTokenSource: ?string;
+  accessTokenSource?: string;
 
   constructor(tokenMap: AccessTokenMap) {
     this.accessToken = tokenMap.accessToken;
@@ -116,9 +120,9 @@ class FBAccessToken {
   /**
    * Getter for the access token that is current for the application.
    */
-  static getCurrentAccessToken(): Promise<?FBAccessToken> {
+  static getCurrentAccessToken(): Promise<FBAccessToken | null> {
     return new Promise((resolve, reject) => {
-      AccessToken.getCurrentAccessToken((tokenMap) => {
+      AccessToken.getCurrentAccessToken((tokenMap?: AccessTokenMap) => {
         if (tokenMap) {
           resolve(new FBAccessToken(tokenMap));
         } else {
@@ -148,7 +152,7 @@ class FBAccessToken {
    * listener when called.
    */
   static addListener(
-    listener: (accessToken: ?FBAccessToken) => void,
+    listener: (accessToken: FBAccessToken | null) => void,
   ): () => void {
     const subscription = eventEmitter.addListener(
       'fbsdk.accessTokenDidChange',
@@ -224,4 +228,4 @@ class FBAccessToken {
   }
 }
 
-module.exports = FBAccessToken;
+export default FBAccessToken;

@@ -17,18 +17,21 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 
 'use strict';
 
-const NativeGraphRequestManager = require('react-native').NativeModules
-  .FBGraphRequest;
+import {
+  NativeModules,
+} from 'react-native';
 
-import type GraphRequest from './FBGraphRequest';
+const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
-type Callback = (error: ?Object, result: ?Object) => void;
+import GraphRequest from './FBGraphRequest';
+
+type Callback = (error?: Object, result?: Object) => void;
 
 function _verifyParameters(request: GraphRequest) {
   if (request.config && request.config.parameters) {
@@ -48,9 +51,9 @@ function _verifyParameters(request: GraphRequest) {
 }
 
 class FBGraphRequestManager {
-  requestBatch: Array<GraphRequest>;
-  requestCallbacks: Array<?Callback>;
-  batchCallback: Callback;
+  requestBatch: GraphRequest[];
+  requestCallbacks: (Callback | undefined)[];
+  batchCallback: Callback | undefined;
 
   constructor() {
     this.requestBatch = [];
@@ -73,7 +76,7 @@ class FBGraphRequestManager {
    * graph request made, only that the entire batch has finished executing.
    */
   addBatchCallback(
-    callback: (error: ?Object, result: ?Object) => void,
+    callback: (error?: Object, result?: Object) => void,
   ): FBGraphRequestManager {
     this.batchCallback = callback;
     return this;
@@ -89,9 +92,9 @@ class FBGraphRequestManager {
    * extra permission and it's unncessary for the sdk. Instead, you can use the NetInfo module
    * in react-native to get the network status.
    */
-  start(timeout: ?number) {
+  start(timeout?: number) {
     const that = this;
-    const callback = (error, result, response) => {
+    const callback = (error: Object, result: Object, response: Object[][]) => {
       if (response) {
         that.requestCallbacks.forEach((innerCallback, index, array) => {
           if (innerCallback) {
@@ -108,4 +111,4 @@ class FBGraphRequestManager {
   }
 }
 
-module.exports = FBGraphRequestManager;
+export default FBGraphRequestManager;

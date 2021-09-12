@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
@@ -17,15 +17,48 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
+
 'use strict';
 
-const AppLink = require('react-native').NativeModules.FBAppLink;
+import * as React from 'react';
+import {requireNativeComponent, StyleSheet} from 'react-native';
 
-module.exports = {
-  fetchDeferredAppLink(): Promise<string | null> {
-    return AppLink.fetchDeferredAppLink();
+import type {ShareContent} from './models/FBShareContent';
+
+class ShareButton extends React.Component<{
+  /**
+   * Content to be shared.
+   */
+  shareContent: ShareContent,
+
+  /**
+   * View style, if any.
+   */
+  style?: any,
+}> {
+  static defaultProps: {
+    style: typeof styles.defaultButtonStyle,
+  };
+
+  render() {
+    return <RCTFBShareButton {...this.props} />;
+  }
+}
+
+const styles = StyleSheet.create({
+  defaultButtonStyle: {
+    height: 30,
+    width: 80,
   },
+});
+
+ShareButton.defaultProps = {
+  style: styles.defaultButtonStyle,
 };
+
+const RCTFBShareButton = requireNativeComponent<any>('RCTFBShareButton');
+
+export default ShareButton;

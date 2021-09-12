@@ -5,17 +5,17 @@
  * This source code is licensed under the license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow
+
  * @format
  */
 
 'use strict';
 
-import {Platform} from 'react-native';
+import {Platform,NativeModules} from 'react-native';
 
-const Settings = require('react-native').NativeModules.FBSettings;
+const Settings = NativeModules.FBSettings;
 
-module.exports = {
+export default {
   /**
    * For iOS only, get AdvertiserTrackingEnabled status.
    * @platform ios

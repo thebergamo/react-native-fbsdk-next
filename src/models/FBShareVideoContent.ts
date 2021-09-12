@@ -17,34 +17,51 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
-
 'use strict';
 
-const MessageDialog = require('react-native').NativeModules.FBMessageDialog;
-import type {ShareContent} from './models/FBShareContent';
+import type {ShareContentCommonParameters} from './FBShareContent';
+import type {SharePhoto} from './FBSharePhoto';
+import type {ShareVideo} from './FBShareVideo';
 
-module.exports = {
+/**
+ * A model for video content to be shared.
+ */
+export type ShareVideoContent = {
   /**
-   * Check if the dialog can be shown.
+   * The type of content to be shared is photo.
    */
-  canShow(shareContent: ShareContent): Promise<boolean> {
-    return MessageDialog.canShow(shareContent);
-  },
-
-  /**
-   * Shows the dialog using the specified content.
-   */
-  show(shareContent: ShareContent): Promise<any> {
-    return MessageDialog.show(shareContent);
-  },
+  contentType: 'video',
 
   /**
-   * Sets whether or not the native message dialog should fail when it encounters a data error.
+   * Common parameters for share content;
    */
-  setShouldFailOnDataError(shouldFailOnDataError: boolean): void {
-    MessageDialog.setShouldFailOnDataError(shouldFailOnDataError);
-  },
+  commonParameters?: ShareContentCommonParameters,
+
+  /**
+   * URL for the content being shared.
+   */
+  contentUrl?: string,
+
+  /**
+   * Video to be shared.
+   */
+  video: ShareVideo,
+
+  /**
+   *  Description of the video.
+   */
+  contentDescription?: string,
+
+  /**
+   * Title of the video.
+   */
+  contentTitle?: string,
+
+  /**
+   * The photo that represents the video.
+   */
+  previewPhoto?: SharePhoto,
 };

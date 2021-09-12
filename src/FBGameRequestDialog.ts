@@ -17,34 +17,30 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-/**
- * Specifies the privacy of a group.
- */
-type AppGroupPrivacy =
-  // Anyone can see the group, who's in in and what members post.
-  | 'Open'
-  // Anyone can see the group and who's in it, but only members can see posts.
-  | 'Closed';
+import {
+  NativeModules,
+} from 'react-native';
 
-/**
- * A model for app invites.
- */
-export type AppGroupCreationContent = {
+const GameRequestDialog = NativeModules.FBGameRequestDialog;
+import type {GameRequestContent} from './models/FBGameRequestContent';
+
+export default {
   /**
-   * The description of the group.
+   * Check if the dialog can be shown.
    */
-  description: string,
+  canShow(): Promise<any> {
+    return GameRequestDialog.canShow();
+  },
+
   /**
-   * The name of the group.
+   * Shows the dialog using the specified content.
    */
-  name: string,
-  /**
-   * The privacy for the group.
-   */
-  privacy: AppGroupPrivacy,
+  show(gameRequestContent: GameRequestContent): Promise<any> {
+    return GameRequestDialog.show(gameRequestContent);
+  },
 };

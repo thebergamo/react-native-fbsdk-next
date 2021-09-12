@@ -17,7 +17,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
@@ -32,7 +32,7 @@ import type {
   LoginTracking,
 } from './FBLoginManager';
 
-type Event = Object;
+type Event = any;
 type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 
 /**
@@ -130,4 +130,4 @@ LoginButton.defaultProps = {
 
 const RCTFBLoginButton = requireNativeComponent<any>('RCTFBLoginButton');
 
-module.exports = LoginButton;
+export default LoginButton;

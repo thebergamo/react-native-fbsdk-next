@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
@@ -17,17 +17,17 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
-
 'use strict';
 
-const ShareOpenGraphValueContainer = require('./FBShareOpenGraphValueContainer');
-
 /**
- * Represents an open graph object.
+ * A video for sharing.
  */
-class ShareOpenGraphObject extends ShareOpenGraphValueContainer {}
-
-module.exports = ShareOpenGraphObject;
+export type ShareVideo = {
+  /**
+   * The URL to the video. Must point to the location of the video on disk.
+   */
+  localUrl: string,
+};

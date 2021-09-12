@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
@@ -17,21 +17,24 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
+
 'use strict';
+
+import ShareOpenGraphAction from './FBShareOpenGraphAction';
 
 import type {ShareContentCommonParameters} from './FBShareContent';
 
 /**
- * A model for status and link content to be shared.
+ * Represents a content object containing information about an Open Graph Action.
  */
-export type ShareLinkContent = {
+export type ShareOpenGraphContent = {
   /**
-   * The type of content to be shared is link.
+   * The type of content to be shared is open graph content.
    */
-  contentType: 'link',
+  contentType: 'open-graph',
 
   /**
    * Common parameters for share content;
@@ -41,34 +44,15 @@ export type ShareLinkContent = {
   /**
    * URL for the content being shared.
    */
-  contentUrl: string,
+  contentUrl?: string,
 
   /**
-   * The Description of the link.
-   * If not specified, this field is automatically populated by information scraped
-   * from the contentURL,  typically the title of the page.
-   * @deprecated `contentDescription` is deprecated from Graph API 2.9.
-   * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
+   * Open Graph Action to be shared.
    */
-  contentDescription?: string,
+  action: ShareOpenGraphAction,
 
   /**
-   * The title to display for this link.
-   * @deprecated `contentTitle` is deprecated from Graph API 2.9.
-   * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
+   * Property name that points to the primary Open Graph Object in the action.
    */
-  contentTitle?: string,
-
-  /**
-   * The URL of a picture to attach to this comment.
-   * @deprecated `imageUrl` is deprecated from Graph API 2.9.
-   * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
-   */
-  imageUrl?: string,
-
-  /**
-   * The predefine quote to attacth to this comment.
-   * If specified, the quote text will render with custom styling on top of the link.
-   */
-  quote?: string,
+  previewPropertyName: string,
 };

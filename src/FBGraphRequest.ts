@@ -17,14 +17,14 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 
 'use strict';
 
-type GraphRequestCallback = (error: ?Object, result: ?Object) => void;
-type GraphRequestConfig = {
+export type GraphRequestCallback = (error?: Object, result?: Object) => void;
+export type GraphRequestConfig = {
   /**
    * The httpMethod to use for the request, for example "GET" or "POST".
    */
@@ -42,7 +42,7 @@ type GraphRequestConfig = {
    */
   accessToken?: string,
 };
-type GraphRequestParameters = {[key: string]: Object};
+export type GraphRequestParameters = {[key: string]: any};
 
 /**
  * Represents a Graph API request and provides batch request supports.
@@ -56,20 +56,20 @@ class FBGraphRequest {
   /**
    * The optional config for the request.
    */
-  config: ?GraphRequestConfig;
+  config?: GraphRequestConfig;
 
   /**
    * Called upon completion or failure of the request.
    */
-  callback: ?GraphRequestCallback;
+  callback?: GraphRequestCallback;
 
   /**
    * Constructs a new Graph API request.
    */
   constructor(
     graphPath: string,
-    config: ?GraphRequestConfig,
-    callback: ?GraphRequestCallback,
+    config?: GraphRequestConfig,
+    callback?: GraphRequestCallback,
   ) {
     this.graphPath = graphPath;
     this.config = config ? config : {};
@@ -86,4 +86,4 @@ class FBGraphRequest {
   }
 }
 
-module.exports = FBGraphRequest;
+export default FBGraphRequest;

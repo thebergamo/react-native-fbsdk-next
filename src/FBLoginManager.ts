@@ -17,12 +17,12 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-const {NativeModules, Platform} = require('react-native');
+import {NativeModules, Platform} from 'react-native';
 const LoginManager = NativeModules.FBLoginManager;
 /**
  * Indicates which default audience to use for sessions that post data to Facebook.
@@ -63,7 +63,7 @@ export type LoginResult = {
 
 export type LoginTracking = 'enabled' | 'limited';
 
-module.exports = {
+export default {
   /**
    * Log in with the requested permissions.
    * @param loginTrackingIOS IOS only: loginTracking: 'enabled' | 'limited', default 'enabled'.
