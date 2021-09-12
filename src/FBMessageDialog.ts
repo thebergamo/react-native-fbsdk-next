@@ -17,43 +17,38 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
+
 'use strict';
 
-import type {ShareLinkContent} from './FBShareLinkContent';
-import type {ShareOpenGraphContent} from './FBShareOpenGraphContent';
-import type {SharePhotoContent} from './FBSharePhotoContent';
-import type {ShareVideoContent} from './FBShareVideoContent';
+import {
+  NativeModules,
+} from 'react-native';
 
-export type ShareContent =
-  | ShareLinkContent
-  | SharePhotoContent
-  | ShareVideoContent
-  | ShareOpenGraphContent;
-/**
- * A base interface for content to be shared.
- */
-export type ShareContentCommonParameters = {
+const MessageDialog = NativeModules.FBMessageDialog;
+import type {ShareContent} from './models/FBShareContent';
+
+export default {
   /**
-   * List of IDs for taggable people to tag with this content.
+   * Check if the dialog can be shown.
    */
-  peopleIds?: Array<string>,
+  canShow(shareContent: ShareContent): Promise<boolean> {
+    return MessageDialog.canShow(shareContent);
+  },
 
   /**
-   * The ID for a place to tag with this content.
+   * Shows the dialog using the specified content.
    */
-  placeId?: string,
+  show(shareContent: ShareContent): Promise<any> {
+    return MessageDialog.show(shareContent);
+  },
 
   /**
-   * A value to be added to the referrer URL when a person follows a link from
-   * this shared content on feed.
+   * Sets whether or not the native message dialog should fail when it encounters a data error.
    */
-  ref?: string,
-
-  /**
-   * A hashtag to be added to the share interface. The hashtag must be 32 characters or less.
-   */
-  hashtag?: string,
+  setShouldFailOnDataError(shouldFailOnDataError: boolean): void {
+    MessageDialog.setShouldFailOnDataError(shouldFailOnDataError);
+  },
 };

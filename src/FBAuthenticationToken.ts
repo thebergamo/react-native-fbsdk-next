@@ -1,11 +1,11 @@
 /**
- * @flow
+
  * @format
  */
 
 'use strict';
 
-const {Platform, NativeModules} = require('react-native');
+import {Platform, NativeModules} from 'react-native';
 const AuthenticationToken = NativeModules.FBAuthenticationToken;
 
 type AuthenticationTokenMap = {
@@ -43,12 +43,12 @@ class FBAuthenticationToken {
   /**
    * Getter for the authentication token
    */
-  static getAuthenticationTokenIOS(): Promise<?FBAuthenticationToken> {
+  static getAuthenticationTokenIOS(): Promise<FBAuthenticationToken | null> {
     if (Platform.OS === 'android') {
       return Promise.resolve(null);
     }
     return new Promise((resolve, reject) => {
-      AuthenticationToken.getAuthenticationToken((tokenMap) => {
+      AuthenticationToken.getAuthenticationToken((tokenMap: AuthenticationTokenMap) => {
         if (tokenMap) {
           resolve(new FBAuthenticationToken(tokenMap));
         } else {
@@ -59,4 +59,4 @@ class FBAuthenticationToken {
   }
 }
 
-module.exports = FBAuthenticationToken;
+export default FBAuthenticationToken;

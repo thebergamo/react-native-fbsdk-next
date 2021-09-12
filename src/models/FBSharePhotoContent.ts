@@ -17,47 +17,35 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-import * as React from 'react';
-import {requireNativeComponent, StyleSheet} from 'react-native';
+import type {ShareContentCommonParameters} from './FBShareContent';
+import type {SharePhoto} from './FBSharePhoto';
 
-import type {ShareContent} from './models/FBShareContent';
-
-class SendButton extends React.Component<{
+/**
+ * A model for photo content to be shared.
+ */
+export type SharePhotoContent = {
   /**
-   * Content to be shared.
+   * The type of content to be shared is photo.
    */
-  shareContent: ShareContent,
+  contentType: 'photo',
 
   /**
-   * View style, if any.
+   * Common parameters for share content;
    */
-  style?: any,
-}> {
-  static defaultProps: {
-    style: typeof styles.defaultButtonStyle,
-  };
+  commonParameters?: ShareContentCommonParameters,
 
-  render() {
-    return <RCTFBSendButton {...this.props} />;
-  }
-}
+  /**
+   * URL for the content being shared.
+   */
+  contentUrl?: string,
 
-const styles = StyleSheet.create({
-  defaultButtonStyle: {
-    height: 30,
-    width: 80,
-  },
-});
-
-SendButton.defaultProps = {
-  style: styles.defaultButtonStyle,
+  /**
+   * Photos to be shared.
+   */
+  photos: Array<SharePhoto>,
 };
-
-const RCTFBSendButton = requireNativeComponent<any>('RCTFBSendButton');
-
-module.exports = SendButton;

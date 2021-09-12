@@ -17,7 +17,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 
@@ -38,7 +38,7 @@ type OpenGraphValueType = 'number' | 'open-graph-object' | 'photo' | 'string';
 class ShareOpenGraphValueContainer {
   _properties: OpenGraphProperties;
 
-  constructor(properties: ?OpenGraphProperties) {
+  constructor(properties: OpenGraphProperties | null) {
     this._properties = properties ? properties : {};
   }
 
@@ -78,4 +78,4 @@ class ShareOpenGraphValueContainer {
   }
 }
 
-module.exports = ShareOpenGraphValueContainer;
+export default ShareOpenGraphValueContainer;

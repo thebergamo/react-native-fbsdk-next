@@ -17,35 +17,34 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-import type {ShareContentCommonParameters} from './FBShareContent';
-import type {SharePhoto} from './FBSharePhoto';
+/**
+ * Specifies the privacy of a group.
+ */
+type AppGroupPrivacy =
+  // Anyone can see the group, who's in in and what members post.
+  | 'Open'
+  // Anyone can see the group and who's in it, but only members can see posts.
+  | 'Closed';
 
 /**
- * A model for photo content to be shared.
+ * A model for app invites.
  */
-export type SharePhotoContent = {
+export type AppGroupCreationContent = {
   /**
-   * The type of content to be shared is photo.
+   * The description of the group.
    */
-  contentType: 'photo',
-
+  description: string,
   /**
-   * Common parameters for share content;
+   * The name of the group.
    */
-  commonParameters?: ShareContentCommonParameters,
-
+  name: string,
   /**
-   * URL for the content being shared.
+   * The privacy for the group.
    */
-  contentUrl?: string,
-
-  /**
-   * Photos to be shared.
-   */
-  photos: Array<SharePhoto>,
+  privacy: AppGroupPrivacy,
 };

@@ -17,27 +17,47 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @flow
+
  * @format
  */
 'use strict';
 
-const GameRequestDialog =
-  require('react-native').NativeModules.FBGameRequestDialog;
-import type {GameRequestContent} from './models/FBGameRequestContent';
+import * as React from 'react';
+import {requireNativeComponent, StyleSheet} from 'react-native';
 
-module.exports = {
+import type {ShareContent} from './models/FBShareContent';
+
+class SendButton extends React.Component<{
   /**
-   * Check if the dialog can be shown.
+   * Content to be shared.
    */
-  canShow(): Promise<any> {
-    return GameRequestDialog.canShow();
-  },
+  shareContent: ShareContent,
 
   /**
-   * Shows the dialog using the specified content.
+   * View style, if any.
    */
-  show(gameRequestContent: GameRequestContent): Promise<any> {
-    return GameRequestDialog.show(gameRequestContent);
+  style?: any,
+}> {
+  static defaultProps: {
+    style: typeof styles.defaultButtonStyle,
+  };
+
+  render() {
+    return <RCTFBSendButton {...this.props} />;
+  }
+}
+
+const styles = StyleSheet.create({
+  defaultButtonStyle: {
+    height: 30,
+    width: 80,
   },
+});
+
+SendButton.defaultProps = {
+  style: styles.defaultButtonStyle,
 };
+
+const RCTFBSendButton = requireNativeComponent<any>('RCTFBSendButton');
+
+export default SendButton;
