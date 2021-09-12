@@ -24,7 +24,7 @@
 /**
  * Specifies the privacy of a group.
  */
-type AppGroupPrivacy =
+export type AppGroupPrivacy =
   // Anyone can see the group, who's in in and what members post.
   | 'Open'
   // Anyone can see the group and who's in it, but only members can see posts.

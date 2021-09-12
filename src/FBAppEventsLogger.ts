@@ -31,7 +31,7 @@ import {isDefined, isNumber, isOneOf, isString} from './util/validate';
 /**
  * Controls when an AppEventsLogger sends log events to the server
  */
-type AppEventsFlushBehavior =
+export type AppEventsFlushBehavior =
   /**
    * Flush automatically: periodically (every 15 seconds or after every 100 events), and
    * always at app reactivation. This is the default value.
@@ -45,41 +45,41 @@ type AppEventsFlushBehavior =
 /**
  * Specifies product availability for Product Catalog product item update
  */
-type ProductAvailability =
-  /**
-   * Item ships immediately
-   */
-  | 'in_stock'
-  /**
-   * No plan to restock
-   */
-  | 'out_of_stock'
-  /**
-   * Available in future
-   */
-  | 'preorder'
-  /**
-   * Ships in 1-2 weeks
-   */
-  | 'avaliable_for_order'
-  /**
-   * Discontinued
-   */
-  | 'discontinued';
+ export type ProductAvailability =
+/**
+ * Item ships immediately
+ */
+| 'in_stock'
+/**
+ * No plan to restock
+ */
+| 'out_of_stock'
+/**
+ * Available in future
+ */
+| 'preorder'
+/**
+ * Ships in 1-2 weeks
+ */
+| 'avaliable_for_order'
+/**
+ * Discontinued
+ */
+| 'discontinued';
 
 /**
- * Specifies product condition for Product Catalog product item update
- */
-type ProductCondition = 'new' | 'refurbished' | 'used';
+* Specifies product condition for Product Catalog product item update
+*/
+export type ProductCondition = 'new' | 'refurbished' | 'used';
 
-type Params = {[key: string]: string | number};
+export type Params = {[key: string]: string | number};
 
 /**
  * Info about a user to increase chances of matching a Facebook user.
  * See https://developers.facebook.com/docs/app-events/advanced-matching for
  * more info about the expected format of each field.
  */
-type UserData = Readonly<{
+export type UserData = Readonly<{
   email?: string,
   firstName?: string,
   lastName?: string,
@@ -92,7 +92,7 @@ type UserData = Readonly<{
   country?: string,
 }>;
 
-type AppEvent = {
+export type AppEvent = {
   AchievedLevel: string,
   AdClick: string,
   AdImpression: string,
@@ -118,7 +118,7 @@ type AppEvent = {
   ViewedContent: string,
 };
 
-type AppEventParam = {
+export type AppEventParam = {
   AddType: string,
   Content: string,
   ContentID: string,
