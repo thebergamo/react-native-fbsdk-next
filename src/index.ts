@@ -39,64 +39,28 @@ import FBLoginButton from './FBLoginButton';
 import FBSendButton from './FBSendButton';
 import FBShareButton from './FBShareButton';
 
-export default {
+export {
   //native models
-  get ShareOpenGraphAction() {
-    return ShareOpenGraphAction;
-  },
-  get ShareOpenGraphObject() {
-    return FBShareOpenGraphObject;
-  },
-  get ShareOpenGraphValueContainer() {
-    return FBShareOpenGraphValueContainer;
-  },
+  ShareOpenGraphAction,
+  FBShareOpenGraphObject as ShareOpenGraphObject,
+  FBShareOpenGraphValueContainer as ShareOpenGraphValueContainer,
 
   //native modules
-  get AccessToken() {
-    return FBAccessToken;
-  },
-  get AuthenticationToken() {
-    return FBAuthenticationToken;
-  },
-  get AppEventsLogger() {
-    return FBAppEventsLogger;
-  },
-  get AppLink() {
-    return FBAppLink;
-  },
-  get GameRequestDialog() {
-    return FBGameRequestDialog;
-  },
-  get GraphRequest() {
-    return FBGraphRequest;
-  },
-  get GraphRequestManager() {
-    return FBGraphRequestManager;
-  },
-  get LoginManager() {
-    return FBLoginManager;
-  },
-  get MessageDialog() {
-    return FBMessageDialog;
-  },
-  get Profile() {
-    return FBProfile;
-  },
-  get Settings() {
-    return FBSettings;
-  },
-  get ShareDialog() {
-    return FBShareDialog;
-  },
+  FBAccessToken as AccessToken,
+  FBAuthenticationToken as AuthenticationToken,
+  FBAppEventsLogger as AppEventsLogger,
+  FBAppLink as AppLink,
+  FBGameRequestDialog as GameRequestDialog,
+  FBGraphRequest as GraphRequest,
+  FBGraphRequestManager as GraphRequestManager,
+  FBLoginManager as LoginManager,
+  FBMessageDialog as MessageDialog,
+  FBProfile as Profile,
+  FBSettings as Settings,
+  FBShareDialog as ShareDialog,
 
   //native components
-  get LoginButton() {
-    return FBLoginButton;
-  },
-  get SendButton() {
-    return FBSendButton;
-  },
-  get ShareButton() {
-    return FBShareButton;
-  },
+  FBLoginButton as LoginButton,
+  FBSendButton as SendButton,
+  FBShareButton as ShareButton,
 };
