@@ -1,8 +1,6 @@
 /**
-
  * @format
  */
-
 
 import {Platform, NativeModules} from 'react-native';
 const Profile = NativeModules.FBProfile;
@@ -26,7 +24,7 @@ class FBProfile {
   /**
    * The user id
    */
-  userID?: string;
+  userID: string | undefined;
 
   /**
    * The user's email.
@@ -37,33 +35,33 @@ class FBProfile {
   /**
    * The user's complete name
    */
-  name?: string;
+  name: string | undefined;
 
   /**
    * The user's first name
    */
-  firstName?: string;
+  firstName: string | undefined;
 
   /**
    * The user's last name
    */
-  lastName?: string;
+  lastName: string | undefined;
 
   /**
    * The user's middle name
    */
-  middleName?: string;
+  middleName: string | undefined;
 
   /**
    * A URL to the user's profile.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_link' permission
    */
-  linkURL?: string;
+  linkURL: string | undefined;
 
   /**
    * A URL to use for fetching a user's profile image.
    */
-  imageURL?: string;
+  imageURL: string | undefined;
 
   constructor(profileMap: ProfileMap) {
     this.firstName = profileMap.firstName;
@@ -81,7 +79,7 @@ class FBProfile {
    * Getter the current logged profile
    */
   static getCurrentProfile(): Promise<FBProfile | null> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       Profile.getCurrentProfile((profileMap: ProfileMap) => {
         if (profileMap) {
           resolve(new FBProfile(profileMap));

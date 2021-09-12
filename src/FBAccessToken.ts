@@ -20,11 +20,7 @@
  * @format
  */
 
-
-import {
-  NativeModules,
-  NativeEventEmitter,
-} from 'react-native';
+import {NativeModules, NativeEventEmitter} from 'react-native';
 
 const AccessToken = NativeModules.FBAccessToken;
 
@@ -99,7 +95,7 @@ class FBAccessToken {
    * The source of access token.
    * @platform android
    */
-  accessTokenSource?: string;
+  accessTokenSource: string | undefined;
 
   constructor(tokenMap: AccessTokenMap) {
     this.accessToken = tokenMap.accessToken;
@@ -119,7 +115,7 @@ class FBAccessToken {
    * Getter for the access token that is current for the application.
    */
   static getCurrentAccessToken(): Promise<FBAccessToken | null> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       AccessToken.getCurrentAccessToken((tokenMap?: AccessTokenMap) => {
         if (tokenMap) {
           resolve(new FBAccessToken(tokenMap));

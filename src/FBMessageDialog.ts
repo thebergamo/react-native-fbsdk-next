@@ -17,14 +17,10 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
-
  * @format
  */
 
-
-import {
-  NativeModules,
-} from 'react-native';
+import {NativeModules} from 'react-native';
 
 const MessageDialog = NativeModules.FBMessageDialog;
 import {ShareContent} from './models/FBShareContent';

@@ -17,10 +17,8 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
-
  * @format
  */
-
 
 import {SharePhoto} from './FBSharePhoto';
 
@@ -29,7 +27,11 @@ export type OpenGraphValue = {
   type: OpenGraphValueType,
   value: any,
 };
-export type OpenGraphValueType = 'number' | 'open-graph-object' | 'photo' | 'string';
+export type OpenGraphValueType =
+  | 'number'
+  | 'open-graph-object'
+  | 'photo'
+  | 'string';
 
 /**
  * Represents an interface for adding and retrieving values to open graph objects and actions.
