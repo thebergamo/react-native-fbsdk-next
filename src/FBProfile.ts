@@ -30,7 +30,7 @@ class FBProfile {
    * The user's email.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'email' permission.
    */
-  email: string | null;
+  email: string | undefined;
 
   /**
    * The user's complete name
@@ -70,7 +70,8 @@ class FBProfile {
     this.linkURL = profileMap.linkURL;
     this.imageURL = profileMap.imageURL;
     this.userID = profileMap.userID;
-    this.email = Platform.OS === 'android' ? null : profileMap.email;
+    // TODO: [TS Migration]: Value should be undefined. Discuss before merging.
+    this.email = Platform.OS === 'android' ? null as unknown as undefined : profileMap.email;
     this.name = profileMap.name;
     Object.freeze(this);
   }
