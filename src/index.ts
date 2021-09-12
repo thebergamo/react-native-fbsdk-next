@@ -20,64 +20,83 @@
  * @format
  */
 
+import ShareOpenGraphAction from './models/FBShareOpenGraphAction';
+import FBShareOpenGraphObject from './models/FBShareOpenGraphObject';
+import FBShareOpenGraphValueContainer from './models/FBShareOpenGraphValueContainer';
+import FBAccessToken from './FBAccessToken';
+import FBAuthenticationToken from './FBAuthenticationToken';
+import FBAppEventsLogger from './FBAppEventsLogger';
+import FBAppLink from './FBAppLink';
+import FBGameRequestDialog from './FBGameRequestDialog';
+import FBGraphRequest from './FBGraphRequest';
+import FBGraphRequestManager from './FBGraphRequestManager';
+import FBLoginManager from './FBLoginManager';
+import FBMessageDialog from './FBMessageDialog';
+import FBProfile from './FBProfile';
+import FBSettings from './FBSettings';
+import FBShareDialog from './FBShareDialog';
+import FBLoginButton from './FBLoginButton';
+import FBSendButton from './FBSendButton';
+import FBShareButton from './FBShareButton';
+
 export default {
   //native models
   get ShareOpenGraphAction() {
-    return require('./models/FBShareOpenGraphAction');
+    return ShareOpenGraphAction;
   },
   get ShareOpenGraphObject() {
-    return require('./models/FBShareOpenGraphObject');
+    return FBShareOpenGraphObject;
   },
   get ShareOpenGraphValueContainer() {
-    return require('./models/FBShareOpenGraphValueContainer');
+    return FBShareOpenGraphValueContainer;
   },
 
   //native modules
   get AccessToken() {
-    return require('./FBAccessToken');
+    return FBAccessToken;
   },
   get AuthenticationToken() {
-    return require('./FBAuthenticationToken');
+    return FBAuthenticationToken;
   },
   get AppEventsLogger() {
-    return require('./FBAppEventsLogger');
+    return FBAppEventsLogger;
   },
   get AppLink() {
-    return require('./FBAppLink');
+    return FBAppLink;
   },
   get GameRequestDialog() {
-    return require('./FBGameRequestDialog');
+    return FBGameRequestDialog;
   },
   get GraphRequest() {
-    return require('./FBGraphRequest');
+    return FBGraphRequest;
   },
   get GraphRequestManager() {
-    return require('./FBGraphRequestManager');
+    return FBGraphRequestManager;
   },
   get LoginManager() {
-    return require('./FBLoginManager');
+    return FBLoginManager;
   },
   get MessageDialog() {
-    return require('./FBMessageDialog');
+    return FBMessageDialog;
   },
   get Profile() {
-    return require('./FBProfile');
+    return FBProfile;
   },
   get Settings() {
-    return require('./FBSettings');
+    return FBSettings;
   },
   get ShareDialog() {
-    return require('./FBShareDialog');
+    return FBShareDialog;
   },
 
   //native components
   get LoginButton() {
-    return require('./FBLoginButton');
+    return FBLoginButton;
   },
   get SendButton() {
-    return require('./FBSendButton');
+    return FBSendButton;
   },
   get ShareButton() {
-    return require('./FBShareButton');
+    return FBShareButton;
   },
 };
