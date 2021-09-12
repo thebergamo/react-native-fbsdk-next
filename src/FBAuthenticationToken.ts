@@ -7,7 +7,7 @@
 import {Platform, NativeModules} from 'react-native';
 const AuthenticationToken = NativeModules.FBAuthenticationToken;
 
-type AuthenticationTokenMap = {
+export type AuthenticationTokenMap = {
   authenticationToken: string,
   nonce: string,
   graphDomain: string,

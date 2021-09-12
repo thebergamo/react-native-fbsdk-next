@@ -28,8 +28,8 @@ import {
 const ShareDialog = NativeModules.FBShareDialog;
 import {ShareContent} from './models/FBShareContent';
 
-type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
-type ShareDialogModeAndroid =
+export type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
+export type ShareDialogModeAndroid =
   /**
    * The mode is determined automatically.
    */
@@ -46,7 +46,7 @@ type ShareDialogModeAndroid =
    * The feed dialog is used.
    */
   | 'feed';
-type ShareDialogModeIOS =
+export type ShareDialogModeIOS =
   /*
    * Acts with the most appropriate mode that is available.
    */

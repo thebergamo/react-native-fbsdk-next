@@ -31,8 +31,8 @@ import {
   LoginTracking,
 } from './FBLoginManager';
 
-type Event = any;
-type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
+export type Event = any;
+export type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 
 /**
  * A button that initiates a log in or log out flow upon tapping.

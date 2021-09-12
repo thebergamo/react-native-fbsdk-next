@@ -7,7 +7,7 @@
 import {Platform, NativeModules} from 'react-native';
 const Profile = NativeModules.FBProfile;
 
-type ProfileMap = {
+export type ProfileMap = {
   firstName: string,
   lastName: string,
   middleName: string,

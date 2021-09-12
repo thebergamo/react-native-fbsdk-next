@@ -30,7 +30,7 @@ const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
 import GraphRequest from './FBGraphRequest';
 
-type Callback = (error?: Object, result?: Object) => void;
+export type Callback = (error?: Object, result?: Object) => void;
 
 function _verifyParameters(request: GraphRequest) {
   if (request.config && request.config.parameters) {

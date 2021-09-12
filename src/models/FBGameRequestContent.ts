@@ -22,14 +22,14 @@
  */
 
 
-type ActionType =
+export type ActionType =
   // The user is sending an object to their friends.
   | 'send'
   // The user is asking for an object from friends.
   | 'askfor'
   // It is the turn of the friends to play against the user in a match.
   | 'turn';
-type Filters =
+export type Filters =
   // Friends using the app can be displayed.
   | 'app_users'
   // Friends not using the app can be displayed.
