@@ -4,6 +4,7 @@
   "description": "Facebook SDK support for React Native apps.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
   "react-native": "src/index.js",
   "sideEffects": false,
   "author": {
@@ -46,7 +47,6 @@
   "license": "MIT",
   "scripts": {
     "start": "react-native start",
-    "prepare": "bob build",
     "flow": "flow",
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn validate:flow",
@@ -66,8 +66,7 @@
     "src",
     "LICENSE.txt",
     "README.md",
-    "react-native-fbsdk-next.podspec",
-    "types"
+    "react-native-fbsdk-next.podspec"
   ],
   "dependencies": {},
   "peerDependencies": {
@@ -83,6 +82,8 @@
     "@semantic-release/github": "^7.2.0",
     "@semantic-release/npm": "^7.0.10",
     "@semantic-release/release-notes-generator": "^9.0.2",
+    "@types/react": "^16.14.15",
+    "@types/react-native": "^0.63.53",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "7.14.0",
@@ -93,7 +94,8 @@
     "react": "16.13.1",
     "react-native": "^0.63.3",
     "react-test-renderer": "16.13.1",
-    "semantic-release": "^17.4.1"
+    "semantic-release": "^17.4.1",
+    "typescript": "^4.4.3"
   },
   "prettier": {
     "requirePragma": true,
@@ -113,8 +115,8 @@
           "copyFlow": true
         }
       ],
-      "module"
+      "module",
+      "typescript"
     ]
-  },
-  "types": "types/index.d.ts"
+  }
 }
