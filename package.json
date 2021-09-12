@@ -47,12 +47,14 @@
   "license": "MIT",
   "scripts": {
     "start": "react-native start",
+    "prepare": "bob build",
     "flow": "flow",
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn validate:flow",
     "validate:eslint": "eslint \"src/**/*\"",
     "validate:flow": "flow",
     "validate:prettier": "prettier \"src/**/*.js\" --check",
+    "validate:ts": "tsc --noEmit",
     "example:ios": "cd ./RNFBSDKExample && yarn ios",
     "example:android": "cd ./RNFBSDKExample && yarn android --no-jetifier",
     "semantic-release": "semantic-release"
