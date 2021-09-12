@@ -46,8 +46,8 @@ function _verifyParameters(request: GraphRequest) {
 }
 
 class FBGraphRequestManager {
-  requestBatch: GraphRequest[];
-  requestCallbacks: (Callback | undefined)[];
+  requestBatch: Array<GraphRequest>;
+  requestCallbacks: Array<Callback | undefined>;
   batchCallback: Callback | undefined;
 
   constructor() {
@@ -89,7 +89,7 @@ class FBGraphRequestManager {
    */
   start(timeout?: number) {
     const that = this;
-    const callback = (error: Object, result: Object, response: Object[][]) => {
+    const callback = (error: Object, result: Object, response: Array<Array<Object>>) => {
       if (response) {
         that.requestCallbacks.forEach((innerCallback, index) => {
           if (innerCallback) {
