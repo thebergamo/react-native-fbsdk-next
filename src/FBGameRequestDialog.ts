@@ -26,7 +26,7 @@ import {
 } from 'react-native';
 
 const GameRequestDialog = NativeModules.FBGameRequestDialog;
-import type {GameRequestContent} from './models/FBGameRequestContent';
+import {GameRequestContent} from './models/FBGameRequestContent';
 
 export default {
   /**

@@ -27,7 +27,7 @@ import {
 } from 'react-native';
 
 const MessageDialog = NativeModules.FBMessageDialog;
-import type {ShareContent} from './models/FBShareContent';
+import {ShareContent} from './models/FBShareContent';
 
 export default {
   /**

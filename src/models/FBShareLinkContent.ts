@@ -21,7 +21,7 @@
  * @format
  */
 
-import type {ShareContentCommonParameters} from './FBShareContent';
+import {ShareContentCommonParameters} from './FBShareContent';
 
 /**
  * A model for status and link content to be shared.

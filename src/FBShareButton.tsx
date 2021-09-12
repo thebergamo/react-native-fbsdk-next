@@ -25,7 +25,7 @@
 import * as React from 'react';
 import {requireNativeComponent, StyleSheet} from 'react-native';
 
-import type {ShareContent} from './models/FBShareContent';
+import {ShareContent} from './models/FBShareContent';
 
 class ShareButton extends React.Component<{
   /**
