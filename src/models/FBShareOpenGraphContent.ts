@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 import ShareOpenGraphAction from './FBShareOpenGraphAction';
 

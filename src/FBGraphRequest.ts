@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 export type GraphRequestCallback = (error?: Object, result?: Object) => void;
 export type GraphRequestConfig = {

@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 import type {SharePhoto} from './FBSharePhoto';
 

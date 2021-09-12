@@ -9,7 +9,6 @@
  * @format
  */
 
-'use strict';
 
 import {Platform, NativeModules} from 'react-native';
 import {isDefined, isString} from './util/validate';

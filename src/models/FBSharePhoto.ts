@@ -20,7 +20,6 @@
 
  * @format
  */
-'use strict';
 
 /**
  * A photo for sharing.

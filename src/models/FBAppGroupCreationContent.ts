@@ -20,7 +20,6 @@
 
  * @format
  */
-'use strict';
 
 /**
  * Specifies the privacy of a group.

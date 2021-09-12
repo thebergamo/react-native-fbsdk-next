@@ -21,7 +21,6 @@
  * @format
  */
 
-'use strict';
 
 import * as React from 'react';
 import {requireNativeComponent, StyleSheet} from 'react-native';
