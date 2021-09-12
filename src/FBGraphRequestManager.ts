@@ -17,14 +17,10 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
-
  * @format
  */
 
-
-import {
-  NativeModules,
-} from 'react-native';
+import {NativeModules} from 'react-native';
 
 const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
@@ -95,7 +91,7 @@ class FBGraphRequestManager {
     const that = this;
     const callback = (error: Object, result: Object, response: Object[][]) => {
       if (response) {
-        that.requestCallbacks.forEach((innerCallback, index, array) => {
+        that.requestCallbacks.forEach((innerCallback, index) => {
           if (innerCallback) {
             innerCallback(response[index][0], response[index][1]);
           }

@@ -1,8 +1,6 @@
 /**
-
  * @format
  */
-
 
 import {Platform, NativeModules} from 'react-native';
 const AuthenticationToken = NativeModules.FBAuthenticationToken;
@@ -46,14 +44,16 @@ class FBAuthenticationToken {
     if (Platform.OS === 'android') {
       return Promise.resolve(null);
     }
-    return new Promise((resolve, reject) => {
-      AuthenticationToken.getAuthenticationToken((tokenMap: AuthenticationTokenMap) => {
-        if (tokenMap) {
-          resolve(new FBAuthenticationToken(tokenMap));
-        } else {
-          resolve(null);
-        }
-      });
+    return new Promise((resolve) => {
+      AuthenticationToken.getAuthenticationToken(
+        (tokenMap: AuthenticationTokenMap) => {
+          if (tokenMap) {
+            resolve(new FBAuthenticationToken(tokenMap));
+          } else {
+            resolve(null);
+          }
+        },
+      );
     });
   }
 }

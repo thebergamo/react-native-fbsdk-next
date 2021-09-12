@@ -17,7 +17,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
-
  * @format
  */
 
@@ -174,6 +173,17 @@ export default {
     }
     AppEventsLogger.logEvent(eventName, valueToSum, parameters);
   },
+  // logEvent(eventName: string, ...args: Array<number | Params>) {
+  //   let valueToSum = 0;
+  //   if (typeof args[0] === 'number') {
+  //     valueToSum = args.shift() as number;
+  //   }
+  //   let parameters = null;
+  //   if (typeof args[0] === 'object') {
+  //     parameters = args[0];
+  //   }
+  //   AppEventsLogger.logEvent(eventName, valueToSum, parameters);
+  // },
 
   /**
    * Logs a purchase. See http://en.wikipedia.org/wiki/ISO_4217 for currencyCode.
