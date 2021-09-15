@@ -48,4 +48,9 @@ RCT_EXPORT_METHOD(initializeSDK)
   [FBSDKApplicationDelegate initializeSDK:nil];
 }
 
+RCT_EXPORT_METHOD(setAppID:(NSString *)appID)
+{
+  [FBSDKSettings setAppID:appID];
+}
+
 @end

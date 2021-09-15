@@ -17,4 +17,8 @@ export type FBSettings = {
      * Initialize the sdk
      */
   initializeSDK(): void;
+  /**
+     * Set app id
+     */
+  setAppID(appID: string): void;
 };

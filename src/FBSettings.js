@@ -58,4 +58,10 @@ module.exports = {
   initializeSDK() {
     Settings.initializeSDK();
   },
+  /**
+   * Set app id
+   */
+   setAppID(appID: string) {
+    Settings.setAppID(appID);
+  },
 };
