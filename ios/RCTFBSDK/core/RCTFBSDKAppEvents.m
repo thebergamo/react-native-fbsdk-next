@@ -30,6 +30,20 @@ RCT_ENUM_CONVERTER(FBSDKAppEventsFlushBehavior, (@{
   @"explicit_only": @(FBSDKAppEventsFlushBehaviorExplicitOnly),
 }), FBSDKAppEventsFlushBehaviorAuto, unsignedIntegerValue)
 
+RCT_ENUM_CONVERTER(FBSDKProductAvailability, (@{
+  @"in_stock": @(FBSDKProductAvailabilityInStock),
+  @"out_of_stock": @(FBSDKProductAvailabilityOutOfStock),
+  @"preorder": @(FBSDKProductAvailabilityPreOrder),
+  @"avaliable_for_order": @(FBSDKProductAvailabilityAvailableForOrder),
+  @"discontinued": @(FBSDKProductAvailabilityDiscontinued),
+}), FBSDKProductAvailabilityInStock, unsignedIntegerValue)
+
+RCT_ENUM_CONVERTER(FBSDKProductCondition, (@{
+  @"new": @(FBSDKProductConditionNew),
+  @"refurbished": @(FBSDKProductConditionRefurbished),
+  @"used": @(FBSDKProductConditionUsed),
+}), FBSDKProductConditionNew, unsignedIntegerValue)
+
 @end
 
 @implementation RCTFBSDKAppEvents
@@ -65,6 +79,35 @@ RCT_EXPORT_METHOD(logPurchase:(double)purchaseAmount
                      currency:currency
                    parameters:parameters
                   accessToken:nil];
+}
+
+RCT_EXPORT_METHOD(logProductItem:(NSString *)itemID
+                    availability:(FBSDKProductAvailability)availability
+                       condition:(FBSDKProductCondition)condition
+                     description:(NSString *)description
+                       imageLink:(NSString *)imageLink
+                            link:(NSString *)link
+                           title:(NSString *)title
+                     priceAmount:(double)priceAmount
+                        currency:(NSString *)currency
+                            gtin:(NSString *)gtin
+                             mpn:(NSString *)mpn
+                           brand:(NSString *)brand
+                      parameters:(NSDictionary *)parameters)
+{
+    [FBSDKAppEvents logProductItem:itemID
+                      availability:availability
+                         condition:condition
+                       description:description
+                         imageLink:imageLink
+                              link:link
+                             title:title
+                       priceAmount:priceAmount
+                          currency:currency
+                              gtin:gtin
+                               mpn:mpn
+                             brand:brand
+                        parameters:parameters];
 }
 
 RCT_EXPORT_METHOD(logPushNotificationOpen:(NSDictionary *)payload)
