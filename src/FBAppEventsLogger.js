@@ -24,6 +24,7 @@
 
 const AppEventsLogger = require('react-native').NativeModules.FBAppEventsLogger;
 const {Platform} = require('react-native');
+const {isDefined, isNumber, isOneOf, isString} = require('./util/validate');
 
 /**
  * Controls when an AppEventsLogger sends log events to the server
@@ -221,8 +222,53 @@ module.exports = {
     brand?: ?string,
     parameters?: ?Params,
   ) {
-    if (!gtin && !mpn && !brand) {
-      throw new Error('Either gtin, mpn or brand is required');
+    if (!isDefined(itemID) || !isString(itemID)) {
+      throw new Error("logProductItem expected 'itemID' to be a string");
+    }
+    if (
+      !isDefined(availability) ||
+      !isOneOf(availability, [
+        'in_stock',
+        'out_of_stock',
+        'preorder',
+        'avaliable_for_order',
+        'discontinued',
+      ])
+    ) {
+      throw new Error(
+        "logProductItem expected 'availability' to be one of 'in_stock' | 'out_of_stock' | 'preorder' | 'avaliable_for_order' | 'discontinued'",
+      );
+    }
+    if (
+      !isDefined(condition) ||
+      !isOneOf(condition, ['new', 'refurbished', 'used'])
+    ) {
+      throw new Error(
+        "logProductItem expected 'condition' to be one of 'new' | 'refurbished' | 'used'",
+      );
+    }
+    if (!isDefined(description) || !isString(description)) {
+      throw new Error("logProductItem expected 'description' to be a string");
+    }
+    if (!isDefined(imageLink) || !isString(imageLink)) {
+      throw new Error("logProductItem expected 'imageLink' to be a string");
+    }
+    if (!isDefined(link) || !isString(link)) {
+      throw new Error("logProductItem expected 'link' to be a string");
+    }
+    if (!isDefined(title) || !isString(title)) {
+      throw new Error("logProductItem expected 'title' to be a string");
+    }
+    if (!isDefined(priceAmount) || !isNumber(priceAmount)) {
+      throw new Error("logProductItem expected 'priceAmount' to be a number");
+    }
+    if (!isDefined(currency) || !isString(currency)) {
+      throw new Error("logProductItem expected 'currency' to be a string");
+    }
+    if (!isDefined(gtin) && !isDefined(mpn) && !isDefined(brand)) {
+      throw new Error(
+        'logProductItem expected either gtin, mpn or brand to be defined',
+      );
     }
 
     AppEventsLogger.logProductItem(
