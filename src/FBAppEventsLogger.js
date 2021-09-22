@@ -24,6 +24,8 @@
 
 const AppEventsLogger = require('react-native').NativeModules.FBAppEventsLogger;
 const {Platform} = require('react-native');
+const {isDefined, isNumber, isOneOf, isString} = require('./util/validate');
+
 /**
  * Controls when an AppEventsLogger sends log events to the server
  */
@@ -37,6 +39,37 @@ type AppEventsFlushBehavior =
    * Only flush when AppEventsLogger.flush() is explicitly invoked.
    */
   | 'explicit_only';
+
+/**
+ * Specifies product availability for Product Catalog product item update
+ */
+type ProductAvailability =
+  /**
+   * Item ships immediately
+   */
+  | 'in_stock'
+  /**
+   * No plan to restock
+   */
+  | 'out_of_stock'
+  /**
+   * Available in future
+   */
+  | 'preorder'
+  /**
+   * Ships in 1-2 weeks
+   */
+  | 'avaliable_for_order'
+  /**
+   * Discontinued
+   */
+  | 'discontinued';
+
+/**
+ * Specifies product condition for Product Catalog product item update
+ */
+type ProductCondition = 'new' | 'refurbished' | 'used';
+
 type Params = {[key: string]: string | number};
 
 /**
@@ -156,6 +189,103 @@ module.exports = {
    */
   logPushNotificationOpen(payload: ?Object) {
     AppEventsLogger.logPushNotificationOpen(payload);
+  },
+
+  /**
+   * Uploads product catalog product item as an app event
+   * @param itemID – Unique ID for the item. Can be a variant for a product. Max size is 100.
+   * @param availability – If item is in stock. Accepted values are: in stock - Item ships immediately out of stock - No plan to restock preorder - Available in future available for order - Ships in 1-2 weeks discontinued - Discontinued
+   * @param condition – Product condition: new, refurbished or used.
+   * @param description – Short text describing product. Max size is 5000.
+   * @param imageLink – Link to item image used in ad.
+   * @param link – Link to merchant's site where someone can buy the item.
+   * @param title – Title of item.
+   * @param priceAmount – Amount of purchase, in the currency specified by the 'currency' parameter. This value will be rounded to the thousandths place (e.g., 12.34567 becomes 12.346).
+   * @param currency – Currency used to specify the amount.
+   * @param gtin – Global Trade Item Number including UPC, EAN, JAN and ISBN
+   * @param mpn – Unique manufacture ID for product
+   * @param brand – Name of the brand Note: Either gtin, mpn or brand is required.
+   * @param parameters – Optional fields for deep link specification.
+   */
+  logProductItem(
+    itemID: string,
+    availability: ProductAvailability,
+    condition: ProductCondition,
+    description: string,
+    imageLink: string,
+    link: string,
+    title: string,
+    priceAmount: number,
+    currency: string,
+    gtin?: ?string,
+    mpn?: ?string,
+    brand?: ?string,
+    parameters?: ?Params,
+  ) {
+    if (!isDefined(itemID) || !isString(itemID)) {
+      throw new Error("logProductItem expected 'itemID' to be a string");
+    }
+    if (
+      !isDefined(availability) ||
+      !isOneOf(availability, [
+        'in_stock',
+        'out_of_stock',
+        'preorder',
+        'avaliable_for_order',
+        'discontinued',
+      ])
+    ) {
+      throw new Error(
+        "logProductItem expected 'availability' to be one of 'in_stock' | 'out_of_stock' | 'preorder' | 'avaliable_for_order' | 'discontinued'",
+      );
+    }
+    if (
+      !isDefined(condition) ||
+      !isOneOf(condition, ['new', 'refurbished', 'used'])
+    ) {
+      throw new Error(
+        "logProductItem expected 'condition' to be one of 'new' | 'refurbished' | 'used'",
+      );
+    }
+    if (!isDefined(description) || !isString(description)) {
+      throw new Error("logProductItem expected 'description' to be a string");
+    }
+    if (!isDefined(imageLink) || !isString(imageLink)) {
+      throw new Error("logProductItem expected 'imageLink' to be a string");
+    }
+    if (!isDefined(link) || !isString(link)) {
+      throw new Error("logProductItem expected 'link' to be a string");
+    }
+    if (!isDefined(title) || !isString(title)) {
+      throw new Error("logProductItem expected 'title' to be a string");
+    }
+    if (!isDefined(priceAmount) || !isNumber(priceAmount)) {
+      throw new Error("logProductItem expected 'priceAmount' to be a number");
+    }
+    if (!isDefined(currency) || !isString(currency)) {
+      throw new Error("logProductItem expected 'currency' to be a string");
+    }
+    if (!isDefined(gtin) && !isDefined(mpn) && !isDefined(brand)) {
+      throw new Error(
+        'logProductItem expected either gtin, mpn or brand to be defined',
+      );
+    }
+
+    AppEventsLogger.logProductItem(
+      itemID,
+      availability,
+      condition,
+      description,
+      imageLink,
+      link,
+      title,
+      priceAmount,
+      currency,
+      gtin,
+      mpn,
+      brand,
+      parameters,
+    );
   },
 
   /**
