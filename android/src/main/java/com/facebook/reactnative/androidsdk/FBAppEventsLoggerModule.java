@@ -212,7 +212,7 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      * @param link – Link to merchant's site where someone can buy the item.
      * @param title – Title of item.
      * @param priceAmount – Amount of purchase, in the currency specified by the 'currency' parameter. This value will be rounded to the thousandths place (e.g., 12.34567 becomes 12.346).
-     * @param currency – Currency used to specify the amount.
+     * @param currencyCode – Currency used to specify the amount.
      * @param gtin – Global Trade Item Number including UPC, EAN, JAN and ISBN
      * @param mpn – Unique manufacture ID for product
      * @param brand – Name of the brand Note: Either gtin, mpn or brand is required.
@@ -226,12 +226,12 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
                                String imageLink,
                                String link,
                                String title,
-                               BigDecimal priceAmount,
-                               Currency currency,
+                               double priceAmount,
+                               String currencyCode,
                                String gtin,
                                String mpn,
                                String brand,
-                               Bundle parameters) {
+                               @Nullable ReadableMap parameters) {
         mAppEventLogger.logProductItem(itemID,
                 AppEventsLogger.ProductAvailability.valueOf(availability.toUpperCase(Locale.ROOT)),
                 AppEventsLogger.ProductCondition.valueOf(condition.toUpperCase(Locale.ROOT)),
@@ -239,12 +239,12 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
                 imageLink,
                 link,
                 title,
-                priceAmount,
-                currency,
+                BigDecimal.valueOf(priceAmount),
+                Currency.getInstance(currencyCode),
                 gtin,
                 mpn,
                 brand,
-                parameters);
+                Arguments.toBundle(parameters));
     }
 
     /**
