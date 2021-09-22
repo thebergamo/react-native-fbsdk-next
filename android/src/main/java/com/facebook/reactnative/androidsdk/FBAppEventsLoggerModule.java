@@ -38,6 +38,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -141,7 +142,7 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setFlushBehavior(String flushBehavior) {
-        AppEventsLogger.setFlushBehavior(AppEventsLogger.FlushBehavior.valueOf(flushBehavior.toUpperCase()));
+        AppEventsLogger.setFlushBehavior(AppEventsLogger.FlushBehavior.valueOf(flushBehavior.toUpperCase(Locale.ROOT)));
     }
 
     /**
@@ -232,8 +233,8 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
                                String brand,
                                Bundle parameters) {
         mAppEventLogger.logProductItem(itemID,
-                AppEventsLogger.ProductAvailability.valueOf(availability.toUpperCase()),
-                AppEventsLogger.ProductCondition.valueOf(condition.toUpperCase()),
+                AppEventsLogger.ProductAvailability.valueOf(availability.toUpperCase(Locale.ROOT)),
+                AppEventsLogger.ProductCondition.valueOf(condition.toUpperCase(Locale.ROOT)),
                 description,
                 imageLink,
                 link,
