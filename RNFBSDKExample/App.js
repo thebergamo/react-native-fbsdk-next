@@ -57,6 +57,7 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <LoginButton
+          testID="facebook-login"
           onLoginFinished={(error, data) => {
             Alert.alert(JSON.stringify(error || data, null, 2));
           }}
