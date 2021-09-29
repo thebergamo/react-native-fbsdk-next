@@ -61,7 +61,7 @@ export class LoginButton extends React.Component<{
   /**
    * testID, if any.
    */
-  testID?: string,
+  testID?: string;
 }> {
   static defaultProps: {
     style: typeof styles.defaultButtonStyle;
