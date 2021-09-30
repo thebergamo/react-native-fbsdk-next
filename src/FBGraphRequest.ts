@@ -20,7 +20,10 @@
  * @format
  */
 
-export type GraphRequestCallback = (error?: Object, result?: Object) => void;
+export type GraphRequestCallback = (
+  error?: Record<string, unknown>,
+  result?: Record<string, unknown>,
+) => void;
 export type GraphRequestConfig = {
   /**
    * The httpMethod to use for the request, for example "GET" or "POST".
@@ -39,7 +42,7 @@ export type GraphRequestConfig = {
    */
   accessToken?: string,
 };
-export type GraphRequestParameters = {[key: string]: any};
+export type GraphRequestParameters = {[key: string]: unknown};
 
 /**
  * Represents a Graph API request and provides batch request supports.
@@ -70,13 +73,13 @@ class FBGraphRequest {
   ) {
     this.graphPath = graphPath;
     this.config = config ? config : {};
-    this.callback = callback ? callback : () => {};
+    this.callback = callback ? callback : () => null;
   }
 
   /**
    * Adds a string parameter to the request.
    */
-  addStringParameter(paramString: string, key: string) {
+  addStringParameter(paramString: string, key: string): void {
     if (this.config != null && this.config.parameters != null) {
       this.config.parameters[key] = {string: paramString};
     }

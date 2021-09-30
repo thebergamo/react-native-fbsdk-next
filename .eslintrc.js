@@ -22,5 +22,11 @@
 'use strict';
 
 module.exports = {
-  extends: '@react-native-community',
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
+  rules: {
+    'prettier/prettier': 0,
+  },
 };

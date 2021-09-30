@@ -129,7 +129,7 @@ class FBAccessToken {
   /**
    * Setter for the access token that is current for the application.
    */
-  static setCurrentAccessToken(accessToken: AccessTokenMap) {
+  static setCurrentAccessToken(accessToken: AccessTokenMap): void {
     AccessToken.setCurrentAccessToken(accessToken);
   }
 
@@ -137,7 +137,7 @@ class FBAccessToken {
    * Updates the current access token with up to date permissions,
    * and extends the expiration date, if extension is possible.
    */
-  static refreshCurrentAccessTokenAsync(): Promise<any> {
+  static refreshCurrentAccessTokenAsync(): Promise<AccessTokenMap> {
     return AccessToken.refreshCurrentAccessTokenAsync();
   }
 

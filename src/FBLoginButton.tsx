@@ -21,7 +21,7 @@
  */
 
 import * as React from 'react';
-import {requireNativeComponent, StyleSheet} from 'react-native';
+import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
 
 import {
   DefaultAudience,
@@ -29,8 +29,15 @@ import {
   LoginResult,
   LoginTracking,
 } from './FBLoginManager';
+import { PropsOf } from './utils';
 
-export type Event = any;
+export type Event = {
+  nativeEvent?: {
+    type?: 'loginFinished' | 'logoutFinished',
+    error: Record<string, unknown>,
+    result: LoginResult,
+  },
+};
 export type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 
 /**
@@ -46,7 +53,10 @@ class LoginButton extends React.Component<{
   /**
    * The callback invoked upon error/completion of a login request.
    */
-  onLoginFinished?: (error: Object, result: LoginResult) => void,
+  onLoginFinished?: (
+    error: Record<string, unknown>,
+    result: LoginResult,
+  ) => void,
 
   /**
    * The callback invoked upon completion of a logout request.
@@ -86,7 +96,7 @@ class LoginButton extends React.Component<{
   /**
    * View style, if any.
    */
-  style?: any,
+  style?: ViewStyle,
 
   /**
    * testID, if any.
@@ -97,7 +107,10 @@ class LoginButton extends React.Component<{
     style: typeof styles.defaultButtonStyle,
   };
 
-  _eventHandler(event: Event) {
+  _eventHandler(event: Event): void {
+    if (typeof event !== 'object' || !event || !event.nativeEvent) {
+      return;
+    }
     const eventDict = event.nativeEvent;
     if (eventDict.type === 'loginFinished') {
       if (this.props.onLoginFinished) {
@@ -110,7 +123,7 @@ class LoginButton extends React.Component<{
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <RCTFBLoginButton
         {...this.props}
@@ -131,6 +144,10 @@ LoginButton.defaultProps = {
   style: styles.defaultButtonStyle,
 };
 
-const RCTFBLoginButton = requireNativeComponent<any>('RCTFBLoginButton');
+type RCTFBLoginButtonProps = PropsOf<LoginButton> & {
+  onChange:(event: Event) => void
+};
+
+const RCTFBLoginButton = requireNativeComponent<RCTFBLoginButtonProps>('RCTFBLoginButton');
 
 export default LoginButton;
