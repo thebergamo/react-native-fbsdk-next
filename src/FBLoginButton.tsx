@@ -97,6 +97,11 @@ class LoginButton extends React.Component<{
    * View style, if any.
    */
   style?: ViewStyle,
+
+  /**
+   * testID, if any.
+   */
+  testID?: string,
 }> {
   static defaultProps: {
     style: typeof styles.defaultButtonStyle,

@@ -42,7 +42,7 @@ export type GraphRequestConfig = {
    */
   accessToken?: string,
 };
-export type GraphRequestParameters = {[key: string]: unknown};
+export type GraphRequestParameters = {[key: string]: {string: string;}};
 
 /**
  * Represents a Graph API request and provides batch request supports.

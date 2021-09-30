@@ -25,6 +25,7 @@ import {NativeModules} from 'react-native';
 const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
 import GraphRequest from './FBGraphRequest';
+import { isObject } from './utils/validate';
 
 export type Callback = (
   error?: Record<string, unknown>,
@@ -35,7 +36,7 @@ function _verifyParameters(request: GraphRequest) {
   if (request.config && request.config.parameters) {
     for (const key in request.config.parameters) {
       const param = request.config.parameters[key];
-      if (typeof param === 'object' && param.string) {
+      if (isObject(param) && param.string) {
         continue;
       }
       throw new Error(
