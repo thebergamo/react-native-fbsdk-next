@@ -26,12 +26,15 @@ const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
 import GraphRequest from './FBGraphRequest';
 
-export type Callback = (error?: Object, result?: Object) => void;
+export type Callback = (
+  error?: Record<string, unknown>,
+  result?: Record<string, unknown>,
+) => void;
 
 function _verifyParameters(request: GraphRequest) {
   if (request.config && request.config.parameters) {
-    for (var key in request.config.parameters) {
-      var param = request.config.parameters[key];
+    for (const key in request.config.parameters) {
+      const param = request.config.parameters[key];
       if (typeof param === 'object' && param.string) {
         continue;
       }
@@ -54,7 +57,7 @@ class FBGraphRequestManager {
     this.requestBatch = [];
     this.requestCallbacks = [];
     // TODO: [TS Migration]: Added default value to fix type definitions. Discuss before merging.
-    this.batchCallback = () => {};
+    this.batchCallback = () => null;
   }
 
   /**
@@ -73,7 +76,10 @@ class FBGraphRequestManager {
    * graph request made, only that the entire batch has finished executing.
    */
   addBatchCallback(
-    callback: (error?: Object, result?: Object) => void,
+    callback: (
+      error?: Record<string, unknown>,
+      result?: Record<string, unknown>,
+    ) => void,
   ): FBGraphRequestManager {
     this.batchCallback = callback;
     return this;
@@ -89,12 +95,13 @@ class FBGraphRequestManager {
    * extra permission and it's unncessary for the sdk. Instead, you can use the NetInfo module
    * in react-native to get the network status.
    */
-  start(timeout?: number) {
+  start(timeout?: number): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this;
     const callback = (
-      error: Object,
-      result: Object,
-      response: Array<Array<Object>>,
+      error: Record<string, unknown>,
+      result: Record<string, unknown>,
+      response: Array<Array<Record<string, unknown>>>,
     ) => {
       if (response) {
         that.requestCallbacks.forEach((innerCallback, index) => {

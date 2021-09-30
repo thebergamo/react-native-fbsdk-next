@@ -25,7 +25,7 @@ import {SharePhoto} from './FBSharePhoto';
 export type OpenGraphProperties = {[key: string]: OpenGraphValue};
 export type OpenGraphValue = {
   type: OpenGraphValueType,
-  value: any,
+  value: unknown,
 };
 export type OpenGraphValueType =
   | 'number'
@@ -46,28 +46,28 @@ class ShareOpenGraphValueContainer {
   /**
    * Sets a number for the specified key.
    */
-  putNumber(key: string, number: number) {
+  putNumber(key: string, number: number): void {
     this._properties[key] = {type: 'number', value: number};
   }
 
   /**
    * Sets an open graph object for the specified key.
    */
-  putObject(key: string, object: ShareOpenGraphValueContainer) {
+  putObject(key: string, object: ShareOpenGraphValueContainer): void {
     this._properties[key] = {type: 'open-graph-object', value: object};
   }
 
   /**
    * Sets a photo for the specified key.
    */
-  putPhoto(key: string, photo: SharePhoto) {
+  putPhoto(key: string, photo: SharePhoto): void {
     this._properties[key] = {type: 'photo', value: photo};
   }
 
   /**
    * Sets a string for the specified key.
    */
-  putString(key: string, string: string) {
+  putString(key: string, string: string): void {
     this._properties[key] = {type: 'string', value: string};
   }
 

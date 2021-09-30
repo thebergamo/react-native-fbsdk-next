@@ -38,12 +38,12 @@ export default {
   /**
    * Set data processing options
    */
-  setDataProcessingOptions(options: Array<string>, ...args: Array<number>) {
-    let country: number = 0;
+  setDataProcessingOptions(options: Array<string>, ...args: Array<number>): void {
+    let country = 0;
     if (typeof args[0] === 'number') {
       country = args[0];
     }
-    let state: number = 0;
+    let state = 0;
     if (typeof args[1] === 'number') {
       state = args[1];
     }
@@ -52,7 +52,7 @@ export default {
   /**
    * Initialize the sdk
    */
-  initializeSDK() {
+  initializeSDK(): void {
     Settings.initializeSDK();
   },
 };

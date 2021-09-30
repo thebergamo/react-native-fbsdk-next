@@ -21,6 +21,7 @@
  */
 
 import {NativeModules, Platform} from 'react-native';
+import { RNFBSDKCallback } from './models/FBSDKCallback';
 const LoginManager = NativeModules.FBLoginManager;
 /**
  * Indicates which default audience to use for sessions that post data to Facebook.
@@ -53,8 +54,7 @@ export type LoginBehaviorIOS =
 /**
  * Shows the results of a login operation.
  */
-export type LoginResult = {
-  isCancelled: boolean,
+export type LoginResult = RNFBSDKCallback & {
   grantedPermissions?: Array<string>,
   declinedPermissions?: Array<string>,
 };
@@ -96,7 +96,7 @@ export default {
   /**
    * Setter for the login behavior.
    */
-  setLoginBehavior(loginBehavior: LoginBehavior) {
+  setLoginBehavior(loginBehavior: LoginBehavior): void {
     if (Platform.OS === 'ios') {
       return;
     }
@@ -113,14 +113,14 @@ export default {
   /**
    * Setter for the default audience.
    */
-  setDefaultAudience(defaultAudience: DefaultAudience) {
+  setDefaultAudience(defaultAudience: DefaultAudience): void {
     LoginManager.setDefaultAudience(defaultAudience);
   },
 
   /**
    * Logs out the user.
    */
-  logOut() {
+  logOut(): void {
     LoginManager.logOut();
   },
 };

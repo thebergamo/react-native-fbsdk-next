@@ -21,7 +21,8 @@
  */
 
 import * as React from 'react';
-import {requireNativeComponent, StyleSheet} from 'react-native';
+import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
+import { PropsOf } from './utils';
 
 import {ShareContent} from './models/FBShareContent';
 
@@ -34,13 +35,13 @@ class SendButton extends React.Component<{
   /**
    * View style, if any.
    */
-  style?: any,
+  style?: ViewStyle,
 }> {
   static defaultProps: {
     style: typeof styles.defaultButtonStyle,
   };
 
-  render() {
+  render(): JSX.Element {
     return <RCTFBSendButton {...this.props} />;
   }
 }
@@ -56,6 +57,6 @@ SendButton.defaultProps = {
   style: styles.defaultButtonStyle,
 };
 
-const RCTFBSendButton = requireNativeComponent<any>('RCTFBSendButton');
+const RCTFBSendButton = requireNativeComponent<PropsOf<SendButton>>('RCTFBSendButton');
 
 export default SendButton;

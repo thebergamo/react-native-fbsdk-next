@@ -21,9 +21,14 @@
  */
 
 import {NativeModules} from 'react-native';
+import { RNFBSDKCallback } from './models/FBSDKCallback';
 
 const MessageDialog = NativeModules.FBMessageDialog;
 import {ShareContent} from './models/FBShareContent';
+
+export type MessageDialogResult = RNFBSDKCallback & {
+  postId: string,
+};
 
 export default {
   /**
@@ -36,7 +41,7 @@ export default {
   /**
    * Shows the dialog using the specified content.
    */
-  show(shareContent: ShareContent): Promise<any> {
+  show(shareContent: ShareContent): Promise<MessageDialogResult> {
     return MessageDialog.show(shareContent);
   },
 

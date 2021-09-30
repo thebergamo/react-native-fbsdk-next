@@ -24,19 +24,27 @@ import {NativeModules} from 'react-native';
 
 const GameRequestDialog = NativeModules.FBGameRequestDialog;
 import {GameRequestContent} from './models/FBGameRequestContent';
+import { RNFBSDKCallback } from './models/FBSDKCallback';
+
+export type GameRequestDialogResult = RNFBSDKCallback & {
+  requestId: string,
+  to: Array<string>,
+};
 
 export default {
   /**
    * Check if the dialog can be shown.
    */
-  canShow(): Promise<any> {
+  canShow(): Promise<boolean> {
     return GameRequestDialog.canShow();
   },
 
   /**
    * Shows the dialog using the specified content.
    */
-  show(gameRequestContent: GameRequestContent): Promise<any> {
+  show(
+    gameRequestContent: GameRequestContent,
+  ): Promise<GameRequestDialogResult> {
     return GameRequestDialog.show(gameRequestContent);
   },
 };

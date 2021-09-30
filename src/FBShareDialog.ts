@@ -21,6 +21,7 @@
  */
 
 import {NativeModules} from 'react-native';
+import { RNFBSDKCallback } from './models/FBSDKCallback';
 
 const ShareDialog = NativeModules.FBShareDialog;
 import {ShareContent} from './models/FBShareContent';
@@ -61,6 +62,10 @@ export type ShareDialogModeIOS =
    */
   | 'native';
 
+export type ShareDialogResult = RNFBSDKCallback & {
+  postId: string,
+};
+
 export default {
   /**
    * Check if the dialog can be shown.
@@ -72,21 +77,21 @@ export default {
   /**
    * Shows the dialog using the specified content.
    */
-  show(shareContent: ShareContent): Promise<any> {
+  show(shareContent: ShareContent): Promise<ShareDialogResult> {
     return ShareDialog.show(shareContent);
   },
 
   /**
    * Sets the mode for the share dialog.
    */
-  setMode(mode: ShareDialogMode) {
+  setMode(mode: ShareDialogMode): void {
     ShareDialog.setMode(mode);
   },
 
   /**
    * Sets whether or not the native share dialog should fail when it encounters a data error.
    */
-  setShouldFailOnDataError(shouldFailOnDataError: boolean) {
+  setShouldFailOnDataError(shouldFailOnDataError: boolean): void {
     ShareDialog.setShouldFailOnDataError(shouldFailOnDataError);
   },
 };
