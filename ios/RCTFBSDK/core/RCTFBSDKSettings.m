@@ -33,12 +33,12 @@ RCT_EXPORT_METHOD(setAdvertiserTrackingEnabled:(BOOL)ATE resolver:(RCTPromiseRes
   resolve(@(result));
 }
 
-RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSStringArray *)options)
+RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSArray<NSString *> *)options)
 {
   [FBSDKSettings setDataProcessingOptions:options];
 }
 
-RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSStringArray *)options country:(int)country state:(int)state)
+RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSArray<NSString *> *)options country:(int)country state:(int)state)
 {
   [FBSDKSettings setDataProcessingOptions:options country:country state:state];
 }
