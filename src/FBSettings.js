@@ -12,6 +12,7 @@
 'use strict';
 
 import {Platform} from 'react-native';
+import {isDefined, isString} from './util/validate';
 
 const Settings = require('react-native').NativeModules.FBSettings;
 
@@ -61,7 +62,10 @@ module.exports = {
   /**
    * Set app id
    */
-   setAppID(appID: string) {
+  setAppID(appID: string) {
+    if (!isDefined(appID) || !isString(appID) || appID.length === 0) {
+      throw new Error("setAppID expected 'appID' to be a non empty string");
+    }
     Settings.setAppID(appID);
   },
 };
