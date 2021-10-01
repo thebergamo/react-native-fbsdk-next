@@ -20,6 +20,8 @@
 
 package com.facebook.reactnative.androidsdk;
 
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.facebook.appevents.AppEventsConstants;
@@ -36,6 +38,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -139,7 +142,7 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void setFlushBehavior(String flushBehavior) {
-        AppEventsLogger.setFlushBehavior(AppEventsLogger.FlushBehavior.valueOf(flushBehavior.toUpperCase()));
+        AppEventsLogger.setFlushBehavior(AppEventsLogger.FlushBehavior.valueOf(flushBehavior.toUpperCase(Locale.ROOT)));
     }
 
     /**
@@ -197,6 +200,52 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      public void logPushNotificationOpen(@Nullable ReadableMap payload) {
          mAppEventLogger.logPushNotificationOpen(Arguments.toBundle(payload));
      }
+
+    /**
+     * Uploads product catalog product item as an app event.
+     *
+     * @param itemID – Unique ID for the item. Can be a variant for a product. Max size is 100.
+     * @param availability – If item is in stock. Accepted values are: in stock - Item ships immediately out of stock - No plan to restock preorder - Available in future available for order - Ships in 1-2 weeks discontinued - Discontinued
+     * @param condition – Product condition: new, refurbished or used.
+     * @param description – Short text describing product. Max size is 5000.
+     * @param imageLink – Link to item image used in ad.
+     * @param link – Link to merchant's site where someone can buy the item.
+     * @param title – Title of item.
+     * @param priceAmount – Amount of purchase, in the currency specified by the 'currency' parameter. This value will be rounded to the thousandths place (e.g., 12.34567 becomes 12.346).
+     * @param currencyCode – Currency used to specify the amount.
+     * @param gtin – Global Trade Item Number including UPC, EAN, JAN and ISBN
+     * @param mpn – Unique manufacture ID for product
+     * @param brand – Name of the brand Note: Either gtin, mpn or brand is required.
+     * @param parameters – Optional fields for deep link specification.
+     */
+    @ReactMethod
+    public void logProductItem(String itemID,
+                               String availability,
+                               String condition,
+                               String description,
+                               String imageLink,
+                               String link,
+                               String title,
+                               double priceAmount,
+                               String currencyCode,
+                               String gtin,
+                               String mpn,
+                               String brand,
+                               @Nullable ReadableMap parameters) {
+        mAppEventLogger.logProductItem(itemID,
+                AppEventsLogger.ProductAvailability.valueOf(availability.toUpperCase(Locale.ROOT)),
+                AppEventsLogger.ProductCondition.valueOf(condition.toUpperCase(Locale.ROOT)),
+                description,
+                imageLink,
+                link,
+                title,
+                BigDecimal.valueOf(priceAmount),
+                Currency.getInstance(currencyCode),
+                gtin,
+                mpn,
+                brand,
+                Arguments.toBundle(parameters));
+    }
 
     /**
      * Sets a user id to associate with all app events. This can be used to associate your own

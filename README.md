@@ -208,6 +208,10 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
    ```
 
   Both result in fixing search paths.
+   
+5. AppLink.fetchDeferredAppLink does not work (on iOS at least)
+   
+   Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
   
 
 ## Usage
