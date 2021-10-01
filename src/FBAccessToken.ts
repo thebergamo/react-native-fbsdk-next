@@ -95,7 +95,7 @@ class FBAccessToken {
    * The source of access token.
    * @platform android
    */
-  accessTokenSource: string | undefined;
+  accessTokenSource?: string;
 
   constructor(tokenMap: AccessTokenMap) {
     this.accessToken = tokenMap.accessToken;

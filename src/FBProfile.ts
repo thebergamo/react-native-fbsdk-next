@@ -70,8 +70,9 @@ class FBProfile {
     this.linkURL = profileMap.linkURL;
     this.imageURL = profileMap.imageURL;
     this.userID = profileMap.userID;
-    // TODO: [TS Migration]: Value should be undefined. Discuss before merging.
-    this.email = Platform.OS === 'android' ? null as unknown as undefined : profileMap.email;
+    if (Platform.OS !== 'android') {
+      this.email = profileMap.email;
+    }
     this.name = profileMap.name;
     Object.freeze(this);
   }

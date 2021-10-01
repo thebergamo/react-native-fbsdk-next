@@ -37,19 +37,13 @@ export function objectKeyValuesAreStrings(object) {
 
 /**
  * Simple is null check.
- *
- * @param value
- * @returns {boolean}
  */
-export function isNull(value) {
+export function isNull(value: unknown): value is null {
   return value === null;
 }
 
 /**
  * Simple is object check.
- *
- * @param value
- * @returns {boolean}
  */
 export function isObject(value) {
   return value ? typeof value === 'object' && !Array.isArray(value) && !isNull(value) : false;
@@ -58,102 +52,79 @@ export function isObject(value) {
 /**
  * Simple is date check
  * https://stackoverflow.com/a/44198641
- * @param value
- * @returns {boolean}
  */
-export function isDate(value) {
+export function isDate(value: unknown): value is Date {
   // use the global isNaN() and not Number.isNaN() since it will validate an Invalid Date
-  return value && Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value);
+  // TODO: [TS Migration]: Casted to Number, should be discussed.
+  return !!value && Object.prototype.toString.call(value) === '[object Date]' && !isNaN(Number(value));
 }
 
 /**
  * Simple is function check
- *
- * @param value
- * @returns {*|boolean}
  */
-export function isFunction(value) {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isFunction(value: unknown): value is Function {
   return value ? typeof value === 'function' : false;
 }
 
 /**
  * Simple is string check
- * @param value
- * @return {boolean}
  */
-export function isString(value) {
+export function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
 /**
  * Simple is number check
- * @param value
- * @return {boolean}
  */
-export function isNumber(value) {
+export function isNumber(value: unknown): value is number {
   return typeof value === 'number';
 }
 
 /**
  * Simple finite check
- * @param value
- * @returns {boolean}
  */
-export function isFinite(value) {
+export function isFinite(value: number): value is number {
   return Number.isFinite(value);
 }
 
 /**
  * Simple integer check
- * @param value
- * @returns {boolean}
  */
-export function isInteger(value) {
+export function isInteger(value: unknown): value is number {
   return Number.isInteger(value);
 }
 
 /**
  * Simple is boolean check
- *
- * @param value
- * @return {boolean}
  */
-export function isBoolean(value) {
+export function isBoolean(value: unknown): value is boolean {
   return typeof value === 'boolean';
 }
 
 /**
- *
- * @param value
- * @returns {arg is Array<any>}
+ * Simple is array check
  */
-export function isArray(value) {
+export function isArray(value: unknown): value is unknown[]  {
   return Array.isArray(value);
 }
 
 /**
- *
- * @param value
- * @returns {boolean}
+ * Simple is undefined check
  */
-export function isUndefined(value) {
+export function isUndefined(value: unknown): value is undefined {
   return typeof value === 'undefined';
 }
 
 /**
- *
- * @param value
- * @returns {boolean}
+ * Simple is not null nor undefined check
  */
- export function isDefined(value) {
+ export function isDefined<T>(value: T): value is Exclude<T, null | undefined> {
   return !isNull(value) && !isUndefined(value);
 }
 
 /**
  * /^[a-zA-Z0-9_]+$/
- *
- * @param value
- * @returns {boolean}
  */
 export function isAlphaNumericUnderscore(value) {
   return AlphaNumericUnderscore.test(value);
@@ -161,8 +132,6 @@ export function isAlphaNumericUnderscore(value) {
 
 /**
  * URL test
- * @param url
- * @returns {boolean}
  */
 const IS_VALID_URL_REGEX = /^(http|https):\/\/[^ "]+$/;
 export function isValidUrl(url) {
@@ -171,10 +140,6 @@ export function isValidUrl(url) {
 
 /**
  * Array includes
- *
- * @param value
- * @param oneOf
- * @returns {boolean}
  */
 export function isOneOf(value, oneOf = []) {
   if (!isArray(oneOf)) {
