@@ -165,7 +165,7 @@ export default {
   logEvent(eventName: string, ...args: Array<number | Params>): void {
     let valueToSum = 0;
     if (typeof args[0] === 'number') {
-      valueToSum = args.shift() as number;
+      valueToSum = Number(args.shift());
     }
     let parameters = null;
     if (typeof args[0] === 'object') {
@@ -188,7 +188,7 @@ export default {
   /**
    * Logs an app event that tracks that the application was open via Push Notification.
    */
-  logPushNotificationOpen(payload?: Record<string, unknown>): void {
+  logPushNotificationOpen(payload?: Record<string, string | number>): void {
     AppEventsLogger.logPushNotificationOpen(payload);
   },
 
