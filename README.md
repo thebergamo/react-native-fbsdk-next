@@ -222,6 +222,18 @@ To comply with Apple privacy requirements, for iOS the `autoInitEnabled` option 
 
 Using this module, there are two options to comply with this requirement, one is platform-neutral and can be used from your javascript code whenever it makes sense for your app, and one is native.
 
+### Setting Facebook app ID from code
+
+In case you e.g. would like to use multiple facebook apps, you can set the facebook app ID using setAppID
+
+```js
+import { Settings } from 'react-native-fbsdk-next';
+
+// Setting the facebook app id using setAppID
+// Remember to set CFBundleURLSchemes in Info.plist on iOS if needed
+Settings.setAppID('APP ID');
+```
+
 #### Platform-neutral SDK initialization
 
 If you do not need to handle a [GDPR-type opt-in flow](https://developers.facebook.com/docs/app-events/gdpr-compliance), on iOS you should include the following javascript code as early in startup as possible. For Android auto-init is the default still, so this is not strictly necessary for Android but will work.
