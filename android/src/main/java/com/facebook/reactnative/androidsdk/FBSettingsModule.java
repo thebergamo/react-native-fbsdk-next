@@ -58,4 +58,13 @@ public class FBSettingsModule extends BaseJavaModule {
     public static void initializeSDK() {
         FacebookSdk.fullyInitialize();
     }
+
+    /**
+     * Set app id
+     * @param appID app id
+     */
+    @ReactMethod
+    public static void setAppID(String appID) {
+        FacebookSdk.setApplicationId(appID);
+    }
 }
