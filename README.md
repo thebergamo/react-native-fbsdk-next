@@ -215,7 +215,7 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
   
 6. You get an exception `App ID not found. Add a string value with your app ID for the key FacebookAppID to the Info.plist or call [FBSDKSettings setAppID:].`
 
-  If you find yourself in this situation, head over to your `AppDelegate.m` file and add the following lines inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement: 
+  If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement: 
 
   ```
     [[FBSDKApplicationDelegate sharedInstance] application:application
