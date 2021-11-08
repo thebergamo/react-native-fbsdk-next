@@ -340,6 +340,9 @@ module.exports = {
    * setUserID. You must call setUserID before making this call.
    */
   updateUserProperties(parameters: Params) {
+    if (Platform.OS === 'ios') {
+      return;
+    }
     AppEventsLogger.updateUserProperties(parameters);
   },
 
