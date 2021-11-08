@@ -45,7 +45,7 @@ RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSArray<NSString *> *)optio
 
 RCT_EXPORT_METHOD(initializeSDK)
 {
-  [FBSDKApplicationDelegate initializeSDK:nil];
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
 }
 
 RCT_EXPORT_METHOD(setAppID:(NSString *)appID)
