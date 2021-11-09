@@ -310,17 +310,6 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
        }
      }
 
-     /**
-      * Sends a request to update the properties for the current user, set by
-      * setUserID. You must call setUserID before making this call.
-      *
-      * @param parameters Key-value pairs representing user properties and their values.
-      */
-     @ReactMethod
-     public void updateUserProperties(ReadableMap parameters) {
-       mAppEventLogger.updateUserProperties(Arguments.toBundle(parameters), null);
-     }
-
     private @Nullable String getNullableString(ReadableMap data, String key) {
       return data.hasKey(key) ? data.getString(key) : null;
     }
