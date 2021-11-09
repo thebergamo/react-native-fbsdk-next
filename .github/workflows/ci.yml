@@ -78,4 +78,4 @@ jobs:
       - name: Install pods
         run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
-        run: cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator -configuration Debug
+        run: cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
