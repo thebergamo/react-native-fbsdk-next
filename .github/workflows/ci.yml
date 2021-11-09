@@ -12,7 +12,12 @@ jobs:
         with:
           node-version: 14
       - name: Install yarn
-        run: npm install -g yarn
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: npm install -g yarn
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -23,7 +28,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
       - name: Install dependencies
-        run: yarn install
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: yarn install
       - name: Run tests
         run: yarn test
   android-build:
@@ -35,7 +45,12 @@ jobs:
         with:
           node-version: 14
       - name: Install yarn
-        run: npm install -g yarn
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: npm install -g yarn
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -46,7 +61,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: yarn install --frozen-lockfile
       - name: Build android example app
         run: cd RNFBSDKExample && yarn && cd android && ./gradlew assembleDebug
   ios-build:
@@ -57,13 +77,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      - uses: actions/setup-ruby@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3'
+          ruby-version: 3
       - name: Install cocoapods
         run: gem install cocoapods
       - name: Install yarn
-        run: npm install -g yarn
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: npm install -g yarn
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -74,7 +100,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1
       - name: Install dependencies
-        run: yarn install && cd RNFBSDKExample && yarn
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          command: yarn install && cd RNFBSDKExample && yarn
       - name: Install pods
         run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
