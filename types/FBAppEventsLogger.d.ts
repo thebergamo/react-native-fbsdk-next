@@ -184,11 +184,6 @@ export type FBAppEventsLogger = {
      */
   getAttributionID(): Promise<string | undefined | null>;
   /**
-     * Sends a request to update the properties for the current user, set by
-     * setUserID. You must call setUserID before making this call.
-     */
-  updateUserProperties(parameters: Params): void;
-  /**
      * Set additional data about the user to increase chances of matching a Facebook user.
      */
   setUserData(userData: UserData): void;
