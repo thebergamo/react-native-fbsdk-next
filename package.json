@@ -56,8 +56,12 @@
     "validate:eslint": "eslint \"src/**/*\"",
     "validate:flow": "flow",
     "validate:prettier": "prettier \"src/**/*.js\" --check",
-    "example:ios": "cd ./RNFBSDKExample && yarn ios",
+    "example:start": "cd ./RNFBSDKExample && yarn start",
+    "example:ios": "cd ./RNFBSDKExample/ios && pod install && yarn ios",
     "example:android": "cd ./RNFBSDKExample && yarn android --no-jetifier",
+    "example:clean": "cd RNFBSDKExample && \\rm -fr yarn.lock node_modules ios/Podfile.lock && cd ..",
+    "example:install": "cd RNFBSDKExample && yarn && cd ios && pod install && cd ..",
+    "example:devcopy": "yarn prepare && cp -rv android ios lib src types *.podspec RNFBSDKExample/node_modules/react-native-fbsdk-next/",
     "semantic-release": "semantic-release"
   },
   "files": [
