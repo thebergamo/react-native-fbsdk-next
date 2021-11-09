@@ -23,8 +23,8 @@
 
 'use strict';
 
-const NativeGraphRequestManager = require('react-native').NativeModules
-  .FBGraphRequest;
+const NativeGraphRequestManager =
+  require('react-native').NativeModules.FBGraphRequest;
 
 import type GraphRequest from './FBGraphRequest';
 

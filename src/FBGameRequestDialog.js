@@ -22,8 +22,8 @@
  */
 'use strict';
 
-const GameRequestDialog = require('react-native').NativeModules
-  .FBGameRequestDialog;
+const GameRequestDialog =
+  require('react-native').NativeModules.FBGameRequestDialog;
 import type {GameRequestContent} from './models/FBGameRequestContent';
 
 module.exports = {
