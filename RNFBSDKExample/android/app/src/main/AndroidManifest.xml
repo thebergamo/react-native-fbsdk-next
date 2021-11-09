@@ -14,13 +14,37 @@
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+        android:exported="true"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:host="applinks" android:scheme="@string/fb_auto_applink_scheme" />
+        </intent-filter>
+      </activity>
+      <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="@string/fb_login_protocol_scheme" />
+        </intent-filter>
       </activity>
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+      <meta-data android:name="com.facebook.sdk.ApplicationName" android:value="@string/app_name"/>
+      <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+      <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false"/>
+      <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="false"/>
+      <provider android:name="com.facebook.FacebookContentProvider" android:authorities="com.facebook.app.FacebookContentProvider355198514515820" android:exported="true" />
     </application>
+    <queries>
+      <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+      <provider android:authorities="com.facebook.orca.provider.PlatformProvider" />
+    </queries>
 </manifest>

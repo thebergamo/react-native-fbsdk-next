@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RNFBSDKExample</string>
-    <string name="facebook_app_id">950110338385665</string>
+    <string name="facebook_app_id">1523458767976650</string>
+    <string name="fb_auto_applink_scheme">fb1523458767976650</string>
+    <string name="facebook_client_token">d157902d0bff64b4c1daaf26e32852e9</string>
+    <string name="fb_login_protocol_scheme">1523458767976650</string>
 </resources>
