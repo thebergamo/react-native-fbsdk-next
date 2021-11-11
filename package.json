@@ -1,6 +1,6 @@
 {
   "name": "react-native-fbsdk-next",
-  "version": "4.6.0",
+  "version": "5.0.0",
   "description": "Facebook SDK support for React Native apps.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
