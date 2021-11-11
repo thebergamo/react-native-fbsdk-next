@@ -68,7 +68,7 @@ jobs:
           max_attempts: 3
           command: yarn install --frozen-lockfile
       - name: Build android example app
-        run: cd RNFBSDKExample && yarn && cd android && ./gradlew assembleDebug
+        run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample && cd android && ./gradlew assembleDebug
   ios-build:
     runs-on: macOS-latest
     steps:
@@ -109,4 +109,4 @@ jobs:
       - name: Install pods
         run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
-        run: cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
+        run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
