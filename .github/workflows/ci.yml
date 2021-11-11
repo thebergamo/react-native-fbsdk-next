@@ -90,6 +90,11 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: npm install -g yarn
+      - uses: hendrikmuhs/ccache-action@v1
+        name: Xcode Compile Cache
+        with:
+          key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
+          max-size: 400M
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -109,4 +114,13 @@ jobs:
       - name: Install pods
         run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
       - name: Build ios example app
-        run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          export SKIP_BUNDLING=1
+          export RCT_NO_LAUNCH_PACKAGER=1
+          set -o pipefail
+          yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
