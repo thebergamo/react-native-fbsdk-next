@@ -104,15 +104,20 @@ jobs:
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-v1
+      - uses: actions/cache@v2
+        name: Cache Pods
+        id: pods-cache
+        with:
+          path: RNFBSDKExample/ios/Pods
+          key: ${{ runner.os }}-pods-v1-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-pods-v1
       - name: Install dependencies
         uses: nick-invision/retry@v2
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
           max_attempts: 3
-          command: yarn install && cd RNFBSDKExample && yarn
-      - name: Install pods
-        run: cd RNFBSDKExample/ios && rm -f Podfile.lock && pod install
+          command: yarn && yarn example:install
       - name: Build ios example app
         run: |
           export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
@@ -123,4 +128,4 @@ jobs:
           export SKIP_BUNDLING=1
           export RCT_NO_LAUNCH_PACKAGER=1
           set -o pipefail
-          yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
+          yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
