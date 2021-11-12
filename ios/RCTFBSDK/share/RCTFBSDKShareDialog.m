@@ -47,8 +47,7 @@ RCT_EXPORT_MODULE(FBShareDialog);
 - (instancetype)init
 {
   if (self = [super init]) {
-    _shareDialog = [[FBSDKShareDialog alloc] init];
-    _shareDialog.delegate = self;
+    _shareDialog = [[FBSDKShareDialog alloc] initWithViewController:nil content:nil delegate:self];
   }
   return self;
 }

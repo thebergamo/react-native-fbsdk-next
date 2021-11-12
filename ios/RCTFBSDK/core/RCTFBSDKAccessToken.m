@@ -51,7 +51,7 @@ RCT_EXPORT_METHOD(setCurrentAccessToken:(FBSDKAccessToken *)token)
 
 RCT_EXPORT_METHOD(refreshCurrentAccessTokenAsync:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [FBSDKAccessToken refreshCurrentAccessToken:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+  [FBSDKAccessToken refreshCurrentAccessTokenWithCompletion:^(id<FBSDKGraphRequestConnecting> connection, id result, NSError *error) {
     if (error) {
       reject(@"FacebookSDK", error.localizedDescription, error);
     } else {
