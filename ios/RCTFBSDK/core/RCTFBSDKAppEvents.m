@@ -152,16 +152,16 @@ RCT_EXPORT_METHOD(setUserData:(NSDictionary *)userData)
 {
   userData = RCTDictionaryWithoutNullValues(userData);
 
-  [FBSDKAppEvents setUserEmail:userData[@"email"]
-                     firstName:userData[@"firstName"]
-                      lastName:userData[@"lastName"]
-                         phone:userData[@"phone"]
-                   dateOfBirth:userData[@"dateOfBirth"]
-                        gender:userData[@"gender"]
-                          city:userData[@"city"]
-                         state:userData[@"state"]
-                           zip:userData[@"zip"]
-                       country:userData[@"country"]];
+  [FBSDKAppEvents.shared setUserEmail:userData[@"email"]
+                            firstName:userData[@"firstName"]
+                             lastName:userData[@"lastName"]
+                                phone:userData[@"phone"]
+                          dateOfBirth:userData[@"dateOfBirth"]
+                               gender:userData[@"gender"]
+                                 city:userData[@"city"]
+                                state:userData[@"state"]
+                                  zip:userData[@"zip"]
+                              country:userData[@"country"]];
 }
 
 RCT_EXPORT_METHOD(setFlushBehavior:(FBSDKAppEventsFlushBehavior)flushBehavior)

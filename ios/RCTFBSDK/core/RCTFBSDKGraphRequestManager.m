@@ -34,9 +34,9 @@ RCT_REMAP_METHOD(start, startWithBatch:(NSArray *)requestBatch
                          batchCallback:(RCTResponseSenderBlock)callback)
 {
   RCTFBSDKGraphRequestConnectionContainer *connection =
-  [[RCTFBSDKGraphRequestConnectionContainer alloc] initWithRequestBatch:requestBatch
-                                                                timeout:timeout
-                                                          batchCallback:callback];
+    [[RCTFBSDKGraphRequestConnectionContainer alloc] initWithRequestBatch:requestBatch
+                                                                  timeout:[timeout integerValue]
+                                                            batchCallback:callback];
   [connection start];
 }
 
