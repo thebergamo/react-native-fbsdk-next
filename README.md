@@ -264,7 +264,7 @@ If you would like to initialize the Facebook SDK even earlier in startup for iOS
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [FBSDKApplicationDelegate initializeSDK:launchOptions]; // <- add this
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK]; // <- add this
 
   // your other stuff
 }
