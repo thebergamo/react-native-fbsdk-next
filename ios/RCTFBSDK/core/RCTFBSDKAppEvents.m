@@ -21,7 +21,6 @@
 #import <React/RCTUtils.h>
 
 #import "RCTConvert+FBSDKAccessToken.h"
-#import <FBSDKCoreKit/FBSDKAppEventsUtility.h>
 
 @implementation RCTConvert (RCTFBSDKAppEvents)
 
@@ -141,8 +140,8 @@ RCT_EXPORT_METHOD(getAdvertiserID:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   @try {
-    NSString *advertiserID = [[FBSDKAppEventsUtility shared] advertiserID];
-    resolve(advertiserID);
+    // advertiserID is no longer available to iOS from FBSDK v12
+    resolve(nil);
   }
   @catch (NSError *error) {
     reject(@"E_ADVERTISER_ID_ERROR", @"Can not get advertiserID", error);
@@ -153,16 +152,16 @@ RCT_EXPORT_METHOD(setUserData:(NSDictionary *)userData)
 {
   userData = RCTDictionaryWithoutNullValues(userData);
 
-  [FBSDKAppEvents setUserEmail:userData[@"email"]
-                     firstName:userData[@"firstName"]
-                      lastName:userData[@"lastName"]
-                         phone:userData[@"phone"]
-                   dateOfBirth:userData[@"dateOfBirth"]
-                        gender:userData[@"gender"]
-                          city:userData[@"city"]
-                         state:userData[@"state"]
-                           zip:userData[@"zip"]
-                       country:userData[@"country"]];
+  [FBSDKAppEvents.shared setUserEmail:userData[@"email"]
+                            firstName:userData[@"firstName"]
+                             lastName:userData[@"lastName"]
+                                phone:userData[@"phone"]
+                          dateOfBirth:userData[@"dateOfBirth"]
+                               gender:userData[@"gender"]
+                                 city:userData[@"city"]
+                                state:userData[@"state"]
+                                  zip:userData[@"zip"]
+                              country:userData[@"country"]];
 }
 
 RCT_EXPORT_METHOD(setFlushBehavior:(FBSDKAppEventsFlushBehavior)flushBehavior)

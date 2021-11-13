@@ -26,7 +26,7 @@ To use this library you need to ensure you match up with the correct version of 
 | <= 8.0.1  | `react-native-fbsdk` `<= 0.10`        | `<= 0.59.x`                   |
 
 > ⚠️ * Attention
-> 
+>
 > Please notice that this module in versions after 4.2.0 only supports React Native versions above 0.63.3 as it's the oldest version of React Native which support latest XCode version. Technically, it may work on older versions (test it to be sure) but **they are not supported**. Changes that accidentally break older react-native versions may be issued without regard to semantic versioning constraints because we do not test against the older versions. Please see [this issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/30) for an example of a previous break. Please update to current react-native versions.
 
 ### 1. Install the library
@@ -59,7 +59,7 @@ $ cd ios/ && pod install
 
 - **React Native <= 0.59**
 
-> For support with React Native <= 0.59, please refer to [React Native FBSDK](https://github.com/facebook/react-native-fbsdk) 
+> For support with React Native <= 0.59, please refer to [React Native FBSDK](https://github.com/facebook/react-native-fbsdk)
 
 If you can't or don't want to use the CLI tool, you can also manually link the library using the instructions below (click on the arrow to show them):
 
@@ -188,7 +188,7 @@ Undefined symbols for architecture x86_64:
 
    Either:
 
-- add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header" 
+- add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header"
 The empty swift file makes this change to the Header Search Path on your build settings:
 ```
 $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
@@ -208,14 +208,14 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
    ```
 
   Both result in fixing search paths.
-   
+
 5. AppLink.fetchDeferredAppLink does not work (on iOS at least)
-   
+
    Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
-  
+
 6. You get an exception `App ID not found. Add a string value with your app ID for the key FacebookAppID to the Info.plist or call [FBSDKSettings setAppID:].`
 
-  If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement: 
+  If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement:
 
   ```
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -631,15 +631,23 @@ new GraphRequestManager().addRequest(infoRequest).start();
 ```
 
 ## Example app
+To run the example app, you'll first need to setup the environment:
+```
+refresh-example.sh
+```
+This will create a new app in the `RNFBSDKExample` directory, using the latest version of React Native.
+Next, it will patch the necessary files so you may run the example app.
 
-### iOS
+```
+yarn example:ios
+```
+or
+```
+yarn example:android
+```
 
-- Run `pod install` in `example/ios`
-- Run `yarn example:ios`
+Note: You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
 
-### Android
-
-- Run `yarn example:android`
 
 ## Join the React Native community
 

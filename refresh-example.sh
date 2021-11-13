@@ -61,11 +61,12 @@ rm -f ios/Podfile??
 # Adding the facebook App Id, App Name, are minimum steps
 
 # note the app id used here does not work fully - replace with your own - but it *does* initialize and prove things to a point.
-sed -i -e 's/<\/resources>/    <string name="facebook_app_id">1523458767976650<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
+FacebookAppId=1523458767976650
+sed -i -e 's/<\/resources>/    <string name="facebook_app_id">'${FacebookAppId}'<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
 rm -f android/app/src/main/res/values/strings.xml??
 sed -i -e 's/^<\/dict>/  <key>FacebookDisplayName<\/key>\n  <string>RNFBSDKExample<\/string>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
-sed -i -e 's/^<\/dict>/  <key>FacebookAppID<\/key>\n  <string>1523458767976650<\/string>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
+sed -i -e 's/^<\/dict>/  <key>FacebookAppID<\/key>\n  <string>'${FacebookAppId}'<\/string>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
 sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string\/facebook_app_id"\/>\n    <\/application>/' android/app/src/main/AndroidManifest.xml
 rm -f android/app/src/main/AndroidManifest.xml??
@@ -73,7 +74,7 @@ sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.Applica
 rm -f android/app/src/main/AndroidManifest.xml??
 
 # You may optionally want to handle facebook app links
-sed -i -e 's/<\/resources>/    <string name="fb_auto_applink_scheme">fb1523458767976650<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
+sed -i -e 's/<\/resources>/    <string name="fb_auto_applink_scheme">fb'${FacebookAppId}'<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
 rm -f android/app/src/main/res/values/strings.xml??
 sed -i -e 's/<\/intent-filter>/<\/intent-filter>\n        <intent-filter>\n            <action android:name="android.intent.action.VIEW" \/>\n            <category android:name="android.intent.category.DEFAULT" \/>\n            <category android:name="android.intent.category.BROWSABLE" \/>\n            <data android:host="applinks" android:scheme="@string\/fb_auto_applink_scheme" \/>\n        <\/intent-filter>/' android/app/src/main/AndroidManifest.xml
 rm -f android/app/src/main/AndroidManifest.xml??
@@ -91,7 +92,7 @@ sed -i -e 's/<\/activity>/<\/activity>\n      <activity android:name="com.facebo
 rm -f android/app/src/main/AndroidManifest.xml??
 
 # This is required for login to work on android and is listed as a requirement for the iOS SDK
-sed -i -e 's/<\/resources>/    <string name="fb_login_protocol_scheme">1523458767976650<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
+sed -i -e 's/<\/resources>/    <string name="fb_login_protocol_scheme">'${FacebookAppId}'<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
 rm -f android/app/src/main/res/values/strings.xml??
 
 sed -i -e 's/^<\/dict>/  <key>LSApplicationQueriesSchemes<\/key>\n  <array>\n    <string>fb-messenger-share-api<\/string>\n    <string>fbauth2<\/string>\n    <string>fbapi<\/string>\n  <\/array>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
@@ -112,7 +113,7 @@ sed -i -e 's/<\/manifest>/    <queries>\n      <provider android:authorities="co
 rm -f android/app/src/main/AndroidManifest.xml??
 sed -i -e 's/<string>fbapi<\/string>/<string>fbapi<\/string>\n    <string>fb-messenger-share-api<\/string>\n    <string>fbauth2<\/string>\n    <string>fbapi<\/string>\n    <string>fbapi20130214<\/string>\n    <string>fbapi20130410<\/string>\n    <string>fbapi20130702<\/string>\n    <string>fbapi20131010<\/string>\n    <string>fbapi20131219<\/string>\n    <string>fbapi20140410<\/string>\n    <string>fbapi20140116<\/string>\n    <string>fbapi20150313<\/string>\n    <string>fbapi20150629<\/string>\n    <string>fbapi20160328<\/string>\n    <string>fbauth<\/string>\n    <string>fbshareextension<\/string>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
-sed -i -e 's/^<\/dict>/  <key>CFBundleURLTypes<\/key>\n  <array>\n    <dict>\n     <key>CFBundleURLSchemes<\/key>\n     <array>\n       <string>fb1523458767976650<\/string>\n     <\/array>\n   <\/dict>\n  <\/array>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
+sed -i -e 's/^<\/dict>/  <key>CFBundleURLTypes<\/key>\n  <array>\n    <dict>\n     <key>CFBundleURLSchemes<\/key>\n     <array>\n       <string>fb'${FacebookAppId}'<\/string>\n     <\/array>\n   <\/dict>\n  <\/array>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
 
 # You may want to integrate Facebook's content provider

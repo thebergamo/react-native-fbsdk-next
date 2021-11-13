@@ -93,11 +93,11 @@ static NSArray<FBSDKGraphRequest *> *FBSDKGraphRequestArray(id json)
   g_pendingConnection = [[NSMutableArray alloc] init];
   [g_pendingConnection addObject:self];
   for (int i = 0; i < _requestBatch.count; i++) {
-    FBSDKGraphRequestBlock completionHandler = ^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    FBSDKGraphRequestCompletion completion = ^(id<FBSDKGraphRequestConnecting> connection, id result, NSError *error) {
       NSDictionary *errorDict = error ? RCTJSErrorFromNSError(error) : nil;
-      _response[[NSString stringWithFormat: @"%i", i]] = @[RCTNullIfNil(errorDict), RCTNullIfNil(result)];
+      self->_response[[NSString stringWithFormat: @"%i", i]] = @[RCTNullIfNil(errorDict), RCTNullIfNil(result)];
     };
-    [_connection addRequest:_requestBatch[i] completionHandler:completionHandler];
+    [_connection addRequest:_requestBatch[i] completion:completion];
   }
   [_connection start];
 }
