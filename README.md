@@ -221,6 +221,18 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
     [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   ```
+
+7. You don't see any events in the Facebook Events Manager
+
+  For it to work you need to:
+
+- Run the app on a real device
+- Have the facebook app running in the background and logged in to an account
+- Have that account you used on Facebook added as an "Advertising Account" for your app on Facebook's dashboard
+- MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
+
+This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
+
 ## Usage
 
 ### SDK Initialization
