@@ -1,5 +1,5 @@
 package com.facebook.reactnative.androidsdk;
-
+import com.facebook.ProfileTracker;
 import com.facebook.Profile;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 @ReactModule(name = FBProfileModule.NAME)
 public class FBProfileModule extends ReactContextBaseJavaModule {
     public static final String NAME = "FBProfile";
+    private ProfileTracker mProfileTracker;
 
     public FBProfileModule(ReactApplicationContext reactContext) {
       super(reactContext);
@@ -34,8 +35,17 @@ public class FBProfileModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getCurrentProfile(Callback callback) {
         //Return the profile object as a ReactMap.
-        callback.invoke(Profile.getCurrentProfile() == null
-                ? null
-                : Utility.profileToReactMap(Profile.getCurrentProfile()));
+         if(Profile.getCurrentProfile() == null) {
+                mProfileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                        callback.invoke(Utility.profileToReactMap(currentProfile));
+                        mProfileTracker.stopTracking();
+                    }
+                };
+            }
+             else {
+                 callback.invoke(Utility.profileToReactMap(Profile.getCurrentProfile()));
+                }
   }
 }
