@@ -34,7 +34,7 @@ public class FBProfileModule extends ReactContextBaseJavaModule {
     */
     @ReactMethod
     public void getCurrentProfile(Callback callback) {
-        //Return the profile object as a ReactMap.
+        //Return the profile object as a ReactMap .
          if(Profile.getCurrentProfile() == null) {
                 mProfileTracker = new ProfileTracker() {
                     @Override
