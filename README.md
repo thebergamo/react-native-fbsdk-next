@@ -663,28 +663,10 @@ Note: You'll probably want to change the Facebook App ID to your own, else the e
 
 ## Testing with Jest
 
-We have a example mock inside `jest/setup.js` but you can follow this example to make a basic mock and improve by your needs:
+We have a example mock inside `jest/setup.js` but you just add the following line to your setup file:
 
 ```js
-import { mockAppEventParams, mockAppEvents } from 'react-native-fbsdk-next/jest/mocks'
-
-jest.mock('react-native-fbsdk-next', () => {
-  return {
-    AppEventsLogger: {
-      logEvent: jest.fn(),
-      logPurchase: jest.fn(),
-      setUserID: jest.fn(),
-      AppEventParams: mockAppEventParams,
-      AppEvents: mockAppEvents,
-    },
-    LoginManager: {
-      logInWithPermissions: jest.fn(),
-    },
-    Settings: {
-      initializeSDK: jest.fn(),
-    },
-  };
-});
+jest.mock('react-native-fbsdk-next', () => require('react-native-fbsdk-next/jest/mocks').default);
 ```
 
 You also can spyOn one of this mock to return whatever you want inside your test:
