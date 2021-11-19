@@ -1,3 +1,5 @@
+const nonMocked = require('../../lib/commonjs');
+
 export const mockAppEvents = {
   AchievedLevel: 'fb_mobile_level_achieved',
   AdClick: 'AdClick',
@@ -41,4 +43,21 @@ export const mockAppEventParams = {
   Success: 'fb_success',
   ValueNo: '0',
   ValueYes: '1',
+};
+
+export default {
+  AppEventsLogger: {
+    logEvent: jest.fn(),
+    logPurchase: jest.fn(),
+    setUserID: jest.fn(),
+    AppEventParams: mockAppEventParams,
+    AppEvents: mockAppEvents,
+  },
+  LoginManager: {
+    logInWithPermissions: jest.fn(),
+  },
+  Settings: {
+    initializeSDK: jest.fn(),
+  },
+  LoginButton: nonMocked.LoginButton,
 };
