@@ -75,7 +75,8 @@
     "LICENSE.txt",
     "README.md",
     "react-native-fbsdk-next.podspec",
-    "types"
+    "types",
+    "jest"
   ],
   "dependencies": {},
   "peerDependencies": {
