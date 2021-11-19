@@ -666,7 +666,7 @@ Note: You'll probably want to change the Facebook App ID to your own, else the e
 We have a example mock inside `jest/setup.js` but you can follow this example to make a basic mock and improve by your needs:
 
 ```js
-import { mockAppEventParams, mockAppEvents } from 'react-naitve-fbsdk-next/jest/mocks'
+import { mockAppEventParams, mockAppEvents } from 'react-native-fbsdk-next/jest/mocks'
 
 jest.mock('react-native-fbsdk-next', () => {
   return {
@@ -686,6 +686,16 @@ jest.mock('react-native-fbsdk-next', () => {
   };
 });
 ```
+
+You also can spyOn one of this mock to return whatever you want inside your test:
+
+```js
+import { LoginManager } from 'react-native-fbsdk-next'
+
+jest.spyOn(LoginManager, 'logInWithPermissions').mockImplementation(() => Promise.resolve({ isCancelled: false }))
+
+```
+
 
 ## Join the React Native community
 
