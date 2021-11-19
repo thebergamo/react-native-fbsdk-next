@@ -661,6 +661,24 @@ yarn example:android
 Note: You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
 
 
+## Testing with Jest
+
+We have a example mock inside `jest/setup.js` but you just add the following line to your setup file:
+
+```js
+jest.mock('react-native-fbsdk-next', () => require('react-native-fbsdk-next/jest/mocks').default);
+```
+
+You also can spyOn one of this mock to return whatever you want inside your test:
+
+```js
+import { LoginManager } from 'react-native-fbsdk-next'
+
+jest.spyOn(LoginManager, 'logInWithPermissions').mockImplementation(() => Promise.resolve({ isCancelled: false }))
+
+```
+
+
 ## Join the React Native community
 
 - Website: https://facebook.github.io/react-native
