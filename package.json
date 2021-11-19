@@ -62,7 +62,8 @@
     "example:clean": "cd RNFBSDKExample && \\rm -fr yarn.lock node_modules ios/Podfile.lock && cd ..",
     "example:install": "cd RNFBSDKExample && yarn && cd ios && (pod install || true) && cd ../..",
     "example:devcopy": "yarn prepare && cp -rv android ios lib src types *.podspec RNFBSDKExample/node_modules/react-native-fbsdk-next/",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "jest": "jest"
   },
   "files": [
     "android/src/main/AndroidManifest.xml",
@@ -124,4 +125,5 @@
     ]
   },
   "types": "types/index.d.ts"
+  
 }
