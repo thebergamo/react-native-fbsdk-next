@@ -3,7 +3,7 @@
 import {mockAppEventParams, mockAppEvents} from './mocks';
 
 jest.mock('../src', () => {
-  const nonMocked = jest.requireActual('./src');
+  const nonMocked = jest.requireActual('../src');
   return {
     AppEventsLogger: {
       logEvent: jest.fn(),
