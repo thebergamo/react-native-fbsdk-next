@@ -1,4 +1,5 @@
-const nonMocked = require('../../lib/commonjs');
+/* eslint-env jest */
+import { LoginButton } from '../../src';
 
 export const mockAppEvents = {
   AchievedLevel: 'fb_mobile_level_achieved',
@@ -59,5 +60,5 @@ export default {
   Settings: {
     initializeSDK: jest.fn(),
   },
-  LoginButton: nonMocked.LoginButton,
+  LoginButton,
 };
