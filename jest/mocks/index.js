@@ -1,4 +1,5 @@
-const nonMocked = require('../../lib/commonjs');
+/* eslint-env jest */
+const nonMocked = require('../../src');
 
 export const mockAppEvents = {
   AchievedLevel: 'fb_mobile_level_achieved',
