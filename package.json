@@ -51,11 +51,9 @@
   "scripts": {
     "start": "react-native start",
     "prepare": "bob build",
-    "flow": "flow",
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn jest",
     "validate:eslint": "eslint \"src/**/*\"",
-    "validate:flow": "flow",
     "validate:prettier": "prettier \"src/**/*.js\" --check",
     "validate:ts": "tsc --noEmit",
     "example:start": "cd ./RNFBSDKExample && yarn start",
@@ -101,7 +99,6 @@
     "babel-jest": "^27.3.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7",
-    "flow-bin": "^0.158.0",
     "jest": "^27.3.1",
     "metro-react-native-babel-preset": "^0.66.2",
     "prettier": "^2.4.1",
@@ -124,10 +121,7 @@
     "output": "lib",
     "targets": [
       [
-        "commonjs",
-        {
-          "copyFlow": true
-        }
+        "commonjs"
       ],
       "module",
       "typescript"
