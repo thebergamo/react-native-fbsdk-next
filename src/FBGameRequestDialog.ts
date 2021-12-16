@@ -24,11 +24,11 @@ import {NativeModules} from 'react-native';
 
 const GameRequestDialog = NativeModules.FBGameRequestDialog;
 import {GameRequestContent} from './models/FBGameRequestContent';
-import { RNFBSDKCallback } from './models/FBSDKCallback';
+import {RNFBSDKCallback} from './models/FBSDKCallback';
 
 export type GameRequestDialogResult = RNFBSDKCallback & {
-  requestId: string,
-  to: Array<string>,
+  requestId: string;
+  to: Array<string>;
 };
 
 export default {

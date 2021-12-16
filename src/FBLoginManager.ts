@@ -21,7 +21,7 @@
  */
 
 import {NativeModules, Platform} from 'react-native';
-import { RNFBSDKCallback } from './models/FBSDKCallback';
+import {RNFBSDKCallback} from './models/FBSDKCallback';
 const LoginManager = NativeModules.FBLoginManager;
 /**
  * Indicates which default audience to use for sessions that post data to Facebook.
@@ -55,8 +55,8 @@ export type LoginBehaviorIOS =
  * Shows the results of a login operation.
  */
 export type LoginResult = RNFBSDKCallback & {
-  grantedPermissions?: Array<string>,
-  declinedPermissions?: Array<string>,
+  grantedPermissions?: Array<string>;
+  declinedPermissions?: Array<string>;
 };
 
 export type LoginTracking = 'enabled' | 'limited';

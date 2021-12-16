@@ -18,7 +18,7 @@
 
 const AlphaNumericUnderscore = /^[a-zA-Z0-9_]+$/;
 
-export function objectKeyValuesAreStrings(object) {
+export function objectKeyValuesAreStrings(object:Object) {
   if (!isObject(object)) {
     return false;
   }
@@ -45,7 +45,7 @@ export function isNull(value: unknown): value is null {
 /**
  * Simple is object check.
  */
-export function isObject(value) {
+export function isObject(value:unknown) :value is Object{
   return value ? typeof value === 'object' && !Array.isArray(value) && !isNull(value) : false;
 }
 
@@ -126,7 +126,7 @@ export function isUndefined(value: unknown): value is undefined {
 /**
  * /^[a-zA-Z0-9_]+$/
  */
-export function isAlphaNumericUnderscore(value) {
+export function isAlphaNumericUnderscore(value:string) {
   return AlphaNumericUnderscore.test(value);
 }
 
@@ -134,14 +134,14 @@ export function isAlphaNumericUnderscore(value) {
  * URL test
  */
 const IS_VALID_URL_REGEX = /^(http|https):\/\/[^ "]+$/;
-export function isValidUrl(url) {
+export function isValidUrl(url:string) {
   return IS_VALID_URL_REGEX.test(url);
 }
 
 /**
  * Array includes
  */
-export function isOneOf(value, oneOf = []) {
+export function isOneOf(value:unknown, oneOf:unknown[] = []) {
   if (!isArray(oneOf)) {
     return false;
   }

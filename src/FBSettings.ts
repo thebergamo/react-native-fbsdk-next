@@ -39,7 +39,10 @@ export default {
   /**
    * Set data processing options
    */
-  setDataProcessingOptions(options: Array<string>, ...args: Array<number>): void {
+  setDataProcessingOptions(
+    options: Array<string>,
+    ...args: Array<number>
+  ): void {
     let country = 0;
     if (typeof args[0] === 'number') {
       country = args[0];

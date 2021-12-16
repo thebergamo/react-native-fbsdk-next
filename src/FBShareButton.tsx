@@ -22,7 +22,7 @@
 
 import * as React from 'react';
 import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
-import { PropsOf } from './utils';
+import {PropsOf} from './utils';
 
 import {ShareContent} from './models/FBShareContent';
 
@@ -30,15 +30,15 @@ class ShareButton extends React.Component<{
   /**
    * Content to be shared.
    */
-  shareContent: ShareContent,
+  shareContent: ShareContent;
 
   /**
    * View style, if any.
    */
-  style?: ViewStyle,
+  style?: ViewStyle;
 }> {
   static defaultProps: {
-    style: typeof styles.defaultButtonStyle,
+    style: typeof styles.defaultButtonStyle;
   };
 
   render(): JSX.Element {
@@ -57,6 +57,7 @@ ShareButton.defaultProps = {
   style: styles.defaultButtonStyle,
 };
 
-const RCTFBShareButton = requireNativeComponent<PropsOf<ShareButton>>('RCTFBShareButton');
+const RCTFBShareButton =
+  requireNativeComponent<PropsOf<ShareButton>>('RCTFBShareButton');
 
 export default ShareButton;

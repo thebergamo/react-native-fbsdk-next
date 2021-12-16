@@ -29,14 +29,14 @@ import {
   LoginResult,
   LoginTracking,
 } from './FBLoginManager';
-import { PropsOf } from './utils';
+import {PropsOf} from './utils';
 
 export type Event = {
   nativeEvent?: {
-    type?: 'loginFinished' | 'logoutFinished',
-    error: Record<string, unknown>,
-    result: LoginResult,
-  },
+    type?: 'loginFinished' | 'logoutFinished';
+    error: Record<string, unknown>;
+    result: LoginResult;
+  };
 };
 export type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 
@@ -48,7 +48,7 @@ class LoginButton extends React.Component<{
    * Represents the permissions to request when the login button
    * is pressed.
    */
-  permissions?: Array<string>,
+  permissions?: Array<string>;
 
   /**
    * The callback invoked upon error/completion of a login request.
@@ -56,55 +56,55 @@ class LoginButton extends React.Component<{
   onLoginFinished?: (
     error: Record<string, unknown>,
     result: LoginResult,
-  ) => void,
+  ) => void;
 
   /**
    * The callback invoked upon completion of a logout request.
    */
-  onLogoutFinished?: () => void,
+  onLogoutFinished?: () => void;
 
   /**
    * The behavior to use when attempting a login.
    * @platform android
    */
-  loginBehaviorAndroid?: LoginBehaviorAndroid,
+  loginBehaviorAndroid?: LoginBehaviorAndroid;
 
   /**
    * The default audience to target when attempting a login.
    */
-  defaultAudience?: DefaultAudience,
+  defaultAudience?: DefaultAudience;
 
   /**
    * For iOS only, the desired tooltip behavior.
    * @platform ios
    */
-  tooltipBehaviorIOS?: TooltipBehaviorIOS,
+  tooltipBehaviorIOS?: TooltipBehaviorIOS;
 
   /**
    * Gets or sets an optional nonce to use for login attempts. A valid nonce must be a non-empty string without
    * whitespace. An invalid nonce will not be set. Instead, default unique nonces will be used for login attempts.
    * @platform ios
    */
-  nonceIOS?: string,
+  nonceIOS?: string;
 
   /**
    * Gets or sets the desired tracking preference to use for login attempts. Defaults to `enabled`
    * @platform ios
    */
-  loginTrackingIOS?: LoginTracking,
+  loginTrackingIOS?: LoginTracking;
 
   /**
    * View style, if any.
    */
-  style?: ViewStyle,
+  style?: ViewStyle;
 
   /**
    * testID, if any.
    */
-  testID?: string,
+  testID?: string;
 }> {
   static defaultProps: {
-    style: typeof styles.defaultButtonStyle,
+    style: typeof styles.defaultButtonStyle;
   };
 
   _eventHandler(event: Event): void {
@@ -145,9 +145,10 @@ LoginButton.defaultProps = {
 };
 
 type RCTFBLoginButtonProps = PropsOf<LoginButton> & {
-  onChange:(event: Event) => void
+  onChange: (event: Event) => void;
 };
 
-const RCTFBLoginButton = requireNativeComponent<RCTFBLoginButtonProps>('RCTFBLoginButton');
+const RCTFBLoginButton =
+  requireNativeComponent<RCTFBLoginButtonProps>('RCTFBLoginButton');
 
 export default LoginButton;

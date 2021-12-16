@@ -28,19 +28,19 @@ export type GraphRequestConfig = {
   /**
    * The httpMethod to use for the request, for example "GET" or "POST".
    */
-  httpMethod?: string,
+  httpMethod?: string;
   /**
    * The Graph API version to use (e.g., "v2.0")
    */
-  version?: string,
+  version?: string;
   /**
    * The request parameters.
    */
-  parameters?: GraphRequestParameters,
+  parameters?: GraphRequestParameters;
   /**
    * The access token used by the request.
    */
-  accessToken?: string,
+  accessToken?: string;
 };
 export type GraphRequestParameters = {[key: string]: unknown};
 

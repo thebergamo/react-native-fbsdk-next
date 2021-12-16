@@ -20,9 +20,7 @@
  * @format
  */
 
-import {
-  NativeModules,
-} from 'react-native';
+import {NativeModules} from 'react-native';
 
 const AppEventsLogger = NativeModules.FBAppEventsLogger;
 import {Platform} from 'react-native';
@@ -44,31 +42,31 @@ export type AppEventsFlushBehavior =
 /**
  * Specifies product availability for Product Catalog product item update
  */
- export type ProductAvailability =
-/**
- * Item ships immediately
- */
-| 'in_stock'
-/**
- * No plan to restock
- */
-| 'out_of_stock'
-/**
- * Available in future
- */
-| 'preorder'
-/**
- * Ships in 1-2 weeks
- */
-| 'avaliable_for_order'
-/**
- * Discontinued
- */
-| 'discontinued';
+export type ProductAvailability =
+  /**
+   * Item ships immediately
+   */
+  | 'in_stock'
+  /**
+   * No plan to restock
+   */
+  | 'out_of_stock'
+  /**
+   * Available in future
+   */
+  | 'preorder'
+  /**
+   * Ships in 1-2 weeks
+   */
+  | 'avaliable_for_order'
+  /**
+   * Discontinued
+   */
+  | 'discontinued';
 
 /**
-* Specifies product condition for Product Catalog product item update
-*/
+ * Specifies product condition for Product Catalog product item update
+ */
 export type ProductCondition = 'new' | 'refurbished' | 'used';
 
 export type Params = {[key: string]: string | number};
@@ -79,69 +77,69 @@ export type Params = {[key: string]: string | number};
  * more info about the expected format of each field.
  */
 export type UserData = Readonly<{
-  email?: string,
-  firstName?: string,
-  lastName?: string,
-  phone?: string,
-  dateOfBirth?: string,
-  gender?: ('m' | 'f'),
-  city?: string,
-  state?: string,
-  zip?: string,
-  country?: string,
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: 'm' | 'f';
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
 }>;
 
 export type AppEvent = {
-  AchievedLevel: string,
-  AdClick: string,
-  AdImpression: string,
-  AddedPaymentInfo: string,
-  AddedToCart: string,
-  AddedToWishlist: string,
-  CompletedRegistration: string,
-  CompletedTutorial: string,
-  Contact: string,
-  CustomizeProduct: string,
-  Donate: string,
-  FindLocation: string,
-  InitiatedCheckout: string,
-  Purchased: string,
-  Rated: string,
-  Searched: string,
-  SpentCredits: string,
-  Schedule: string,
-  StartTrial: string,
-  SubmitApplication: string,
-  Subscribe: string,
-  UnlockedAchievement: string,
-  ViewedContent: string,
+  AchievedLevel: string;
+  AdClick: string;
+  AdImpression: string;
+  AddedPaymentInfo: string;
+  AddedToCart: string;
+  AddedToWishlist: string;
+  CompletedRegistration: string;
+  CompletedTutorial: string;
+  Contact: string;
+  CustomizeProduct: string;
+  Donate: string;
+  FindLocation: string;
+  InitiatedCheckout: string;
+  Purchased: string;
+  Rated: string;
+  Searched: string;
+  SpentCredits: string;
+  Schedule: string;
+  StartTrial: string;
+  SubmitApplication: string;
+  Subscribe: string;
+  UnlockedAchievement: string;
+  ViewedContent: string;
 };
 
 export type AppEventParam = {
-  AddType: string,
-  Content: string,
-  ContentID: string,
-  ContentType: string,
-  Currency: string,
-  Description: string,
-  Level: string,
-  NumItems: string,
-  MaxRatingValue: string,
-  OrderId: string,
-  PaymentInfoAvailable: string,
-  RegistrationMethod: string,
-  SearchString: string,
-  Success: string,
-  ValueNo: string,
-  ValueYes: string,
+  AddType: string;
+  Content: string;
+  ContentID: string;
+  ContentType: string;
+  Currency: string;
+  Description: string;
+  Level: string;
+  NumItems: string;
+  MaxRatingValue: string;
+  OrderId: string;
+  PaymentInfoAvailable: string;
+  RegistrationMethod: string;
+  SearchString: string;
+  Success: string;
+  ValueNo: string;
+  ValueYes: string;
 };
 
 const {
   AppEvents,
   AppEventParams,
 }: {
-  AppEvents: AppEvent,
-  AppEventParams: AppEventParam,
+  AppEvents: AppEvent;
+  AppEventParams: AppEventParam;
 } = AppEventsLogger.getConstants();
 
 export default {
@@ -218,10 +216,10 @@ export default {
     title: string,
     priceAmount: number,
     currency: string,
-    gtin?: ?string,
-    mpn?: ?string,
-    brand?: ?string,
-    parameters?: ?Params,
+    gtin?: string,
+    mpn?: string,
+    brand?: string,
+    parameters?: Params,
   ) {
     if (!isDefined(itemID) || !isString(itemID)) {
       throw new Error("logProductItem expected 'itemID' to be a string");

@@ -27,16 +27,16 @@ const AccessToken = NativeModules.FBAccessToken;
 const eventEmitter = new NativeEventEmitter(AccessToken);
 
 export type AccessTokenMap = {
-  accessToken: string,
-  permissions: Array<string>,
-  declinedPermissions: Array<string>,
-  expiredPermissions: Array<string>,
-  applicationID: string,
-  userID: string,
-  expirationTime: number,
-  lastRefreshTime: number,
-  dataAccessExpirationTime: number,
-  accessTokenSource?: string,
+  accessToken: string;
+  permissions: Array<string>;
+  declinedPermissions: Array<string>;
+  expiredPermissions: Array<string>;
+  applicationID: string;
+  userID: string;
+  expirationTime: number;
+  lastRefreshTime: number;
+  dataAccessExpirationTime: number;
+  accessTokenSource?: string;
 };
 
 /**

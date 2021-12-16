@@ -24,8 +24,8 @@ import {SharePhoto} from './FBSharePhoto';
 
 export type OpenGraphProperties = {[key: string]: OpenGraphValue};
 export type OpenGraphValue = {
-  type: OpenGraphValueType,
-  value: unknown,
+  type: OpenGraphValueType;
+  value: unknown;
 };
 export type OpenGraphValueType =
   | 'number'

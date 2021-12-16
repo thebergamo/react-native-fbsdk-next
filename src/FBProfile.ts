@@ -6,14 +6,14 @@ import {Platform, NativeModules} from 'react-native';
 const Profile = NativeModules.FBProfile;
 
 export type ProfileMap = {
-  firstName: string,
-  lastName: string,
-  middleName: string,
-  imageURL: string,
-  linkURL: string,
-  userID: string,
-  email: string,
-  name: string,
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  imageURL: string;
+  linkURL: string;
+  userID: string;
+  email: string;
+  name: string;
 };
 
 /**

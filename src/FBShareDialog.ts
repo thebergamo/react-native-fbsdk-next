@@ -21,7 +21,7 @@
  */
 
 import {NativeModules} from 'react-native';
-import { RNFBSDKCallback } from './models/FBSDKCallback';
+import {RNFBSDKCallback} from './models/FBSDKCallback';
 
 const ShareDialog = NativeModules.FBShareDialog;
 import {ShareContent} from './models/FBShareContent';
@@ -63,7 +63,7 @@ export type ShareDialogModeIOS =
   | 'native';
 
 export type ShareDialogResult = RNFBSDKCallback & {
-  postId: string,
+  postId: string;
 };
 
 export default {
