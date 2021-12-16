@@ -32,10 +32,11 @@ export type Callback = (
 ) => void;
 
 function _verifyParameters(request: GraphRequest) {
-  if (request.config && request.config.parameters) {
+  if (request.config?.parameters) {
     for (const key in request.config.parameters) {
       const param = request.config.parameters[key];
-      if (typeof param === 'object' && param.string) {
+
+      if (typeof param === 'object' && (param as any)?.string) {
         continue;
       }
       throw new Error(
