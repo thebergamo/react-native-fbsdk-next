@@ -94,8 +94,8 @@
     "@semantic-release/release-notes-generator": "^10.0.2",
     "@types/react": "^16.14.15",
     "@types/react-native": "^0.63.53",
-    "@typescript-eslint/eslint-plugin": "^4.31.0",
-    "@typescript-eslint/parser": "^4.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
     "babel-jest": "^27.3.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7",
@@ -106,7 +106,7 @@
     "react-native": "^0.66.2",
     "react-test-renderer": "17.0.2",
     "semantic-release": "^18.0.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.5.4"
   },
   "prettier": {
     "requirePragma": true,
