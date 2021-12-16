@@ -55,7 +55,6 @@ export function isObject(value:unknown) :value is Object{
  */
 export function isDate(value: unknown): value is Date {
   // use the global isNaN() and not Number.isNaN() since it will validate an Invalid Date
-  // TODO: [TS Migration]: Casted to Number, should be discussed.
   return !!value && Object.prototype.toString.call(value) === '[object Date]' && !isNaN(Number(value));
 }
 
