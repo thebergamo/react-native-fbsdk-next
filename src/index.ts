@@ -20,46 +20,21 @@
  * @format
  */
 
-import ShareOpenGraphAction from './models/FBShareOpenGraphAction';
-import FBShareOpenGraphObject from './models/FBShareOpenGraphObject';
-import FBShareOpenGraphValueContainer from './models/FBShareOpenGraphValueContainer';
-import FBAccessToken from './FBAccessToken';
-import FBAuthenticationToken from './FBAuthenticationToken';
-import FBAppEventsLogger from './FBAppEventsLogger';
-import FBAppLink from './FBAppLink';
-import FBGameRequestDialog from './FBGameRequestDialog';
-import FBGraphRequest from './FBGraphRequest';
-import FBGraphRequestManager from './FBGraphRequestManager';
-import FBLoginManager from './FBLoginManager';
-import FBMessageDialog from './FBMessageDialog';
-import FBProfile from './FBProfile';
-import FBSettings from './FBSettings';
-import FBShareDialog from './FBShareDialog';
-import FBLoginButton from './FBLoginButton';
-import FBSendButton from './FBSendButton';
-import FBShareButton from './FBShareButton';
-
-// TODO: [TS Migration]: Removed getters and used normal export. Discuss before merging.
-export {
-  //native models
-  ShareOpenGraphAction,
-  FBShareOpenGraphObject as ShareOpenGraphObject,
-  FBShareOpenGraphValueContainer as ShareOpenGraphValueContainer,
-  //native modules
-  FBAccessToken as AccessToken,
-  FBAuthenticationToken as AuthenticationToken,
-  FBAppEventsLogger as AppEventsLogger,
-  FBAppLink as AppLink,
-  FBGameRequestDialog as GameRequestDialog,
-  FBGraphRequest as GraphRequest,
-  FBGraphRequestManager as GraphRequestManager,
-  FBLoginManager as LoginManager,
-  FBMessageDialog as MessageDialog,
-  FBProfile as Profile,
-  FBSettings as Settings,
-  FBShareDialog as ShareDialog,
-  //native components
-  FBLoginButton as LoginButton,
-  FBSendButton as SendButton,
-  FBShareButton as ShareButton,
-};
+export {default as ShareOpenGraphAction} from './models/FBShareOpenGraphAction';
+export {default as ShareOpenGraphObject} from './models/FBShareOpenGraphObject';
+export {default as ShareOpenGraphValueContainer} from './models/FBShareOpenGraphValueContainer';
+export {default as AccessToken} from './FBAccessToken';
+export {default as AuthenticationToken} from './FBAuthenticationToken';
+export {default as AppEventsLogger} from './FBAppEventsLogger';
+export {default as AppLink} from './FBAppLink';
+export {default as GameRequestDialog} from './FBGameRequestDialog';
+export {default as GraphRequest} from './FBGraphRequest';
+export {default as GraphRequestManager} from './FBGraphRequestManager';
+export {default as LoginManager} from './FBLoginManager';
+export {default as MessageDialog} from './FBMessageDialog';
+export {default as Profile} from './FBProfile';
+export {default as Settings} from './FBSettings';
+export {default as ShareDialog} from './FBShareDialog';
+export {default as LoginButton} from './FBLoginButton';
+export {default as SendButton} from './FBSendButton';
+export {default as ShareButton} from './FBShareButton';
