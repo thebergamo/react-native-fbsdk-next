@@ -50,16 +50,9 @@ function _verifyParameters(request: GraphRequest) {
 }
 
 class FBGraphRequestManager {
-  requestBatch: Array<GraphRequest>;
-  requestCallbacks: Array<Callback | undefined>;
-  batchCallback: Callback;
-
-  constructor() {
-    this.requestBatch = [];
-    this.requestCallbacks = [];
-    // TODO: [TS Migration]: Added default value to fix type definitions. Discuss before merging.
-    this.batchCallback = () => null;
-  }
+  requestBatch: Array<GraphRequest> = [];
+  requestCallbacks: Array<Callback | undefined> = [];
+  batchCallback: Callback | null = null;
 
   /**
    * Add a graph request.
