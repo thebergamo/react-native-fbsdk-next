@@ -29,6 +29,7 @@
 		B34601D02628529500AC1860 /* RCTFBSDKProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */; };
 		F1191EC92560474100A8767F /* RCTFBSDKAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = F1191EC82560474100A8767F /* RCTFBSDKAppLink.m */; };
 		F16CE2DB276CAE30003CABEB /* RCTFBSDKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F16CE2DA276CAE30003CABEB /* RCTFBSDKSettings.m */; };
+		F1781000276CC2EB0045DEF1 /* RCTFBSDKAEMReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = F1780FFF276CC2EB0045DEF1 /* RCTFBSDKAEMReporter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,7 @@
 		F16CE2D8276CAE30003CABEB /* RCTFBSDKProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKProfile.h; path = core/RCTFBSDKProfile.h; sourceTree = "<group>"; };
 		F16CE2D9276CAE30003CABEB /* RCTFBSDKSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTFBSDKSettings.h; path = core/RCTFBSDKSettings.h; sourceTree = "<group>"; };
 		F16CE2DA276CAE30003CABEB /* RCTFBSDKSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKSettings.m; path = core/RCTFBSDKSettings.m; sourceTree = "<group>"; };
+		F1780FFF276CC2EB0045DEF1 /* RCTFBSDKAEMReporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTFBSDKAEMReporter.m; path = core/RCTFBSDKAEMReporter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				10E3C0D12626E87A00016645 /* RCTFBSDKAuthenticationToken.h */,
 				F16CE2D8276CAE30003CABEB /* RCTFBSDKProfile.h */,
 				B34601CF2628529500AC1860 /* RCTFBSDKProfile.m */,
+				F1780FFF276CC2EB0045DEF1 /* RCTFBSDKAEMReporter.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				93E005111CE3D2D3000598E3 /* RCTFBSDKMessageDialog.m in Sources */,
 				93E0050F1CE3D2D3000598E3 /* RCTFBSDKGameRequestDialog.m in Sources */,
 				93E004E31CE3D292000598E3 /* RCTConvert+FBSDKAccessToken.m in Sources */,
+				F1781000276CC2EB0045DEF1 /* RCTFBSDKAEMReporter.m in Sources */,
 				10E3C0CF2626E85700016645 /* RCTFBSDKAuthenticationToken.m in Sources */,
 				93E004F01CE3D2B4000598E3 /* RCTFBSDKLoginButtonManager.m in Sources */,
 				93E004EF1CE3D2B4000598E3 /* RCTConvert+FBSDKLogin.m in Sources */,
