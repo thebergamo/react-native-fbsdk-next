@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-present Invertase Limited & Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +14,12 @@
  * limitations under the License.
  *
  * Taken from react-native-firebase: https://github.com/invertase/react-native-firebase/blob/master/packages/app/lib/common/validate.js
+ *
+ * @format
  */
-
 const AlphaNumericUnderscore = /^[a-zA-Z0-9_]+$/;
 
-export function objectKeyValuesAreStrings(object:Object) {
+export function objectKeyValuesAreStrings(object: object) {
   if (!isObject(object)) {
     return false;
   }
@@ -45,8 +46,10 @@ export function isNull(value: unknown): value is null {
 /**
  * Simple is object check.
  */
-export function isObject(value:unknown) :value is Object{
-  return value ? typeof value === 'object' && !Array.isArray(value) && !isNull(value) : false;
+export function isObject(value: unknown): value is object {
+  return value
+    ? typeof value === 'object' && !Array.isArray(value) && !isNull(value)
+    : false;
 }
 
 /**
@@ -55,7 +58,11 @@ export function isObject(value:unknown) :value is Object{
  */
 export function isDate(value: unknown): value is Date {
   // use the global isNaN() and not Number.isNaN() since it will validate an Invalid Date
-  return !!value && Object.prototype.toString.call(value) === '[object Date]' && !isNaN(Number(value));
+  return (
+    !!value &&
+    Object.prototype.toString.call(value) === '[object Date]' &&
+    !isNaN(Number(value))
+  );
 }
 
 /**
@@ -104,7 +111,7 @@ export function isBoolean(value: unknown): value is boolean {
 /**
  * Simple is array check
  */
-export function isArray(value: unknown): value is unknown[]  {
+export function isArray(value: unknown): value is unknown[] {
   return Array.isArray(value);
 }
 
@@ -118,14 +125,14 @@ export function isUndefined(value: unknown): value is undefined {
 /**
  * Simple is not null nor undefined check
  */
- export function isDefined<T>(value: T): value is Exclude<T, null | undefined> {
+export function isDefined<T>(value: T): value is Exclude<T, null | undefined> {
   return !isNull(value) && !isUndefined(value);
 }
 
 /**
  * /^[a-zA-Z0-9_]+$/
  */
-export function isAlphaNumericUnderscore(value:string) {
+export function isAlphaNumericUnderscore(value: string) {
   return AlphaNumericUnderscore.test(value);
 }
 
@@ -133,14 +140,14 @@ export function isAlphaNumericUnderscore(value:string) {
  * URL test
  */
 const IS_VALID_URL_REGEX = /^(http|https):\/\/[^ "]+$/;
-export function isValidUrl(url:string) {
+export function isValidUrl(url: string) {
   return IS_VALID_URL_REGEX.test(url);
 }
 
 /**
  * Array includes
  */
-export function isOneOf(value:unknown, oneOf:unknown[] = []) {
+export function isOneOf(value: unknown, oneOf: unknown[] = []) {
   if (!isArray(oneOf)) {
     return false;
   }

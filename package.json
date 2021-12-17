@@ -54,7 +54,7 @@
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn jest",
     "validate:eslint": "eslint \"src/**/*\"",
-    "validate:prettier": "prettier \"src/**/*.js\" --check",
+    "validate:prettier": "prettier \"src/**/*.ts\" --check",
     "validate:ts": "tsc --noEmit",
     "example:start": "cd ./RNFBSDKExample && yarn start",
     "example:ios": "cd ./RNFBSDKExample/ios && rm -f Podfile.lock && pod install && yarn ios",
