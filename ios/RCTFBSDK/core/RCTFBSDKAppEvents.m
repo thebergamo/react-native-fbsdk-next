@@ -62,10 +62,10 @@ RCT_EXPORT_METHOD(logEvent:(NSString *)eventName
 {
   parameters = RCTDictionaryWithoutNullValues(parameters);
 
-  [FBSDKAppEvents logEvent:eventName
-                valueToSum:valueToSum
-                parameters:parameters
-               accessToken:nil];
+  [FBSDKAppEvents.shared logEvent:eventName
+                       valueToSum:valueToSum
+                       parameters:parameters
+                      accessToken:nil];
 }
 
 RCT_EXPORT_METHOD(logPurchase:(double)purchaseAmount
@@ -74,10 +74,10 @@ RCT_EXPORT_METHOD(logPurchase:(double)purchaseAmount
 {
   parameters = RCTDictionaryWithoutNullValues(parameters);
 
-  [FBSDKAppEvents logPurchase:purchaseAmount
-                     currency:currency
-                   parameters:parameters
-                  accessToken:nil];
+  [FBSDKAppEvents.shared logPurchase:purchaseAmount
+                            currency:currency
+                          parameters:parameters
+                         accessToken:nil];
 }
 
 RCT_EXPORT_METHOD(logProductItem:(NSString *)itemID
@@ -94,41 +94,41 @@ RCT_EXPORT_METHOD(logProductItem:(NSString *)itemID
                            brand:(NSString *)brand
                       parameters:(NSDictionary *)parameters)
 {
-    [FBSDKAppEvents logProductItem:itemID
-                      availability:availability
-                         condition:condition
-                       description:description
-                         imageLink:imageLink
-                              link:link
-                             title:title
-                       priceAmount:priceAmount
-                          currency:currency
-                              gtin:gtin
-                               mpn:mpn
-                             brand:brand
-                        parameters:parameters];
+    [FBSDKAppEvents.shared logProductItem:itemID
+                             availability:availability
+                                condition:condition
+                              description:description
+                                imageLink:imageLink
+                                     link:link
+                                    title:title
+                              priceAmount:priceAmount
+                                 currency:currency
+                                     gtin:gtin
+                                      mpn:mpn
+                                    brand:brand
+                               parameters:parameters];
 }
 
 RCT_EXPORT_METHOD(logPushNotificationOpen:(NSDictionary *)payload)
 {
-  [FBSDKAppEvents logPushNotificationOpen:payload];
+  [FBSDKAppEvents.shared logPushNotificationOpen:payload];
 }
 
 RCT_EXPORT_METHOD(setUserID:(NSString *)userID)
 {
-  [FBSDKAppEvents setUserID:userID];
+  [FBSDKAppEvents.shared setUserID:userID];
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getUserID)
 {
-  return [FBSDKAppEvents userID];
+  return [FBSDKAppEvents.shared userID];
 }
 
 RCT_EXPORT_METHOD(getAnonymousID:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   @try {
-    NSString *anonymousID = [FBSDKAppEvents anonymousID];
+    NSString *anonymousID = [FBSDKAppEvents.shared anonymousID];
     resolve(anonymousID);
   }
   @catch (NSError *error) {
@@ -166,17 +166,17 @@ RCT_EXPORT_METHOD(setUserData:(NSDictionary *)userData)
 
 RCT_EXPORT_METHOD(setFlushBehavior:(FBSDKAppEventsFlushBehavior)flushBehavior)
 {
-  [FBSDKAppEvents setFlushBehavior:flushBehavior];
+  [FBSDKAppEvents.shared setFlushBehavior:flushBehavior];
 }
 
 RCT_EXPORT_METHOD(flush)
 {
-  [FBSDKAppEvents flush];
+  [FBSDKAppEvents.shared flush];
 }
 
 RCT_EXPORT_METHOD(setPushNotificationsDeviceToken:(NSString *)deviceToken)
 {
-  [FBSDKAppEvents setPushNotificationsDeviceToken:[RCTConvert NSData:deviceToken]];
+  [FBSDKAppEvents.shared setPushNotificationsDeviceToken:[RCTConvert NSData:deviceToken]];
 }
 
 - (NSDictionary *)constantsToExport {
