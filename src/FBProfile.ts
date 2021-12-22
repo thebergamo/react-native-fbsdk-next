@@ -6,14 +6,14 @@ import {Platform, NativeModules} from 'react-native';
 const Profile = NativeModules.FBProfile;
 
 export type ProfileMap = {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  imageURL: string;
-  linkURL: string;
-  userID: string;
-  email: string;
-  name: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  middleName?: string | null;
+  imageURL?: string | null;
+  linkURL?: string | null;
+  userID?: string | null;
+  email?: string | null;
+  name?: string | null;
 };
 
 /**
@@ -24,44 +24,44 @@ class FBProfile {
   /**
    * The user id
    */
-  userID: string | undefined;
+  userID?: string | null;
 
   /**
    * The user's email.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'email' permission.
    */
-  email: string | undefined;
+  email?: string | null;
 
   /**
    * The user's complete name
    */
-  name: string | undefined;
+  name?: string | null;
 
   /**
    * The user's first name
    */
-  firstName: string | undefined;
+  firstName?: string | null;
 
   /**
    * The user's last name
    */
-  lastName: string | undefined;
+  lastName?: string | null;
 
   /**
    * The user's middle name
    */
-  middleName: string | undefined;
+  middleName?: string | null;
 
   /**
    * A URL to the user's profile.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_link' permission
    */
-  linkURL: string | undefined;
+  linkURL?: string | null;
 
   /**
    * A URL to use for fetching a user's profile image.
    */
-  imageURL: string | undefined;
+  imageURL?: string | null;
 
   constructor(profileMap: ProfileMap) {
     this.firstName = profileMap.firstName;
