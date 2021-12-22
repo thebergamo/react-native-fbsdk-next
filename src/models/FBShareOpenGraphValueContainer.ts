@@ -46,28 +46,28 @@ class ShareOpenGraphValueContainer {
   /**
    * Sets a number for the specified key.
    */
-  putNumber(key: string, number: number): void {
+  putNumber(key: string, number: number) {
     this._properties[key] = {type: 'number', value: number};
   }
 
   /**
    * Sets an open graph object for the specified key.
    */
-  putObject(key: string, object: ShareOpenGraphValueContainer): void {
+  putObject(key: string, object: ShareOpenGraphValueContainer) {
     this._properties[key] = {type: 'open-graph-object', value: object};
   }
 
   /**
    * Sets a photo for the specified key.
    */
-  putPhoto(key: string, photo: SharePhoto): void {
+  putPhoto(key: string, photo: SharePhoto) {
     this._properties[key] = {type: 'photo', value: photo};
   }
 
   /**
    * Sets a string for the specified key.
    */
-  putString(key: string, string: string): void {
+  putString(key: string, string: string) {
     this._properties[key] = {type: 'string', value: string};
   }
 

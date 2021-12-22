@@ -89,7 +89,7 @@ class FBGraphRequestManager {
    * extra permission and it's unncessary for the sdk. Instead, you can use the NetInfo module
    * in react-native to get the network status.
    */
-  start(timeout?: number): void {
+  start(timeout?: number) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this;
     const callback = (

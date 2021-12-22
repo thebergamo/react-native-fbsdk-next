@@ -40,11 +40,11 @@ class FBAuthenticationToken {
   /**
    * Getter for the authentication token
    */
-  static getAuthenticationTokenIOS(): Promise<FBAuthenticationToken | null> {
+  static getAuthenticationTokenIOS() {
     if (Platform.OS === 'android') {
       return Promise.resolve(null);
     }
-    return new Promise((resolve) => {
+    return new Promise<FBAuthenticationToken | null>((resolve) => {
       AuthenticationToken.getAuthenticationToken(
         (tokenMap: AuthenticationTokenMap) => {
           if (tokenMap) {

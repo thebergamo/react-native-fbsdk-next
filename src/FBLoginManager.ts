@@ -96,7 +96,7 @@ export default {
   /**
    * Setter for the login behavior.
    */
-  setLoginBehavior(loginBehavior: LoginBehavior): void {
+  setLoginBehavior(loginBehavior: LoginBehavior) {
     if (Platform.OS === 'ios') {
       return;
     }
@@ -113,14 +113,14 @@ export default {
   /**
    * Setter for the default audience.
    */
-  setDefaultAudience(defaultAudience: DefaultAudience): void {
+  setDefaultAudience(defaultAudience: DefaultAudience) {
     LoginManager.setDefaultAudience(defaultAudience);
   },
 
   /**
    * Logs out the user.
    */
-  logOut(): void {
+  logOut() {
     LoginManager.logOut();
   },
 };

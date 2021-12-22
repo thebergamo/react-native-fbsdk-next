@@ -41,7 +41,7 @@ class SendButton extends React.Component<{
     style: typeof styles.defaultButtonStyle;
   };
 
-  render(): JSX.Element {
+  render() {
     return <RCTFBSendButton {...this.props} />;
   }
 }

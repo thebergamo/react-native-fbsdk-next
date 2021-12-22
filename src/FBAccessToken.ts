@@ -114,8 +114,8 @@ class FBAccessToken {
   /**
    * Getter for the access token that is current for the application.
    */
-  static getCurrentAccessToken(): Promise<FBAccessToken | null> {
-    return new Promise((resolve) => {
+  static getCurrentAccessToken() {
+    return new Promise<FBAccessToken | null>((resolve) => {
       AccessToken.getCurrentAccessToken((tokenMap?: AccessTokenMap) => {
         if (tokenMap) {
           resolve(new FBAccessToken(tokenMap));
@@ -129,7 +129,7 @@ class FBAccessToken {
   /**
    * Setter for the access token that is current for the application.
    */
-  static setCurrentAccessToken(accessToken: AccessTokenMap): void {
+  static setCurrentAccessToken(accessToken: AccessTokenMap) {
     AccessToken.setCurrentAccessToken(accessToken);
   }
 
@@ -145,9 +145,7 @@ class FBAccessToken {
    * Adds a listener for when the access token changes. Returns a functions which removes the
    * listener when called.
    */
-  static addListener(
-    listener: (accessToken: FBAccessToken | null) => void,
-  ): () => void {
+  static addListener(listener: (accessToken: FBAccessToken | null) => void) {
     const subscription = eventEmitter.addListener(
       'fbsdk.accessTokenDidChange',
       (tokenMap: AccessTokenMap) => {
@@ -165,7 +163,7 @@ class FBAccessToken {
    * Gets the date at which the access token expires. The value is the number of
    * milliseconds since Jan. 1, 1970, midnight GMT.
    */
-  getExpires(): number {
+  getExpires() {
     return this.expirationTime;
   }
 
@@ -175,7 +173,7 @@ class FBAccessToken {
    * have been added or removed since the time the AccessToken object was created. See
    * https://developers.facebook.com/docs/reference/login/#permissions for details.
    */
-  getPermissions(): Array<string> {
+  getPermissions() {
     return this.permissions;
   }
 
@@ -186,11 +184,11 @@ class FBAccessToken {
    * permissions have been granted or declined since the last time an AccessToken object was
    * created. See https://developers.facebook.com/docs/reference/login/#permissions for details.
    */
-  getDeclinedPermissions(): Array<string> {
+  getDeclinedPermissions() {
     return this.declinedPermissions;
   }
 
-  getExpiredPermissions(): Array<string> {
+  getExpiredPermissions() {
     return this.expiredPermissions;
   }
 
@@ -199,25 +197,25 @@ class FBAccessToken {
    * will attempt to renew them periodically. The value is the number of milliseconds since
    * Jan. 1, 1970, midnight GMT.
    */
-  getLastRefresh(): number {
+  getLastRefresh() {
     return this.lastRefreshTime;
   }
 
-  getDataAccessExpiration(): number {
+  getDataAccessExpiration() {
     return this.dataAccessExpirationTime;
   }
 
   /**
    * Gets the ID of the Facebook Application associated with this access token.
    */
-  getApplicationId(): string {
+  getApplicationId() {
     return this.applicationID;
   }
 
   /**
    * Gets user ID associated with this access token.
    */
-  getUserId(): string {
+  getUserId() {
     return this.userID;
   }
 }

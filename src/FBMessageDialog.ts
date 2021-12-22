@@ -48,7 +48,7 @@ export default {
   /**
    * Sets whether or not the native message dialog should fail when it encounters a data error.
    */
-  setShouldFailOnDataError(shouldFailOnDataError: boolean): void {
+  setShouldFailOnDataError(shouldFailOnDataError: boolean) {
     MessageDialog.setShouldFailOnDataError(shouldFailOnDataError);
   },
 };

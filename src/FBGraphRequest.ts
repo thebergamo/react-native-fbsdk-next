@@ -79,7 +79,7 @@ class FBGraphRequest {
   /**
    * Adds a string parameter to the request.
    */
-  addStringParameter(paramString: string, key: string): void {
+  addStringParameter(paramString: string, key: string) {
     if (this.config != null && this.config.parameters != null) {
       this.config.parameters[key] = {string: paramString};
     }

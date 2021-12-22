@@ -107,7 +107,7 @@ class LoginButton extends React.Component<{
     style: typeof styles.defaultButtonStyle;
   };
 
-  _eventHandler(event: Event): void {
+  _eventHandler(event: Event) {
     if (typeof event !== 'object' || !event || !event.nativeEvent) {
       return;
     }
@@ -123,7 +123,7 @@ class LoginButton extends React.Component<{
     }
   }
 
-  render(): JSX.Element {
+  render() {
     return (
       <RCTFBLoginButton
         {...this.props}

@@ -41,7 +41,7 @@ class ShareButton extends React.Component<{
     style: typeof styles.defaultButtonStyle;
   };
 
-  render(): JSX.Element {
+  render() {
     return <RCTFBShareButton {...this.props} />;
   }
 }

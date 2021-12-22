@@ -84,14 +84,14 @@ export default {
   /**
    * Sets the mode for the share dialog.
    */
-  setMode(mode: ShareDialogMode): void {
+  setMode(mode: ShareDialogMode) {
     ShareDialog.setMode(mode);
   },
 
   /**
    * Sets whether or not the native share dialog should fail when it encounters a data error.
    */
-  setShouldFailOnDataError(shouldFailOnDataError: boolean): void {
+  setShouldFailOnDataError(shouldFailOnDataError: boolean) {
     ShareDialog.setShouldFailOnDataError(shouldFailOnDataError);
   },
 };

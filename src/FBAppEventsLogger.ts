@@ -147,7 +147,7 @@ export default {
    * Sets the current event flushing behavior specifying when events
    * are sent back to Facebook servers.
    */
-  setFlushBehavior(flushBehavior: AppEventsFlushBehavior): void {
+  setFlushBehavior(flushBehavior: AppEventsFlushBehavior) {
     AppEventsLogger.setFlushBehavior(flushBehavior);
   },
 
@@ -160,7 +160,7 @@ export default {
    * logEvent(eventName: string, valueToSum: number, parameters: {[key:string]:string|number});
    * See https://developers.facebook.com/docs/app-events/android for detail.
    */
-  logEvent(eventName: string, ...args: Array<number | Params>): void {
+  logEvent(eventName: string, ...args: Array<number | Params>) {
     let valueToSum = 0;
     if (typeof args[0] === 'number') {
       valueToSum = Number(args.shift());
@@ -179,14 +179,14 @@ export default {
     purchaseAmount: number,
     currencyCode: string,
     parameters?: Params,
-  ): void {
+  ) {
     AppEventsLogger.logPurchase(purchaseAmount, currencyCode, parameters);
   },
 
   /**
    * Logs an app event that tracks that the application was open via Push Notification.
    */
-  logPushNotificationOpen(payload?: Record<string, string | number>): void {
+  logPushNotificationOpen(payload?: Record<string, string | number>) {
     AppEventsLogger.logPushNotificationOpen(payload);
   },
 
@@ -290,7 +290,7 @@ export default {
   /**
    * Explicitly kicks off flushing of events to Facebook.
    */
-  flush(): void {
+  flush() {
     AppEventsLogger.flush();
   },
 
@@ -298,7 +298,7 @@ export default {
    * Sets a custom user ID to associate with all app events.
    * The userID is persisted until it is cleared by passing nil.
    */
-  setUserID(userID: string | null): void {
+  setUserID(userID: string | null) {
     AppEventsLogger.setUserID(userID);
   },
 
@@ -337,7 +337,7 @@ export default {
   /**
    * Set additional data about the user to increase chances of matching a Facebook user.
    */
-  setUserData(userData: UserData): void {
+  setUserData(userData: UserData) {
     AppEventsLogger.setUserData(userData);
   },
 
@@ -345,7 +345,7 @@ export default {
    * For iOS only, sets and sends device token to register the current application for push notifications.
    * @platform ios
    */
-  setPushNotificationsDeviceToken(deviceToken: string): void {
+  setPushNotificationsDeviceToken(deviceToken: string) {
     AppEventsLogger.setPushNotificationsDeviceToken(deviceToken);
   },
 
@@ -353,7 +353,7 @@ export default {
    * For Android only, sets and sends registration id to register the current app for push notifications.
    * @platform Android
    */
-  setPushNotificationsRegistrationId(registrationId: string): void {
+  setPushNotificationsRegistrationId(registrationId: string) {
     AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
   },
 
