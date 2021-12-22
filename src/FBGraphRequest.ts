@@ -56,12 +56,12 @@ class FBGraphRequest {
   /**
    * The optional config for the request.
    */
-  config: GraphRequestConfig | undefined;
+  config: GraphRequestConfig;
 
   /**
    * Called upon completion or failure of the request.
    */
-  callback: GraphRequestCallback | undefined;
+  callback: GraphRequestCallback;
 
   /**
    * Constructs a new Graph API request.
