@@ -81,29 +81,29 @@
     "react-native": ">=0.63.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/runtime": "^7.16.3",
-    "@react-native-community/bob": "^0.17.1",
+    "@babel/core": "^7.16.5",
+    "@babel/runtime": "^7.16.5",
     "@react-native-community/eslint-config": "^3.0.1",
-    "@semantic-release/commit-analyzer": "^9.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^8.0.3",
-    "@semantic-release/release-notes-generator": "^10.0.2",
-    "@types/react": "^16.14.15",
-    "@types/react-native": "^0.63.53",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "babel-jest": "^27.3.1",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/react": "^17.0.38",
+    "@types/react-native": "^0.66.10",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "babel-jest": "^27.4.5",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7",
-    "jest": "^27.3.1",
+    "jest": "^27.4.5",
     "metro-react-native-babel-preset": "^0.66.2",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.1",
     "react": "17.0.2",
-    "react-native": "^0.66.2",
+    "react-native": "^0.66.4",
+    "react-native-builder-bob": "^0.18.2",
     "react-test-renderer": "17.0.2",
-    "semantic-release": "^18.0.0",
+    "semantic-release": "^18.0.1",
     "typescript": "^4.5.4"
   },
   "prettier": {
@@ -124,5 +124,19 @@
       "module",
       "typescript"
     ]
-  }
+  },
+  "react-native": "src/index.ts",
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
