@@ -35,7 +35,7 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
 
     public static final String REACT_CLASS = "RCTFBLoginButton";
 
-    private FBActivityEventListener mActivityEventListener = new FBActivityEventListener();
+    private final FBActivityEventListener mActivityEventListener = new FBActivityEventListener();
 
     public FBLoginButtonManager(ReactApplicationContext reactApplicationContext) {
         reactApplicationContext.addActivityEventListener(mActivityEventListener);
@@ -49,17 +49,28 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
     @Override
     public RCTLoginButton createViewInstance(ThemedReactContext context) {
         return new RCTLoginButton(context, mActivityEventListener.getCallbackManager());
-
     }
 
     @ReactProp(name = "loginBehaviorAndroid")
     public void setLoginBehavior(RCTLoginButton loginButton, @Nullable String loginBehavior) {
-        loginButton.setLoginBehavior(LoginBehavior.valueOf(loginBehavior.toUpperCase()));
+        LoginBehavior behavior = LoginBehavior.NATIVE_WITH_FALLBACK;
+
+        if (loginBehavior != null) {
+            behavior = LoginBehavior.valueOf(loginBehavior.toUpperCase());
+        }
+
+        loginButton.setLoginBehavior(behavior);
     }
 
     @ReactProp(name = "defaultAudience")
     public void setDefaultAudience(RCTLoginButton loginButton, @Nullable String defaultAudience) {
-        loginButton.setDefaultAudience(DefaultAudience.valueOf(defaultAudience.toUpperCase()));
+        DefaultAudience audience = DefaultAudience.FRIENDS;
+
+        if (defaultAudience != null) {
+            audience = DefaultAudience.valueOf(defaultAudience.toUpperCase());
+        }
+
+        loginButton.setDefaultAudience(audience);
     }
 
     @ReactProp(name = "permissions")
