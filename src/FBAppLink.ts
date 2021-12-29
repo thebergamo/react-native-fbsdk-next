@@ -19,14 +19,13 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
+import {NativeModules} from 'react-native';
+
+const AppLink = NativeModules.FBAppLink;
+
+export default {
+  fetchDeferredAppLink(): Promise<string | null> {
+    return AppLink.fetchDeferredAppLink();
   },
 };

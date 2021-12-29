@@ -19,14 +19,39 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
-  },
+import {ShareLinkContent} from './FBShareLinkContent';
+import {ShareOpenGraphContent} from './FBShareOpenGraphContent';
+import {SharePhotoContent} from './FBSharePhotoContent';
+import {ShareVideoContent} from './FBShareVideoContent';
+
+export type ShareContent =
+  | ShareLinkContent
+  | SharePhotoContent
+  | ShareVideoContent
+  | ShareOpenGraphContent;
+/**
+ * A base interface for content to be shared.
+ */
+export type ShareContentCommonParameters = {
+  /**
+   * List of IDs for taggable people to tag with this content.
+   */
+  peopleIds?: Array<string>;
+
+  /**
+   * The ID for a place to tag with this content.
+   */
+  placeId?: string;
+
+  /**
+   * A value to be added to the referrer URL when a person follows a link from
+   * this shared content on feed.
+   */
+  ref?: string;
+
+  /**
+   * A hashtag to be added to the share interface. The hashtag must be 32 characters or less.
+   */
+  hashtag?: string;
 };

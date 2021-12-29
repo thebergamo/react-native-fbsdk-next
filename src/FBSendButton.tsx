@@ -19,14 +19,45 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
+import * as React from 'react';
+import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
+import {PropsOf} from './utils';
+
+import {ShareContent} from './models/FBShareContent';
+
+class SendButton extends React.Component<{
+  /**
+   * Content to be shared.
+   */
+  shareContent: ShareContent;
+
+  /**
+   * View style, if any.
+   */
+  style?: ViewStyle;
+}> {
+  static defaultProps: {
+    style: typeof styles.defaultButtonStyle;
+  };
+
+  render() {
+    return <RCTFBSendButton {...this.props} />;
+  }
+}
+
+const styles = StyleSheet.create({
+  defaultButtonStyle: {
+    height: 30,
+    width: 80,
   },
+});
+
+SendButton.defaultProps = {
+  style: styles.defaultButtonStyle,
 };
+
+const RCTFBSendButton =
+  requireNativeComponent<PropsOf<SendButton>>('RCTFBSendButton');
+
+export default SendButton;

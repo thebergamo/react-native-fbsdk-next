@@ -19,14 +19,36 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
+import {NativeModules} from 'react-native';
+import {RNFBSDKCallback} from './models/FBSDKCallback';
+
+const MessageDialog = NativeModules.FBMessageDialog;
+import {ShareContent} from './models/FBShareContent';
+
+export type MessageDialogResult = RNFBSDKCallback & {
+  postId: string;
+};
+
+export default {
+  /**
+   * Check if the dialog can be shown.
+   */
+  canShow(shareContent: ShareContent): Promise<boolean> {
+    return MessageDialog.canShow(shareContent);
+  },
+
+  /**
+   * Shows the dialog using the specified content.
+   */
+  show(shareContent: ShareContent): Promise<MessageDialogResult> {
+    return MessageDialog.show(shareContent);
+  },
+
+  /**
+   * Sets whether or not the native message dialog should fail when it encounters a data error.
+   */
+  setShouldFailOnDataError(shouldFailOnDataError: boolean) {
+    MessageDialog.setShouldFailOnDataError(shouldFailOnDataError);
   },
 };

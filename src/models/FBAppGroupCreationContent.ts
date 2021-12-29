@@ -19,14 +19,30 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
-  },
+/**
+ * Specifies the privacy of a group.
+ */
+export type AppGroupPrivacy =
+  // Anyone can see the group, who's in in and what members post.
+  | 'Open'
+  // Anyone can see the group and who's in it, but only members can see posts.
+  | 'Closed';
+
+/**
+ * A model for app invites.
+ */
+export type AppGroupCreationContent = {
+  /**
+   * The description of the group.
+   */
+  description: string;
+  /**
+   * The name of the group.
+   */
+  name: string;
+  /**
+   * The privacy for the group.
+   */
+  privacy: AppGroupPrivacy;
 };
