@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const LoginButton = require('../../lib/commonjs/FBLoginButton');
+const LoginButton = require('../../lib/commonjs/FBLoginButton').default;
 
 
 export const mockAppEvents = {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
@@ -19,14 +19,22 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
-  },
-};
+import ShareOpenGraphValueContainer from './FBShareOpenGraphValueContainer';
+
+/**
+ * Represents an open graph action.
+ */
+class ShareOpenGraphAction extends ShareOpenGraphValueContainer {
+  /**
+   * The action type.
+   */
+  actionType: string;
+
+  constructor(actionType: string) {
+    super(null);
+    this.actionType = actionType;
+  }
+}
+
+export default ShareOpenGraphAction;

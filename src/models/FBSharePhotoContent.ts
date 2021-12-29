@@ -19,14 +19,31 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
-  },
+import {ShareContentCommonParameters} from './FBShareContent';
+import {SharePhoto} from './FBSharePhoto';
+
+/**
+ * A model for photo content to be shared.
+ */
+export type SharePhotoContent = {
+  /**
+   * The type of content to be shared is photo.
+   */
+  contentType: 'photo';
+
+  /**
+   * Common parameters for share content;
+   */
+  commonParameters?: ShareContentCommonParameters;
+
+  /**
+   * URL for the content being shared.
+   */
+  contentUrl?: string;
+
+  /**
+   * Photos to be shared.
+   */
+  photos: Array<SharePhoto>;
 };

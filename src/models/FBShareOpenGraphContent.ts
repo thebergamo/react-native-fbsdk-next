@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
@@ -19,14 +19,37 @@
  *
  * @format
  */
-'use strict';
 
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
-  rules: {
-    'prettier/prettier': 0,
-  },
+import ShareOpenGraphAction from './FBShareOpenGraphAction';
+
+import {ShareContentCommonParameters} from './FBShareContent';
+
+/**
+ * Represents a content object containing information about an Open Graph Action.
+ */
+export type ShareOpenGraphContent = {
+  /**
+   * The type of content to be shared is open graph content.
+   */
+  contentType: 'open-graph';
+
+  /**
+   * Common parameters for share content;
+   */
+  commonParameters?: ShareContentCommonParameters;
+
+  /**
+   * URL for the content being shared.
+   */
+  contentUrl?: string;
+
+  /**
+   * Open Graph Action to be shared.
+   */
+  action: ShareOpenGraphAction;
+
+  /**
+   * Property name that points to the primary Open Graph Object in the action.
+   */
+  previewPropertyName: string;
 };

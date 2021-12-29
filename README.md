@@ -469,7 +469,7 @@ export default class Login extends Component {
 
 #### Share dialogs
 
-All of the dialogs included are used in a similar way, with differing content types. All content types are defined with [Flow](http://flowtype.org/) Type Annotation in js/models directory.
+All of the dialogs included are used in a similar way, with differing content types.
 
 ```js
 // ...
