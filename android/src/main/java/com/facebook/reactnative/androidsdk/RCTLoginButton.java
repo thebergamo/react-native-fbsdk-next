@@ -42,7 +42,6 @@ import java.util.Set;
 public class RCTLoginButton extends LoginButton {
 
     private final CallbackManager mCallbackManager;
-    private AccessTokenTracker mAccessTokenTracker;
 
     public RCTLoginButton(ThemedReactContext context, CallbackManager callbackManager) {
         super(context);
@@ -52,7 +51,7 @@ public class RCTLoginButton extends LoginButton {
     }
 
     public void init() {
-        mAccessTokenTracker = new AccessTokenTracker() {
+        new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
