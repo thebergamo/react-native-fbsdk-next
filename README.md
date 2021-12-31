@@ -633,13 +633,13 @@ The DeepLink URL from the re-engagement ads should be passed to the AEM Kit even
 
 #### **Step 2. Add AEM Logging**
 
-Use the AEMReporter exported from the sdk to log event to AEM, `logAEMEvent` function will bypass if platform isn't iOS, it's safe to call without platform determined.
+Use the AEMReporterIOS exported from the sdk to log event to AEM, `logAEMEvent` function will bypass if platform isn't iOS, it's safe to call without platform determined.
 
 ```ts
-import {AEMReporter} from 'react-native-fbsdk-next';
+import {AEMReporterIOS} from 'react-native-fbsdk-next';
 
-// this will do nothing if Platform.OS !== 'ios'
-AEMReporter.logAEMEvent(eventName, value, currency, otherParameters);
+// this will do nothing if Platform.OS != 'ios'
+AEMReporterIOS.logAEMEvent(eventName, value, currency, otherParameters);
 ```
 
 Event names for AEM must match event names you used in app event logging.
