@@ -611,6 +611,38 @@ AppEventsLogger.logEvent(AppEventsLogger.AppEvents.CompletedRegistration, {
   [AppEventsLogger.AppEventParams.RegistrationMethod]: "email",
 });
 ```
+### [Aggregated Event Measurement(AEM) for iOS](https://developers.facebook.com/docs/app-events/guides/aggregated-event-measurement/)
+
+Aggregated Event Measurement (AEM) for iOS apps allows for the measurement of app events from iOS 14.5+ users who have opted out of app tracking. To implement AEM for your app you can follow the steps below. 
+
+#### **Step 1. Connect the App Delegate**
+
+Add the following code in the system `application:openURL:options:` function from `AppDelegate`/`SceneDelegate` where `{app-id}` is your Facebook app ID. The call sequence matters.
+
+The DeepLink URL from the re-engagement ads should be passed to the AEM Kit even if the app is opened in cold start.
+
+```objc
+#import <FBAEMKit/FBAEMKit.h>
+
+// apply codes below to `application:openURL:options:` 
+// in `AppDelegate.m` or `SceneDelegate.m`
+[FBAEMReporter configureWithNetworker:nil appID:{app-id}];
+[FBAEMReporter enable];
+[FBAEMReporter handleURL:url];
+```
+
+#### **Step 2. Add AEM Logging**
+
+Use the AEMReporterIOS exported from the sdk to log event to AEM, `logAEMEvent` function will bypass if platform isn't iOS, it's safe to call without platform determined.
+
+```ts
+import {AEMReporterIOS} from 'react-native-fbsdk-next';
+
+// this will do nothing if Platform.OS != 'ios'
+AEMReporterIOS.logAEMEvent(eventName, value, currency, otherParameters);
+```
+
+Event names for AEM must match event names you used in app event logging.
 
 ### [Graph API](https://developers.facebook.com/docs/graph-api)
 
