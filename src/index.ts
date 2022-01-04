@@ -39,3 +39,8 @@ export {default as LoginButton} from './FBLoginButton';
 export {default as SendButton} from './FBSendButton';
 export {default as ShareButton} from './FBShareButton';
 export {default as AEMReporterIOS} from './FBAEMReporter';
+
+export type {
+  ShareContent,
+  ShareContentCommonParameters,
+} from './models/FBShareContent';
