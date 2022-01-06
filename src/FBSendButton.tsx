@@ -19,12 +19,10 @@
  *
  * @format
  */
-
+import {ShareContent} from './models/FBShareContent';
+import {PropsOf} from './utils';
 import * as React from 'react';
 import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
-import {PropsOf} from './utils';
-
-import {ShareContent} from './models/FBShareContent';
 
 class SendButton extends React.Component<{
   /**

@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import {NativeModules} from 'react-native';
 
 const AppLink = NativeModules.FBAppLink;
