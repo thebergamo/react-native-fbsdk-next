@@ -7,9 +7,8 @@
  *
  * @format
  */
-
-import {Platform, NativeModules} from 'react-native';
 import {isDefined, isString} from './util/validate';
+import {Platform, NativeModules} from 'react-native';
 
 const Settings = NativeModules.FBSettings;
 

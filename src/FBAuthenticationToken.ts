@@ -1,8 +1,8 @@
 /**
  * @format
  */
-
 import {Platform, NativeModules} from 'react-native';
+
 const AuthenticationToken = NativeModules.FBAuthenticationToken;
 
 export type AuthenticationTokenMap = {

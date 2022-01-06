@@ -19,12 +19,11 @@
  *
  * @format
  */
-
-import {NativeModules} from 'react-native';
 import {RNFBSDKCallback} from './models/FBSDKCallback';
+import {ShareContent} from './models/FBShareContent';
+import {NativeModules} from 'react-native';
 
 const ShareDialog = NativeModules.FBShareDialog;
-import {ShareContent} from './models/FBShareContent';
 
 export type ShareDialogMode = ShareDialogModeIOS | ShareDialogModeAndroid;
 export type ShareDialogModeAndroid =

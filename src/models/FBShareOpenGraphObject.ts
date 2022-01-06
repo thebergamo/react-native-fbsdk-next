@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import ShareOpenGraphValueContainer from './FBShareOpenGraphValueContainer';
 
 /**

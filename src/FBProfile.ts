@@ -1,8 +1,8 @@
 /**
  * @format
  */
-
 import {Platform, NativeModules} from 'react-native';
+
 const Profile = NativeModules.FBProfile;
 
 export type ProfileMap = {

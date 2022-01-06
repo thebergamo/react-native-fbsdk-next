@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import {SharePhoto} from './FBSharePhoto';
 
 export type OpenGraphProperties = {[key: string]: OpenGraphValue};
