@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import {ShareContentCommonParameters} from './FBShareContent';
 
 /**

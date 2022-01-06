@@ -19,10 +19,8 @@
  *
  * @format
  */
-
-import ShareOpenGraphAction from './FBShareOpenGraphAction';
-
 import {ShareContentCommonParameters} from './FBShareContent';
+import ShareOpenGraphAction from './FBShareOpenGraphAction';
 
 /**
  * Represents a content object containing information about an Open Graph Action.

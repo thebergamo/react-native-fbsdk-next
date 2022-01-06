@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import {NativeModules, NativeEventEmitter} from 'react-native';
 
 const AccessToken = NativeModules.FBAccessToken;

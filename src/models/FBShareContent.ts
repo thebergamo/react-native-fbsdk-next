@@ -19,7 +19,6 @@
  *
  * @format
  */
-
 import {ShareLinkContent} from './FBShareLinkContent';
 import {ShareOpenGraphContent} from './FBShareOpenGraphContent';
 import {SharePhotoContent} from './FBSharePhotoContent';

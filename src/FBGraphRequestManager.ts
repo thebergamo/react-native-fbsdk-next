@@ -19,12 +19,10 @@
  *
  * @format
  */
-
+import GraphRequest, {GraphRequestParameters} from './FBGraphRequest';
 import {NativeModules} from 'react-native';
 
 const NativeGraphRequestManager = NativeModules.FBGraphRequest;
-
-import GraphRequest, {GraphRequestParameters} from './FBGraphRequest';
 
 export type Callback = (
   error?: Record<string, unknown>,

@@ -19,12 +19,11 @@
  *
  * @format
  */
-
-import {NativeModules} from 'react-native';
 import {RNFBSDKCallback} from './models/FBSDKCallback';
+import {ShareContent} from './models/FBShareContent';
+import {NativeModules} from 'react-native';
 
 const MessageDialog = NativeModules.FBMessageDialog;
-import {ShareContent} from './models/FBShareContent';
 
 export type MessageDialogResult = RNFBSDKCallback & {
   postId: string;

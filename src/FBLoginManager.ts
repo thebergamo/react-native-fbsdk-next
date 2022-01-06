@@ -19,9 +19,9 @@
  *
  * @format
  */
-
-import {NativeModules, Platform} from 'react-native';
 import {RNFBSDKCallback} from './models/FBSDKCallback';
+import {NativeModules, Platform} from 'react-native';
+
 const LoginManager = NativeModules.FBLoginManager;
 /**
  * Indicates which default audience to use for sessions that post data to Facebook.

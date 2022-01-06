@@ -19,10 +19,6 @@
  *
  * @format
  */
-
-import * as React from 'react';
-import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
-
 import {
   DefaultAudience,
   LoginBehaviorAndroid,
@@ -30,6 +26,8 @@ import {
   LoginTracking,
 } from './FBLoginManager';
 import {PropsOf} from './utils';
+import * as React from 'react';
+import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
 
 export type Event = {
   nativeEvent?: {

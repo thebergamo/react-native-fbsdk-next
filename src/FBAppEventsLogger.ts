@@ -19,12 +19,12 @@
  *
  * @format
  */
-
+import {isDefined, isNumber, isOneOf, isString} from './util/validate';
 import {NativeModules} from 'react-native';
+import {Platform} from 'react-native';
 
 const AppEventsLogger = NativeModules.FBAppEventsLogger;
-import {Platform} from 'react-native';
-import {isDefined, isNumber, isOneOf, isString} from './util/validate';
+
 /**
  * Controls when an AppEventsLogger sends log events to the server
  */
