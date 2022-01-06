@@ -89,6 +89,7 @@
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^8.0.3",
     "@semantic-release/release-notes-generator": "^10.0.3",
+    "@trivago/prettier-plugin-sort-imports": "^3.1.1",
     "@types/react": "^17.0.38",
     "@types/react-native": "^0.66.10",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
