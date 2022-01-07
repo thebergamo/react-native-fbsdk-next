@@ -25,7 +25,7 @@ fi
 # Make the new example
 npx react-native init RNFBSDKExample
 pushd RNFBSDKExample
-yarn add github:thebergamo/react-native-fbsdk-next
+yarn add github:thebergamo/react-native-fbsdk-next#beta
 
 #########################################################################
 #
