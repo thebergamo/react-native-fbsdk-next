@@ -5217,9 +5217,9 @@ react-native-codegen@^0.0.7:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-"react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next":
-  version "6.2.0"
-  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/331fc983d21383230e6f703b01f5d1b53b8fd178"
+"react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next#beta":
+  version "7.0.0-beta.3"
+  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/1c2b16f87ef2471485461a9db577eede2ce96700"
 
 react-native@0.66.4:
   version "0.66.4"
