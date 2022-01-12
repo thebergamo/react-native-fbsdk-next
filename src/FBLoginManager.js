@@ -51,7 +51,8 @@ export type LoginBehaviorAndroid =
 export type LoginBehaviorIOS =
   // Attempts log in through the Safari browser.
   // This is the only behavior supported by the native sdk.
-  'browser';
+  | 'FBSDKLoginBehaviorNative'
+  | 'FBSDKLoginBehaviorWeb';
 /**
  * Shows the results of a login operation.
  */
