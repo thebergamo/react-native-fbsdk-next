@@ -298,8 +298,15 @@ export default {
    * Sets a custom user ID to associate with all app events.
    * The userID is persisted until it is cleared by passing nil.
    */
-  setUserID(userID: string | null) {
+  setUserID(userID: string) {
     AppEventsLogger.setUserID(userID);
+  },
+
+  /**
+   * Clears the currently set user id.
+   */
+  clearUserID() {
+    AppEventsLogger.clearUserID();
   },
 
   /**
