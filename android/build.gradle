@@ -10,7 +10,6 @@ buildscript {
         repositories {
             mavenCentral()
             google()
-            gradlePluginPortal()
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:7.0.3'
@@ -43,7 +42,6 @@ repositories {
     }
     mavenCentral()
     google()
-    gradlePluginPortal()
 }
 
 def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '12.+')
