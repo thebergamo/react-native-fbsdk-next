@@ -8,8 +8,9 @@ buildscript {
     // module dependency in an application project.
     if (project == rootProject) {
         repositories {
+            mavenCentral()
             google()
-            jcenter()
+            gradlePluginPortal()
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:7.0.3'
@@ -42,6 +43,7 @@ repositories {
     }
     mavenCentral()
     google()
+    gradlePluginPortal()
 }
 
 def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '12.+')
