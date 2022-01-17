@@ -52,6 +52,7 @@ export default {
     logEvent: jest.fn(),
     logPurchase: jest.fn(),
     setUserID: jest.fn(),
+    clearUserID: jest.fn(),
     AppEventParams: mockAppEventParams,
     AppEvents: mockAppEvents,
   },

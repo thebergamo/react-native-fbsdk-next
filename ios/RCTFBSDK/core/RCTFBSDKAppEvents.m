@@ -119,6 +119,11 @@ RCT_EXPORT_METHOD(setUserID:(NSString *)userID)
   [FBSDKAppEvents.shared setUserID:userID];
 }
 
+RCT_EXPORT_METHOD(clearUserID)
+{
+  [FBSDKAppEvents clearUserID];
+}
+
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getUserID)
 {
   return [FBSDKAppEvents.shared userID];
