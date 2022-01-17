@@ -260,6 +260,14 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
          mAppEventLogger.setUserID(userID);
      }
 
+    /**
+     * Clears the currently set user id.
+     */
+     @ReactMethod
+     public void clearUserID() {
+         mAppEventLogger.clearUserID();
+     }
+
      /**
       * Returns the set user id or null if not set
       *
