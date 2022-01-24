@@ -134,13 +134,7 @@ export type AppEventParam = {
   ValueYes: string;
 };
 
-let AppEvents: AppEvent | undefined = undefined;
-let AppEventParams: AppEventParam | undefined = undefined;
-if (AppEventsLogger !== undefined) {
-  const constants = AppEventsLogger?.getConstants();
-  AppEvents = constants.AppEvents;
-  AppEventParams = constants.AppEventParams;
-}
+const {AppEvents, AppEventParams} = AppEventsLogger?.getConstants() || {};
 
 export default {
   /**
