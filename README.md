@@ -644,6 +644,21 @@ AEMReporterIOS.logAEMEvent(eventName, value, currency, otherParameters);
 
 Event names for AEM must match event names you used in app event logging.
 
+Here's an example of how to use this method - 
+
+```ts
+LogFBPurchase = (purchaseAmount: number, currencyCode: string, parameters?: Params | undefined) => {
+    AppEventsLogger.logPurchase(purchaseAmount, currencyCode, parameters);
+    AEMReporterIOS.logAEMEvent("fb_mobile_purchase", purchaseAmount, currencyCode, parameters);
+}
+
+LogFBEvent = (eventName: string, ...args: Array<number | Params>) => {
+    AppEventsLogger.logEvent(eventName, ...args);
+    AEMReporterIOS.logAEMEvent(eventName, 0, undefined, {});
+}
+```
+
+
 ### [Graph API](https://developers.facebook.com/docs/graph-api)
 
 #### Graph Requests
