@@ -652,9 +652,9 @@ LogFBPurchase = (purchaseAmount: number, currencyCode: string, parameters?: Para
     AEMReporterIOS.logAEMEvent("fb_mobile_purchase", purchaseAmount, currencyCode, parameters);
 }
 
-LogFBEvent = (eventName: string, ...args: Array<number | Params>) => {
-    AppEventsLogger.logEvent(eventName, ...args);
-    AEMReporterIOS.logAEMEvent(eventName, 0, undefined, {});
+LogFBEvent = (eventName: string, valueToSum: number, parameters: Record<string,string | number>)=> {
+    AppEventsLogger.logEvent(eventName, valueToSum, parameters);
+    AEMReporterIOS.logAEMEvent(eventName, valueToSum, parameters.fb_currency, parameters);
 }
 ```
 
