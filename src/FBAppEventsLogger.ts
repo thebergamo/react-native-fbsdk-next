@@ -298,6 +298,7 @@ export default {
 
   /**
    * Clears the currently set user id.
+   * @deprecated use setUserID(null) instead
    */
   clearUserID() {
     AppEventsLogger.clearUserID();
