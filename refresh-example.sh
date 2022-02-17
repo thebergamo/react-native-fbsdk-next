@@ -23,9 +23,11 @@ fi
 \rm -fr RNFBSDKExample
 
 # Make the new example
-npx react-native init RNFBSDKExample
+npx react-native init RNFBSDKExample --skip-install
 pushd RNFBSDKExample
-yarn add github:thebergamo/react-native-fbsdk-next#beta
+rm -f Gemfile Gemfile.lock .ruby-version
+yarn
+yarn add github:thebergamo/react-native-fbsdk-next
 
 #########################################################################
 #
