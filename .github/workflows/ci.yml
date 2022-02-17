@@ -88,6 +88,8 @@ jobs:
           ruby-version: 3
       - name: Install cocoapods
         run: gem install cocoapods
+      - name: Install xcbeautify
+        run: brew install xcbeautify
       - name: Install yarn
         uses: nick-invision/retry@v2
         with:
@@ -99,7 +101,7 @@ jobs:
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
-          max-size: 400M
+          max-size: 750M
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
