@@ -67,6 +67,11 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: yarn install --frozen-lockfile
+      - name: Install JDK11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
       - name: Build android example app
         run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample && cd android && ./gradlew assembleDebug
   ios-build:
