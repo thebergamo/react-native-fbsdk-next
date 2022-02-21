@@ -23,7 +23,7 @@
 
 import React, {Component} from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {LoginButton, Settings, ShareDialog} from 'react-native-fbsdk-next';
+import {LoginButton, LoginManager, Settings, ShareDialog} from 'react-native-fbsdk-next';
 
 const SHARE_LINK_CONTENT = {
   contentType: 'link',
@@ -35,6 +35,15 @@ const SHARE_LINK_CONTENT = {
 Settings.initializeSDK();
 
 export default class App extends Component<{}> {
+  _reauthorizeDataAccess = async () => {
+    try {
+      const result = await LoginManager.reauthorizeDataAccess();
+      Alert.alert("Reauthorize data access result", JSON.stringify(result, null, 2));
+    } catch (error) {
+      Alert.alert("Reauthorize data access fail with error:", error);
+    }
+  };
+
   _shareLinkWithShareDialog = async () => {
     const canShow = await ShareDialog.canShow(SHARE_LINK_CONTENT);
     if (canShow) {
@@ -63,7 +72,10 @@ export default class App extends Component<{}> {
           }}
         />
         <TouchableHighlight onPress={this._shareLinkWithShareDialog}>
-          <Text style={styles.shareText}>Share link with ShareDialog</Text>
+          <Text style={styles.buttonText}>Share link with ShareDialog</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._reauthorizeDataAccess}>
+          <Text style={styles.buttonText}>Reauthorize Data Access</Text>
         </TouchableHighlight>
       </View>
     );
@@ -77,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  shareText: {
+  buttonText: {
     fontSize: 20,
     margin: 10,
   },

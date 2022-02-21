@@ -118,6 +118,13 @@ export default {
   },
 
   /**
+   * Re-authorizes the user to update data access permissions.
+   */
+  reauthorizeDataAccess(): Promise<LoginResult> {
+    return LoginManager.reauthorizeDataAccess();
+  },
+
+  /**
    * Logs out the user.
    */
   logOut() {

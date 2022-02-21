@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(logInWithPermissions:(NSArray<NSString *> *)permissions
     };
     FBSDKLoginConfiguration *configuration;
     FBSDKLoginTracking tracking = [loginTracking  isEqualToString: @"limited"] ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled;
-    
+
     if ( ( ![nonce isEqual:[NSNull null]] ) && ( [nonce length] != 0 ) ) {
         configuration =
         [[FBSDKLoginConfiguration alloc] initWithPermissions:permissions
@@ -90,12 +90,24 @@ RCT_EXPORT_METHOD(logInWithPermissions:(NSArray<NSString *> *)permissions
                                                     tracking: tracking
          ];
     }
-    
-    
+
     [_loginManager
      logInFromViewController: nil
      configuration:configuration
      completion:requestHandler];
+};
+
+RCT_EXPORT_METHOD(reauthorizeDataAccess:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    FBSDKLoginManagerLoginResultBlock requestHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+      if (error) {
+        reject(@"FacebookSDK", @"Reauthorization Failed", error);
+      } else {
+        resolve(RCTBuildResultDictionary(result));
+      }
+    };
+
+    [_loginManager reauthorizeDataAccess:nil handler:requestHandler];
 };
 
 RCT_EXPORT_METHOD(logOut)
