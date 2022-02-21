@@ -91,14 +91,13 @@ RCT_EXPORT_METHOD(logInWithPermissions:(NSArray<NSString *> *)permissions
          ];
     }
 
-
     [_loginManager
      logInFromViewController: nil
      configuration:configuration
      completion:requestHandler];
 };
 
-RCT_REMAP_METHOD(reauthorizeDataAccess, reauthorizeDataAccess_resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(reauthorizeDataAccess:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     FBSDKLoginManagerLoginResultBlock requestHandler = ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
       if (error) {
