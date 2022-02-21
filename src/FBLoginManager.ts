@@ -118,8 +118,8 @@ export default {
   },
 
   /**
-  * Re-authorizes the user to update data access permissions.
-  */
+   * Re-authorizes the user to update data access permissions.
+   */
   reauthorizeDataAccess(): Promise<LoginResult> {
     return LoginManager.reauthorizeDataAccess();
   },
