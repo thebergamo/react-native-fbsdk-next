@@ -75,7 +75,7 @@ describe('Android facebook config', () => {
   });
 
   it(`returns correct value from all getters if value provided`, () => {
-    expect(getFacebookScheme({ appID: 'myscheme' })).toMatch(
+    expect(getFacebookScheme({ scheme: 'fbmyscheme' })).toMatch(
       'fbmyscheme'
     );
     expect(getFacebookAppId({ appID: 'my-app-id' })).toMatch(
@@ -103,6 +103,7 @@ describe('Android facebook config', () => {
     );
     const facebookConfig = {
       appID: 'my-app-id',
+      scheme: 'fbmyscheme',
       displayName: 'my-display-name',
       autoLogAppEventsEnabled: false,
       isAutoInitEnabled: true,

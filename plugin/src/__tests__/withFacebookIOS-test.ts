@@ -23,8 +23,8 @@ describe('ios facebook config', () => {
   });
 
   it(`returns correct value from all getters if value provided`, () => {
-    expect(getFacebookScheme({ appID: 'my-app-id' })).toMatch(
-      'fbmy-app-id'
+    expect(getFacebookScheme({ scheme: 'fbscheme' })).toMatch(
+      'fbscheme'
     );
     expect(getFacebookAppId({ appID: 'my-app-id' })).toMatch(
       'my-app-id'
