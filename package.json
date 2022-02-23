@@ -48,8 +48,11 @@
   ],
   "license": "MIT",
   "scripts": {
+    "build:plugin": "tsc --build plugin",
+    "clean:plugin": "expo-module clean plugin",
+    "lint:plugin": "eslint plugin/src/*",
     "start": "react-native start",
-    "prepare": "bob build",
+    "prepare": "bob build && npm run clean:plugin && npm run build:plugin",
     "lint": "eslint ./src",
     "test": "yarn validate:prettier && yarn validate:eslint && yarn jest",
     "validate:eslint": "eslint \"src/**/*\"",
@@ -75,9 +78,15 @@
     "README.md",
     "react-native-fbsdk-next.podspec",
     "jest",
-    "tsconfig.json"
+    "tsconfig.json",
+    "app.plugin.js",
+    "expo-module.config.json",
+    "plugin/build/"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@expo/config-plugins": "^4.0.4",
+    "xml2js": "^0.4.23"
+  },
   "peerDependencies": {
     "react-native": ">=0.63.3"
   },
@@ -91,6 +100,7 @@
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/xml2js": "^0.4.9",
     "@types/react": "^17.0.39",
     "@types/react-native": "^0.66.16",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
@@ -99,6 +109,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "conventional-changelog-conventionalcommits": "^4.6.3",
     "eslint": "^8.9.0",
+    "expo-module-scripts": "^2.0.0",
     "jest": "^27.5.1",
     "metro-react-native-babel-preset": "^0.68.0",
     "prettier": "^2.5.1",
