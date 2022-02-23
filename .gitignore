@@ -43,3 +43,6 @@ lib/
 
 # vscode
 .vscode
+
+# Keep expo plugin build code
+!plugin/build

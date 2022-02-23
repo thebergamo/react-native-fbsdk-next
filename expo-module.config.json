@@ -1,0 +1,10 @@
+{
+  "platforms": [
+    "ios"
+  ],
+  "ios": {
+    "appDelegateSubscribers": [
+      "FacebookAppDelegate"
+    ]
+  }
+}
