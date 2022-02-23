@@ -14,6 +14,16 @@ const pkg = require('react-native-fbsdk-next/package.json');
 
 const withFacebook: ConfigPlugin<ConfigProps | void> = (config, props) => {
   const newProps = getMergePropsWithConfig(config, props);
+  if (!newProps.appID) {
+    throw new Error('missing appID in the plugin properties');
+  }
+  if (!newProps.displayName) {
+    throw new Error('missing displayName in the plugin properties');
+  }
+  if (!newProps.scheme) {
+    throw new Error('missing scheme in the plugin properties');
+  }
+
   // Android
   config = withFacebookAppIdString(config, newProps);
   config = withFacebookManifest(config, newProps);

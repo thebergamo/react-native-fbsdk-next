@@ -9,6 +9,15 @@ const withSKAdNetworkIdentifiers_1 = require("./withSKAdNetworkIdentifiers");
 const pkg = require('react-native-fbsdk-next/package.json');
 const withFacebook = (config, props) => {
     const newProps = (0, config_1.getMergePropsWithConfig)(config, props);
+    if (!newProps.appID) {
+        throw new Error('missing appID in the plugin properties');
+    }
+    if (!newProps.displayName) {
+        throw new Error('missing displayName in the plugin properties');
+    }
+    if (!newProps.scheme) {
+        throw new Error('missing scheme in the plugin properties');
+    }
     // Android
     config = (0, withFacebookAndroid_1.withFacebookAppIdString)(config, newProps);
     config = (0, withFacebookAndroid_1.withFacebookManifest)(config, newProps);
