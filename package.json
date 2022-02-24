@@ -4,7 +4,7 @@
   "description": "Facebook SDK support for React Native apps.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/typescript/src/index.d.ts",
   "sideEffects": false,
   "author": {
     "name": "Marcos Bérgamo"
