@@ -15,8 +15,6 @@ Pod::Spec.new do |s|
   s.source         = { :git => 'https://github.com/thebergamo/react-native-fbsdk-next.git', :tag => "v#{package['version']}" }
   s.static_framework = true
 
-  s.compiler_flags = %[-DRNBRANCH_VERSION=@\\"#{package["dependencies"]["react-native-fbsdk-next"]}\\"]
-
   s.dependency 'ExpoModulesCore'
   s.dependency 'React-Core'
   s.dependency 'FBSDKCoreKit'
