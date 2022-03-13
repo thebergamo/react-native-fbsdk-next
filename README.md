@@ -123,7 +123,8 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
 
-**NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
+**NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
+   on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
    1. Add `#import <FBSDKCoreKit/FBSDKCoreKit.h>`
    2. Inside `didFinishLaunchingWithOptions`, add the following:
       ```objc
