@@ -121,7 +121,18 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 #### 3.2 iOS
 
-Follow ***steps 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS.
+Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
+
+**NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
+   on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
+   1. Add `#import <FBSDKCoreKit/FBSDKCoreKit.h>`
+   2. Inside `didFinishLaunchingWithOptions`, add the following:
+      ```objc
+         [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+      ```
+   3. After this step, if you run into this `build` issue: `Undefined symbols for architecture x86_64:`, 
+   then you need to create a new file `File.swift` on your project folder. After doing this, you will get a prompt from `Xcode` asking if you would like to create a `Bridging Header`. Click accept.
 
 **If you're not using cocoapods already** you can also follow step 1.1 to set it up.
 
