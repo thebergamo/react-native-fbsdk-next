@@ -73,8 +73,8 @@ RCT_EXPORT_MODULE(FBGameRequestDialog);
 - (instancetype)init
 {
   if ((self = [super init])) {
-    _dialog = [[FBSDKGameRequestDialog alloc] init];
-    _dialog.delegate = self;
+    // Content can't be null, how should this be initialized?
+    _dialog = [[FBSDKGameRequestDialog alloc] initWithContent:nil delegate:self];
   }
   return self;
 }

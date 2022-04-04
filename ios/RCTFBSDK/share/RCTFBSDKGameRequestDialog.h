@@ -18,7 +18,7 @@
 
 #import <React/RCTBridgeModule.h>
 
-#import <FBSDKShareKit/FBSDKShareKit.h>
+@import FBSDKGamingServicesKit;
 
 @interface RCTFBSDKGameRequestDialog : NSObject <RCTBridgeModule>
 @end
