@@ -168,10 +168,6 @@ public final class Utility {
     public static ShareLinkContent buildShareLinkContent(ReadableMap shareLinkContent) {
         ShareLinkContent.Builder contentBuilder = new ShareLinkContent.Builder();
         contentBuilder.setContentUrl(Uri.parse(shareLinkContent.getString("contentUrl")));
-        String url = getValueOrNull(shareLinkContent, "imageUrl");
-        contentBuilder.setImageUrl(url != null ? Uri.parse(url) : null);
-        contentBuilder.setContentDescription(getValueOrNull(shareLinkContent, "contentDescription"));
-        contentBuilder.setContentTitle(getValueOrNull(shareLinkContent, "contentTitle"));
         contentBuilder.setQuote(getValueOrNull(shareLinkContent, "quote"));
         appendGenericContent(contentBuilder, shareLinkContent);
         return contentBuilder.build();
