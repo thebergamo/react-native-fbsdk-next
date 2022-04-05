@@ -18,24 +18,33 @@ public class FBProfileModule extends ReactContextBaseJavaModule {
     public static final String NAME = "FBProfile";
 
     public FBProfileModule(ReactApplicationContext reactContext) {
-      super(reactContext);
+        super(reactContext);
     }
 
     @NonNull
     @Override
     public String getName() {
-    return NAME;
-  }
+        return NAME;
+    }
 
     /**
-    * Get the current logged profile.
-    * @param callback Use callback to pass the current logged profile back to JS.
-    */
+     * Get the current logged profile.
+     *
+     * @param callback Use callback to pass the current logged profile back to JS.
+     */
     @ReactMethod
     public void getCurrentProfile(Callback callback) {
         //Return the profile object as a ReactMap.
-        callback.invoke(Profile.getCurrentProfile() == null
-                ? null
-                : Utility.profileToReactMap(Profile.getCurrentProfile()));
-  }
+        if (Profile.getCurrentProfile() == null) {
+            mProfileTracker = new ProfileTracker() {
+                @Override
+                protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                    callback.invoke(Utility.profileToReactMap(currentProfile));
+                    mProfileTracker.stopTracking();
+                }
+            };
+        } else {
+            callback.invoke(Utility.profileToReactMap(Profile.getCurrentProfile()));
+        }
+    }
 }
