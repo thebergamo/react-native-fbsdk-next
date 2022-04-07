@@ -48,6 +48,10 @@ export const mockAppEventParams = {
 };
 
 export default {
+  AccessToken: {
+    refreshCurrentAccessTokenAsync: jest.fn(),
+    getCurrentAccessToken: jest.fn(),
+  },
   AppEventsLogger: {
     logEvent: jest.fn(),
     logPurchase: jest.fn(),
