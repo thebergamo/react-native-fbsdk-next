@@ -58,6 +58,7 @@ export default {
   },
   LoginManager: {
     logInWithPermissions: jest.fn(),
+    logOut: jest.fn(),
   },
   Settings: {
     initializeSDK: jest.fn(),
