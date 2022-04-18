@@ -55,7 +55,7 @@ static void RCTAppendGenericContent(RCTFBSDKSharingContent contentObject, NSDict
     contentObject.peopleIDs = [RCTConvert NSStringArray:contentData[@"peopleIds"]];
     contentObject.placeID = [RCTConvert NSString:contentData[@"placeId"]];
     contentObject.ref = [RCTConvert NSString:contentData[@"ref"]];
-    contentObject.hashtag = [FBSDKHashtag hashtagWithString:[RCTConvert NSString:contentData[@"hashtag"]]];
+    contentObject.hashtag = [[FBSDKHashtag alloc] initWithString: [RCTConvert NSString:contentData[@"hashtag"]]];
   }
 }
 
@@ -88,7 +88,7 @@ static FBSDKSharePhoto *RCTBuildPhoto(NSDictionary *photoData)
 {
   UIImage *image = [RCTConvert UIImage:photoData[@"imageUrl"]];
   BOOL userGenerated = [RCTConvert BOOL:photoData[@"userGenerated"]];
-  FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImage:image userGenerated:userGenerated];
+  FBSDKSharePhoto *photo =[ [FBSDKSharePhoto alloc] initWithImage:image isUserGenerated:userGenerated];
   photo.caption = [RCTConvert NSString:photoData[@"caption"]];
   return photo;
 }
@@ -98,7 +98,7 @@ static FBSDKShareVideoContent *RCTBuildVideoContent(NSDictionary *contentData)
   FBSDKShareVideoContent *videoContent = [[FBSDKShareVideoContent alloc] init];
   NSDictionary *videoData = [RCTConvert NSDictionary:contentData[@"video"]];
   NSURL *videoURL = [RCTConvert NSURL:videoData[@"localUrl"]];
-  FBSDKShareVideo *video = [FBSDKShareVideo videoWithVideoURL:videoURL];
+  FBSDKShareVideo *video = [[FBSDKShareVideo alloc] initWithVideoURL:videoURL previewPhoto:nil];
   if (contentData[@"previewPhoto"]) {
     FBSDKSharePhoto *previewPhoto = RCTBuildPhoto([RCTConvert NSDictionary:contentData[@"previewPhoto"]]);
     video.previewPhoto = previewPhoto;

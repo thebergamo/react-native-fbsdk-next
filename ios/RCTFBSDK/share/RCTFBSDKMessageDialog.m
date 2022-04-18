@@ -44,8 +44,7 @@ RCT_EXPORT_MODULE(FBMessageDialog);
 - (instancetype)init
 {
   if ((self = [super init])) {
-    _dialog = [[FBSDKMessageDialog alloc] init];
-    _dialog.delegate = self;
+    _dialog = [[FBSDKMessageDialog alloc] initWithContent:nil delegate:self];
   }
   return self;
 }

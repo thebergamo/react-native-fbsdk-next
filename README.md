@@ -493,7 +493,6 @@ import { ShareDialog } from 'react-native-fbsdk-next';
 const shareLinkContent = {
   contentType: 'link',
   contentUrl: "https://facebook.com",
-  contentDescription: 'Wow, check out this great site!',
 };
 
 // ...
@@ -580,7 +579,6 @@ import { ShareApi } from 'react-native-fbsdk-next';
 const shareLinkContent = {
   contentType: 'link',
   contentUrl: "https://facebook.com",
-  contentDescription: 'Wow, check out this great site!',
 };
 
 // ...
