@@ -97,7 +97,7 @@ public class FBShareDialogModule extends FBSDKCallbackManagerBaseJavaModule {
 
     @ReactMethod
     public void setMode(String mode) {
-        mShareDialogMode = ShareDialog.Mode.valueOf(mode.toUpperCase(Locale.ENGLISH));
+        mShareDialogMode = ShareDialog.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
     }
 
     @ReactMethod
