@@ -20,6 +20,7 @@
 
 package com.facebook.reactnative.androidsdk;
 
+import java.util.Locale;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -96,7 +97,7 @@ public class FBShareDialogModule extends FBSDKCallbackManagerBaseJavaModule {
 
     @ReactMethod
     public void setMode(String mode) {
-        mShareDialogMode = ShareDialog.Mode.valueOf(mode.toUpperCase());
+        mShareDialogMode = ShareDialog.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
     }
 
     @ReactMethod

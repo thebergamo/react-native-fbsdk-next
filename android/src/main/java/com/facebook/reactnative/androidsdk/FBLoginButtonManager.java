@@ -30,6 +30,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
+import java.util.Locale;
 
 public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
 
@@ -56,7 +57,7 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
         LoginBehavior behavior = LoginBehavior.NATIVE_WITH_FALLBACK;
 
         if (loginBehavior != null) {
-            behavior = LoginBehavior.valueOf(loginBehavior.toUpperCase());
+            behavior = LoginBehavior.valueOf(loginBehavior.toUpperCase(Locale.ROOT));
         }
 
         loginButton.setLoginBehavior(behavior);
@@ -67,7 +68,7 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
         DefaultAudience audience = DefaultAudience.FRIENDS;
 
         if (defaultAudience != null) {
-            audience = DefaultAudience.valueOf(defaultAudience.toUpperCase());
+            audience = DefaultAudience.valueOf(defaultAudience.toUpperCase(Locale.ROOT));
         }
 
         loginButton.setDefaultAudience(audience);
