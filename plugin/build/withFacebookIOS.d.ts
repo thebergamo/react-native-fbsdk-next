@@ -1,10 +1,6 @@
 import { ConfigPlugin, InfoPlist } from '@expo/config-plugins';
 import { ConfigProps } from './config';
 export declare const withFacebookIOS: ConfigPlugin<ConfigProps>;
-/**
- * Getters
- * TODO: these getters are the same between ios/android, we could reuse them
- */
 export declare function setFacebookConfig(config: ConfigProps, infoPlist: InfoPlist): InfoPlist;
 export declare function setFacebookScheme(config: ConfigProps, infoPlist: InfoPlist): InfoPlist;
 export declare function setFacebookAutoInitEnabled(config: ConfigProps, { FacebookAutoInitEnabled: _, ...infoPlist }: InfoPlist): InfoPlist;

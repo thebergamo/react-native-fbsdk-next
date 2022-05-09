@@ -30,11 +30,6 @@ export const withFacebookIOS: ConfigPlugin<ConfigProps> = (config, props) => {
   });
 };
 
-/**
- * Getters
- * TODO: these getters are the same between ios/android, we could reuse them
- */
-
 export function setFacebookConfig(config: ConfigProps, infoPlist: InfoPlist) {
   infoPlist = setFacebookAppId(config, infoPlist);
   infoPlist = setFacebookClientToken(config, infoPlist);

@@ -14,10 +14,6 @@ const withFacebookIOS = (config, props) => {
     });
 };
 exports.withFacebookIOS = withFacebookIOS;
-/**
- * Getters
- * TODO: these getters are the same between ios/android, we could reuse them
- */
 function setFacebookConfig(config, infoPlist) {
     infoPlist = setFacebookAppId(config, infoPlist);
     infoPlist = setFacebookClientToken(config, infoPlist);
