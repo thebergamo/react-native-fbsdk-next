@@ -8,6 +8,7 @@ import {
   ConfigProps,
   getFacebookAdvertiserIDCollection,
   getFacebookAppId,
+  getFacebookClientToken,
   getFacebookAutoInitEnabled,
   getFacebookAutoLogAppEvents,
   getFacebookDisplayName,
@@ -29,13 +30,9 @@ export const withFacebookIOS: ConfigPlugin<ConfigProps> = (config, props) => {
   });
 };
 
-/**
- * Getters
- * TODO: these getters are the same between ios/android, we could reuse them
- */
-
 export function setFacebookConfig(config: ConfigProps, infoPlist: InfoPlist) {
   infoPlist = setFacebookAppId(config, infoPlist);
+  infoPlist = setFacebookClientToken(config, infoPlist);
   infoPlist = setFacebookApplicationQuerySchemes(config, infoPlist);
   infoPlist = setFacebookDisplayName(config, infoPlist);
   infoPlist = setFacebookAutoInitEnabled(config, infoPlist);
@@ -117,6 +114,21 @@ export function setFacebookAppId(
     return {
       ...infoPlist,
       FacebookAppID: appID,
+    };
+  }
+
+  return infoPlist;
+}
+
+export function setFacebookClientToken(
+  config: ConfigProps,
+  { FacebookClientToken: _, ...infoPlist }: InfoPlist
+): InfoPlist {
+  const clientToken = getFacebookClientToken(config);
+  if (clientToken) {
+    return {
+      ...infoPlist,
+      FacebookClientToken: clientToken,
     };
   }
 

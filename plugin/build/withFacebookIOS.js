@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withUserTrackingPermission = exports.setFacebookApplicationQuerySchemes = exports.setFacebookDisplayName = exports.setFacebookAppId = exports.setFacebookAdvertiserIDCollectionEnabled = exports.setFacebookAutoLogAppEventsEnabled = exports.setFacebookAutoInitEnabled = exports.setFacebookScheme = exports.setFacebookConfig = exports.withFacebookIOS = void 0;
+exports.withUserTrackingPermission = exports.setFacebookApplicationQuerySchemes = exports.setFacebookDisplayName = exports.setFacebookClientToken = exports.setFacebookAppId = exports.setFacebookAdvertiserIDCollectionEnabled = exports.setFacebookAutoLogAppEventsEnabled = exports.setFacebookAutoInitEnabled = exports.setFacebookScheme = exports.setFacebookConfig = exports.withFacebookIOS = void 0;
 const config_plugins_1 = require("@expo/config-plugins");
 const config_1 = require("./config");
 const { Scheme } = config_plugins_1.IOSConfig;
@@ -14,12 +14,9 @@ const withFacebookIOS = (config, props) => {
     });
 };
 exports.withFacebookIOS = withFacebookIOS;
-/**
- * Getters
- * TODO: these getters are the same between ios/android, we could reuse them
- */
 function setFacebookConfig(config, infoPlist) {
     infoPlist = setFacebookAppId(config, infoPlist);
+    infoPlist = setFacebookClientToken(config, infoPlist);
     infoPlist = setFacebookApplicationQuerySchemes(config, infoPlist);
     infoPlist = setFacebookDisplayName(config, infoPlist);
     infoPlist = setFacebookAutoInitEnabled(config, infoPlist);
@@ -85,6 +82,17 @@ function setFacebookAppId(config, { FacebookAppID: _, ...infoPlist }) {
     return infoPlist;
 }
 exports.setFacebookAppId = setFacebookAppId;
+function setFacebookClientToken(config, { FacebookClientToken: _, ...infoPlist }) {
+    const clientToken = (0, config_1.getFacebookClientToken)(config);
+    if (clientToken) {
+        return {
+            ...infoPlist,
+            FacebookClientToken: clientToken,
+        };
+    }
+    return infoPlist;
+}
+exports.setFacebookClientToken = setFacebookClientToken;
 function setFacebookDisplayName(config, { FacebookDisplayName: _, ...infoPlist }) {
     const facebookDisplayName = (0, config_1.getFacebookDisplayName)(config);
     if (facebookDisplayName) {

@@ -9,6 +9,7 @@ import {
 import {
   setFacebookAdvertiserIDCollectionEnabled,
   setFacebookAppId,
+  setFacebookClientToken,
   setFacebookAutoInitEnabled,
   setFacebookConfig,
 } from '../withFacebookIOS';
@@ -51,6 +52,12 @@ describe('ios facebook config', () => {
     });
   });
 
+  it('sets the facebook client token config', () => {
+    expect(setFacebookClientToken({ clientToken: 'abc' }, {})).toStrictEqual({
+      FacebookClientToken: 'abc',
+    });
+  });
+
   it('sets the facebook auto init config', () => {
     expect(
       setFacebookAutoInitEnabled({ isAutoInitEnabled: true }, {})
@@ -77,6 +84,7 @@ describe('ios facebook config', () => {
         {
           FacebookAdvertiserIDCollectionEnabled: true,
           FacebookAppID: 'my-app-id',
+          FacebookClientToken: 'my-client-token',
           FacebookAutoInitEnabled: true,
           FacebookAutoLogAppEventsEnabled: true,
           FacebookDisplayName: 'my-display-name',
