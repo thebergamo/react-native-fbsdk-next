@@ -121,7 +121,6 @@
     "typescript": "^4.5.5"
   },
   "prettier": {
-    "requirePragma": true,
     "singleQuote": true,
     "trailingComma": "all",
     "bracketSpacing": false,
