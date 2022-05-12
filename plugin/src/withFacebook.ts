@@ -1,13 +1,12 @@
-import { ConfigPlugin, createRunOncePlugin } from '@expo/config-plugins';
-import { ConfigProps, getMergePropsWithConfig } from './config';
-
+import {ConfigProps, getMergePropsWithConfig} from './config';
 import {
   withAndroidPermissions,
   withFacebookAppIdString,
   withFacebookManifest,
 } from './withFacebookAndroid';
-import { withFacebookIOS, withUserTrackingPermission } from './withFacebookIOS';
-import { withSKAdNetworkIdentifiers } from './withSKAdNetworkIdentifiers';
+import {withFacebookIOS, withUserTrackingPermission} from './withFacebookIOS';
+import {withSKAdNetworkIdentifiers} from './withSKAdNetworkIdentifiers';
+import {ConfigPlugin, createRunOncePlugin} from '@expo/config-plugins';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('react-native-fbsdk-next/package.json');

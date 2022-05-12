@@ -1,4 +1,4 @@
-import { ExpoConfig } from '@expo/config-types';
+import {ExpoConfig} from '@expo/config-types';
 
 export type ExpoConfigFacebook = Pick<
   ExpoConfig,
@@ -48,7 +48,7 @@ export type ConfigProps = {
 
 export function getMergePropsWithConfig(
   config: ExpoConfigFacebook,
-  props: ConfigProps | void
+  props: ConfigProps | void,
 ): ConfigProps {
   const {
     facebookAppId,
@@ -65,7 +65,8 @@ export function getMergePropsWithConfig(
     scheme = facebookScheme ?? (appID ? `fb${appID}` : undefined),
     isAutoInitEnabled = facebookAutoInitEnabled ?? false,
     autoLogAppEventsEnabled = facebookAutoLogAppEventsEnabled ?? false,
-    advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled ?? false,
+    advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled ??
+      false,
     iosUserTrackingPermission,
   } = (props ?? {}) as ConfigProps;
 

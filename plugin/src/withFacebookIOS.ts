@@ -1,10 +1,4 @@
 import {
-  ConfigPlugin,
-  InfoPlist,
-  IOSConfig,
-  withInfoPlist,
-} from '@expo/config-plugins';
-import {
   ConfigProps,
   getFacebookAdvertiserIDCollection,
   getFacebookAppId,
@@ -14,9 +8,15 @@ import {
   getFacebookDisplayName,
   getFacebookScheme,
 } from './config';
+import {
+  ConfigPlugin,
+  InfoPlist,
+  IOSConfig,
+  withInfoPlist,
+} from '@expo/config-plugins';
 
-const { Scheme } = IOSConfig;
-const { appendScheme } = Scheme;
+const {Scheme} = IOSConfig;
+const {appendScheme} = Scheme;
 
 const fbSchemes = ['fbapi', 'fb-messenger-api', 'fbauth2', 'fbshareextension'];
 
@@ -49,8 +49,8 @@ export function setFacebookScheme(config: ConfigProps, infoPlist: InfoPlist) {
   }
 
   if (
-    infoPlist.CFBundleURLTypes?.some(({ CFBundleURLSchemes }) =>
-      CFBundleURLSchemes.includes(facebookScheme)
+    infoPlist.CFBundleURLTypes?.some(({CFBundleURLSchemes}) =>
+      CFBundleURLSchemes.includes(facebookScheme),
     )
   ) {
     return infoPlist;
@@ -61,7 +61,7 @@ export function setFacebookScheme(config: ConfigProps, infoPlist: InfoPlist) {
 
 export function setFacebookAutoInitEnabled(
   config: ConfigProps,
-  { FacebookAutoInitEnabled: _, ...infoPlist }: InfoPlist
+  {FacebookAutoInitEnabled: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const isAutoInitEnabled = getFacebookAutoInitEnabled(config);
   if (isAutoInitEnabled === null) {
@@ -76,7 +76,7 @@ export function setFacebookAutoInitEnabled(
 
 export function setFacebookAutoLogAppEventsEnabled(
   config: ConfigProps,
-  { FacebookAutoLogAppEventsEnabled: _, ...infoPlist }: InfoPlist
+  {FacebookAutoLogAppEventsEnabled: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const autoLogAppEventsEnabled = getFacebookAutoLogAppEvents(config);
   if (autoLogAppEventsEnabled === null) {
@@ -91,7 +91,7 @@ export function setFacebookAutoLogAppEventsEnabled(
 
 export function setFacebookAdvertiserIDCollectionEnabled(
   config: ConfigProps,
-  { FacebookAdvertiserIDCollectionEnabled: _, ...infoPlist }: InfoPlist
+  {FacebookAdvertiserIDCollectionEnabled: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const advertiserIDCollectionEnabled =
     getFacebookAdvertiserIDCollection(config);
@@ -107,7 +107,7 @@ export function setFacebookAdvertiserIDCollectionEnabled(
 
 export function setFacebookAppId(
   config: ConfigProps,
-  { FacebookAppID: _, ...infoPlist }: InfoPlist
+  {FacebookAppID: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const appID = getFacebookAppId(config);
   if (appID) {
@@ -122,7 +122,7 @@ export function setFacebookAppId(
 
 export function setFacebookClientToken(
   config: ConfigProps,
-  { FacebookClientToken: _, ...infoPlist }: InfoPlist
+  {FacebookClientToken: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const clientToken = getFacebookClientToken(config);
   if (clientToken) {
@@ -137,7 +137,7 @@ export function setFacebookClientToken(
 
 export function setFacebookDisplayName(
   config: ConfigProps,
-  { FacebookDisplayName: _, ...infoPlist }: InfoPlist
+  {FacebookDisplayName: _, ...infoPlist}: InfoPlist,
 ): InfoPlist {
   const facebookDisplayName = getFacebookDisplayName(config);
   if (facebookDisplayName) {
@@ -152,7 +152,7 @@ export function setFacebookDisplayName(
 
 export function setFacebookApplicationQuerySchemes(
   config: ConfigProps,
-  infoPlist: InfoPlist
+  infoPlist: InfoPlist,
 ): InfoPlist {
   const facebookAppId = getFacebookAppId(config);
 
@@ -163,7 +163,7 @@ export function setFacebookApplicationQuerySchemes(
     return infoPlist;
   } else if (!facebookAppId && !existingSchemes.length) {
     // already removed, no need to strip again
-    const { LSApplicationQueriesSchemes, ...restInfoPlist } = infoPlist;
+    const {LSApplicationQueriesSchemes, ...restInfoPlist} = infoPlist;
     if (LSApplicationQueriesSchemes?.length) {
       return infoPlist;
     } else {
@@ -200,9 +200,11 @@ export function setFacebookApplicationQuerySchemes(
   };
 }
 
-export const withUserTrackingPermission: ConfigPlugin<{
-  iosUserTrackingPermission?: string | false;
-} | void> = (config, { iosUserTrackingPermission } = {}) => {
+export const withUserTrackingPermission: ConfigPlugin<
+  {
+    iosUserTrackingPermission?: string | false;
+  } | void
+> = (config, {iosUserTrackingPermission} = {}) => {
   if (iosUserTrackingPermission === false) {
     return config;
   }
