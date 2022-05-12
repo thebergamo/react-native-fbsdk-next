@@ -66,6 +66,7 @@ export function getMergePropsWithConfig(
     isAutoInitEnabled = facebookAutoInitEnabled ?? false,
     autoLogAppEventsEnabled = facebookAutoLogAppEventsEnabled ?? false,
     advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled ?? false,
+    iosUserTrackingPermission,
   } = (props ?? {}) as ConfigProps;
 
   return {
@@ -76,6 +77,7 @@ export function getMergePropsWithConfig(
     isAutoInitEnabled,
     autoLogAppEventsEnabled,
     advertiserIDCollectionEnabled,
+    iosUserTrackingPermission,
   };
 }
 
