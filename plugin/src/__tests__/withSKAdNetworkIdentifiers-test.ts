@@ -1,11 +1,16 @@
-import { withSKAdNetworkIdentifiers } from '../withSKAdNetworkIdentifiers';
+import {withSKAdNetworkIdentifiers} from '../withSKAdNetworkIdentifiers';
 
 describe(withSKAdNetworkIdentifiers, () => {
   it(`adds ids to the Info.plist`, () => {
-    expect(withSKAdNetworkIdentifiers({
-      name: 'foo',
-      slug: 'bar',
-    }, ['FOOBAR', 'other'])).toStrictEqual({
+    expect(
+      withSKAdNetworkIdentifiers(
+        {
+          name: 'foo',
+          slug: 'bar',
+        },
+        ['FOOBAR', 'other'],
+      ),
+    ).toStrictEqual({
       name: 'foo',
       slug: 'bar',
       ios: {
@@ -38,8 +43,8 @@ describe(withSKAdNetworkIdentifiers, () => {
             },
           },
         },
-        ['foobar', 'other']
-      )
+        ['foobar', 'other'],
+      ),
     ).toStrictEqual({
       name: 'foo',
       slug: 'bar',

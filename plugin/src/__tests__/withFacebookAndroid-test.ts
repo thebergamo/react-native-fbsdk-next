@@ -1,7 +1,3 @@
-import { AndroidConfig } from '@expo/config-plugins';
-import { resolve } from 'path';
-import { Parser } from 'xml2js';
-
 import {
   getFacebookAdvertiserIDCollection,
   getFacebookAppId,
@@ -10,14 +6,17 @@ import {
   getFacebookDisplayName,
   getFacebookScheme,
 } from '../config';
-import { setFacebookConfig } from '../withFacebookAndroid';
+import {setFacebookConfig} from '../withFacebookAndroid';
+import {AndroidConfig} from '@expo/config-plugins';
+import {resolve} from 'path';
+import {Parser} from 'xml2js';
 
-const { getMainApplication, readAndroidManifestAsync } = AndroidConfig.Manifest;
+const {getMainApplication, readAndroidManifestAsync} = AndroidConfig.Manifest;
 
 const fixturesPath = resolve(__dirname, 'fixtures');
 const sampleManifestPath = resolve(
   fixturesPath,
-  'react-native-AndroidManifest.xml'
+  'react-native-AndroidManifest.xml',
 );
 
 const filledManifest = `<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.expo.mycoolapp">
@@ -75,31 +74,25 @@ describe('Android facebook config', () => {
   });
 
   it(`returns correct value from all getters if value provided`, () => {
-    expect(getFacebookScheme({ scheme: 'fbmyscheme' })).toMatch(
-      'fbmyscheme'
+    expect(getFacebookScheme({scheme: 'fbmyscheme'})).toMatch('fbmyscheme');
+    expect(getFacebookAppId({appID: 'my-app-id'})).toMatch('my-app-id');
+    expect(getFacebookDisplayName({displayName: 'my-display-name'})).toMatch(
+      'my-display-name',
     );
-    expect(getFacebookAppId({ appID: 'my-app-id' })).toMatch(
-      'my-app-id'
+    expect(getFacebookAutoLogAppEvents({autoLogAppEventsEnabled: false})).toBe(
+      false,
     );
-    expect(
-      getFacebookDisplayName({ displayName: 'my-display-name' })
-    ).toMatch('my-display-name');
-    expect(
-      getFacebookAutoLogAppEvents({ autoLogAppEventsEnabled: false })
-    ).toBe(false);
-    expect(getFacebookAutoInitEnabled({ isAutoInitEnabled: true })).toBe(
-      true
-    );
+    expect(getFacebookAutoInitEnabled({isAutoInitEnabled: true})).toBe(true);
     expect(
       getFacebookAdvertiserIDCollection({
         advertiserIDCollectionEnabled: false,
-      })
+      }),
     ).toBe(false);
   });
 
   it('adds scheme, appid, display name, autolog events, auto init, advertiser id collection to androidmanifest.xml', async () => {
     let androidManifestJson = await readAndroidManifestAsync(
-      sampleManifestPath
+      sampleManifestPath,
     );
     const facebookConfig = {
       appID: 'my-app-id',
@@ -111,12 +104,12 @@ describe('Android facebook config', () => {
     };
     androidManifestJson = setFacebookConfig(
       facebookConfig,
-      androidManifestJson
+      androidManifestJson,
     );
     // Run this twice to ensure copies don't get added.
     androidManifestJson = setFacebookConfig(
       facebookConfig,
-      androidManifestJson
+      androidManifestJson,
     );
 
     const mainApplication = getMainApplication(androidManifestJson);
@@ -125,49 +118,50 @@ describe('Android facebook config', () => {
     }
 
     const facebookActivity = mainApplication.activity?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity'
+      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity',
     );
     expect(facebookActivity).toHaveLength(1);
 
     const applicationId = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationId'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationId',
     );
     expect(applicationId).toHaveLength(1);
     expect(applicationId?.[0].$['android:value']).toMatch(
-      '@string/facebook_app_id'
+      '@string/facebook_app_id',
     );
 
     const displayName = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationName'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationName',
     );
     expect(displayName).toHaveLength(1);
     expect(displayName?.[0].$['android:value']).toMatch(
-      facebookConfig.displayName
+      facebookConfig.displayName,
     );
 
     const autoLogAppEventsEnabled = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoLogAppEventsEnabled'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoLogAppEventsEnabled',
     );
     expect(autoLogAppEventsEnabled).toHaveLength(1);
     expect(autoLogAppEventsEnabled?.[0].$['android:value']).toMatch(
-      facebookConfig.autoLogAppEventsEnabled.toString()
+      facebookConfig.autoLogAppEventsEnabled.toString(),
     );
 
     const advertiserIDCollectionEnabled = mainApplication['meta-data']?.filter(
       (e) =>
-        e.$['android:name'] === 'com.facebook.sdk.AdvertiserIDCollectionEnabled'
+        e.$['android:name'] ===
+        'com.facebook.sdk.AdvertiserIDCollectionEnabled',
     );
     expect(advertiserIDCollectionEnabled).toHaveLength(1);
     expect(advertiserIDCollectionEnabled?.[0].$['android:value']).toMatch(
-      facebookConfig.advertiserIDCollectionEnabled.toString()
+      facebookConfig.advertiserIDCollectionEnabled.toString(),
     );
 
     const autoInitEnabled = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoInitEnabled'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoInitEnabled',
     );
     expect(autoInitEnabled).toHaveLength(1);
     expect(autoInitEnabled?.[0].$['android:value']).toMatch(
-      facebookConfig.isAutoInitEnabled.toString()
+      facebookConfig.isAutoInitEnabled.toString(),
     );
   });
 
@@ -178,7 +172,7 @@ describe('Android facebook config', () => {
     const facebookConfig = {};
     androidManifestJson = setFacebookConfig(
       facebookConfig,
-      androidManifestJson
+      androidManifestJson,
     );
 
     const mainApplication = getMainApplication(androidManifestJson);
@@ -187,32 +181,33 @@ describe('Android facebook config', () => {
     }
 
     const facebookActivity = mainApplication.activity?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity'
+      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity',
     );
     expect(facebookActivity).toHaveLength(0);
     const applicationId = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationId'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationId',
     );
     expect(applicationId).toHaveLength(0);
 
     const displayName = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationName'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationName',
     );
     expect(displayName).toHaveLength(0);
 
     const autoLogAppEventsEnabled = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoLogAppEventsEnabled'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoLogAppEventsEnabled',
     );
     expect(autoLogAppEventsEnabled).toHaveLength(0);
 
     const advertiserIDCollectionEnabled = mainApplication['meta-data']?.filter(
       (e) =>
-        e.$['android:name'] === 'com.facebook.sdk.AdvertiserIDCollectionEnabled'
+        e.$['android:name'] ===
+        'com.facebook.sdk.AdvertiserIDCollectionEnabled',
     );
     expect(advertiserIDCollectionEnabled).toHaveLength(0);
 
     const autoInitEnabled = mainApplication['meta-data']?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoInitEnabled'
+      (e) => e.$['android:name'] === 'com.facebook.sdk.AutoInitEnabled',
     );
     expect(autoInitEnabled).toHaveLength(0);
   });

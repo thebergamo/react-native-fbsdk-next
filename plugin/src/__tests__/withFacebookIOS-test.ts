@@ -13,6 +13,7 @@ import {
   setFacebookAutoInitEnabled,
   setFacebookConfig,
 } from '../withFacebookIOS';
+
 describe('ios facebook config', () => {
   it(`returns null from all getters if no value provided`, () => {
     expect(getFacebookScheme({})).toBe(null);
@@ -24,43 +25,37 @@ describe('ios facebook config', () => {
   });
 
   it(`returns correct value from all getters if value provided`, () => {
-    expect(getFacebookScheme({ scheme: 'fbscheme' })).toMatch(
-      'fbscheme'
+    expect(getFacebookScheme({scheme: 'fbscheme'})).toMatch('fbscheme');
+    expect(getFacebookAppId({appID: 'my-app-id'})).toMatch('my-app-id');
+    expect(getFacebookDisplayName({displayName: 'my-display-name'})).toMatch(
+      'my-display-name',
     );
-    expect(getFacebookAppId({ appID: 'my-app-id' })).toMatch(
-      'my-app-id'
+    expect(getFacebookAutoLogAppEvents({autoLogAppEventsEnabled: false})).toBe(
+      false,
     );
-    expect(
-      getFacebookDisplayName({ displayName: 'my-display-name' })
-    ).toMatch('my-display-name');
-    expect(
-      getFacebookAutoLogAppEvents({ autoLogAppEventsEnabled: false })
-    ).toBe(false);
-    expect(getFacebookAutoInitEnabled({ isAutoInitEnabled: true })).toBe(
-      true
-    );
+    expect(getFacebookAutoInitEnabled({isAutoInitEnabled: true})).toBe(true);
     expect(
       getFacebookAdvertiserIDCollection({
         advertiserIDCollectionEnabled: false,
-      })
+      }),
     ).toBe(false);
   });
 
   it('sets the facebook app id config', () => {
-    expect(setFacebookAppId({ appID: 'abc' }, {})).toStrictEqual({
+    expect(setFacebookAppId({appID: 'abc'}, {})).toStrictEqual({
       FacebookAppID: 'abc',
     });
   });
 
   it('sets the facebook client token config', () => {
-    expect(setFacebookClientToken({ clientToken: 'abc' }, {})).toStrictEqual({
+    expect(setFacebookClientToken({clientToken: 'abc'}, {})).toStrictEqual({
       FacebookClientToken: 'abc',
     });
   });
 
   it('sets the facebook auto init config', () => {
     expect(
-      setFacebookAutoInitEnabled({ isAutoInitEnabled: true }, {})
+      setFacebookAutoInitEnabled({isAutoInitEnabled: true}, {}),
     ).toStrictEqual({
       FacebookAutoInitEnabled: true,
     });
@@ -69,9 +64,9 @@ describe('ios facebook config', () => {
   it('sets the facebook advertising id enabled config', () => {
     expect(
       setFacebookAdvertiserIDCollectionEnabled(
-        { advertiserIDCollectionEnabled: true },
-        {}
-      )
+        {advertiserIDCollectionEnabled: true},
+        {},
+      ),
     ).toStrictEqual({
       FacebookAdvertiserIDCollectionEnabled: true,
     });
@@ -94,8 +89,8 @@ describe('ios facebook config', () => {
             'fbauth2',
             'fbshareextension',
           ],
-        }
-      )
+        },
+      ),
     ).toStrictEqual({});
   });
   it('preserves the existing LSApplicationQueriesSchemes after removing the facebook schemes', () => {
@@ -109,7 +104,7 @@ describe('ios facebook config', () => {
           'fbauth2',
           'fbshareextension',
         ],
-      }
+      },
     );
     // Test that running the command twice doesn't cause duplicates
     expect(setFacebookConfig({}, plist)).toStrictEqual({

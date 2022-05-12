@@ -1,4 +1,4 @@
-import { ConfigPlugin } from '@expo/config-plugins';
+import {ConfigPlugin} from '@expo/config-plugins';
 
 /**
  * Plugin to add [`SKAdNetworkIdentifier`](https://developer.apple.com/documentation/storekit/skadnetwork/configuring_the_participating_apps)s to the Info.plist safely.
@@ -7,7 +7,10 @@ import { ConfigPlugin } from '@expo/config-plugins';
  * @param config
  * @param props.identifiers array of lowercase string ids to push to the `SKAdNetworkItems` array in the `Info.plist`.
  */
-export const withSKAdNetworkIdentifiers: ConfigPlugin<string[]> = (config, identifiers) => {
+export const withSKAdNetworkIdentifiers: ConfigPlugin<string[]> = (
+  config,
+  identifiers,
+) => {
   if (!config.ios) {
     config.ios = {};
   }
@@ -20,7 +23,7 @@ export const withSKAdNetworkIdentifiers: ConfigPlugin<string[]> = (config, ident
 
   // Get ids
   let existingIds = config.ios.infoPlist.SKAdNetworkItems.map(
-    (item: any) => item?.SKAdNetworkIdentifier ?? null
+    (item: any) => item?.SKAdNetworkIdentifier ?? null,
   ).filter(Boolean) as string[];
   // remove duplicates
   existingIds = [...new Set(existingIds)];

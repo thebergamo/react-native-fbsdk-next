@@ -1,7 +1,6 @@
 /* eslint-env jest */
 const LoginButton = require('../../lib/commonjs/FBLoginButton').default;
 
-
 export const mockAppEvents = {
   AchievedLevel: 'fb_mobile_level_achieved',
   AdClick: 'AdClick',

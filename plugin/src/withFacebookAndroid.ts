@@ -1,14 +1,4 @@
 import {
-  AndroidConfig,
-  ConfigPlugin,
-  withAndroidManifest,
-  withStringsXml,
-} from '@expo/config-plugins';
-import {
-  appendScheme,
-  hasScheme,
-} from '@expo/config-plugins/build/android/Scheme';
-import {
   ConfigProps,
   getFacebookAdvertiserIDCollection,
   getFacebookAppId,
@@ -18,9 +8,19 @@ import {
   getFacebookDisplayName,
   getFacebookScheme,
 } from './config';
+import {
+  AndroidConfig,
+  ConfigPlugin,
+  withAndroidManifest,
+  withStringsXml,
+} from '@expo/config-plugins';
+import {
+  appendScheme,
+  hasScheme,
+} from '@expo/config-plugins/build/android/Scheme';
 
-const { buildResourceItem } = AndroidConfig.Resources;
-const { removeStringItem, setStringItem } = AndroidConfig.Strings;
+const {buildResourceItem} = AndroidConfig.Resources;
+const {removeStringItem, setStringItem} = AndroidConfig.Strings;
 const {
   addMetaDataItemToMainApplication,
   getMainApplicationOrThrow,
@@ -41,17 +41,17 @@ const META_AD_ID_COLLECTION = 'com.facebook.sdk.AdvertiserIDCollectionEnabled';
 
 export const withFacebookAppIdString: ConfigPlugin<ConfigProps> = (
   config,
-  props
+  props,
 ) => {
   return withStringsXml(config, (config) => {
     config.modResults = applyFacebookAppIdString(props, config.modResults);
     config.modResults = applyFacebookClientTokenString(
       props,
-      config.modResults
+      config.modResults,
     );
     config.modResults = applyFacebookLoginProtocolSchemeString(
       props,
-      config.modResults
+      config.modResults,
     );
     return config;
   });
@@ -59,7 +59,7 @@ export const withFacebookAppIdString: ConfigPlugin<ConfigProps> = (
 
 export const withFacebookManifest: ConfigPlugin<ConfigProps> = (
   config,
-  props
+  props,
 ) => {
   return withAndroidManifest(config, (config) => {
     config.modResults = setFacebookConfig(props, config.modResults);
@@ -81,13 +81,13 @@ function buildXMLItem({
   head: Record<string, string>;
   children?: Record<string, string | any[]>;
 }) {
-  return { ...(children ?? {}), $: head };
+  return {...(children ?? {}), $: head};
 }
 
 function buildAndroidItem(datum: string | Record<string, any>) {
-  const item = typeof datum === 'string' ? { name: datum } : datum;
+  const item = typeof datum === 'string' ? {name: datum} : datum;
   const head = prefixAndroidKeys(item);
-  return buildXMLItem({ head });
+  return buildXMLItem({head});
 }
 
 function getFacebookSchemeActivity() {
@@ -117,7 +117,7 @@ function getFacebookSchemeActivity() {
             buildAndroidItem('android.intent.category.BROWSABLE'),
           ],
           data: [
-            buildAndroidItem({ scheme: '@string/fb_login_protocol_scheme' }),
+            buildAndroidItem({scheme: '@string/fb_login_protocol_scheme'}),
           ],
         },
       ],
@@ -150,7 +150,7 @@ function ensureFacebookActivity({
 
 function applyFacebookLoginProtocolSchemeString(
   props: ConfigProps,
-  stringsJSON: AndroidConfig.Resources.ResourceXML
+  stringsJSON: AndroidConfig.Resources.ResourceXML,
 ) {
   const scheme = getFacebookScheme(props);
   if (scheme) {
@@ -161,7 +161,7 @@ function applyFacebookLoginProtocolSchemeString(
           value: scheme,
         }),
       ],
-      stringsJSON
+      stringsJSON,
     );
   }
 
@@ -170,13 +170,13 @@ function applyFacebookLoginProtocolSchemeString(
 
 function applyFacebookAppIdString(
   props: ConfigProps,
-  stringsJSON: AndroidConfig.Resources.ResourceXML
+  stringsJSON: AndroidConfig.Resources.ResourceXML,
 ) {
   const appID = getFacebookAppId(props);
   if (appID) {
     return setStringItem(
-      [buildResourceItem({ name: STRING_FACEBOOK_APP_ID, value: appID })],
-      stringsJSON
+      [buildResourceItem({name: STRING_FACEBOOK_APP_ID, value: appID})],
+      stringsJSON,
     );
   }
 
@@ -185,7 +185,7 @@ function applyFacebookAppIdString(
 
 function applyFacebookClientTokenString(
   props: ConfigProps,
-  stringsJSON: AndroidConfig.Resources.ResourceXML
+  stringsJSON: AndroidConfig.Resources.ResourceXML,
 ) {
   const clientToken = getFacebookClientToken(props);
   if (clientToken) {
@@ -196,7 +196,7 @@ function applyFacebookClientTokenString(
           value: clientToken,
         }),
       ],
-      stringsJSON
+      stringsJSON,
     );
   }
 
@@ -205,7 +205,7 @@ function applyFacebookClientTokenString(
 
 export function setFacebookConfig(
   props: ConfigProps,
-  androidManifest: AndroidConfig.Manifest.AndroidManifest
+  androidManifest: AndroidConfig.Manifest.AndroidManifest,
 ) {
   const scheme = getFacebookScheme(props);
 
@@ -223,18 +223,18 @@ export function setFacebookConfig(
     androidManifest = appendScheme(scheme, androidManifest);
   }
 
-  mainApplication = ensureFacebookActivity({ scheme, mainApplication });
+  mainApplication = ensureFacebookActivity({scheme, mainApplication});
 
   if (appID) {
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_APP_ID,
-      `@string/${STRING_FACEBOOK_APP_ID}`
+      `@string/${STRING_FACEBOOK_APP_ID}`,
     );
   } else {
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_APP_ID
+      META_APP_ID,
     );
   }
 
@@ -242,12 +242,12 @@ export function setFacebookConfig(
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_CLIENT_TOKEN,
-      `@string/${STRING_FACEBOOK_CLIENT_TOKEN}`
+      `@string/${STRING_FACEBOOK_CLIENT_TOKEN}`,
     );
   } else {
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_CLIENT_TOKEN
+      META_CLIENT_TOKEN,
     );
   }
 
@@ -255,49 +255,49 @@ export function setFacebookConfig(
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_APP_NAME,
-      displayName
+      displayName,
     );
   } else {
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_APP_NAME
+      META_APP_NAME,
     );
   }
   if (autoInitEnabled !== null) {
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_AUTO_INIT,
-      autoInitEnabled ? 'true' : 'false'
+      autoInitEnabled ? 'true' : 'false',
     );
   } else {
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_AUTO_INIT
+      META_AUTO_INIT,
     );
   }
   if (autoLogAppEvents !== null) {
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_AUTO_LOG_APP_EVENTS,
-      autoLogAppEvents ? 'true' : 'false'
+      autoLogAppEvents ? 'true' : 'false',
     );
   } else {
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_AUTO_LOG_APP_EVENTS
+      META_AUTO_LOG_APP_EVENTS,
     );
   }
   if (advertiserIdCollection !== null) {
     mainApplication = addMetaDataItemToMainApplication(
       mainApplication,
       META_AD_ID_COLLECTION,
-      advertiserIdCollection ? 'true' : 'false'
+      advertiserIdCollection ? 'true' : 'false',
     );
   } else {
     // eslint-disable-next-line
     mainApplication = removeMetaDataItemFromMainApplication(
       mainApplication,
-      META_AD_ID_COLLECTION
+      META_AD_ID_COLLECTION,
     );
   }
 
