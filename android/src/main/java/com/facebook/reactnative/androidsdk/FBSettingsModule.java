@@ -13,7 +13,10 @@ import androidx.annotation.Nullable;
 import com.facebook.FacebookSdk;
 import com.facebook.react.bridge.BaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.module.annotations.ReactModule;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a {@link NativeModule} that allows JS to use SDK settings in Facebook Android SDK.
@@ -31,23 +34,16 @@ public class FBSettingsModule extends BaseJavaModule {
     }
 
     /**
-     * Sets data processing options
-     * @param options list of the options
-     */
-    @ReactMethod
-    public void setDataProcessingOptions(@Nullable String[] options) {
-        FacebookSdk.setDataProcessingOptions(options, 0, 0);
-    }
-
-    /**
      * Sets data processing options with country and state
      * @param options list of the options
      * @param country code of the country
      * @param state code of the state
      */
     @ReactMethod
-    public static void setDataProcessingOptionsExtra(@Nullable String[] options, int country, int state) {
-        FacebookSdk.setDataProcessingOptions(options, country, state);
+    public void setDataProcessingOptions(ReadableArray options, int country, int state) {
+        List<String> opts = Utility.reactArrayToStringList(options);
+        String[] optsArray = opts.toArray(new String[0]);
+        FacebookSdk.setDataProcessingOptions(optsArray, country, state);
     }
 
     /**
