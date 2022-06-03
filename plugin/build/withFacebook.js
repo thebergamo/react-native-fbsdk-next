@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const config_plugins_1 = require("@expo/config-plugins");
 const config_1 = require("./config");
 const withFacebookAndroid_1 = require("./withFacebookAndroid");
 const withFacebookIOS_1 = require("./withFacebookIOS");
 const withSKAdNetworkIdentifiers_1 = require("./withSKAdNetworkIdentifiers");
+const config_plugins_1 = require("@expo/config-plugins");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('react-native-fbsdk-next/package.json');
 const withFacebook = (config, props) => {
