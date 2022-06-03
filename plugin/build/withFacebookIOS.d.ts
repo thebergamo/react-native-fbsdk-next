@@ -1,5 +1,5 @@
-import { ConfigPlugin, InfoPlist } from '@expo/config-plugins';
 import { ConfigProps } from './config';
+import { ConfigPlugin, InfoPlist } from '@expo/config-plugins';
 export declare const withFacebookIOS: ConfigPlugin<ConfigProps>;
 export declare function setFacebookConfig(config: ConfigProps, infoPlist: InfoPlist): InfoPlist;
 export declare function setFacebookScheme(config: ConfigProps, infoPlist: InfoPlist): InfoPlist;

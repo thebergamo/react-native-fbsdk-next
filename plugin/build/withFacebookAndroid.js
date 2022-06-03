@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setFacebookConfig = exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
+const config_1 = require("./config");
 const config_plugins_1 = require("@expo/config-plugins");
 const Scheme_1 = require("@expo/config-plugins/build/android/Scheme");
-const config_1 = require("./config");
 const { buildResourceItem } = config_plugins_1.AndroidConfig.Resources;
 const { removeStringItem, setStringItem } = config_plugins_1.AndroidConfig.Strings;
 const { addMetaDataItemToMainApplication, getMainApplicationOrThrow, prefixAndroidKeys, removeMetaDataItemFromMainApplication, } = config_plugins_1.AndroidConfig.Manifest;
