@@ -286,18 +286,18 @@ PODS:
   - React-jsinspector (0.67.2)
   - React-logger (0.67.2):
     - glog
-  - react-native-fbsdk-next (8.0.4):
+  - react-native-fbsdk-next (8.0.5):
     - React-Core
-    - react-native-fbsdk-next/Core (= 8.0.4)
-    - react-native-fbsdk-next/Login (= 8.0.4)
-    - react-native-fbsdk-next/Share (= 8.0.4)
-  - react-native-fbsdk-next/Core (8.0.4):
+    - react-native-fbsdk-next/Core (= 8.0.5)
+    - react-native-fbsdk-next/Login (= 8.0.5)
+    - react-native-fbsdk-next/Share (= 8.0.5)
+  - react-native-fbsdk-next/Core (8.0.5):
     - FBSDKCoreKit (~> 13.2.0)
     - React-Core
-  - react-native-fbsdk-next/Login (8.0.4):
+  - react-native-fbsdk-next/Login (8.0.5):
     - FBSDKLoginKit (~> 13.2.0)
     - React-Core
-  - react-native-fbsdk-next/Share (8.0.4):
+  - react-native-fbsdk-next/Share (8.0.5):
     - FBSDKGamingServicesKit (~> 13.2.0)
     - FBSDKShareKit (~> 13.2.0)
     - React-Core
@@ -551,7 +551,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 52beb652bbc61201bd70cbe4f0b8edb607e8da4f
   React-jsinspector: 595f76eba2176ebd8817a1fffd47b84fbdab9383
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
-  react-native-fbsdk-next: 7ab4f307b4c07de8f2f669659b70ff703eb841bd
+  react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
   React-perflogger: 3c9bb7372493e49036f07a82c44c8cf65cbe88db
   React-RCTActionSheet: 052606483045a408693aa7e864410b4a052f541a
   React-RCTAnimation: 08d4cac13222bb1348c687a0158dfd3b577cdb63

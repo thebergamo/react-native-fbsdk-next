@@ -5243,8 +5243,8 @@ react-native-codegen@^0.0.8:
     nullthrows "^1.1.1"
 
 "react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next":
-  version "7.1.0"
-  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/b6ae0aa51e3feeb6d6c22737712e3b20d69f0765"
+  version "8.0.5"
+  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/2e4fc7aa91db8ebf4ceec45ee35b602dd706b57c"
 
 react-native@0.67.2:
   version "0.67.2"
