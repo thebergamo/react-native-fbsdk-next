@@ -20,14 +20,6 @@
  * @format
  */
 
-export {default as ShareOpenGraphAction} from './models/FBShareOpenGraphAction';
-export {default as ShareOpenGraphObject} from './models/FBShareOpenGraphObject';
-export {
-  default as ShareOpenGraphValueContainer,
-  OpenGraphProperties,
-  OpenGraphValue,
-  OpenGraphValueType,
-} from './models/FBShareOpenGraphValueContainer';
 export {default as AccessToken, AccessTokenMap} from './FBAccessToken';
 export {
   default as AuthenticationToken,
@@ -89,6 +81,5 @@ export {
   ShareContentCommonParameters,
 } from './models/FBShareContent';
 export {ShareLinkContent} from './models/FBShareLinkContent';
-export {ShareOpenGraphContent} from './models/FBShareOpenGraphContent';
 export {SharePhotoContent} from './models/FBSharePhotoContent';
 export {ShareVideoContent} from './models/FBShareVideoContent';
