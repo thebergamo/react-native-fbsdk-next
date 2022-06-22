@@ -20,15 +20,13 @@
  * @format
  */
 import {ShareLinkContent} from './FBShareLinkContent';
-import {ShareOpenGraphContent} from './FBShareOpenGraphContent';
 import {SharePhotoContent} from './FBSharePhotoContent';
 import {ShareVideoContent} from './FBShareVideoContent';
 
 export type ShareContent =
   | ShareLinkContent
   | SharePhotoContent
-  | ShareVideoContent
-  | ShareOpenGraphContent;
+  | ShareVideoContent;
 /**
  * A base interface for content to be shared.
  */
