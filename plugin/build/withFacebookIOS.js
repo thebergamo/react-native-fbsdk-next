@@ -6,7 +6,6 @@ const config_plugins_1 = require("@expo/config-plugins");
 const { Scheme } = config_plugins_1.IOSConfig;
 const { appendScheme } = Scheme;
 const fbSchemes = ['fbapi', 'fb-messenger-api', 'fbauth2', 'fbshareextension'];
-const USER_TRACKING = 'This identifier will be used to deliver personalized ads to you.';
 const withFacebookIOS = (config, props) => {
     return (0, config_plugins_1.withInfoPlist)(config, (config) => {
         config.modResults = setFacebookConfig(props, config.modResults);
@@ -148,7 +147,7 @@ function setFacebookApplicationQuerySchemes(config, infoPlist) {
 }
 exports.setFacebookApplicationQuerySchemes = setFacebookApplicationQuerySchemes;
 const withUserTrackingPermission = (config, { iosUserTrackingPermission } = {}) => {
-    if (iosUserTrackingPermission === false) {
+    if (!iosUserTrackingPermission) {
         return config;
     }
     if (!config.ios) {
@@ -159,8 +158,7 @@ const withUserTrackingPermission = (config, { iosUserTrackingPermission } = {}) 
     }
     config.ios.infoPlist.NSUserTrackingUsageDescription =
         iosUserTrackingPermission ||
-            config.ios.infoPlist.NSUserTrackingUsageDescription ||
-            USER_TRACKING;
+            config.ios.infoPlist.NSUserTrackingUsageDescription;
     return config;
 };
 exports.withUserTrackingPermission = withUserTrackingPermission;

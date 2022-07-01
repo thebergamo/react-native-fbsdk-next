@@ -41,7 +41,7 @@ export type ConfigProps = {
   /**
    * Sets the iOS `NSUserTrackingUsageDescription` permission message in the `Info.plist`.
    */
-  iosUserTrackingPermission?: string;
+  iosUserTrackingPermission?: string | false;
 };
 
 export function getMergePropsWithConfig(

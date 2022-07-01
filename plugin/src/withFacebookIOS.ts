@@ -199,7 +199,7 @@ export function setFacebookApplicationQuerySchemes(
 
 export const withUserTrackingPermission: ConfigPlugin<
   {
-    iosUserTrackingPermission?: string;
+    iosUserTrackingPermission?: string | false;
   } | void
 > = (config, {iosUserTrackingPermission} = {}) => {
   if (!iosUserTrackingPermission) {
