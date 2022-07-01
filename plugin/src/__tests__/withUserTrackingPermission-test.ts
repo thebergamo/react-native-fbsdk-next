@@ -30,18 +30,12 @@ describe(withUserTrackingPermission, () => {
     });
   });
 
-  it(`adds default user tracking description`, () => {
+  it(`does not add user tracking description by default`, () => {
     expect(
       withUserTrackingPermission({name: 'foo', slug: 'bar'}, {}),
     ).toStrictEqual({
       name: 'foo',
       slug: 'bar',
-      ios: {
-        infoPlist: {
-          NSUserTrackingUsageDescription:
-            'This identifier will be used to deliver personalized ads to you.',
-        },
-      },
     });
   });
 

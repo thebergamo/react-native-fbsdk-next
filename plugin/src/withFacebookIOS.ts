@@ -20,9 +20,6 @@ const {appendScheme} = Scheme;
 
 const fbSchemes = ['fbapi', 'fb-messenger-api', 'fbauth2', 'fbshareextension'];
 
-const USER_TRACKING =
-  'This identifier will be used to deliver personalized ads to you.';
-
 export const withFacebookIOS: ConfigPlugin<ConfigProps> = (config, props) => {
   return withInfoPlist(config, (config) => {
     config.modResults = setFacebookConfig(props, config.modResults);
@@ -205,7 +202,7 @@ export const withUserTrackingPermission: ConfigPlugin<
     iosUserTrackingPermission?: string | false;
   } | void
 > = (config, {iosUserTrackingPermission} = {}) => {
-  if (iosUserTrackingPermission === false) {
+  if (!iosUserTrackingPermission) {
     return config;
   }
 
@@ -217,8 +214,7 @@ export const withUserTrackingPermission: ConfigPlugin<
   }
   config.ios.infoPlist.NSUserTrackingUsageDescription =
     iosUserTrackingPermission ||
-    config.ios.infoPlist.NSUserTrackingUsageDescription ||
-    USER_TRACKING;
+    config.ios.infoPlist.NSUserTrackingUsageDescription;
 
   return config;
 };

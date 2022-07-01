@@ -721,7 +721,7 @@ The plugin provides props for extra customization. Every time you change the pro
 - `appID` (_string_): Facebook Application ID.
 - `displayName` (_string_): Application Name.
 - `clientToken` (_string_): Client Token.
-- `iosUserTrackingPermission` (_string_): iOS User Tracking Permission. Defaults `This identifier will be used to deliver personalized ads to you.`.
+- `iosUserTrackingPermission` (_string_): iOS User Tracking Permission.
 - `advertiserIDCollectionEnabled` (_boolean_): Enable advertiser ID collection. Default `false`.
 - `autoLogAppEventsEnabled` (_boolean_): Default `false`.
 - `isAutoInitEnabled` (_boolean_): Default `false`.
@@ -740,7 +740,8 @@ The plugin provides props for extra customization. Every time you change the pro
           "displayName": "RN SDK Demo",
           "advertiserIDCollectionEnabled": false,
           "autoLogAppEventsEnabled": false,
-          "isAutoInitEnabled": true
+          "isAutoInitEnabled": true,
+          "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
         }
       ]
     ]
