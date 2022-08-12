@@ -725,6 +725,8 @@ The plugin provides props for extra customization. Every time you change the pro
 - `advertiserIDCollectionEnabled` (_boolean_): Enable advertiser ID collection. Default `false`.
 - `autoLogAppEventsEnabled` (_boolean_): Default `false`.
 - `isAutoInitEnabled` (_boolean_): Default `false`.
+         
+> If you are migrating from `expo-facebook` to this library, it is important to consider that `clientToken` was not required in `expo-facebook`, but it is required here. You can get that value from "Facebook Developers > Your App > Configurations > Advanced".
 
 #### Example
 
