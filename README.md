@@ -751,6 +751,23 @@ The plugin provides props for extra customization. Every time you change the pro
 }
 ```
 
+## Enabling Auto App Installs in Expo
+To enable auto app installs in Expo, you need to set autoLogAppEventsEnabled and advertiserIDCollectionEnabled flags to **true** in your `app.json` or `app.config.js`.
+
+Moreover, on iOS you need user consent to collect user data. You can do this by adding the following code somewhere to your `App.tsx`:
+
+```js
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
+
+const { status } = await requestTrackingPermissionsAsync(); 
+
+Settings.initializeSDK();
+
+if (status === 'granted') {
+    await Settings.setAdvertiserTrackingEnabled(true);
+}
+```
+
 ## Example app
 To run the example app, you'll first need to setup the environment:
 ```
