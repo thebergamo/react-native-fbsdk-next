@@ -293,11 +293,6 @@ export default {
    * The userID is persisted until this method is called again with a null userId
    */
   setUserID(userID: string | null) {
-    if (userID === null && Platform.OS === 'android') {
-      // TODO: Remove workaround once https://github.com/facebook/facebook-android-sdk/issues/1047 is released
-      AppEventsLogger.clearUserID();
-      return;
-    }
     AppEventsLogger.setUserID(userID);
   },
 
