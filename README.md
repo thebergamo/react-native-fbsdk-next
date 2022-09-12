@@ -244,6 +244,21 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
 
 This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
 
+8. No login if Facebook app is installed on iOS
+
+  Add the following code to AppDelegate.m:
+```
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [[FBSDKApplicationDelegate sharedInstance]application:app
+                                                       openURL:url
+                                                       options:options];
+}
+```
+See https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447
+
 ## Usage
 
 ### SDK Initialization
