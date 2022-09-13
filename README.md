@@ -144,7 +144,7 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
                                                             options:options];
       }
       ```
-      Without this code login might not work if Facebook app is installed, see https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447
+      Without this code login might not work if Facebook app is installed, see https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447 - if you are also using react-native deep-linking you may need have multiple entries in this openURL method, as detailed in the next section
 
 **If you're not using cocoapods already** you can also follow step 1.1 to set it up.
 
