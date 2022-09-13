@@ -133,6 +133,18 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
       ```
    3. After this step, if you run into this `build` issue: `Undefined symbols for architecture x86_64:`, 
    then you need to create a new file `File.swift` on your project folder. After doing this, you will get a prompt from `Xcode` asking if you would like to create a `Bridging Header`. Click accept.
+   4. From the facebook-ios-sdk docs steps 1-3, but in Objective-C since they have moved to Swift for their examples - make something like the following code is in AppDelegate.m:
+      ```objc
+      - (BOOL)application:(UIApplication *)app
+                  openURL:(NSURL *)url
+                  options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+      {
+        return [[FBSDKApplicationDelegate sharedInstance]application:app
+                                                            openURL:url
+                                                            options:options];
+      }
+      ```
+      Without this code login might not work if Facebook app is installed, see https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447 - if you are also using react-native deep-linking you may need have multiple entries in this openURL method, as detailed in the next section
 
 **If you're not using cocoapods already** you can also follow step 1.1 to set it up.
 
