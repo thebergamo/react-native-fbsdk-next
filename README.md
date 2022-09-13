@@ -133,6 +133,18 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
       ```
    3. After this step, if you run into this `build` issue: `Undefined symbols for architecture x86_64:`, 
    then you need to create a new file `File.swift` on your project folder. After doing this, you will get a prompt from `Xcode` asking if you would like to create a `Bridging Header`. Click accept.
+   4. Add the following code to AppDelegate.m:
+      ```objc
+      - (BOOL)application:(UIApplication *)app
+                  openURL:(NSURL *)url
+                  options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+      {
+        return [[FBSDKApplicationDelegate sharedInstance]application:app
+                                                            openURL:url
+                                                            options:options];
+      }
+      ```
+      Without this code login might not work if Facebook app is installed, see https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447
 
 **If you're not using cocoapods already** you can also follow step 1.1 to set it up.
 
@@ -243,21 +255,6 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
 - MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
 
 This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
-
-8. No login if Facebook app is installed on iOS
-
-  Add the following code to AppDelegate.m:
-```
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{
-  return [[FBSDKApplicationDelegate sharedInstance]application:app
-                                                       openURL:url
-                                                       options:options];
-}
-```
-See https://github.com/thebergamo/react-native-fbsdk-next/issues/59#issuecomment-1038149447
 
 ## Usage
 
