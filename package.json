@@ -60,7 +60,7 @@
     "validate:ts": "tsc --noEmit",
     "example:start": "cd ./RNFBSDKExample && yarn start",
     "example:ios": "cd ./RNFBSDKExample/ios && rm -f Podfile.lock && pod install && yarn ios",
-    "example:android": "cd ./RNFBSDKExample && yarn android --no-jetifier",
+    "example:android": "cd ./RNFBSDKExample && yarn android",
     "example:clean": "cd RNFBSDKExample && \\rm -fr yarn.lock node_modules ios/Podfile.lock && cd ..",
     "example:install": "cd RNFBSDKExample && yarn && cd ios && (rm -f Podfile.lock && pod install || true) && cd ../..",
     "example:devcopy": "yarn prepare && cp -rv package.json android ios lib src *.podspec RNFBSDKExample/node_modules/react-native-fbsdk-next/",
