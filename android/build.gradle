@@ -12,7 +12,7 @@ buildscript {
             google()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:7.0.3'
+            classpath 'com.android.tools.build:gradle:7.3.0'
         }
     }
 }
@@ -20,7 +20,7 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 31)
+    compileSdkVersion safeExtGet('compileSdkVersion', 33)
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 16)
         targetSdkVersion safeExtGet('targetSdkVersion', 31)
@@ -44,7 +44,7 @@ repositories {
     google()
 }
 
-def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '14.+')
+def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '15.+')
 
 dependencies {
     //noinspection GradleDynamicVersion
