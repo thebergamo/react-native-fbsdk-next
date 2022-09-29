@@ -1,7 +1,7 @@
 require 'json'
 package = JSON.parse(File.read(File.join(__dir__, './', 'package.json')))
 
-FBSDKVersion = "14.1.0"
+FBSDKVersion = "15.0.0"
 
 Pod::Spec.new do |s|
   s.name          = package['name']
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license       = package['license']
   s.homepage      = package['homepage']
   s.source        = { :git => 'https://github.com/thebergamo/react-native-fbsdk-next.git', :tag => "v#{package['version']}" }
-  s.platforms     = { :ios => "11.0", :tvos => "11.0" }
+  s.platforms     = { :ios => "12.0", :tvos => "12.0" }
   s.dependency      'React-Core'
 
   s.subspec 'Core' do |ss|
