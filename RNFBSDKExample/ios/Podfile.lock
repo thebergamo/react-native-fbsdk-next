@@ -2,8 +2,8 @@ PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
-  - FBAEMKit (14.1.0):
-    - FBSDKCoreKit_Basics (= 14.1.0)
+  - FBAEMKit (15.0.0):
+    - FBSDKCoreKit_Basics (= 15.0.0)
   - FBLazyVector (0.70.1)
   - FBReactNativeSpec (0.70.1):
     - RCT-Folly (= 2021.07.22.00)
@@ -12,18 +12,18 @@ PODS:
     - React-Core (= 0.70.1)
     - React-jsi (= 0.70.1)
     - ReactCommon/turbomodule/core (= 0.70.1)
-  - FBSDKCoreKit (14.1.0):
-    - FBAEMKit (= 14.1.0)
-    - FBSDKCoreKit_Basics (= 14.1.0)
-  - FBSDKCoreKit_Basics (14.1.0)
-  - FBSDKGamingServicesKit (14.1.0):
-    - FBSDKCoreKit (= 14.1.0)
-    - FBSDKCoreKit_Basics (= 14.1.0)
-    - FBSDKShareKit (= 14.1.0)
-  - FBSDKLoginKit (14.1.0):
-    - FBSDKCoreKit (= 14.1.0)
-  - FBSDKShareKit (14.1.0):
-    - FBSDKCoreKit (= 14.1.0)
+  - FBSDKCoreKit (15.0.0):
+    - FBAEMKit (= 15.0.0)
+    - FBSDKCoreKit_Basics (= 15.0.0)
+  - FBSDKCoreKit_Basics (15.0.0)
+  - FBSDKGamingServicesKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
+    - FBSDKCoreKit_Basics (= 15.0.0)
+    - FBSDKShareKit (= 15.0.0)
+  - FBSDKLoginKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
+  - FBSDKShareKit (15.0.0):
+    - FBSDKCoreKit (= 15.0.0)
   - Flipper (0.125.0):
     - Flipper-Folly (~> 2.6)
     - Flipper-RSocket (~> 1.4)
@@ -316,20 +316,20 @@ PODS:
   - React-jsinspector (0.70.1)
   - React-logger (0.70.1):
     - glog
-  - react-native-fbsdk-next (10.1.0):
+  - react-native-fbsdk-next (11.0.0):
     - React-Core
-    - react-native-fbsdk-next/Core (= 10.1.0)
-    - react-native-fbsdk-next/Login (= 10.1.0)
-    - react-native-fbsdk-next/Share (= 10.1.0)
-  - react-native-fbsdk-next/Core (10.1.0):
-    - FBSDKCoreKit (~> 14.1.0)
+    - react-native-fbsdk-next/Core (= 11.0.0)
+    - react-native-fbsdk-next/Login (= 11.0.0)
+    - react-native-fbsdk-next/Share (= 11.0.0)
+  - react-native-fbsdk-next/Core (11.0.0):
+    - FBSDKCoreKit (~> 15.0.0)
     - React-Core
-  - react-native-fbsdk-next/Login (10.1.0):
-    - FBSDKLoginKit (~> 14.1.0)
+  - react-native-fbsdk-next/Login (11.0.0):
+    - FBSDKLoginKit (~> 15.0.0)
     - React-Core
-  - react-native-fbsdk-next/Share (10.1.0):
-    - FBSDKGamingServicesKit (~> 14.1.0)
-    - FBSDKShareKit (~> 14.1.0)
+  - react-native-fbsdk-next/Share (11.0.0):
+    - FBSDKGamingServicesKit (~> 15.0.0)
+    - FBSDKShareKit (~> 15.0.0)
     - React-Core
   - React-perflogger (0.70.1)
   - React-RCTActionSheet (0.70.1):
@@ -564,14 +564,14 @@ SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
-  FBAEMKit: a899515e45476027f73aef377b5cffadcd56ca3a
+  FBAEMKit: d8312d8451ead46282adc7f3565ffc4965e3a4a7
   FBLazyVector: d3cdc05875c89782840d2f38e1d6174fab24e4d2
   FBReactNativeSpec: 0612c8f2dbd774414bb778247c6ec6cb05aa4c50
-  FBSDKCoreKit: 24f8bc8d3b5b2a8c5c656a1329492a12e8efa792
-  FBSDKCoreKit_Basics: 6e578c9bdc7aa1365dbbbde633c9ebb536bcaa98
-  FBSDKGamingServicesKit: 548f294d6c1cc91a1a1517ade872aaa36bf3a085
-  FBSDKLoginKit: 787de205d524c3a4b17d527916f1d066e4361660
-  FBSDKShareKit: b9c1cd1fa6a320a50f0f353cf30d589049c8db77
+  FBSDKCoreKit: 81879058dd06208c0820fc713d054ca54903e8ba
+  FBSDKCoreKit_Basics: eebc9bb69a0e5d133b92dca53a20716227faa454
+  FBSDKGamingServicesKit: e0766514d64d26a9f846e793c0a44bc4a236723b
+  FBSDKLoginKit: 11995469cd7da16fd4d5245e8d2ec61060479270
+  FBSDKShareKit: 9501792c3024580809f811a8a549868699d9bd32
   Flipper: 26fc4b7382499f1281eb8cb921e5c3ad6de91fe0
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 2dc99b02f658daf147069aad9dbd29d8feb06d30
@@ -601,7 +601,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 47201924064085223b63ec7e3ee9fd40ad8508e8
   React-jsinspector: 1363be638eccfe1aea1b10dd42e632b0397e5ec8
   React-logger: 7bd569e3857d74ed412ce0a5c51f421ff7d4ca7f
-  react-native-fbsdk-next: d6e1c6ad1693c891add104ab529d96906784ba9c
+  react-native-fbsdk-next: e5ea39f1b0f1e76deeb2538275559706f3b79e82
   React-perflogger: 48c6b363e867d64b682e84f80ca45636bd65e19c
   React-RCTActionSheet: 33c74fe5c754835e3715c300618da9aa2f7203fa
   React-RCTAnimation: 2dbf0120d4d1ab7716079b4180f2ca89c465e46b
