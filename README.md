@@ -117,7 +117,7 @@ protected List<ReactPackage> getPackages() {
 
 #### 3.1 Android
 
-Before you can run the project, follow the [Getting Started Guide](https://developers.facebook.com/docs/android/getting-started/) for Facebook Android SDK to set up a Facebook app. You can skip the build.gradle changes since that's taken care of by the rnpm link step above, but **make sure** you follow the rest of the steps such as updating `strings.xml` and `AndroidManifest.xml`.
+Before you can run the project, follow the [Getting Started Guide](https://developers.facebook.com/docs/android/getting-started/) for Facebook Android SDK to set up a Facebook app. You can skip the build.gradle changes since that's taken care of by the rnpm link step above, but **make sure** you follow the rest of the steps such as updating `strings.xml` and `AndroidManifest.xml`. In addition, keep in mind that you have to point the Key Hash generation command at your app's `debug.keystore` file. You can find its location by checking [`storeFile`](https://developer.android.com/studio/build/gradle-tips#sign-your-app) in one of the `build.gradle` files (its default path is `android/app/build.gradle` however this can vary from project to project).
 
 #### 3.2 iOS
 
