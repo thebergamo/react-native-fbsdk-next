@@ -7,7 +7,7 @@
  *
  * @format
  */
-import {isDefined, isString} from './util/validate';
+import {isBoolean, isDefined, isString} from './util/validate';
 import {Platform, NativeModules} from 'react-native';
 
 const Settings = NativeModules.FBSettings;
@@ -64,4 +64,27 @@ export default {
     }
     Settings.setAppID(appID);
   },
+  /**
+   * Set the LogAppEventsEnabled .
+   *
+   */
+  setAutoLogAppEventsEnabled(enabled: boolean) {
+    if (!isBoolean(enabled)) {
+       throw new Error("setAutoLogAppEventsEnabled expected 'enabled' to be a boolean");
+    }
+    Settings.setAutoLogAppEventsEnabled(enabled);
+      return Promise.resolve(true);
+    },
+  /**
+   * Set the AdvertiserIDCollectionEnabled
+   *
+   */
+  setAdvertiserIDCollectionEnabled(enabled: boolean) {
+    if (!isBoolean(enabled)) {
+      throw new Error("setAdvertiserIDCollectionEnabled expected 'enabled' to be a boolean");
+   }
+   Settings.setAdvertiserIDCollectionEnabled(enabled);
+      return Promise.resolve(true);
+    }
+
 };

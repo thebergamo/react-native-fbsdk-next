@@ -63,4 +63,21 @@ public class FBSettingsModule extends BaseJavaModule {
     public static void setAppID(String appID) {
         FacebookSdk.setApplicationId(appID);
     }
+    /**
+     * Set Logging For The user
+     * @param enabled enabled
+     */
+    @ReactMethod
+    public static void setAutoLogAppEventsEnabled(Boolean enabled) {
+        FacebookSdk.setAutoLogAppEventsEnabled(enabled);
+    }
+    /**
+     * Set The Collection enabling for idfa,adid
+     * @param enabled enabled
+     */
+    @ReactMethod
+    public static void setAdvertiserIDCollectionEnabled(Boolean enabled) {
+        FacebookSdk.setAdvertiserIDCollectionEnabled(enabled);
+    }
+
 }

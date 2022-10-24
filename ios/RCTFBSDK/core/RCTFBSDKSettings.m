@@ -53,4 +53,18 @@ RCT_EXPORT_METHOD(setAppID:(NSString *)appID)
   [FBSDKSettings.sharedSettings setAppID:appID];
 }
 
+RCT_EXPORT_METHOD(setAutoLogAppEventsEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve
+rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [FBSDKSettings.sharedSettings setAutoLogAppEventsEnabled:enabled];
+  resolve(@(true)); // true means successfully changed
+}
+
+RCT_EXPORT_METHOD(setAdvertiserIDCollectionEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejector:(RCTPromiseRejectBlock)reject )
+{
+  [FBSDKSettings.sharedSettings setAdvertiserIDCollectionEnabled:enabled];
+  resolve(@(true)); // true means successfully changed
+}
+
+
 @end
