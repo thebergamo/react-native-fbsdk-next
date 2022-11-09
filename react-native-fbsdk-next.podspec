@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license       = package['license']
   s.homepage      = package['homepage']
   s.source        = { :git => 'https://github.com/thebergamo/react-native-fbsdk-next.git', :tag => "v#{package['version']}" }
-  s.platforms     = { :ios => "12.0", :tvos => "12.0" }
+  s.platforms     = { :ios => "13.0", :tvos => "13.0" }
   s.dependency      'React-Core'
 
   s.subspec 'Core' do |ss|
