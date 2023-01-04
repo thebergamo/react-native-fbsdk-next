@@ -134,7 +134,10 @@ export type AppEventParam = {
   ValueYes: string;
 };
 
-const {AppEvents, AppEventParams} = AppEventsLogger?.getConstants() || {};
+const {AppEvents, AppEventParams} = (AppEventsLogger?.getConstants() || {}) as {
+  AppEvents: AppEvent;
+  AppEventParams: AppEventParam;
+};
 
 export default {
   /**
