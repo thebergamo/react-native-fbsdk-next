@@ -789,6 +789,31 @@ if (status === 'granted') {
 }
 ```
 
+## Migrating from expo-facebook to react-native-fbsdk-next
+The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated in Expo SDK 45 and removed in Expo SDK 46. The following feature parity table lists the `expo-facebook` API functions and their `react-native-fbsdk-native` counterparts, where available:
+
+| expo-facebook | Supported | react-native-fbsdk-next |
+| --- | --- | --- |
+| [flushAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#flushasync) | ✅ | AppEventsLogger.flush() |
+| [getAdvertiserIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getadvertiseridasync) | ❌ | Not supported |
+| [getAnonymousIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getanonymousidasync) | ✅ | AppEventsLogger.getAnonymousID() |
+| [getAttributionIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getattributionidasync) | ✅ | AppEventsLogger.getAttributionID() |
+| [getAuthenticationCredentialAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getauthenticationcredentialasync) | ✅ | AccessToken.accessToken |
+| [getPermissionsAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getpermissionsasync) | ❌ | Not supported |
+| [getUserIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getuseridasync) | ✅ | AppEventsLogger.getUserId() |
+| [initializeAsync(optionsOrAppId, appName)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#initializeasyncoptionsorappid-appname) | ✅ | Settings.setAppID($appId); Settings.setAppName($appName); Settings.setGraphAPIVersion($version); Settings.setAutoLogAppEventsEnabled($autoLogAppEvents); <br/> Settings.initializeSDK() |
+| [logEventAsync(eventName, parameters)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#logeventasynceventname-parameters) | ✅ | AppEventsLogger.logEvent(eventName, parameters) |
+| [logInWithReadPermissionsAsync(options)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#loginwithreadpermissionsasyncoptions) | ✅ | LoginManager.logInWithPermissions(permissions) |
+| [logOutAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#logoutasync)  | ✅ | LoginManager.logOut() |
+| [logPurchaseAsync(purchaseAmount, currencyCode, parameters)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#logpurchaseasyncpurchaseamount-currencycode-parameters) | ✅ | AppEventsLogger.logPurchase(purchaseAmount, currency, parameters) |
+| [logPushNotificationOpenAsync(campaign)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#logpushnotificationopenasynccampaign) | ✅ | AppEventsLogger.logPushNotificationOpen(payload) |
+| [requestPermissionsAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#requestpermissionsasync) | ❌ | Not supported |
+| [setAdvertiserIDCollectionEnabledAsync(enabled)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setadvertiseridcollectionenabledasyncenabled) | ✅ | Settings.setAdvertiserIDCollectionEnabled(enabled) |
+| [setAdvertiserTrackingEnabledAsync(enabled)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setadvertisertrackingenabledasyncenabled) | ✅ | Settings.setAdvertiserTrackingEnabled(enabled) |
+| [setAutoLogAppEventsEnabledAsync(enabled)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setautologappeventsenabledasyncenabled) | ✅ | Settings.setAutoLogAppEventsEnabled(enabled) |
+| [setUserDataAsync(userData)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setuserdataasyncuserdata) | ✅ | AppEventsLogger.setUserData(userData) |
+| [setUserIDAsync(userID)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setuseridasyncuserid) | ✅ | AppEventsLogger.setUserID(userID) |
+
 ## Example app
 To run the example app, you'll first need to setup the environment:
 ```
