@@ -7,7 +7,7 @@
  *
  * @format
  */
-import {isDefined, isString} from './util/validate';
+import {isDefined, isString, isValidGraphAPIVersion} from './util/validate';
 import {Platform, NativeModules} from 'react-native';
 
 const Settings = NativeModules.FBSettings;
@@ -63,5 +63,45 @@ export default {
       throw new Error("setAppID expected 'appID' to be a non empty string");
     }
     Settings.setAppID(appID);
+  },
+  /**
+   * Sets the Facebook application name for the current app.
+   */
+  setAppName(appName: string) {
+    if (!isDefined(appName) || !isString(appName) || appName.length === 0) {
+      throw new Error("setAppName expected 'appName' to be a non empty string");
+    }
+    Settings.setAppName(appName);
+  },
+  /**
+   * Sets the Graph API version to use when making Graph requests.
+   */
+  setGraphAPIVersion(version: string) {
+    if (
+      !isDefined(version) ||
+      !isString(version) ||
+      version.length === 0 ||
+      !isValidGraphAPIVersion(version)
+    ) {
+      throw new Error(
+        "setGraphAPIVersion expected 'version' to be a non empty string",
+      );
+    }
+    Settings.setGraphAPIVersion(version);
+  },
+  /**
+   * Sets whether Facebook SDK should log app events. App events involve eg. app installs,
+   * app launches etc.
+   */
+  setAutoLogAppEventsEnabled(enabled: boolean) {
+    Settings.setAutoLogAppEventsEnabled(enabled);
+  },
+  /**
+   * Whether the Facebook SDK should collect advertiser ID properties, like the Apple IDFA
+   * and Android Advertising ID, automatically. Advertiser IDs let you identify and target
+   * specific customers.
+   */
+  setAdvertiserIDCollectionEnabled(enabled: boolean) {
+    Settings.setAdvertiserIDCollectionEnabled(enabled);
   },
 };

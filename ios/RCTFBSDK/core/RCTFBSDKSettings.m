@@ -29,7 +29,7 @@ RCT_EXPORT_METHOD(getAdvertiserTrackingEnabled:(RCTPromiseResolveBlock)resolve r
 
 RCT_EXPORT_METHOD(setAdvertiserTrackingEnabled:(BOOL)ATE resolver:(RCTPromiseResolveBlock)resolve rejector:(RCTPromiseRejectBlock)reject)
 {
-  FBSDKSettings.sharedSettings.advertiserTrackingEnabled = ATE;
+  [FBSDKSettings.sharedSettings setAdvertiserTrackingEnabled:ATE];
   resolve(@(true)); // true means successfully changed
 }
 
@@ -51,6 +51,25 @@ RCT_EXPORT_METHOD(initializeSDK)
 RCT_EXPORT_METHOD(setAppID:(NSString *)appID)
 {
   [FBSDKSettings.sharedSettings setAppID:appID];
+}
+
+RCT_EXPORT_METHOD(setAppName:(NSString *)displayName)
+{
+  [FBSDKSettings.sharedSettings setDisplayName:displayName];
+}
+
+RCT_EXPORT_METHOD(setGraphAPIVersion:(NSString *)version)
+{
+  [FBSDKSettings.sharedSettings setGraphAPIVersion:version];
+}
+
+RCT_EXPORT_METHOD(setAutoLogAppEventsEnabled:(BOOL)enabled)
+{
+  [FBSDKSettings.sharedSettings setAutoLogAppEventsEnabled:enabled];
+}
+RCT_EXPORT_METHOD(setAdvertiserIDCollectionEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejector:(RCTPromiseRejectBlock)reject)
+{
+  [FBSDKSettings.sharedSettings setAdvertiserIDCollectionEnabled:enabled];
 }
 
 @end

@@ -63,4 +63,24 @@ public class FBSettingsModule extends BaseJavaModule {
     public static void setAppID(String appID) {
         FacebookSdk.setApplicationId(appID);
     }
+
+    @ReactMethod
+    public static void setAppName(String displayName) {
+        FacebookSdk.setApplicationName(displayName);
+    }
+
+    @ReactMethod
+    public static void setGraphAPIVersion(String version) {
+        FacebookSdk.setGraphApiVersion(version);
+    }
+
+    @ReactMethod
+    public static void setAutoLogAppEventsEnabled(Boolean enabled) {
+        FacebookSdk.setAutoLogAppEventsEnabled(enabled);
+    }
+
+    @ReactMethod
+    public static void setAdvertiserIDCollectionEnabled(Boolean enabled) {
+        FacebookSdk.setAdvertiserIDCollectionEnabled(enabled);
+    }
 }

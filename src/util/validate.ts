@@ -145,6 +145,14 @@ export function isValidUrl(url: string) {
 }
 
 /**
+ * Matches Graph API versions of the form v2.7
+ */
+const IS_VALID_GRAPH_API_VERSION = /^(v([0-9]+).([0-9]+))/;
+export function isValidGraphAPIVersion(version: string) {
+  return IS_VALID_GRAPH_API_VERSION.test(version);
+}
+
+/**
  * Array includes
  */
 export function isOneOf(value: unknown, oneOf: unknown[] = []) {
