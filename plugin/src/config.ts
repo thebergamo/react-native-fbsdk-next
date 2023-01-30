@@ -1,15 +1,3 @@
-import {ExpoConfig} from '@expo/config-types';
-
-export type ExpoConfigFacebook = Pick<
-  ExpoConfig,
-  | 'facebookScheme'
-  | 'facebookAdvertiserIDCollectionEnabled'
-  | 'facebookAppId'
-  | 'facebookAutoInitEnabled'
-  | 'facebookAutoLogAppEventsEnabled'
-  | 'facebookDisplayName'
->;
-
 export type ConfigProps = {
   /**
    * Used for all Facebook libraries. Set up your Facebook App ID at https://developers.facebook.com.
@@ -44,28 +32,18 @@ export type ConfigProps = {
   iosUserTrackingPermission?: string | false;
 };
 
-export function getMergePropsWithConfig(
-  config: ExpoConfigFacebook,
+export function getConfigProps(
   props: ConfigProps | void,
 ): ConfigProps {
   const {
-    facebookAppId,
-    facebookDisplayName,
-    facebookScheme,
-    facebookAutoInitEnabled,
-    facebookAutoLogAppEventsEnabled,
-    facebookAdvertiserIDCollectionEnabled,
-  } = config;
-  const {
-    appID = facebookAppId,
+    appID,
     clientToken,
-    displayName = facebookDisplayName,
-    scheme = facebookScheme ?? (appID ? `fb${appID}` : undefined),
-    isAutoInitEnabled = facebookAutoInitEnabled ?? false,
-    autoLogAppEventsEnabled = facebookAutoLogAppEventsEnabled ?? false,
-    advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled ??
-      false,
-    iosUserTrackingPermission,
+    displayName,
+    scheme = appID ? `fb${appID}` : undefined,
+    isAutoInitEnabled = false,
+    autoLogAppEventsEnabled = false,
+    advertiserIDCollectionEnabled = false,
+    iosUserTrackingPermission = false,
   } = (props ?? {}) as ConfigProps;
 
   return {

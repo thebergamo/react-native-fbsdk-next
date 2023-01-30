@@ -1,4 +1,4 @@
-import {ConfigProps, getMergePropsWithConfig} from './config';
+import {ConfigProps, getConfigProps} from './config';
 import {
   withAndroidPermissions,
   withFacebookAppIdString,
@@ -12,7 +12,7 @@ import {ConfigPlugin, createRunOncePlugin} from '@expo/config-plugins';
 const pkg = require('react-native-fbsdk-next/package.json');
 
 const withFacebook: ConfigPlugin<ConfigProps | void> = (config, props) => {
-  const newProps = getMergePropsWithConfig(config, props);
+  const newProps = getConfigProps(props);
   if (!newProps.appID) {
     throw new Error('missing appID in the plugin properties');
   }
