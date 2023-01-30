@@ -1,5 +1,3 @@
-import { ExpoConfig } from '@expo/config-types';
-export declare type ExpoConfigFacebook = Pick<ExpoConfig, 'facebookScheme' | 'facebookAdvertiserIDCollectionEnabled' | 'facebookAppId' | 'facebookAutoInitEnabled' | 'facebookAutoLogAppEventsEnabled' | 'facebookDisplayName'>;
 export declare type ConfigProps = {
     /**
      * Used for all Facebook libraries. Set up your Facebook App ID at https://developers.facebook.com.
@@ -31,7 +29,7 @@ export declare type ConfigProps = {
      */
     iosUserTrackingPermission?: string | false;
 };
-export declare function getMergePropsWithConfig(config: ExpoConfigFacebook, props: ConfigProps | void): ConfigProps;
+export declare function getConfigProps(props: ConfigProps | void): ConfigProps;
 export declare function getFacebookAppId(config: ConfigProps): string | null;
 export declare function getFacebookClientToken(config: ConfigProps): string | null;
 export declare function getFacebookScheme(config: ConfigProps): string | null;

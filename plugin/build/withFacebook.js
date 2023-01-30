@@ -8,7 +8,7 @@ const config_plugins_1 = require("@expo/config-plugins");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('react-native-fbsdk-next/package.json');
 const withFacebook = (config, props) => {
-    const newProps = (0, config_1.getMergePropsWithConfig)(config, props);
+    const newProps = (0, config_1.getConfigProps)(props);
     if (!newProps.appID) {
         throw new Error('missing appID in the plugin properties');
     }

@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFacebookAdvertiserIDCollection = exports.getFacebookAutoLogAppEvents = exports.getFacebookAutoInitEnabled = exports.getFacebookDisplayName = exports.getFacebookScheme = exports.getFacebookClientToken = exports.getFacebookAppId = exports.getMergePropsWithConfig = void 0;
-function getMergePropsWithConfig(config, props) {
-    const { facebookAppId, facebookDisplayName, facebookScheme, facebookAutoInitEnabled, facebookAutoLogAppEventsEnabled, facebookAdvertiserIDCollectionEnabled, } = config;
-    const { appID = facebookAppId, clientToken, displayName = facebookDisplayName, scheme = facebookScheme !== null && facebookScheme !== void 0 ? facebookScheme : (appID ? `fb${appID}` : undefined), isAutoInitEnabled = facebookAutoInitEnabled !== null && facebookAutoInitEnabled !== void 0 ? facebookAutoInitEnabled : false, autoLogAppEventsEnabled = facebookAutoLogAppEventsEnabled !== null && facebookAutoLogAppEventsEnabled !== void 0 ? facebookAutoLogAppEventsEnabled : false, advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled !== null && facebookAdvertiserIDCollectionEnabled !== void 0 ? facebookAdvertiserIDCollectionEnabled : false, iosUserTrackingPermission, } = (props !== null && props !== void 0 ? props : {});
+exports.getFacebookAdvertiserIDCollection = exports.getFacebookAutoLogAppEvents = exports.getFacebookAutoInitEnabled = exports.getFacebookDisplayName = exports.getFacebookScheme = exports.getFacebookClientToken = exports.getFacebookAppId = exports.getConfigProps = void 0;
+function getConfigProps(props) {
+    const { appID, clientToken, displayName, scheme = appID ? `fb${appID}` : undefined, isAutoInitEnabled = false, autoLogAppEventsEnabled = false, advertiserIDCollectionEnabled = false, iosUserTrackingPermission = false, } = (props !== null && props !== void 0 ? props : {});
     return {
         appID,
         clientToken,
@@ -15,7 +14,7 @@ function getMergePropsWithConfig(config, props) {
         iosUserTrackingPermission,
     };
 }
-exports.getMergePropsWithConfig = getMergePropsWithConfig;
+exports.getConfigProps = getConfigProps;
 function getFacebookAppId(config) {
     var _a;
     return (_a = config.appID) !== null && _a !== void 0 ? _a : null;
