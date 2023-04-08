@@ -84,11 +84,16 @@
     "plugin/build/"
   ],
   "dependencies": {
-    "@expo/config-plugins": "^5.0.1",
     "xml2js": "^0.4.23"
   },
   "peerDependencies": {
+    "expo": ">=47.0.0",
     "react-native": ">=0.63.3"
+  },
+  "peerDependenciesMeta": {
+    "expo": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -109,6 +114,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "eslint": "^8.16.0",
+    "expo": "^47.0.0",
     "expo-module-scripts": "^2.0.0",
     "jest": "^28.1.0",
     "metro-react-native-babel-preset": "^0.71.0",
