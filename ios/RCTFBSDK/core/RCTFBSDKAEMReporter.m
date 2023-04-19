@@ -7,7 +7,7 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTUtils.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBAEMKit/FBAEMKit-Swift.h>
 
 @interface RCTFBSDKAEMReporter : NSObject <RCTBridgeModule>
 @end

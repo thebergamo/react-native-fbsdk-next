@@ -121,17 +121,22 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 #### 3.2 iOS
 
-Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
+Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS.
 
 **NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
    on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
-   1. Add `#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>`
+   1. Add
+   ```objc
+   #import <AuthenticationServices/AuthenticationServices.h>
+   #import <SafariServices/SafariServices.h>
+   #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>`
+   ```
    2. Inside `didFinishLaunchingWithOptions`, add the following:
       ```objc
          [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
       ```
-   3. After this step, if you run into this `build` issue: `Undefined symbols for architecture x86_64:`, 
+   3. After this step, if you run into this `build` issue: `Undefined symbols for architecture x86_64:`,
    then you need to create a new file `File.swift` on your project folder. After doing this, you will get a prompt from `Xcode` asking if you would like to create a `Bridging Header`. Click accept.
    4. From the facebook-ios-sdk docs steps 1-3, but in Objective-C since they have moved to Swift for their examples - make something like the following code is in AppDelegate.m:
       ```objc
@@ -153,6 +158,8 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
 The `AppDelegate.m` file can only have one method for `openUrl`. If you're also using `RCTLinkingManager` to handle deep links, you should handle both results in your `openUrl` method.
 
 ```objc
+#import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
+#import <SafariServices/SafariServices.h> // <- Add This Import
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
 #import <React/RCTLinkingManager.h> // <- Add This Import
 
@@ -252,7 +259,7 @@ $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
 - Run the app on a real device
 - Have the facebook app running in the background and logged in to an account
 - Have that account you used on Facebook added as an "Advertising Account" for your app on Facebook's dashboard
-- MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
+- MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP.
 
 This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
 
@@ -295,6 +302,8 @@ Settings.initializeSDK();
 If you would like to initialize the Facebook SDK even earlier in startup for iOS, you need to include this code in your AppDelegate.m file now that auto-initialization is removed.
 
 ```objective-c
+#import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
+#import <SafariServices/SafariServices.h> // <- Add This Import
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -634,7 +643,7 @@ AppEventsLogger.logEvent(AppEventsLogger.AppEvents.CompletedRegistration, {
 ```
 ### [Aggregated Event Measurement(AEM) for iOS](https://developers.facebook.com/docs/app-events/guides/aggregated-event-measurement/)
 
-Aggregated Event Measurement (AEM) for iOS apps allows for the measurement of app events from iOS 14.5+ users who have opted out of app tracking. To implement AEM for your app you can follow the steps below. 
+Aggregated Event Measurement (AEM) for iOS apps allows for the measurement of app events from iOS 14.5+ users who have opted out of app tracking. To implement AEM for your app you can follow the steps below.
 
 #### **Step 1. Connect the App Delegate**
 
@@ -643,13 +652,13 @@ Add the following code in the system `application:openURL:options:` function fro
 The DeepLink URL from the re-engagement ads should be passed to the AEM Kit even if the app is opened in cold start.
 
 ```objc
-#import <FBAEMKit/FBAEMKit.h>
+#import <FBAEMKit/FBAEMKit-Swift.h>
 
-// apply codes below to `application:openURL:options:` 
+// apply codes below to `application:openURL:options:`
 // in `AppDelegate.m` or `SceneDelegate.m`
 [FBAEMReporter configureWithNetworker:nil appID:@"{app-id}" reporter:nil]; // Replace {app-id} with your Facebook App id
 [FBAEMReporter enable];
-[FBAEMReporter handleURL:url];
+[FBAEMReporter handle:url];
 ```
 
 #### **Step 2. Add AEM Logging**
@@ -665,7 +674,7 @@ AEMReporterIOS.logAEMEvent(eventName, value, currency, otherParameters);
 
 Event names for AEM must match event names you used in app event logging.
 
-Here's an example of how to use this method - 
+Here's an example of how to use this method -
 
 ```ts
 LogFBPurchase = (purchaseAmount: number, currencyCode: string, parameters?: Params | undefined) => {
@@ -725,7 +734,7 @@ After installing this npm package, add the [config plugin](https://docs.expo.io/
 ```
 
 Unless you are managing your own native code, the config plugin must be configured per the following "API" section.
-         
+
 Next, rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
 
 ### API
@@ -733,7 +742,7 @@ Next, rebuild your app as described in the ["Adding custom native code"](https:/
 The plugin provides props for extra customization. Every time you change the props or plugins, you'll need to rebuild (and `prebuild`) the native app. If no extra properties are added, defaults will be used.
 
 Required configuration:
-         
+
 - `appID` (_string_): Facebook Application ID.
 - `displayName` (_string_): Application Name.
 - `clientToken` (_string_): Client Token.
@@ -745,7 +754,7 @@ Optional configuration:
 - `advertiserIDCollectionEnabled` (_boolean_): Enable advertiser ID collection. Default `false`.
 - `autoLogAppEventsEnabled` (_boolean_): Default `false`.
 - `isAutoInitEnabled` (_boolean_): Default `false`.
-         
+
 > If you are migrating from `expo-facebook` to this library, it is important to consider that `clientToken` was not required in `expo-facebook`, but it is required here. You can get that value from "Facebook Developers > Your App > Configurations > Advanced".
 
 #### Example
@@ -780,7 +789,7 @@ Moreover, on iOS you need user consent to collect user data. You can do this by 
 ```js
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
-const { status } = await requestTrackingPermissionsAsync(); 
+const { status } = await requestTrackingPermissionsAsync();
 
 Settings.initializeSDK();
 
