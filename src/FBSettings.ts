@@ -67,7 +67,7 @@ export default {
   /**
    * Set clientToken
    */
-  setApsetClientTokenpID(clientToken: string) {
+  setClientToken(clientToken: string) {
     if (!isDefined(clientToken) || !isString(clientToken) || clientToken.length === 0) {
       throw new Error("setClientToken expected 'clientToken' to be a non empty string");
     }
