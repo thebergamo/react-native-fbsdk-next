@@ -8,15 +8,11 @@
 
 package com.facebook.reactnative.androidsdk;
 
-import androidx.annotation.Nullable;
-
 import com.facebook.FacebookSdk;
-import com.facebook.react.bridge.BaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.module.annotations.ReactModule;
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * This is a {@link NativeModule} that allows JS to use SDK settings in Facebook Android SDK.
@@ -62,6 +58,15 @@ public class FBSettingsModule extends BaseJavaModule {
     @ReactMethod
     public static void setAppID(String appID) {
         FacebookSdk.setApplicationId(appID);
+    }
+
+    /**
+     * Set client token
+     * @param clientToken client token
+     */
+    @ReactMethod
+    public static void setClientToken(String clientToken) {
+        FacebookSdk.setClientToken(clientToken);
     }
 
     @ReactMethod
