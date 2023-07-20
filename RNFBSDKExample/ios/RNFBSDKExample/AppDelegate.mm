@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <SafariServices/SafariServices.h>
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
 #import <React/RCTLinkingManager.h>
 

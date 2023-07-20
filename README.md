@@ -125,7 +125,12 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
 
 **NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
    on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
-   1. Add `#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>`
+   1. Add
+   ```objc
+   #import <AuthenticationServices/AuthenticationServices.h>
+   #import <SafariServices/SafariServices.h>
+   #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+   ```
    2. Inside `didFinishLaunchingWithOptions`, add the following:
       ```objc
          [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -153,6 +158,8 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
 The `AppDelegate.m` file can only have one method for `openUrl`. If you're also using `RCTLinkingManager` to handle deep links, you should handle both results in your `openUrl` method.
 
 ```objc
+#import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
+#import <SafariServices/SafariServices.h> // <- Add This Import
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
 #import <React/RCTLinkingManager.h> // <- Add This Import
 
@@ -295,6 +302,8 @@ Settings.initializeSDK();
 If you would like to initialize the Facebook SDK even earlier in startup for iOS, you need to include this code in your AppDelegate.m file now that auto-initialization is removed.
 
 ```objective-c
+#import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
+#import <SafariServices/SafariServices.h> // <- Add This Import
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -643,13 +652,13 @@ Add the following code in the system `application:openURL:options:` function fro
 The DeepLink URL from the re-engagement ads should be passed to the AEM Kit even if the app is opened in cold start.
 
 ```objc
-#import <FBAEMKit/FBAEMKit.h>
+#import <FBAEMKit/FBAEMKit-Swift.h>
 
 // apply codes below to `application:openURL:options:` 
 // in `AppDelegate.m` or `SceneDelegate.m`
 [FBAEMReporter configureWithNetworker:nil appID:@"{app-id}" reporter:nil]; // Replace {app-id} with your Facebook App id
 [FBAEMReporter enable];
-[FBAEMReporter handleURL:url];
+[FBAEMReporter handle:url];
 ```
 
 #### **Step 2. Add AEM Logging**
