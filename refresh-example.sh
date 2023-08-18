@@ -34,11 +34,6 @@ yarn add github:thebergamo/react-native-fbsdk-next
 # General compile fixes and tweaks, not react-native-fbsdk-next specific
 #
 
-# We want to test Android12 compatibility, so let's bump up our compile and target versions on android:
-sed -i -e $'s/compileSdkVersion = 30/compileSdkVersion = 33/' android/build.gradle
-sed -i -e $'s/targetSdkVersion = 30/targetSdkVersion = 33/' android/build.gradle
-rm -f android/build.gradle??
-
 # React-native builds on iOS are very noisy with warnings in other packages that drown our warnings out. Reduce warnings to just our packages.
 sed -i -e $'s/__apply_Xcode_12_5_M1_post_install_workaround(installer)/__apply_Xcode_12_5_M1_post_install_workaround(installer)\\\n\\\n    # quiet non-module warnings - only interested in fbsdk-next warnings\\\n    installer.pods_project.targets.each do |target|\\\n      if !target.name.include? "react-native-fbsdk-next"\\\n        target.build_configurations.each do |config|\\\n          config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"\\\n        end\\\n      end\\\n    end/' ios/Podfile
 rm -f ios/Podfile??
