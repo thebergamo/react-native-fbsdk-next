@@ -65,6 +65,21 @@ export default {
     Settings.setAppID(appID);
   },
   /**
+   * Set clientToken
+   */
+  setClientToken(clientToken: string) {
+    if (
+      !isDefined(clientToken) ||
+      !isString(clientToken) ||
+      clientToken.length === 0
+    ) {
+      throw new Error(
+        "setClientToken expected 'clientToken' to be a non empty string",
+      );
+    }
+    Settings.setClientToken(clientToken);
+  },
+  /**
    * Sets the Facebook application name for the current app.
    */
   setAppName(appName: string) {
