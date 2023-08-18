@@ -741,7 +741,7 @@ Required configuration:
 
 Optional configuration:
 
-- `iosUserTrackingPermission` (_string_): iOS User Tracking Permission.
+- `iosUserTrackingPermission` (_string_ || false): iOS User Tracking Permission.
 - `advertiserIDCollectionEnabled` (_boolean_): Enable advertiser ID collection. Default `false`.
 - `autoLogAppEventsEnabled` (_boolean_): Default `false`.
 - `isAutoInitEnabled` (_boolean_): Default `false`.
