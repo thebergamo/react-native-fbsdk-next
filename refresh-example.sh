@@ -69,8 +69,12 @@ rm -f android/app/src/main/AndroidManifest.xml??
 sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.ApplicationName" android:value="@string\/app_name"\/>\n    <\/application>/' android/app/src/main/AndroidManifest.xml
 rm -f android/app/src/main/AndroidManifest.xml??
 
-# You probably want to see if Facebook can handle a link, so facebook logins work...
-sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n\n#import <FBSDKCoreKit\/FBSDKCoreKit-swift.h>\n#import <React\/RCTLinkingManager.h>/' ios/RNFBSDKExample/AppDelegate.mm
+# FBSDK requires a few imports, and you probably want to see if Facebook can handle a link, so facebook logins work...
+sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n#import <FBSDKCoreKit\/FBSDKCoreKit-swift.h>\n#import <React\/RCTLinkingManager.h>/' ios/RNFBSDKExample/AppDelegate.mm
+rm -f ios/RNFBSDKExample/AppDelegate.mm??
+sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n#import <SafariServices\/SafariServices.h>/' ios/RNFBSDKExample/AppDelegate.mm
+rm -f ios/RNFBSDKExample/AppDelegate.mm??
+sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n\n#import <AuthenticationServices\/AuthenticationServices.h>/' ios/RNFBSDKExample/AppDelegate.mm
 rm -f ios/RNFBSDKExample/AppDelegate.mm??
 
 sed -i -e 's|@implementation AppDelegate|@implementation AppDelegate\n\n- (BOOL)application:(UIApplication *)app\n            openURL:(NSURL *)url\n            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options\n{\n  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {\n    return YES;\n  }\n\n  if ([RCTLinkingManager application:app openURL:url options:options]) {\n    return YES;\n  }\n  \n  return NO;\n}|' ios/RNFBSDKExample/AppDelegate.mm
