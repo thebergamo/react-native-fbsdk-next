@@ -5681,8 +5681,8 @@ react-is@^17.0.1:
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
 "react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next":
-  version "11.2.1"
-  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/49e2ec104b14755683214af037df0b5c7c630b3b"
+  version "11.3.0"
+  resolved "https://codeload.github.com/thebergamo/react-native-fbsdk-next/tar.gz/47b45f645ae14459c9045c82c039cea8a415caa4"
   dependencies:
     xml2js "^0.4.23"
 
