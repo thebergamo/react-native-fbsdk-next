@@ -44,7 +44,7 @@ repositories {
     google()
 }
 
-def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '15.+')
+def FACEBOOK_SDK_VERSION = safeExtGet('facebookSdkVersion', '16.+')
 
 dependencies {
     //noinspection GradleDynamicVersion
