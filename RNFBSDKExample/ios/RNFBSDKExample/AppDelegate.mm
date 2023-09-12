@@ -2,7 +2,7 @@
 
 #import <AuthenticationServices/AuthenticationServices.h>
 #import <SafariServices/SafariServices.h>
-#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
 #import <React/RCTLinkingManager.h>
 
 #import <React/RCTBundleURLProvider.h>

@@ -70,7 +70,7 @@ sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.Applica
 rm -f android/app/src/main/AndroidManifest.xml??
 
 # FBSDK requires a few imports, and you probably want to see if Facebook can handle a link, so facebook logins work...
-sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n#import <FBSDKCoreKit\/FBSDKCoreKit-swift.h>\n#import <React\/RCTLinkingManager.h>/' ios/RNFBSDKExample/AppDelegate.mm
+sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n#import <FBSDKCoreKit\/FBSDKCoreKit-Swift.h>\n#import <React\/RCTLinkingManager.h>/' ios/RNFBSDKExample/AppDelegate.mm
 rm -f ios/RNFBSDKExample/AppDelegate.mm??
 sed -i -e 's/#import "AppDelegate.h"/#import "AppDelegate.h"\n#import <SafariServices\/SafariServices.h>/' ios/RNFBSDKExample/AppDelegate.mm
 rm -f ios/RNFBSDKExample/AppDelegate.mm??
