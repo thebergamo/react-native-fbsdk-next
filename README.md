@@ -129,7 +129,7 @@ Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.
    ```objc
    #import <AuthenticationServices/AuthenticationServices.h>
    #import <SafariServices/SafariServices.h>
-   #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+   #import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
    ```
    2. Inside `didFinishLaunchingWithOptions`, add the following:
       ```objc
@@ -160,7 +160,7 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 ```objc
 #import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
 #import <SafariServices/SafariServices.h> // <- Add This Import
-#import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h> // <- Add This Import
 #import <React/RCTLinkingManager.h> // <- Add This Import
 
 - (BOOL)application:(UIApplication *)app
@@ -304,7 +304,7 @@ If you would like to initialize the Facebook SDK even earlier in startup for iOS
 ```objective-c
 #import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
 #import <SafariServices/SafariServices.h> // <- Add This Import
-#import <FBSDKCoreKit/FBSDKCoreKit-swift.h> // <- Add This Import
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h> // <- Add This Import
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
