@@ -84,7 +84,7 @@
     "plugin/build/"
   ],
   "dependencies": {
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.6.2"
   },
   "peerDependencies": {
     "expo": ">=47.0.0",
@@ -107,7 +107,7 @@
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/react": "^18.0.10",
     "@types/react-native": "^0.67.7",
-    "@types/xml2js": "^0.4.11",
+    "@types/xml2js": "^0.4.13",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "babel-jest": "^28.1.0",
