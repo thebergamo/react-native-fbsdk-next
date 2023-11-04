@@ -60,26 +60,11 @@ export {default as MessageDialog, MessageDialogResult} from './FBMessageDialog';
 export {default as Profile, ProfileMap} from './FBProfile';
 export {default as Settings} from './FBSettings';
 export {
-  default as ShareDialog,
-  ShareDialogMode,
-  ShareDialogModeAndroid,
-  ShareDialogModeIOS,
-  ShareDialogResult,
-} from './FBShareDialog';
-export {
   default as LoginButton,
   Event,
   TooltipBehaviorIOS,
 } from './FBLoginButton';
 export {default as SendButton} from './FBSendButton';
-export {default as ShareButton} from './FBShareButton';
 export {default as AEMReporterIOS} from './FBAEMReporter';
 
 export {RNFBSDKCallback} from './models/FBSDKCallback';
-export {
-  ShareContent,
-  ShareContentCommonParameters,
-} from './models/FBShareContent';
-export {ShareLinkContent} from './models/FBShareLinkContent';
-export {SharePhotoContent} from './models/FBSharePhotoContent';
-export {ShareVideoContent} from './models/FBShareVideoContent';
