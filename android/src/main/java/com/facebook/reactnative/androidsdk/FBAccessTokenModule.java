@@ -78,7 +78,9 @@ public class FBAccessTokenModule extends ReactContextBaseJavaModule {
     @Override
     public void onCatalystInstanceDestroy() {
         super.onCatalystInstanceDestroy();
-        accessTokenTracker.stopTracking();
+        if (accessTokenTracker != null) {
+            accessTokenTracker.stopTracking();
+        }
     }
 
     /**
