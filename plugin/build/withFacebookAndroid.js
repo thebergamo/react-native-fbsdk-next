@@ -41,7 +41,7 @@ const withAndroidPermissions = (config) => {
 };
 exports.withAndroidPermissions = withAndroidPermissions;
 function buildXMLItem({ head, children, }) {
-    return { ...(children !== null && children !== void 0 ? children : {}), $: head };
+    return { ...(children ?? {}), $: head };
 }
 function buildAndroidItem(datum) {
     const item = typeof datum === 'string' ? { name: datum } : datum;
@@ -86,8 +86,7 @@ function ensureFacebookActivity({ mainApplication, scheme, }) {
     if (Array.isArray(mainApplication.activity)) {
         // Remove all Facebook CustomTabActivities first
         mainApplication.activity = mainApplication.activity.filter((activity) => {
-            var _a;
-            return ((_a = activity.$) === null || _a === void 0 ? void 0 : _a['android:name']) !== CUSTOM_TAB_ACTIVITY;
+            return activity.$?.['android:name'] !== CUSTOM_TAB_ACTIVITY;
         });
     }
     else {
