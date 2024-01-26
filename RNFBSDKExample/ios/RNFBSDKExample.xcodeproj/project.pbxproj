@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* RNFBSDKExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNFBSDKExampleTests.m */; };
+		0698BF159D935CDAB81678D1 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A221A9311F804654A856C42 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		39DDD25A9FA4F757400EC035 /* libPods-RNFBSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506E88CD1D7E8EED59AD33A9 /* libPods-RNFBSDKExample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A4C1ECF82A3BD99E7FE149C3 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD22E94A006860CC65BF38C1 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */; };
-		CA051B1EE6B7608595DFBA25 /* libPods-RNFBSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CB30C3500934C1BC3B324 /* libPods-RNFBSDKExample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +36,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RNFBSDKExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNFBSDKExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNFBSDKExample/main.m; sourceTree = "<group>"; };
-		419779D7D4DD1A8E53DB69C1 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		49A4373B857DF87CC34227C8 /* Pods-RNFBSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample.release.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample.release.xcconfig"; sourceTree = "<group>"; };
-		7864E2763F0FD5DE7E149D9A /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7D5CB30C3500934C1BC3B324 /* libPods-RNFBSDKExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFBSDKExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24DCFC5830AD5B978013610F /* Pods-RNFBSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
+		506E88CD1D7E8EED59AD33A9 /* libPods-RNFBSDKExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFBSDKExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69A5E9DE529D5F54CC7888B3 /* Pods-RNFBSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample.release.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample.release.xcconfig"; sourceTree = "<group>"; };
+		6A221A9311F804654A856C42 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFBSDKExample-RNFBSDKExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74FAFC2CEEA3F96AC504E146 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RNFBSDKExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D9ADF2DBD73FE886502A14F6 /* Pods-RNFBSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
-		DD22E94A006860CC65BF38C1 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFBSDKExample-RNFBSDKExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5C45A70B9188AA7031272FB /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4C1ECF82A3BD99E7FE149C3 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a in Frameworks */,
+				0698BF159D935CDAB81678D1 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA051B1EE6B7608595DFBA25 /* libPods-RNFBSDKExample.a in Frameworks */,
+				39DDD25A9FA4F757400EC035 /* libPods-RNFBSDKExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				7D5CB30C3500934C1BC3B324 /* libPods-RNFBSDKExample.a */,
-				DD22E94A006860CC65BF38C1 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */,
+				506E88CD1D7E8EED59AD33A9 /* libPods-RNFBSDKExample.a */,
+				6A221A9311F804654A856C42 /* libPods-RNFBSDKExample-RNFBSDKExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D9ADF2DBD73FE886502A14F6 /* Pods-RNFBSDKExample.debug.xcconfig */,
-				49A4373B857DF87CC34227C8 /* Pods-RNFBSDKExample.release.xcconfig */,
-				7864E2763F0FD5DE7E149D9A /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */,
-				419779D7D4DD1A8E53DB69C1 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */,
+				24DCFC5830AD5B978013610F /* Pods-RNFBSDKExample.debug.xcconfig */,
+				69A5E9DE529D5F54CC7888B3 /* Pods-RNFBSDKExample.release.xcconfig */,
+				E5C45A70B9188AA7031272FB /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */,
+				74FAFC2CEEA3F96AC504E146 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RNFBSDKExampleTests" */;
 			buildPhases = (
-				051259F9051F38CA096114C2 /* [CP] Check Pods Manifest.lock */,
+				7E3E1BC9CFD9F79577A95C28 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				0ACE2DFD6DF499A16884170F /* [CP] Embed Pods Frameworks */,
-				7E5B7B8D49951711AFB4E1F5 /* [CP] Copy Pods Resources */,
+				B23B1E488810704857022E18 /* [CP] Embed Pods Frameworks */,
+				8E123F32FF070CDE1C38B620 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +176,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RNFBSDKExample" */;
 			buildPhases = (
-				6B7FB29E2E87D5E4B53797BE /* [CP] Check Pods Manifest.lock */,
-				FD10A7F022414F080027D42C /* Start Packager */,
+				71F69D40659F748191CE81BA /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				D38C93EC5529E234F3654655 /* [CP] Embed Pods Frameworks */,
-				F1265AF9C0CE2F24E0282597 /* [CP] Copy Pods Resources */,
+				0C780E1FC98F80E5C04EC29C /* [CP] Embed Pods Frameworks */,
+				07CB8EC108E8B0C097B20F8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -266,46 +265,41 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		051259F9051F38CA096114C2 /* [CP] Check Pods Manifest.lock */ = {
+		07CB8EC108E8B0C097B20F8B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNFBSDKExample-RNFBSDKExampleTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0ACE2DFD6DF499A16884170F /* [CP] Embed Pods Frameworks */ = {
+		0C780E1FC98F80E5C04EC29C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6B7FB29E2E87D5E4B53797BE /* [CP] Check Pods Manifest.lock */ = {
+		71F69D40659F748191CE81BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -327,7 +321,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E5B7B8D49951711AFB4E1F5 /* [CP] Copy Pods Resources */ = {
+		7E3E1BC9CFD9F79577A95C28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNFBSDKExample-RNFBSDKExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E123F32FF070CDE1C38B620 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,57 +360,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D38C93EC5529E234F3654655 /* [CP] Embed Pods Frameworks */ = {
+		B23B1E488810704857022E18 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F1265AF9C0CE2F24E0282597 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample/Pods-RNFBSDKExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD10A7F022414F080027D42C /* Start Packager */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Start Packager";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFBSDKExample-RNFBSDKExampleTests/Pods-RNFBSDKExample-RNFBSDKExampleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -430,7 +410,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7864E2763F0FD5DE7E149D9A /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */;
+			baseConfigurationReference = E5C45A70B9188AA7031272FB /* Pods-RNFBSDKExample-RNFBSDKExampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				EXCLUDED_ARCHS = i386;
@@ -439,7 +419,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = RNFBSDKExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,13 +439,13 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 419779D7D4DD1A8E53DB69C1 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */;
+			baseConfigurationReference = 74FAFC2CEEA3F96AC504E146 /* Pods-RNFBSDKExample-RNFBSDKExampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				EXCLUDED_ARCHS = i386;
 				INFOPLIST_FILE = RNFBSDKExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -485,7 +465,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9ADF2DBD73FE886502A14F6 /* Pods-RNFBSDKExample.debug.xcconfig */;
+			baseConfigurationReference = 24DCFC5830AD5B978013610F /* Pods-RNFBSDKExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -514,7 +494,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49A4373B857DF87CC34227C8 /* Pods-RNFBSDKExample.release.xcconfig */;
+			baseConfigurationReference = 69A5E9DE529D5F54CC7888B3 /* Pods-RNFBSDKExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -544,7 +524,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -588,7 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -606,9 +586,16 @@
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -617,7 +604,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -654,7 +641,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -671,9 +658,16 @@
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
