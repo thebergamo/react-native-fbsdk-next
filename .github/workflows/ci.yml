@@ -135,4 +135,5 @@ jobs:
           export SKIP_BUNDLING=1
           export RCT_NO_LAUNCH_PACKAGER=1
           set -o pipefail
-          yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios && xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug
+          yarn example:devcopy && yarn example:install && cd RNFBSDKExample/ios
+          xcodebuild -scheme RNFBSDKExample -workspace RNFBSDKExample.xcworkspace VALID_ARCHS=\"`uname -m`\" ONLY_ACTIVE_ARCH=YES -sdk iphonesimulator -configuration Debug | xcbeautify
