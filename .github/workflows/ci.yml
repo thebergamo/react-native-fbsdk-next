@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
+      - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 20
       - name: Install yarn
         uses: nick-invision/retry@v2
         with:
@@ -40,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 16
+      - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 20
       - name: Install yarn
         uses: nick-invision/retry@v2
         with:
@@ -67,21 +67,21 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: yarn install --frozen-lockfile
-      - name: Install JDK11
+      - name: Install JDK
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
       - name: Build android example app
         run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample && cd android && ./gradlew assembleDebug
   ios-build:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 16
+      - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 20
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
