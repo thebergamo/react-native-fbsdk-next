@@ -18,12 +18,12 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: npm install -g yarn
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
@@ -51,12 +51,12 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: npm install -g yarn
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
@@ -102,12 +102,12 @@ jobs:
         with:
           key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
           max-size: 750M
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-v1
