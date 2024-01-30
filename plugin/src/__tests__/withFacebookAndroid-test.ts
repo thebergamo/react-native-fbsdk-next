@@ -91,9 +91,8 @@ describe('Android facebook config', () => {
   });
 
   it('adds scheme, appid, display name, autolog events, auto init, advertiser id collection to androidmanifest.xml', async () => {
-    let androidManifestJson = await readAndroidManifestAsync(
-      sampleManifestPath,
-    );
+    let androidManifestJson =
+      await readAndroidManifestAsync(sampleManifestPath);
     const facebookConfig = {
       appID: 'my-app-id',
       scheme: 'fbmyscheme',

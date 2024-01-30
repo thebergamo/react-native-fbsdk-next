@@ -1,6 +1,6 @@
 import { ExpoConfig } from '@expo/config-types';
-export declare type ExpoConfigFacebook = Pick<ExpoConfig, 'facebookScheme' | 'facebookAdvertiserIDCollectionEnabled' | 'facebookAppId' | 'facebookAutoInitEnabled' | 'facebookAutoLogAppEventsEnabled' | 'facebookDisplayName'>;
-export declare type ConfigProps = {
+export type ExpoConfigFacebook = Pick<ExpoConfig, 'facebookScheme' | 'facebookAdvertiserIDCollectionEnabled' | 'facebookAppId' | 'facebookAutoInitEnabled' | 'facebookAutoLogAppEventsEnabled' | 'facebookDisplayName'>;
+export type ConfigProps = {
     /**
      * Used for all Facebook libraries. Set up your Facebook App ID at https://developers.facebook.com.
      */

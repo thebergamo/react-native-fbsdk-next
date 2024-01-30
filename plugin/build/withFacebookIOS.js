@@ -26,12 +26,11 @@ function setFacebookConfig(config, infoPlist) {
 }
 exports.setFacebookConfig = setFacebookConfig;
 function setFacebookScheme(config, infoPlist) {
-    var _a;
     const facebookScheme = (0, config_1.getFacebookScheme)(config);
     if (!facebookScheme) {
         return infoPlist;
     }
-    if ((_a = infoPlist.CFBundleURLTypes) === null || _a === void 0 ? void 0 : _a.some(({ CFBundleURLSchemes }) => CFBundleURLSchemes.includes(facebookScheme))) {
+    if (infoPlist.CFBundleURLTypes?.some(({ CFBundleURLSchemes }) => CFBundleURLSchemes.includes(facebookScheme))) {
         return infoPlist;
     }
     return appendScheme(facebookScheme, infoPlist);
@@ -113,7 +112,7 @@ function setFacebookApplicationQuerySchemes(config, infoPlist) {
     else if (!facebookAppId && !existingSchemes.length) {
         // already removed, no need to strip again
         const { LSApplicationQueriesSchemes, ...restInfoPlist } = infoPlist;
-        if (LSApplicationQueriesSchemes === null || LSApplicationQueriesSchemes === void 0 ? void 0 : LSApplicationQueriesSchemes.length) {
+        if (LSApplicationQueriesSchemes?.length) {
             return infoPlist;
         }
         else {

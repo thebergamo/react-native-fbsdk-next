@@ -20,20 +20,56 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1523458767976650</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<string>FALSE</string>
+	<key>FacebookAppID</key>
+	<string>1523458767976650</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<string>FALSE</string>
+	<key>FacebookClientToken</key>
+	<string>d157902d0bff64b4c1daaf26e32852e9</string>
+	<key>FacebookDisplayName</key>
+	<string>RNFBSDKExample</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
@@ -51,45 +87,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>FacebookDisplayName</key>
-  <string>RNFBSDKExample</string>
-  <key>FacebookAppID</key>
-  <string>1523458767976650</string>
-  <key>FacebookClientToken</key>
-  <string>d157902d0bff64b4c1daaf26e32852e9</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fb-messenger-share-api</string>
-    <string>fbauth2</string>
-    <string>fbapi</string>
-    <string>fb-messenger-share-api</string>
-    <string>fbauth2</string>
-    <string>fbapi</string>
-    <string>fbapi20130214</string>
-    <string>fbapi20130410</string>
-    <string>fbapi20130702</string>
-    <string>fbapi20131010</string>
-    <string>fbapi20131219</string>
-    <string>fbapi20140410</string>
-    <string>fbapi20140116</string>
-    <string>fbapi20150313</string>
-    <string>fbapi20150629</string>
-    <string>fbapi20160328</string>
-    <string>fbauth</string>
-    <string>fbshareextension</string>
-  </array>
-  <key>FacebookAutoLogAppEventsEnabled</key>
-  <string>FALSE</string>
-  <key>FacebookAdvertiserIDCollectionEnabled</key>
-  <string>FALSE</string>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-     <key>CFBundleURLSchemes</key>
-     <array>
-       <string>fb1523458767976650</string>
-     </array>
-   </dict>
-  </array>
 </dict>
 </plist>
