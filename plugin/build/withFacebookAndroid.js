@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.setFacebookConfig = exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
 const config_1 = require("./config");
 const config_plugins_1 = require("@expo/config-plugins");
-const Scheme_1 = require("@expo/config-plugins/build/android/Scheme");
 const { buildResourceItem } = config_plugins_1.AndroidConfig.Resources;
 const { removeStringItem, setStringItem } = config_plugins_1.AndroidConfig.Strings;
 const { addMetaDataItemToMainApplication, getMainApplicationOrThrow, prefixAndroidKeys, removeMetaDataItemFromMainApplication, } = config_plugins_1.AndroidConfig.Manifest;
+const FACEBOOK_ACTIVITY = 'com.facebook.FacebookActivity';
 const CUSTOM_TAB_ACTIVITY = 'com.facebook.CustomTabActivity';
 const STRING_FACEBOOK_APP_ID = 'facebook_app_id';
 const STRING_FB_LOGIN_PROTOCOL_SCHEME = 'fb_login_protocol_scheme';
@@ -48,7 +48,21 @@ function buildAndroidItem(datum) {
     const head = prefixAndroidKeys(item);
     return buildXMLItem({ head });
 }
-function getFacebookSchemeActivity() {
+function getFacebookActivity() {
+    /**
+  <activity android:name="com.facebook.FacebookActivity"
+      android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+      android:label="@string/app_name" />
+     */
+    return buildXMLItem({
+        head: prefixAndroidKeys({
+            name: FACEBOOK_ACTIVITY,
+            configChanges: 'keyboard|keyboardHidden|screenLayout|screenSize|orientation',
+            label: '@string/app_name'
+        }),
+    });
+}
+function getCustomTabActivity() {
     /**
   <activity
       android:name="com.facebook.CustomTabActivity"
@@ -86,7 +100,7 @@ function ensureFacebookActivity({ mainApplication, scheme, }) {
     if (Array.isArray(mainApplication.activity)) {
         // Remove all Facebook CustomTabActivities first
         mainApplication.activity = mainApplication.activity.filter((activity) => {
-            return activity.$?.['android:name'] !== CUSTOM_TAB_ACTIVITY;
+            return ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(activity.$?.['android:name']);
         });
     }
     else {
@@ -94,7 +108,8 @@ function ensureFacebookActivity({ mainApplication, scheme, }) {
     }
     // If a new scheme is defined, append it to the activity.
     if (scheme) {
-        mainApplication.activity.push(getFacebookSchemeActivity());
+        mainApplication.activity.push(getFacebookActivity());
+        mainApplication.activity.push(getCustomTabActivity());
     }
     return mainApplication;
 }
@@ -139,9 +154,6 @@ function setFacebookConfig(props, androidManifest) {
     const advertiserIdCollection = (0, config_1.getFacebookAdvertiserIDCollection)(props);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let mainApplication = getMainApplicationOrThrow(androidManifest);
-    if (scheme && !(0, Scheme_1.hasScheme)(scheme, androidManifest)) {
-        androidManifest = (0, Scheme_1.appendScheme)(scheme, androidManifest);
-    }
     mainApplication = ensureFacebookActivity({ scheme, mainApplication });
     if (appID) {
         mainApplication = addMetaDataItemToMainApplication(mainApplication, META_APP_ID, `@string/${STRING_FACEBOOK_APP_ID}`);
