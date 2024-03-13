@@ -14,10 +14,6 @@ import {
   withAndroidManifest,
   withStringsXml,
 } from '@expo/config-plugins';
-import {
-  appendScheme,
-  hasScheme,
-} from '@expo/config-plugins/build/android/Scheme';
 
 const {buildResourceItem} = AndroidConfig.Resources;
 const {removeStringItem, setStringItem} = AndroidConfig.Strings;
@@ -218,10 +214,6 @@ export function setFacebookConfig(
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let mainApplication = getMainApplicationOrThrow(androidManifest);
-
-  if (scheme && !hasScheme(scheme, androidManifest)) {
-    androidManifest = appendScheme(scheme, androidManifest);
-  }
 
   mainApplication = ensureFacebookActivity({scheme, mainApplication});
 
