@@ -24,6 +24,7 @@ const {
   removeMetaDataItemFromMainApplication,
 } = AndroidConfig.Manifest;
 
+const FACEBOOK_ACTIVITY = 'com.facebook.FacebookActivity';
 const CUSTOM_TAB_ACTIVITY = 'com.facebook.CustomTabActivity';
 const STRING_FACEBOOK_APP_ID = 'facebook_app_id';
 const STRING_FB_LOGIN_PROTOCOL_SCHEME = 'fb_login_protocol_scheme';
@@ -75,18 +76,33 @@ function buildXMLItem({
   children,
 }: {
   head: Record<string, string>;
-  children?: Record<string, string | any[]>;
+  children?: Record<string, string | unknown[]>;
 }) {
   return {...(children ?? {}), $: head};
 }
 
-function buildAndroidItem(datum: string | Record<string, any>) {
+function buildAndroidItem(datum: string | Record<string, unknown>) {
   const item = typeof datum === 'string' ? {name: datum} : datum;
   const head = prefixAndroidKeys(item);
   return buildXMLItem({head});
 }
 
-function getFacebookSchemeActivity() {
+function getFacebookActivity() {
+  /**
+<activity android:name="com.facebook.FacebookActivity"
+    android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+    android:label="@string/app_name" />
+   */
+  return buildXMLItem({
+    head: prefixAndroidKeys({
+      name: FACEBOOK_ACTIVITY,
+      configChanges: 'keyboard|keyboardHidden|screenLayout|screenSize|orientation',
+      label: '@string/app_name'
+    }),
+  }) as AndroidConfig.Manifest.ManifestActivity;
+}
+
+function getCustomTabActivity() {
   /**
 <activity
     android:name="com.facebook.CustomTabActivity"
@@ -131,7 +147,7 @@ function ensureFacebookActivity({
   if (Array.isArray(mainApplication.activity)) {
     // Remove all Facebook CustomTabActivities first
     mainApplication.activity = mainApplication.activity.filter((activity) => {
-      return activity.$?.['android:name'] !== CUSTOM_TAB_ACTIVITY;
+      return ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(activity.$?.['android:name']);
     });
   } else {
     mainApplication.activity = [];
@@ -139,7 +155,8 @@ function ensureFacebookActivity({
 
   // If a new scheme is defined, append it to the activity.
   if (scheme) {
-    mainApplication.activity.push(getFacebookSchemeActivity());
+    mainApplication.activity.push(getFacebookActivity())
+    mainApplication.activity.push(getCustomTabActivity());
   }
   return mainApplication;
 }
