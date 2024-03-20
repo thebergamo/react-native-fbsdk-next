@@ -17,8 +17,8 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "RCTFBSDKLoginButtonManager.h"
+#import "RCTFBSDKLoginButtonView.h"
 
-#import <React/RCTBridge.h>
 #import <React/RCTComponentEvent.h>
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTUtils.h>
@@ -34,12 +34,12 @@ RCT_EXPORT_MODULE(RCTFBLoginButton)
 
 - (UIView *)view
 {
-  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-  loginButton.delegate = self;
-  return loginButton;
+  return [[RCTFBSDKLoginButtonView alloc] init];
 }
 
 #pragma mark - Properties
+
+RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(permissions, NSStringArray)
 
@@ -60,36 +60,5 @@ RCT_CUSTOM_VIEW_PROPERTY(tooltipBehaviorIOS, FBSDKLoginButtonTooltipBehavior, FB
   [view setTooltipBehavior:json ? [RCTConvert FBSDKLoginButtonTooltipBehavior:json] : FBSDKLoginButtonTooltipBehaviorAutomatic];
 }
 
-#pragma mark - FBSDKLoginButtonDelegate
-
-- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error
-{
-  NSDictionary *body = @{
-    @"type": @"loginFinished",
-    @"error": error ? RCTJSErrorFromNSError(error) : [NSNull null],
-    @"result": error ? [NSNull null] : @{
-      @"isCancelled": @(result.isCancelled),
-      @"grantedPermissions": result.isCancelled ? [NSNull null] : result.grantedPermissions.allObjects,
-      @"declinedPermissions": result.isCancelled ? [NSNull null] : result.declinedPermissions.allObjects,
-    },
-  };
-
-  RCTComponentEvent *event = [[RCTComponentEvent alloc] initWithName:@"topChange"
-                                                             viewTag:loginButton.reactTag
-                                                                body:body];
-  [self.bridge.eventDispatcher sendEvent:event];
-}
-
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
-{
-  NSDictionary *body = @{
-    @"type": @"logoutFinished",
-  };
-
-  RCTComponentEvent *event = [[RCTComponentEvent alloc] initWithName:@"topChange"
-                                                             viewTag:loginButton.reactTag
-                                                                body:body];
-  [self.bridge.eventDispatcher sendEvent:event];
-}
 
 @end
