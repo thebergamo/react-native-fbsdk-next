@@ -51,7 +51,7 @@ public class FBSettingsModule extends BaseJavaModule {
      * [FB SDK Best Practices for GDPR Compliance](https://developers.facebook.com/docs/app-events/gdpr-compliance/)
      */
     @ReactMethod
-    public static void initializeSDK() {
+    public void initializeSDK() {
         FacebookSdk.fullyInitialize();
     }
 
@@ -60,7 +60,7 @@ public class FBSettingsModule extends BaseJavaModule {
      * @param appID app id
      */
     @ReactMethod
-    public static void setAppID(String appID) {
+    public void setAppID(String appID) {
         FacebookSdk.setApplicationId(appID);
     }
 
@@ -69,27 +69,27 @@ public class FBSettingsModule extends BaseJavaModule {
      * @param clientToken client token
      */
     @ReactMethod
-    public static void setClientToken(String clientToken) {
+    public void setClientToken(String clientToken) {
         FacebookSdk.setClientToken(clientToken);
     }
 
     @ReactMethod
-    public static void setAppName(String displayName) {
+    public void setAppName(String displayName) {
         FacebookSdk.setApplicationName(displayName);
     }
 
     @ReactMethod
-    public static void setGraphAPIVersion(String version) {
+    public void setGraphAPIVersion(String version) {
         FacebookSdk.setGraphApiVersion(version);
     }
 
     @ReactMethod
-    public static void setAutoLogAppEventsEnabled(Boolean enabled) {
+    public void setAutoLogAppEventsEnabled(Boolean enabled) {
         FacebookSdk.setAutoLogAppEventsEnabled(enabled);
     }
 
     @ReactMethod
-    public static void setAdvertiserIDCollectionEnabled(Boolean enabled) {
+    public void setAdvertiserIDCollectionEnabled(Boolean enabled) {
         FacebookSdk.setAdvertiserIDCollectionEnabled(enabled);
     }
 }
