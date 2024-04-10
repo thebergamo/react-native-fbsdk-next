@@ -117,9 +117,14 @@ describe('Android facebook config', () => {
     }
 
     const facebookActivity = mainApplication.activity?.filter(
-      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity',
+      (e) => e.$['android:name'] === 'com.facebook.FacebookActivity',
     );
     expect(facebookActivity).toHaveLength(1);
+
+    const customTabActivity = mainApplication.activity?.filter(
+      (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity',
+    );
+    expect(customTabActivity).toHaveLength(1);
 
     const applicationId = mainApplication['meta-data']?.filter(
       (e) => e.$['android:name'] === 'com.facebook.sdk.ApplicationId',
