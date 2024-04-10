@@ -31,7 +31,8 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.facebook.react.uimanager.UIManagerHelper;
+import com.facebook.react.uimanager.events.EventDispatcher;
 
 import java.util.Set;
 
@@ -42,11 +43,13 @@ import java.util.Set;
 public class RCTLoginButton extends LoginButton {
 
     private final CallbackManager mCallbackManager;
+    private final EventDispatcher mEventDispatcher;
 
     public RCTLoginButton(ThemedReactContext context, CallbackManager callbackManager) {
         super(context);
         this.setToolTipMode(ToolTipMode.NEVER_DISPLAY);
         mCallbackManager = callbackManager;
+        mEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((ReactContext) getContext(), getId());
         init();
     }
 
@@ -60,10 +63,8 @@ public class RCTLoginButton extends LoginButton {
                     WritableMap event = Arguments.createMap();
                     event.putString("type", "logoutFinished");
                     ReactContext context = (ReactContext) getContext();
-                    context.getJSModule(RCTEventEmitter.class).receiveEvent(
-                            getId(),
-                            "topChange",
-                            event);
+                    mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+
                 }
             }
         };
@@ -85,10 +86,7 @@ public class RCTLoginButton extends LoginButton {
                                 setToStringArray(loginResult.getRecentlyDeniedPermissions())));
                 event.putMap("result", result);
                 ReactContext context = (ReactContext) getContext();
-                context.getJSModule(RCTEventEmitter.class).receiveEvent(
-                        getId(),
-                        "topChange",
-                        event);
+                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
             }
 
             @Override
@@ -100,10 +98,7 @@ public class RCTLoginButton extends LoginButton {
                 result.putBoolean("isCancelled", false);
                 event.putMap("result", result);
                 ReactContext context = (ReactContext) getContext();
-                context.getJSModule(RCTEventEmitter.class).receiveEvent(
-                        getId(),
-                        "topChange",
-                        event);
+                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
             }
 
             @Override
@@ -115,10 +110,7 @@ public class RCTLoginButton extends LoginButton {
                 result.putBoolean("isCancelled", true);
                 event.putMap("result", result);
                 ReactContext context = (ReactContext) getContext();
-                context.getJSModule(RCTEventEmitter.class).receiveEvent(
-                        getId(),
-                        "topChange",
-                        event);
+                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
             }
         });
     }
