@@ -1,118 +1,105 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ *
+ * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+ * copy, modify, and distribute this software in source code or binary form for use
+ * in connection with the web services and APIs provided by Facebook.
+ *
+ * As with any software that integrates with the Facebook platform, your use of
+ * this software is subject to the Facebook Developer Principles and Policies
+ * [http://developers.facebook.com/policy/]. This copyright notice shall be
+ * included in all copies or substantial portions of the software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @format
+ * @flow
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, {Component} from 'react';
+import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  LoginButton,
+  LoginManager,
+  Settings,
+  ShareDialog,
+  ShareLinkContent,
+} from 'react-native-fbsdk-next';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const SHARE_LINK_CONTENT: ShareLinkContent = {
+  contentType: 'link',
+  contentUrl: 'https://www.facebook.com/',
+};
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+// Ask for consent first if necessary
+// Possibly only do this for iOS if no need to handle a GDPR-type flow
+Settings.initializeSDK();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+export default class App extends Component<{}> {
+  _reauthorizeDataAccess = async () => {
+    try {
+      const result = await LoginManager.reauthorizeDataAccess();
+      Alert.alert(
+        'Reauthorize data access result',
+        JSON.stringify(result, null, 2),
+      );
+    } catch (error) {
+      Alert.alert('Reauthorize data access fail with error:', error as string);
+    }
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  _shareLinkWithShareDialog = async () => {
+    const canShow = await ShareDialog.canShow(SHARE_LINK_CONTENT);
+    if (canShow) {
+      try {
+        const {isCancelled, postId} = await ShareDialog.show(
+          SHARE_LINK_CONTENT,
+        );
+        if (isCancelled) {
+          Alert.alert('Share cancelled');
+        } else {
+          Alert.alert('Share success with postId: ' + postId);
+        }
+      } catch (error) {
+        Alert.alert('Share fail with error: ' + error);
+      }
+    }
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <LoginButton
+          testID="facebook-login"
+          onLoginFinished={(error, data) => {
+            Alert.alert(JSON.stringify(error || data, null, 2));
+          }}
+        />
+        <TouchableHighlight onPress={this._shareLinkWithShareDialog}>
+          <Text style={styles.buttonText}>Share link with ShareDialog</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._reauthorizeDataAccess}>
+          <Text style={styles.buttonText}>Reauthorize Data Access</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  buttonText: {
+    fontSize: 20,
+    margin: 10,
   },
 });
-
-export default App;
