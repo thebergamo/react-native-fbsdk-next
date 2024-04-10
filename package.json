@@ -137,17 +137,6 @@
     "bracketSameLine": true,
     "parser": "typescript"
   },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      [
-        "commonjs"
-      ],
-      "module",
-      "typescript"
-    ]
-  },
   "react-native": "src/index.ts",
   "react-native-builder-bob": {
     "source": "src",
