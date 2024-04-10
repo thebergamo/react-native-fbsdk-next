@@ -75,7 +75,7 @@ jobs:
       - name: Build android example app
         run: yarn example:install && yarn example:devcopy && yarn example:install && cd RNFBSDKExample && cd android && ./gradlew assembleDebug
   ios-build:
-    runs-on: macOS-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
