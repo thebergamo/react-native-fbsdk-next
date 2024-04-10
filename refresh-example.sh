@@ -23,7 +23,7 @@ fi
 \rm -fr RNFBSDKExample
 
 # Make the new example
-npx react-native init RNFBSDKExample --skip-install
+npx react-native@latest init RNFBSDKExample --skip-install
 pushd RNFBSDKExample
 rm -f Gemfile Gemfile.lock .ruby-version
 yarn
