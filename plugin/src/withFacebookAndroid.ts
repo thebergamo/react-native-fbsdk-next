@@ -96,8 +96,9 @@ function getFacebookActivity() {
   return buildXMLItem({
     head: prefixAndroidKeys({
       name: FACEBOOK_ACTIVITY,
-      configChanges: 'keyboard|keyboardHidden|screenLayout|screenSize|orientation',
-      label: '@string/app_name'
+      configChanges:
+        'keyboard|keyboardHidden|screenLayout|screenSize|orientation',
+      label: '@string/app_name',
     }),
   }) as AndroidConfig.Manifest.ManifestActivity;
 }
@@ -147,7 +148,9 @@ function ensureFacebookActivity({
   if (Array.isArray(mainApplication.activity)) {
     // Remove all Facebook CustomTabActivities first
     mainApplication.activity = mainApplication.activity.filter((activity) => {
-      return ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(activity.$?.['android:name']);
+      return ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(
+        activity.$?.['android:name'],
+      );
     });
   } else {
     mainApplication.activity = [];
@@ -155,7 +158,7 @@ function ensureFacebookActivity({
 
   // If a new scheme is defined, append it to the activity.
   if (scheme) {
-    mainApplication.activity.push(getFacebookActivity())
+    mainApplication.activity.push(getFacebookActivity());
     mainApplication.activity.push(getCustomTabActivity());
   }
   return mainApplication;

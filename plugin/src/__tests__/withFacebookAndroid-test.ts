@@ -119,7 +119,7 @@ describe('Android facebook config', () => {
     const facebookActivity = mainApplication.activity?.filter(
       (e) => e.$['android:name'] === 'com.facebook.FacebookActivity',
     );
-    expect(facebookActivity).toHaveLength(1)
+    expect(facebookActivity).toHaveLength(1);
 
     const customTabActivity = mainApplication.activity?.filter(
       (e) => e.$['android:name'] === 'com.facebook.CustomTabActivity',
