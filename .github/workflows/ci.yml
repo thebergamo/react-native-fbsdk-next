@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 20
       - name: Install yarn
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -28,7 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -45,7 +45,7 @@ jobs:
         with:
           node-version: 20
       - name: Install yarn
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -61,7 +61,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -91,7 +91,7 @@ jobs:
       - name: Install xcbeautify
         run: brew install xcbeautify
       - name: Install yarn
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -119,7 +119,7 @@ jobs:
           key: ${{ runner.os }}-pods-v1-${{ hashFiles('RNFBSDKExample/ios/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-pods-v1
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
