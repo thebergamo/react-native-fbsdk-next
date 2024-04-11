@@ -50,7 +50,7 @@ npm install --save react-native-fbsdk-next
 
 [CLI autolink feature](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) links the module while building the app.
 
-*Note* For `iOS` using `cocoapods`, run:
+*Note:* For `iOS` using `cocoapods`, run:
 
 ```bash
 $ cd ios/ && pod install
@@ -123,7 +123,7 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
 
-**NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
+**Note:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
    on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
    1. Add
    ```objc
@@ -181,87 +181,103 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 
 ### Troubleshooting
 
-1. I cannot run the Android project.
+1. You cannot run the Android project.
 
-- Make sure you added the code snippet in step 3.1.
-- Make sure you set up a Facebook app and updated the `AndroidManifest.xml` and `res/values/strings.xml` with Facebook app settings.
+    - Make sure you added the code snippet in step 3.1.
+    - Make sure you set up a Facebook app and updated the `AndroidManifest.xml` and `res/values/strings.xml` with Facebook app settings.
 
 2. Duplicate symbol errors
 
-- Make sure that `FBSDK[Core, Login, Share]Kit.framework` are **NOT** in `Link Binary with Libraries` for your **root project** when using cocoapods.
+    - Make sure that `FBSDK[Core, Login, Share]Kit.framework` are **NOT** in `Link Binary with Libraries` for your **root project** when using cocoapods.
 
-3. I get this build error: `no type or protocol named UIApplicationOpenURLOptionsKey`:
+3. You get this build error: `no type or protocol named UIApplicationOpenURLOptionsKey`:
 
-- Your Xcode version is too old. Upgrade to Xcode 10.0+.
+    - Your Xcode version is too old. Upgrade to Xcode 10.0+.
 
 4. You get a compilation error with the error `Undefined symbols for architecture x86_64`
-```
-Undefined symbols for architecture x86_64:
-    "_swift_FORCE_LOAD$_swiftUniformTypeIdentifiers", referenced from:
-    _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
-    (maybe you meant: _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit)
-    "_swift_FORCE_LOAD$_swiftCoreMIDI", referenced from:
-    _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
-    (maybe you meant: _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit)
-    "_swift_FORCE_LOAD$_swiftWebKit", referenced from:
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(AccessToken.o)
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Permission.o)
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Settings.o)
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(FBLoginButton.o)
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(LoginManager.o)
-    _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
-    (maybe you meant: _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit, _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit , _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit )
-    ld: symbol(s) not found for architecture x86_64
-```
+    ```
+    Undefined symbols for architecture x86_64:
+        "_swift_FORCE_LOAD$_swiftUniformTypeIdentifiers", referenced from:
+        _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+        (maybe you meant: _swift_FORCE_LOAD$swiftUniformTypeIdentifiers$_FBSDKShareKit)
+        "_swift_FORCE_LOAD$_swiftCoreMIDI", referenced from:
+        _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+        (maybe you meant: _swift_FORCE_LOAD$swiftCoreMIDI$_FBSDKShareKit)
+        "_swift_FORCE_LOAD$_swiftWebKit", referenced from:
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(AccessToken.o)
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Permission.o)
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit in libFBSDKCoreKit.a(Settings.o)
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(FBLoginButton.o)
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit in libFBSDKLoginKit.a(LoginManager.o)
+        _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit in libFBSDKShareKit.a(Enums+Extensions.o)
+        (maybe you meant: _swift_FORCE_LOAD$swiftWebKit$_FBSDKLoginKit, _swift_FORCE_LOAD$swiftWebKit$_FBSDKShareKit , _swift_FORCE_LOAD$swiftWebKit$_FBSDKCoreKit )
+        ld: symbol(s) not found for architecture x86_64
+    ```
 
-   After **facebook-ios-sdk v7** (written with Swift parts) you need to coordinate Swift language usage with Objective-C for iOS.
+      After **facebook-ios-sdk v7** (written with Swift parts) you need to coordinate Swift language usage with Objective-C for iOS.
 
-   Either:
+      Either:
 
-- add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header"
-The empty swift file makes this change to the Header Search Path on your build settings:
-```
-$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
-$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
-```
+    - add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header"
+    The empty swift file makes this change to the Header Search Path on your build settings:
+    ```
+    $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
+    $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
+    ```
 
-- or add this stanza in the postinstall section of your Podfile as a possible workaround (then `pod deintegrate && pod install`):
+    - or add this stanza in the postinstall section of your Podfile as a possible workaround (then `pod deintegrate && pod install`):
 
-   ```ruby
-    # Mixing Swift and Objective-C in a react-native project may be problematic.
-    # Workaround:  https://github.com/facebookarchive/react-native-fbsdk/issues/755#issuecomment-787488994
-    installer.aggregate_targets.first.user_project.native_targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
-      end
-    end
-   ```
+      ```ruby
+        # Mixing Swift and Objective-C in a react-native project may be problematic.
+        # Workaround:  https://github.com/facebookarchive/react-native-fbsdk/issues/755#issuecomment-787488994
+        installer.aggregate_targets.first.user_project.native_targets.each do |target|
+          target.build_configurations.each do |config|
+            config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
+          end
+        end
+      ```
 
-  Both result in fixing search paths.
+      Both result in fixing search paths.
 
 5. AppLink.fetchDeferredAppLink does not work (on iOS at least)
 
-   Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
+    Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
 
 6. You get an exception `App ID not found. Add a string value with your app ID for the key FacebookAppID to the Info.plist or call [FBSDKSettings setAppID:].`
 
-  If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement:
+    If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement:
 
-  ```
-    [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
-  ```
+    ```
+      [[FBSDKApplicationDelegate sharedInstance] application:application
+                              didFinishLaunchingWithOptions:launchOptions];
+    ```
 
 7. You don't see any events in the Facebook Events Manager
 
-  For it to work you need to:
+    For it to work you need to:
 
-- Run the app on a real device
-- Have the facebook app running in the background and logged in to an account
-- Have that account you used on Facebook added as an "Advertising Account" for your app on Facebook's dashboard
-- MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
+    - Run the app on a real device
+    - Have the facebook app running in the background and logged in to an account
+    - Have that account you used on Facebook added as an "Advertising Account" for your app on Facebook's dashboard
+    - MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
 
-This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
+    This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
+
+8. You get “There is an error in logging you into this application” when attempting to log in via the native Facebook app on Android.
+
+    This typically means the appropriate signing certificate hash hasn’t been saved to your Facebook app.
+
+    You can follow the [instructions here](https://developers.facebook.com/docs/facebook-login/android#6--provide-the-development-and-release-key-hashes-for-your-app) to generate and save the hash from your signing certificate.
+
+    **Note:** If Google is signing your releases, you’ll need to get the SHA-1 from the **Release** > **App signing** > **App signing key certificate** in the [Play Console](https://play.google.com/console/) and run this command:
+
+    ```bash
+    echo YOUR_SHA1_HERE | xxd -r -p | openssl base64
+    ```
+
+    If you’re also using App Tester for internal releases, you’ll need to run the same command for the SHA-1 from **Release** > **Internal app sharing** > **Internal test certificate** and save that hash as well.
+
+    Once you have your hashes, return [here](https://developers.facebook.com/docs/facebook-login/android#6--provide-the-development-and-release-key-hashes-for-your-app) and enter them under **Key Hashes**.
 
 ## Usage
 
@@ -839,7 +855,7 @@ or
 yarn example:android
 ```
 
-Note: You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
+**Note:** You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
 
 
 ## Testing with Jest
