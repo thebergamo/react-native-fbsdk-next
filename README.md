@@ -16,6 +16,7 @@ Functionality is provided through one single npm package so you can use it for b
 ## Installation
 
 ## React Native Compatibility
+
 To use this library you need to ensure you match up with the correct version of React Native you are using.
 
 | FB SDK    | lib version                           | Required React Native Version |
@@ -33,13 +34,13 @@ To use this library you need to ensure you match up with the correct version of 
 
 using either Yarn:
 
-```
+```bash
 yarn add react-native-fbsdk-next
 ```
 
 or npm:
 
-```
+```bash
 npm install --save react-native-fbsdk-next
 ```
 
@@ -50,7 +51,7 @@ npm install --save react-native-fbsdk-next
 
 [CLI autolink feature](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) links the module while building the app.
 
-*Note:* For `iOS` using `cocoapods`, run:
+**Note:** For `iOS` using `cocoapods`, run:
 
 ```bash
 $ cd ios/ && pod install
@@ -798,6 +799,7 @@ Optional configuration:
 ```
 
 ## Enabling Auto App Installs in Expo
+
 To enable auto app installs in Expo, you need to set autoLogAppEventsEnabled and advertiserIDCollectionEnabled flags to **true** in your `app.json` or `app.config.js`.
 
 Moreover, on iOS you need user consent to collect user data. You can do this by adding the following code somewhere to your `App.tsx`:
@@ -815,6 +817,7 @@ if (status === 'granted') {
 ```
 
 ## Migrating from expo-facebook to react-native-fbsdk-next
+
 The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated in Expo SDK 45 and removed in Expo SDK 46. The following feature parity table lists the `expo-facebook` API functions and their `react-native-fbsdk-native` counterparts, where available:
 
 | expo-facebook | Supported | react-native-fbsdk-next |
@@ -840,6 +843,7 @@ The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated
 | [setUserIDAsync(userID)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setuseridasyncuserid) | ✅ | AppEventsLogger.setUserID(userID) |
 
 ## Example app
+
 To run the example app, you'll first need to setup the environment:
 ```
 refresh-example.sh
@@ -874,7 +878,6 @@ import { LoginManager } from 'react-native-fbsdk-next'
 jest.spyOn(LoginManager, 'logInWithPermissions').mockImplementation(() => Promise.resolve({ isCancelled: false }))
 
 ```
-
 
 ## Join the React Native community
 
