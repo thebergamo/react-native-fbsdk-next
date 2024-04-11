@@ -58,7 +58,7 @@ function getFacebookActivity() {
         head: prefixAndroidKeys({
             name: FACEBOOK_ACTIVITY,
             configChanges: 'keyboard|keyboardHidden|screenLayout|screenSize|orientation',
-            label: '@string/app_name'
+            label: '@string/app_name',
         }),
     });
 }
