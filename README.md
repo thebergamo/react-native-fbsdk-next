@@ -16,7 +16,6 @@ Functionality is provided through one single npm package so you can use it for b
 ## Installation
 
 ## React Native Compatibility
-
 To use this library you need to ensure you match up with the correct version of React Native you are using.
 
 | FB SDK    | lib version                           | Required React Native Version |
@@ -28,19 +27,19 @@ To use this library you need to ensure you match up with the correct version of 
 
 > ⚠️ * Attention
 >
-> Please notice that this module in versions after 4.2.0 only supports React Native versions above 0.63.3 as it's the oldest version of React Native which support latest XCode version. Technically, it may work on older versions (test it to be sure) but **they are not supported**. Changes that accidentally break older react-native versions may be issued without regard to semantic versioning constraints because we do not test against the older versions. Please see [this issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/30) for an example of a previous break. Please update to current react-native versions.
+> Please notice that this module in versions after 4.2.0 only supports React Native versions above 0.63.3 as it's the oldest version of React Native which support latest XCode version. Technically, it may work on older versions (test it to be sure) but **they are not supported**. Changes that accidentally break older react-native versions may be issued without regard to semantic versioning constraints because we do not test against the older versions. Please see [this issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/30) for an example of a previous break. Please update to current `react-native` versions.
 
 ### 1. Install the library
 
 using either Yarn:
 
-```bash
+```
 yarn add react-native-fbsdk-next
 ```
 
 or npm:
 
-```bash
+```
 npm install --save react-native-fbsdk-next
 ```
 
@@ -51,7 +50,7 @@ npm install --save react-native-fbsdk-next
 
 [CLI autolink feature](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) links the module while building the app.
 
-**Note:** For `iOS` using `cocoapods`, run:
+*Note* For `iOS` using `cocoapods`, run:
 
 ```bash
 $ cd ios/ && pod install
@@ -124,7 +123,7 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
 
-**Note:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
+**NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
    on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
    1. Add
    ```objc
@@ -187,15 +186,16 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
     - Make sure you added the code snippet in step 3.1.
     - Make sure you set up a Facebook app and updated the `AndroidManifest.xml` and `res/values/strings.xml` with Facebook app settings.
 
-2. Duplicate symbol errors
+2. You get duplicate symbol errors.
 
-    - Make sure that `FBSDK[Core, Login, Share]Kit.framework` are **NOT** in `Link Binary with Libraries` for your **root project** when using cocoapods.
+    - Make sure that `FBSDK[Core, Login, Share]Kit.framework` are **not** in `Link Binary with Libraries` for your **root project** when using CocoaPods.
 
-3. You get this build error: `no type or protocol named UIApplicationOpenURLOptionsKey`:
+3. You get this build error: `no type or protocol named UIApplicationOpenURLOptionsKey`.
 
     - Your Xcode version is too old. Upgrade to Xcode 10.0+.
 
-4. You get a compilation error with the error `Undefined symbols for architecture x86_64`
+4. You get a compilation error with the error `Undefined symbols for architecture x86_64`.
+
     ```
     Undefined symbols for architecture x86_64:
         "_swift_FORCE_LOAD$_swiftUniformTypeIdentifiers", referenced from:
@@ -215,42 +215,42 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
         ld: symbol(s) not found for architecture x86_64
     ```
 
-      After **facebook-ios-sdk v7** (written with Swift parts) you need to coordinate Swift language usage with Objective-C for iOS.
+   After **[facebook-ios-sdk](https://github.com/facebook/facebook-ios-sdk) v7** (written with Swift parts) you need to coordinate Swift language usage with Objective-C for iOS.
 
-      Either:
+   Either:
 
     - add a new file named `File.Swift` in the main project folder and answer "yes" when Xcode asks you if you want to "Create Bridging Header"
     The empty swift file makes this change to the Header Search Path on your build settings:
-    ```
+    ```bash
     $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
     $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)
     ```
 
-    - or add this stanza in the postinstall section of your Podfile as a possible workaround (then `pod deintegrate && pod install`):
+      - or add this stanza in the postinstall section of your Podfile as a possible workaround (then `pod deintegrate && pod install`):
 
-      ```ruby
-        # Mixing Swift and Objective-C in a react-native project may be problematic.
-        # Workaround:  https://github.com/facebookarchive/react-native-fbsdk/issues/755#issuecomment-787488994
-        installer.aggregate_targets.first.user_project.native_targets.each do |target|
-          target.build_configurations.each do |config|
-            config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
+        ```ruby
+          # Mixing Swift and Objective-C in a react-native project may be problematic.
+          # Workaround:  https://github.com/facebookarchive/react-native-fbsdk/issues/755#issuecomment-787488994
+          installer.aggregate_targets.first.user_project.native_targets.each do |target|
+            target.build_configurations.each do |config|
+              config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
+            end
           end
-        end
-      ```
+        ```
 
-      Both result in fixing search paths.
+        Both result in fixing search paths.
 
-5. AppLink.fetchDeferredAppLink does not work (on iOS at least)
+5. `AppLink.fetchDeferredAppLink` does not work (on iOS at least).
 
-    Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
+   Both the Facebook App and your app have to have App Tracking Transparency (ATT) permission granted for facebook deferred app links to work. See [this related issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/104#issuecomment-931488609)
 
 6. You get an exception `App ID not found. Add a string value with your app ID for the key FacebookAppID to the Info.plist or call [FBSDKSettings setAppID:].`
 
-    If you find yourself in this situation, and you are certain that you have the FacebookAppID in your Info.plist or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement:
+    If you find yourself in this situation, and you are certain that you have the FacebookAppID in your `Info.plist` or that you have called `setAppId`, you *may* be able to fix it by adding the following lines to `AppDelegate.m` inside the `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`, just before the `return YES` statement:
 
-    ```
+    ```objective-c
       [[FBSDKApplicationDelegate sharedInstance] application:application
-                              didFinishLaunchingWithOptions:launchOptions];
+                            didFinishLaunchingWithOptions:launchOptions];
     ```
 
 7. You don't see any events in the Facebook Events Manager
@@ -260,9 +260,9 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
     - Run the app on a real device
     - Have the facebook app running in the background and logged in to an account
     - Have that account you used on Facebook added as an "Advertising Account" for your app on Facebook's dashboard
-    - MOST IMPORTANT: Have ATT enabled both on the FACEBOOK APP and YOUR APP. 
+    - **Most important:** Have ATT enabled on both the **Facebook app** and **your app**. 
 
-    This will make it so events you log on your app by YOU—which I guess they determine by seeing who is logged in on the Facebook App— are the ones to show up on the Event manager.
+    This will make it so events you log on your app by **you** – which I guess they determine by seeing who is logged in on the Facebook App – are the ones to show up on the Event manager.
 
 8. You get “There is an error in logging you into this application” when attempting to log in via the native Facebook app on Android.
 
@@ -335,10 +335,10 @@ If you would like to initialize the Facebook SDK even earlier in startup for iOS
 
 #### Login Button + Access Token
 
-```js
+```jsx
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { LoginButton, AccessToken } from 'react-native-fbsdk-next';
+import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 
 export default class Login extends Component {
   render() {
@@ -398,7 +398,7 @@ LoginManager.logInWithPermissions(["public_profile"]).then(
 
 #### Get profile information
 
-You can retrieve the profile information after a succesfull login attempt. The data returned will be related to the type of
+You can retrieve the profile information after a successful login attempt. The data returned will be related to the type of
 authentication you are using (limited or not) and the permission granted by the login method.
 
 ```js
@@ -411,9 +411,10 @@ import { Profile } from "react-native-fbsdk-next";
 const currentProfile = Profile.getCurrentProfile().then(
   function(currentProfile) {
     if (currentProfile) {
-      console.log("The current logged user is: " +
-        currentProfile.name
-        + ". His profile id is: " +
+      console.log(
+        "The current logged user is: " +
+        currentProfile.name +
+        ". Their profile id is: " +
         currentProfile.userID
       );
     }
@@ -421,26 +422,43 @@ const currentProfile = Profile.getCurrentProfile().then(
 );
 ```
 
-There's some platform related specific behaviours that you need to consider:
-- On Android, the `email` field doesn't get retrieved even if the `[..., 'email', ...]` permission will be request.
-In fact, the `email` field doesn't exist in the native Java SDK provided by Facebook at the moment (https://developers.facebook.com/docs/reference/androidsdk/current/facebook/com/facebook/profile.html/?locale=it_IT)
-- The width and height query params for the profile picture uri will be 100 (iOS SDK default values).
+There's some platform related specific behaviors that you need to consider:
+- On Android, the `email` field isn't retrieved even if the `[..., "email", ...]` permission is requested.
+In fact, the `email` field doesn't exist in the native Java SDK provided by Facebook at the moment ([reference](https://developers.facebook.com/docs/reference/androidsdk/current/facebook/com/facebook/profile.html/)).
+- The width and height query params for the profile picture URI will be 100 (iOS SDK default values).
 
-### [Limited Login [IOS]](https://developers.facebook.com/docs/facebook-login/limited-login/ios)
+### [Limited Login (iOS only)](https://developers.facebook.com/docs/facebook-login/limited-login/ios)
 
-#### Login Button with Limited Login [IOS only] + Authentication Token [IOS only]
+#### Login Button with Limited Login + Authentication Token
 
-Limited Login allows developers to signal that a login is limited in terms of tracking users.
+[Limited Login](https://developers.facebook.com/docs/facebook-login/limited-login/) was introduced by Facebook based on Apple’s [App Transparency Tracking enforcement](https://developer.apple.com/news/?id=3d8a9yyh) so that iOS users who have opted out of ATT are able to use Facebook login.
 
-**`loginTrackingIOS`** - The possible values are `enabled` and `limited`. Defaults to `enabled`.
+**Note:** Limited Login is required for iOS if using React Native FBSDK Next >= 13.0.0 due to [facebook-ios-sdk#v17.0.0](https://github.com/facebook/facebook-ios-sdk/blob/master/CHANGELOG.md#1700) (see [this comment](https://github.com/facebook/facebook-ios-sdk/issues/2384#issuecomment-2080038284)).
 
-When `loginTrackingIOS` is `limited` - `AccessToken` will be unavailable. Use `AuthenticationToken` instead.
+**`loginTrackingIOS`**: The possible values are `"enabled"` and `"limited"`. The default is `"enabled"`.
 
-`nonceIOS` - Limited Login allows developers to pass a custom nonce for use in verifying an authentication attempt on their servers. A valid nonce must be a non-empty string without whitespace. An invalid nonce will not be set. Instead, default unique nonces will be used for login attempts.
+When `loginTrackingIOS` is `"limited"`, an `AccessToken` will be unavailable. Instead an `AuthenticationToken` that wraps an OpenID Connect token is provided.
 
-```js
+**Note:** An `AuthenticationToken` **cannot** be used to access the GraphAPI. Attempting to do so will result in this error:
+
+```json
+{
+  "error": {
+    "message": "Invalid OAuth access token - Cannot parse access token",
+    "type": "OAuthException",
+    "code": 190,
+    "fbtrace_id": "AqAQuOb32_wZqY1R132lpBI"
+  }
+}
+```
+
+See [this issue](https://github.com/thebergamo/react-native-fbsdk-next/issues/521) for more information.
+
+`nonceIOS`: Limited Login allows developers to optionally pass a custom nonce for use in [validating an authentication attempt](https://developers.facebook.com/docs/facebook-login/limited-login/token/validating) on their servers. A valid nonce must be a non-empty string without whitespace. An invalid nonce will not be set. Instead, a default unique nonce will be used.
+
+```jsx
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
   AccessToken,
   AuthenticationToken,
@@ -454,11 +472,11 @@ export default class Login extends Component {
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
-              console.log('login has error: ' + result.error);
+              console.log("login has error: " + result.error);
             } else if (result.isCancelled) {
-              console.log('login is cancelled.');
+              console.log("login is cancelled.");
             } else {
-              if (Platform.OS === 'ios') {
+              if (Platform.OS === "ios") {
                 AuthenticationToken.getAuthenticationTokenIOS().then((data) => {
                   console.log(data?.authenticationToken);
                 });
@@ -469,9 +487,9 @@ export default class Login extends Component {
               }
             }
           }}
-          onLogoutFinished={() => console.log('logout.')}
-          loginTrackingIOS={'limited'}
-          nonceIOS={'my_nonce'}
+          onLogoutFinished={() => console.log("logout.")}
+          loginTrackingIOS="limited"
+          nonceIOS="my_nonce" // Optional
         />
       </View>
     );
@@ -479,30 +497,36 @@ export default class Login extends Component {
 }
 ```
 
-#### Login Manager with Limited Login [IOS only] + Authentication Token [IOS only]
+#### Login Manager with Limited Login + Authentication Token
 
 ```js
+  //...
 
   import {
     AccessToken,
     AuthenticationToken,
     LoginManager,
-  } from 'react-native-fbsdk-next';
+  } from "react-native-fbsdk-next";
 
   //...
 
   try {
     const result = await LoginManager.logInWithPermissions(
-      ['public_profile', 'email'],
-      'limited',
-      'my_nonce'
+      [
+        "public_profile",
+        "email",
+      ],
+      "limited",
+      "my_nonce", // Optional
     );
     console.log(result);
-
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
+      // This token **cannot** be used to access the Graph API.
+      // https://developers.facebook.com/docs/facebook-login/limited-login/
       const result = await AuthenticationToken.getAuthenticationTokenIOS();
       console.log(result?.authenticationToken);
     } else {
+      // This token can be used to access the Graph API.
       const result = await AccessToken.getCurrentAccessToken();
       console.log(result?.accessToken);
     }
@@ -511,7 +535,6 @@ export default class Login extends Component {
   }
 
   //...
-
 ```
 
 ### [Sharing](https://developers.facebook.com/docs/sharing)
@@ -547,14 +570,13 @@ shareLinkWithShareDialog() {
   ).then(
     function(result) {
       if (result.isCancelled) {
-        console.log('Share cancelled');
+        console.log("Share cancelled");
       } else {
-        console.log('Share success with postId: '
-          + result.postId);
+        console.log("Share successful with postId: " + result.postId);
       }
     },
     function(error) {
-      console.log('Share fail with error: ' + error);
+      console.log("Share failed with error: " + error);
     }
   );
 }
@@ -565,16 +587,17 @@ shareLinkWithShareDialog() {
 See [SharePhotoContent](/js/models/FBSharePhotoContent.js) and [SharePhoto](/js/models/FBSharePhoto.js) to refer other options.
 
 ```js
-const FBSDK = require('react-native-fbsdk-next');
-const {
-  ShareApi,
-} = FBSDK;
+// ...
 
-const photoUri = 'file://' + '/path/of/photo.png'
+import { ShareApi } from "react-native-fbsdk-next";
+
+// ...
+
+const photoUri = "file://" + "/path/of/photo.png";
 const sharePhotoContent = {
-  contentType = 'photo',
+  contentType = "photo",
   photos: [{ imageUrl: photoUri }],
-}
+};
 
 // ...
 
@@ -586,16 +609,17 @@ ShareDialog.show(tmp.state.sharePhotoContent);
 See [ShareVideoContent](/js/models/FBShareVideoContent.js) and [ShareVideo](/js/models/FBShareVideo.js) to refer other options.
 
 ```js
-const FBSDK = require('react-native-fbsdk-next');
-const {
-  ShareApi,
-} = FBSDK;
+// ...
 
-const videoUri = 'file://' + '/path/of/video.mp4'
+import { ShareApi } from "react-native-fbsdk-next";
+
+// ...
+
+const videoUri = "file://" + "/path/of/video.mp4";
 const shareVideoContent = {
-  contentType = 'video',
+  contentType = "video",
   video: { localUrl: videoUri },
-}
+};
 
 // ...
 
@@ -615,7 +639,7 @@ import { ShareApi } from 'react-native-fbsdk-next';
 
 // Build up a shareable link.
 const shareLinkContent = {
-  contentType: 'link',
+  contentType: "link",
   contentUrl: "https://facebook.com",
 };
 
@@ -626,15 +650,15 @@ ShareApi.canShare(this.state.shareLinkContent).then(
   var tmp = this;
   function(canShare) {
     if (canShare) {
-      return ShareApi.share(tmp.state.shareLinkContent, '/me', 'Some message.');
+      return ShareApi.share(tmp.state.shareLinkContent, "/me", "Some message.");
     }
   }
 ).then(
   function(result) {
-    console.log('Share with ShareApi success.');
+    console.log("Share with ShareApi success.");
   },
   function(error) {
-    console.log('Share with ShareApi failed with error: ' + error);
+    console.log("Share with ShareApi failed with error: " + error);
   }
 );
 ```
@@ -658,6 +682,7 @@ AppEventsLogger.logEvent(AppEventsLogger.AppEvents.CompletedRegistration, {
   [AppEventsLogger.AppEventParams.RegistrationMethod]: "email",
 });
 ```
+
 ### [Aggregated Event Measurement(AEM) for iOS](https://developers.facebook.com/docs/app-events/guides/aggregated-event-measurement/)
 
 Aggregated Event Measurement (AEM) for iOS apps allows for the measurement of app events from iOS 14.5+ users who have opted out of app tracking. To implement AEM for your app you can follow the steps below. 
@@ -682,10 +707,10 @@ The DeepLink URL from the re-engagement ads should be passed to the AEM Kit even
 
 Use the AEMReporterIOS exported from the sdk to log event to AEM, `logAEMEvent` function will bypass if platform isn't iOS, it's safe to call without platform determined.
 
-```ts
+```js
 import {AEMReporterIOS} from 'react-native-fbsdk-next';
 
-// this will do nothing if Platform.OS != 'ios'
+// This will do nothing if Platform.OS !== "ios"
 AEMReporterIOS.logAEMEvent(eventName, value, currency, otherParameters);
 ```
 
@@ -708,7 +733,9 @@ LogFBEvent = (eventName: string, valueToSum: number, parameters: Record<string,s
 
 ### [Graph API](https://developers.facebook.com/docs/graph-api)
 
-#### Graph Requests
+**Note:** Graph API requests cannot be made with a [Limited Login](https://developers.facebook.com/docs/facebook-login/limited-login/) `AuthenticationToken`.
+
+#### Graph API Requests
 
 ```js
 // ...
@@ -717,21 +744,22 @@ import { GraphRequest, GraphRequestManager } from 'react-native-fbsdk-next';
 
 // ...
 
-//Create response callback.
-_responseInfoCallback(error: ?Object, result: ?Object) {
+// Create response callback.
+_responseInfoCallback(error, result) {
   if (error) {
-    console.log('Error fetching data: ' + error.toString());
+    console.log("Error fetching data: " + error.toString());
   } else {
-    console.log('Success fetching data: ' + result.toString());
+    console.log("Success fetching data: " + result.toString());
   }
 }
 
 // Create a graph request asking for user information with a callback to handle the response.
 const infoRequest = new GraphRequest(
-  '/me',
+  "/me",
   null,
   this._responseInfoCallback,
 );
+
 // Start the graph request.
 new GraphRequestManager().addRequest(infoRequest).start();
 ```
@@ -799,7 +827,6 @@ Optional configuration:
 ```
 
 ## Enabling Auto App Installs in Expo
-
 To enable auto app installs in Expo, you need to set autoLogAppEventsEnabled and advertiserIDCollectionEnabled flags to **true** in your `app.json` or `app.config.js`.
 
 Moreover, on iOS you need user consent to collect user data. You can do this by adding the following code somewhere to your `App.tsx`:
@@ -817,7 +844,6 @@ if (status === 'granted') {
 ```
 
 ## Migrating from expo-facebook to react-native-fbsdk-next
-
 The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated in Expo SDK 45 and removed in Expo SDK 46. The following feature parity table lists the `expo-facebook` API functions and their `react-native-fbsdk-native` counterparts, where available:
 
 | expo-facebook | Supported | react-native-fbsdk-next |
@@ -843,23 +869,26 @@ The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated
 | [setUserIDAsync(userID)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setuseridasyncuserid) | ✅ | AppEventsLogger.setUserID(userID) |
 
 ## Example app
-
 To run the example app, you'll first need to setup the environment:
+
 ```
 refresh-example.sh
 ```
+
 This will create a new app in the `RNFBSDKExample` directory, using the latest version of React Native.
 Next, it will patch the necessary files so you may run the example app.
 
-```
+```bash
 yarn example:ios
 ```
+
 or
-```
+
+```bash
 yarn example:android
 ```
 
-**Note:** You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
+Note: You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
 
 
 ## Testing with Jest
@@ -867,17 +896,18 @@ yarn example:android
 We have a example mock inside `jest/setup.js` but you just add the following line to your setup file:
 
 ```js
-jest.mock('react-native-fbsdk-next', () => require('react-native-fbsdk-next/jest/mocks').default);
+jest.mock("react-native-fbsdk-next", () => require("react-native-fbsdk-next/jest/mocks").default);
 ```
 
-You also can spyOn one of this mock to return whatever you want inside your test:
+You also can `spyOn` one of this mock to return whatever you want inside your test:
 
 ```js
-import { LoginManager } from 'react-native-fbsdk-next'
+import { LoginManager } from "react-native-fbsdk-next"
 
-jest.spyOn(LoginManager, 'logInWithPermissions').mockImplementation(() => Promise.resolve({ isCancelled: false }))
+jest.spyOn(LoginManager, "logInWithPermissions").mockImplementation(() => Promise.resolve({ isCancelled: false }))
 
 ```
+
 
 ## Join the React Native community
 
@@ -888,4 +918,4 @@ See the [CONTRIBUTING](./CONTRIBUTING.md) file for how to help out.
 
 ## License
 
-See the LICENSE file.
+See the [LICENSE](./LICENSE) file.
