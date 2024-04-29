@@ -14,4 +14,4 @@ Here is a procedure that works:
 1. `git clone git@github.com:<your github username>/react-native-fbsdk.next.git`
 1. `cd react-native-fbsdk-next`
 1. `yarn`
-1. Follow the instructions in [RNFBSDKExample/README.md](the example README) related to using the example to test changes to the core module
+1. Follow the instructions in [the example README](./RNFBSDKExample/README.md) related to using the example to test changes to the core module
