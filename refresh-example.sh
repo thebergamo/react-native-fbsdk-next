@@ -23,11 +23,12 @@ fi
 \rm -fr RNFBSDKExample
 
 # Make the new example
-npx react-native@latest init RNFBSDKExample --skip-install
+npm_config_yes=true npx react-native@latest init RNFBSDKExample --skip-install --skip-git-init
 pushd RNFBSDKExample
 rm -f Gemfile Gemfile.lock .ruby-version
+touch yarn.lock
 yarn
-yarn add github:thebergamo/react-native-fbsdk-next
+yarn add react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next
 
 #########################################################################
 #
@@ -124,8 +125,9 @@ sed -i -e 's/^<\/dict>/  <key>CFBundleURLTypes<\/key>\n  <array>\n    <dict>\n  
 rm -f ios/RNFBSDKExample/Info.plist??
 
 # You may want to integrate Facebook's content provider
-sed -i -e 's/<\/application>/  <provider android:name="com.facebook.FacebookContentProvider" android:authorities="com.facebook.app.FacebookContentProvider355198514515820" android:exported="true" \/>\n    <\/application>/' android/app/src/main/AndroidManifest.xml
-rm -f android/app/src/main/AndroidManifest.xml??
+# Hmm - commented out 20240926 by mikehardy - causes insta-crash on startup now
+# sed -i -e 's/<\/application>/  <provider android:name="com.facebook.FacebookContentProvider" android:authorities="com.facebook.app.FacebookContentProvider355198514515820" android:exported="true" \/>\n    <\/application>/' android/app/src/main/AndroidManifest.xml
+# rm -f android/app/src/main/AndroidManifest.xml??
 
 
 # Install the results
