@@ -68,6 +68,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: iOS build configured to use current node
+        run: echo "export NODE_BINARY=`which node`" > RNFBSDKExample/ios/.xcode.env.local
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
