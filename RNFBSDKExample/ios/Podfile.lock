@@ -1,21 +1,21 @@
 PODS:
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
-  - FBAEMKit (17.0.3):
-    - FBSDKCoreKit_Basics (= 17.0.3)
+  - FBAEMKit (17.1.0):
+    - FBSDKCoreKit_Basics (= 17.1.0)
   - FBLazyVector (0.75.3)
-  - FBSDKCoreKit (17.0.3):
-    - FBAEMKit (= 17.0.3)
-    - FBSDKCoreKit_Basics (= 17.0.3)
-  - FBSDKCoreKit_Basics (17.0.3)
-  - FBSDKGamingServicesKit (17.0.3):
-    - FBSDKCoreKit (= 17.0.3)
-    - FBSDKCoreKit_Basics (= 17.0.3)
-    - FBSDKShareKit (= 17.0.3)
-  - FBSDKLoginKit (17.0.3):
-    - FBSDKCoreKit (= 17.0.3)
-  - FBSDKShareKit (17.0.3):
-    - FBSDKCoreKit (= 17.0.3)
+  - FBSDKCoreKit (17.1.0):
+    - FBAEMKit (= 17.1.0)
+    - FBSDKCoreKit_Basics (= 17.1.0)
+  - FBSDKCoreKit_Basics (17.1.0)
+  - FBSDKGamingServicesKit (17.1.0):
+    - FBSDKCoreKit (= 17.1.0)
+    - FBSDKCoreKit_Basics (= 17.1.0)
+    - FBSDKShareKit (= 17.1.0)
+  - FBSDKLoginKit (17.1.0):
+    - FBSDKCoreKit (= 17.1.0)
+  - FBSDKShareKit (17.1.0):
+    - FBSDKCoreKit (= 17.1.0)
   - fmt (9.1.0)
   - glog (0.3.5)
   - hermes-engine (0.75.3):
@@ -1257,14 +1257,14 @@ PODS:
     - react-native-fbsdk-next/Login (= 13.0.0)
     - react-native-fbsdk-next/Share (= 13.0.0)
   - react-native-fbsdk-next/Core (13.0.0):
-    - FBSDKCoreKit (~> 17.0.0)
+    - FBSDKCoreKit (~> 17.1)
     - React-Core
   - react-native-fbsdk-next/Login (13.0.0):
-    - FBSDKLoginKit (~> 17.0.0)
+    - FBSDKLoginKit (~> 17.1)
     - React-Core
   - react-native-fbsdk-next/Share (13.0.0):
-    - FBSDKGamingServicesKit (~> 17.0.0)
-    - FBSDKShareKit (~> 17.0.0)
+    - FBSDKGamingServicesKit (~> 17.1)
+    - FBSDKShareKit (~> 17.1)
     - React-Core
   - React-nativeconfig (0.75.3)
   - React-NativeModulesApple (0.75.3):
@@ -1738,13 +1738,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: 4cb898d0bf20404aab1850c656dcea009429d6c1
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
-  FBAEMKit: 9900b2edd99a2d21629a6277e6166f14c6215799
+  FBAEMKit: cb719c53575a3be86ea873279f30d6a2c4e15881
   FBLazyVector: 7b438dceb9f904bd85ca3c31d64cce32a035472b
-  FBSDKCoreKit: 0791f8f68a8630931a4c12aa23a56cc021551596
-  FBSDKCoreKit_Basics: 46d6b472c0dd0a5a7e972c025033d1c567f54eb4
-  FBSDKGamingServicesKit: 599a63c235776b7c6288d5dfd7c02edab9a1d3b7
-  FBSDKLoginKit: b4a4eba1d62eb452544411824f41689adabd5bd2
-  FBSDKShareKit: eb1169eafe3c06f881dc6deed2d7979585b16959
+  FBSDKCoreKit: ecdb980a24633ccb012700299ceb16d0235e14d2
+  FBSDKCoreKit_Basics: 045101c4a9ef10c845347424d73a29aae02c3e43
+  FBSDKGamingServicesKit: f2488bfe4a1e3ea478e9c60b8ecbaa8da4cd9e39
+  FBSDKLoginKit: 69eb59b2f839aba635616df6e422acd0ca88030a
+  FBSDKShareKit: be9db7d121cbc3d6700c1b712a61183cac407f64
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: 69ef571f3de08433d766d614c73a9838a06bf7eb
   hermes-engine: 8d2103d6c0176779aea4e25df6bb1410f9946680
@@ -1777,7 +1777,7 @@ SPEC CHECKSUMS:
   React-logger: 4072f39df335ca443932e0ccece41fbeb5ca8404
   React-Mapbuffer: 714f2fae68edcabfc332b754e9fbaa8cfc68fdd4
   React-microtasksnativemodule: 4943ad8f99be8ccf5a63329fa7d269816609df9e
-  react-native-fbsdk-next: 84746ea062dc3b1a422154d7674ba4c5836b6d82
+  react-native-fbsdk-next: b9207741d17005c2ff772e47d3370e91b3fbed4e
   React-nativeconfig: 4a9543185905fe41014c06776bf126083795aed9
   React-NativeModulesApple: 0506da59fc40d2e1e6e12a233db5e81c46face27
   React-perflogger: 3bbb82f18e9ac29a1a6931568e99d6305ef4403b
