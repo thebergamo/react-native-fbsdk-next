@@ -75,9 +75,21 @@ public class FBAccessTokenModule extends ReactContextBaseJavaModule {
 
     }
 
-    @Override
+    // the upstream method was removed in react-native 0.74
+    // this remains for backwards compatibility so that react-native < 0.74
+    @SuppressWarnings("removal")
     public void onCatalystInstanceDestroy() {
         super.onCatalystInstanceDestroy();
+        if (accessTokenTracker != null) {
+            accessTokenTracker.stopTracking();
+        }
+    }
+
+    // This should have an `@Override` tag, but the method does not exist until
+    // react-native >= 0.74, which would cause linting errors across versions
+    // once minimum supported react-native here is 0.74+, add the tag
+    public void invalidate() {
+        super.invalidate();
         if (accessTokenTracker != null) {
             accessTokenTracker.stopTracking();
         }
