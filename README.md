@@ -869,14 +869,14 @@ The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated
 | [setUserIDAsync(userID)](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#setuseridasyncuserid) | ✅ | AppEventsLogger.setUserID(userID) |
 
 ## Example app
-To run the example app, you'll first need to setup the environment:
 
-```
-refresh-example.sh
+Start the metro javascript server:
+
+```bash
+yarn example:start
 ```
 
-This will create a new app in the `RNFBSDKExample` directory, using the latest version of React Native.
-Next, it will patch the necessary files so you may run the example app.
+Then start either the iOS or android app:
 
 ```bash
 yarn example:ios
@@ -888,7 +888,26 @@ or
 yarn example:android
 ```
 
+As you make changes to the module's code you will want to copy those into the example:
+
+```bash
+yarn example:devcopy
+```
+
 Note: You'll probably want to change the Facebook App ID to your own, else the example app won't be able to login.  To change it, edit your local copy of `refresh-example.sh`, update the `FacebookAppId` variable, then re-run `refresh-example.sh` to regenerate the example directory.
+
+To update the example app, you should be able to just run the refresh script:
+
+```
+refresh-example.sh
+```
+
+This will create a new app in the `RNFBSDKExample` directory, using the latest version of React Native.
+Next, it will patch the necessary files so you may run the example app.
+
+Occasionally react-native version changes mean that there is some incompatibility
+between what the script expects to find in the fresh react-native app as it does
+string search/replace operations, but typically they are easy to fix.
 
 
 ## Testing with Jest
