@@ -20,7 +20,7 @@ RCT_EXPORT_METHOD(getCurrentProfile:(RCTResponseSenderBlock)callback)
 
 #pragma mark - Helper Functions
 
-static NSDictionary *RCTBuildProfileDict()
+static NSDictionary *RCTBuildProfileDict(void)
 {
     if (!FBSDKProfile.currentProfile) {
         return nil;
