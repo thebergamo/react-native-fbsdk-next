@@ -107,7 +107,13 @@ RCT_EXPORT_METHOD(reauthorizeDataAccess:(RCTPromiseResolveBlock)resolve rejecter
       }
     };
 
+    // the nil argument is a ViewController, it should be nullable but Xcode complains
+    // I logged an upstream bug (and proposed a PR), hopefully will resolve.
+    // https://github.com/facebook/facebook-ios-sdk/issues/2476
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     [_loginManager reauthorizeDataAccess:nil handler:requestHandler];
+#pragma clang diagnostic pop
 };
 
 RCT_EXPORT_METHOD(logOut)
