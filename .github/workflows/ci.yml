@@ -15,22 +15,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install yarn
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          command: npm install -g yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
+        name: Yarn Cache
+        id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
-          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v1-
+          path: .yarn/cache
+          key: ${{ runner.os }}-android-yarn-v1-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-js-yarn-v1
       - name: Install dependencies
         uses: nick-fields/retry@v3
         with:
@@ -48,22 +39,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install yarn
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          command: npm install -g yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
+        name: Yarn Cache
+        id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
-          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v1-
+          path: .yarn/cache
+          key: ${{ runner.os }}-android-yarn-v1-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-android-yarn-v1
       - name: Install dependencies
         uses: nick-fields/retry@v3
         with:
@@ -94,27 +76,18 @@ jobs:
         run: gem install cocoapods
       - name: Install xcbeautify
         run: brew install xcbeautify
-      - name: Install yarn
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          command: npm install -g yarn
       - uses: hendrikmuhs/ccache-action@v1
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
           max-size: 750M
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
+        name: Yarn Cache
+        id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
-          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v1
+          path: .yarn/cache
+          key: ${{ runner.os }}-ios-yarn-v1-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-v1
       - uses: actions/cache@v4
         name: Cache Pods
         id: pods-cache
