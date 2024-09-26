@@ -47,7 +47,7 @@ public class FBProfileModule extends ReactContextBaseJavaModule {
               @Override
               public void run() {
                 timer.cancel();
-                callback.invoke(null);
+                callback.invoke();
               }
             },
             30000
