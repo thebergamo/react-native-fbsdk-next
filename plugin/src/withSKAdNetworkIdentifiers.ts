@@ -23,7 +23,6 @@ export const withSKAdNetworkIdentifiers: ConfigPlugin<string[]> = (
 
   // Get ids
   let existingIds = config.ios.infoPlist.SKAdNetworkItems.map(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (item: any) => item?.SKAdNetworkIdentifier ?? null,
   ).filter(Boolean) as string[];
   // remove duplicates
