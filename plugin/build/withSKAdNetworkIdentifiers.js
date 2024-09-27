@@ -19,9 +19,7 @@ const withSKAdNetworkIdentifiers = (config, identifiers) => {
         config.ios.infoPlist.SKAdNetworkItems = [];
     }
     // Get ids
-    let existingIds = config.ios.infoPlist.SKAdNetworkItems.map(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (item) => item?.SKAdNetworkIdentifier ?? null).filter(Boolean);
+    let existingIds = config.ios.infoPlist.SKAdNetworkItems.map((item) => item?.SKAdNetworkIdentifier ?? null).filter(Boolean);
     // remove duplicates
     existingIds = [...new Set(existingIds)];
     for (const id of identifiers) {

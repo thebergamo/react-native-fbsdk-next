@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
-exports.setFacebookConfig = setFacebookConfig;
+exports.setFacebookConfig = exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
 const config_1 = require("./config");
 const config_plugins_1 = require("@expo/config-plugins");
 const { buildResourceItem } = config_plugins_1.AndroidConfig.Resources;
@@ -195,3 +194,4 @@ function setFacebookConfig(props, androidManifest) {
     }
     return androidManifest;
 }
+exports.setFacebookConfig = setFacebookConfig;
