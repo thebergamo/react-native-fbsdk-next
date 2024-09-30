@@ -1,21 +1,21 @@
 PODS:
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
-  - FBAEMKit (17.1.0):
-    - FBSDKCoreKit_Basics (= 17.1.0)
+  - FBAEMKit (17.3.0):
+    - FBSDKCoreKit_Basics (= 17.3.0)
   - FBLazyVector (0.75.3)
-  - FBSDKCoreKit (17.1.0):
-    - FBAEMKit (= 17.1.0)
-    - FBSDKCoreKit_Basics (= 17.1.0)
-  - FBSDKCoreKit_Basics (17.1.0)
-  - FBSDKGamingServicesKit (17.1.0):
-    - FBSDKCoreKit (= 17.1.0)
-    - FBSDKCoreKit_Basics (= 17.1.0)
-    - FBSDKShareKit (= 17.1.0)
-  - FBSDKLoginKit (17.1.0):
-    - FBSDKCoreKit (= 17.1.0)
-  - FBSDKShareKit (17.1.0):
-    - FBSDKCoreKit (= 17.1.0)
+  - FBSDKCoreKit (17.3.0):
+    - FBAEMKit (= 17.3.0)
+    - FBSDKCoreKit_Basics (= 17.3.0)
+  - FBSDKCoreKit_Basics (17.3.0)
+  - FBSDKGamingServicesKit (17.3.0):
+    - FBSDKCoreKit (= 17.3.0)
+    - FBSDKCoreKit_Basics (= 17.3.0)
+    - FBSDKShareKit (= 17.3.0)
+  - FBSDKLoginKit (17.3.0):
+    - FBSDKCoreKit (= 17.3.0)
+  - FBSDKShareKit (17.3.0):
+    - FBSDKCoreKit (= 17.3.0)
   - fmt (9.1.0)
   - glog (0.3.5)
   - hermes-engine (0.75.3):
@@ -1251,20 +1251,20 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-fbsdk-next (13.0.0):
+  - react-native-fbsdk-next (13.1.1):
     - React-Core
-    - react-native-fbsdk-next/Core (= 13.0.0)
-    - react-native-fbsdk-next/Login (= 13.0.0)
-    - react-native-fbsdk-next/Share (= 13.0.0)
-  - react-native-fbsdk-next/Core (13.0.0):
-    - FBSDKCoreKit (~> 17.1)
+    - react-native-fbsdk-next/Core (= 13.1.1)
+    - react-native-fbsdk-next/Login (= 13.1.1)
+    - react-native-fbsdk-next/Share (= 13.1.1)
+  - react-native-fbsdk-next/Core (13.1.1):
+    - FBSDKCoreKit (~> 17.3)
     - React-Core
-  - react-native-fbsdk-next/Login (13.0.0):
-    - FBSDKLoginKit (~> 17.1)
+  - react-native-fbsdk-next/Login (13.1.1):
+    - FBSDKLoginKit (~> 17.3)
     - React-Core
-  - react-native-fbsdk-next/Share (13.0.0):
-    - FBSDKGamingServicesKit (~> 17.1)
-    - FBSDKShareKit (~> 17.1)
+  - react-native-fbsdk-next/Share (13.1.1):
+    - FBSDKGamingServicesKit (~> 17.3)
+    - FBSDKShareKit (~> 17.3)
     - React-Core
   - React-nativeconfig (0.75.3)
   - React-NativeModulesApple (0.75.3):
@@ -1738,13 +1738,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: 4cb898d0bf20404aab1850c656dcea009429d6c1
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
-  FBAEMKit: cb719c53575a3be86ea873279f30d6a2c4e15881
+  FBAEMKit: 92f488a9c97208e2f6f01655750944d213fbc0b0
   FBLazyVector: 7b438dceb9f904bd85ca3c31d64cce32a035472b
-  FBSDKCoreKit: ecdb980a24633ccb012700299ceb16d0235e14d2
-  FBSDKCoreKit_Basics: 045101c4a9ef10c845347424d73a29aae02c3e43
-  FBSDKGamingServicesKit: f2488bfe4a1e3ea478e9c60b8ecbaa8da4cd9e39
-  FBSDKLoginKit: 69eb59b2f839aba635616df6e422acd0ca88030a
-  FBSDKShareKit: be9db7d121cbc3d6700c1b712a61183cac407f64
+  FBSDKCoreKit: 1be47a742ccdddf8dd85272c3953534214dc0f30
+  FBSDKCoreKit_Basics: fcafe75f7deeed1146d04ea51b45a69731e63c16
+  FBSDKGamingServicesKit: c9cb7317649310a4211796166c255122b7513480
+  FBSDKLoginKit: ad0d6485feace32d65f407f6a288c4dfa8ec559c
+  FBSDKShareKit: e96f20fc2f6f68d25ae310a0f64f147f25ef66a4
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: 69ef571f3de08433d766d614c73a9838a06bf7eb
   hermes-engine: 8d2103d6c0176779aea4e25df6bb1410f9946680
@@ -1777,7 +1777,7 @@ SPEC CHECKSUMS:
   React-logger: 4072f39df335ca443932e0ccece41fbeb5ca8404
   React-Mapbuffer: 714f2fae68edcabfc332b754e9fbaa8cfc68fdd4
   React-microtasksnativemodule: 4943ad8f99be8ccf5a63329fa7d269816609df9e
-  react-native-fbsdk-next: b9207741d17005c2ff772e47d3370e91b3fbed4e
+  react-native-fbsdk-next: 958f8abd9fa3713377105ff7c31114ed16aabefe
   React-nativeconfig: 4a9543185905fe41014c06776bf126083795aed9
   React-NativeModulesApple: 0506da59fc40d2e1e6e12a233db5e81c46face27
   React-perflogger: 3bbb82f18e9ac29a1a6931568e99d6305ef4403b
