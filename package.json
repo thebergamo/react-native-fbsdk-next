@@ -152,6 +152,6 @@
   ],
   "packageManager": "yarn@3.6.4",
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   }
 }
