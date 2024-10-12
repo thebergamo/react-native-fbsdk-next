@@ -76,9 +76,9 @@
     <string>fbshareextension</string>
   </array>
   <key>FacebookAutoLogAppEventsEnabled</key>
-  <string>FALSE</string>
+  <false/>
   <key>FacebookAdvertiserIDCollectionEnabled</key>
-  <string>FALSE</string>
+  <false/>
   <key>CFBundleURLTypes</key>
   <array>
     <dict>
