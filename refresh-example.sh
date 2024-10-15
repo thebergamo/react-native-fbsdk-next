@@ -111,9 +111,9 @@ sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.AutoLog
 rm -f android/app/src/main/AndroidManifest.xml??
 sed -i -e 's/<\/application>/  <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="false"\/>\n    <\/application>/' android/app/src/main/AndroidManifest.xml
 rm -f android/app/src/main/AndroidManifest.xml??
-sed -i -e 's/^<\/dict>/  <key>FacebookAutoLogAppEventsEnabled<\/key>\n  <string>FALSE<\/string>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
+sed -i -e 's/^<\/dict>/  <key>FacebookAutoLogAppEventsEnabled<\/key>\n  <false\/>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
-sed -i -e 's/^<\/dict>/  <key>FacebookAdvertiserIDCollectionEnabled<\/key>\n  <string>FALSE<\/string>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
+sed -i -e 's/^<\/dict>/  <key>FacebookAdvertiserIDCollectionEnabled<\/key>\n  <false\/>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
 rm -f ios/RNFBSDKExample/Info.plist??
 
 # On iOS and Android you have to add entries for various query schemes (Android S+) and allowed URLs etc
