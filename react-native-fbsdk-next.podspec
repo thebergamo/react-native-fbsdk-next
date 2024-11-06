@@ -1,7 +1,7 @@
 require 'json'
 package = JSON.parse(File.read(File.join(__dir__, './', 'package.json')))
 
-FBSDKVersion = "17.3"
+FBSDKVersion = "17.4"
 
 Pod::Spec.new do |s|
   s.name          = package['name']
