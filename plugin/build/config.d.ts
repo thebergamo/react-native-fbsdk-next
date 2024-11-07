@@ -1,14 +1,14 @@
-interface FacebookPluginConfig {
+type FacebookPluginConfig = {
     scheme?: string;
     advertiserIDCollectionEnabled?: boolean;
     appId?: string;
     autoInitEnabled?: boolean;
     autoLogAppEventsEnabled?: boolean;
     displayName?: string;
-}
+};
 export type ExpoConfigFacebook = {
-    plugins?: {
-        facebook?: FacebookPluginConfig;
+    plugins: {
+        facebook: FacebookPluginConfig;
     };
 };
 export type ConfigProps = {
