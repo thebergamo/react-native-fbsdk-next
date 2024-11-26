@@ -35,6 +35,23 @@ static NSDictionary *RCTBuildProfileDict(void)
         @"linkURL": FBSDKProfile.currentProfile.linkURL ? FBSDKProfile.currentProfile.linkURL.relativeString : [NSNull null],
         @"userID": FBSDKProfile.currentProfile.userID ? FBSDKProfile.currentProfile.userID : [NSNull null],
         @"email": FBSDKProfile.currentProfile.email ? FBSDKProfile.currentProfile.email : [NSNull null],
+        @"refreshDate": FBSDKProfile.currentProfile.refreshDate ? @(FBSDKProfile.currentProfile.refreshDate.timeIntervalSince1970 * 1000) : [NSNull null],
+        @"friendIDs": FBSDKProfile.currentProfile.friendIDs ? FBSDKProfile.currentProfile.friendIDs : [NSNull null],
+        @"birthday": FBSDKProfile.currentProfile.birthday ? @(FBSDKProfile.currentProfile.birthday.timeIntervalSince1970 * 1000) : [NSNull null],
+        @"ageRange": FBSDKProfile.currentProfile.ageRange ? @{
+            @"min": FBSDKProfile.currentProfile.ageRange.min,
+            @"max": FBSDKProfile.currentProfile.ageRange.max
+        } : [NSNull null],
+        @"hometown": FBSDKProfile.currentProfile.hometown ? @{
+            @"id": FBSDKProfile.currentProfile.hometown.id,
+            @"name": FBSDKProfile.currentProfile.hometown.name
+        } : [NSNull null],
+        @"location": FBSDKProfile.currentProfile.location ? @{
+            @"id": FBSDKProfile.currentProfile.location.id,
+            @"name": FBSDKProfile.currentProfile.location.name
+        } : [NSNull null],
+        @"gender": FBSDKProfile.currentProfile.gender ? FBSDKProfile.currentProfile.gender : [NSNull null],
+        @"permissions": FBSDKProfile.currentProfile.permissions ? FBSDKProfile.currentProfile.permissions.allObjects : [NSNull null]
     };
 }
 
