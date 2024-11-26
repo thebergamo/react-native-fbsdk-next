@@ -38,7 +38,10 @@ static NSDictionary *RCTBuildProfileDict(void)
         @"refreshDate": FBSDKProfile.currentProfile.refreshDate ? @(FBSDKProfile.currentProfile.refreshDate.timeIntervalSince1970 * 1000) : [NSNull null],
         @"friendIDs": FBSDKProfile.currentProfile.friendIDs ? FBSDKProfile.currentProfile.friendIDs : [NSNull null],
         @"birthday": FBSDKProfile.currentProfile.birthday ? @(FBSDKProfile.currentProfile.birthday.timeIntervalSince1970 * 1000) : [NSNull null],
-        @"ageRange": FBSDKProfile.currentProfile.ageRange ? FBSDKProfile.currentProfile.ageRange : [NSNull null],
+        @"ageRange": FBSDKProfile.currentProfile.ageRange ? @{
+            @"min": FBSDKProfile.currentProfile.ageRange.min,
+            @"max": FBSDKProfile.currentProfile.ageRange.max
+        } : [NSNull null],
         @"hometown": FBSDKProfile.currentProfile.hometown ? @{
             @"id": FBSDKProfile.currentProfile.hometown.id,
             @"name": FBSDKProfile.currentProfile.hometown.name
