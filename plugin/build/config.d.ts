@@ -1,5 +1,16 @@
-import { ExpoConfig } from '@expo/config-types';
-export type ExpoConfigFacebook = Pick<ExpoConfig, 'facebookScheme' | 'facebookAdvertiserIDCollectionEnabled' | 'facebookAppId' | 'facebookAutoInitEnabled' | 'facebookAutoLogAppEventsEnabled' | 'facebookDisplayName'>;
+type FacebookPluginConfig = {
+    scheme?: string;
+    advertiserIDCollectionEnabled?: boolean;
+    appId?: string;
+    autoInitEnabled?: boolean;
+    autoLogAppEventsEnabled?: boolean;
+    displayName?: string;
+};
+export type ExpoConfigFacebook = {
+    plugins: {
+        facebook: FacebookPluginConfig;
+    };
+};
 export type ConfigProps = {
     /**
      * Used for all Facebook libraries. Set up your Facebook App ID at https://developers.facebook.com.
@@ -39,3 +50,4 @@ export declare function getFacebookDisplayName(config: ConfigProps): string | nu
 export declare function getFacebookAutoInitEnabled(config: ConfigProps): boolean | null;
 export declare function getFacebookAutoLogAppEvents(config: ConfigProps): boolean | null;
 export declare function getFacebookAdvertiserIDCollection(config: ConfigProps): boolean | null;
+export {};

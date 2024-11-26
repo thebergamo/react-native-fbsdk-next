@@ -7,8 +7,32 @@ const withSKAdNetworkIdentifiers_1 = require("./withSKAdNetworkIdentifiers");
 const config_plugins_1 = require("@expo/config-plugins");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('react-native-fbsdk-next/package.json');
+function getExpoFacebookConfig(config) {
+    const facebookPlugin = config.plugins?.find((plugin) => {
+        if (Array.isArray(plugin) && plugin[0] === 'facebook') {
+            return true;
+        }
+        return false;
+    });
+    if (Array.isArray(facebookPlugin) && facebookPlugin.length > 1) {
+        return {
+            plugins: {
+                facebook: facebookPlugin[1],
+            },
+        };
+    }
+    return {
+        plugins: {
+            facebook: {},
+        },
+    };
+}
 const withFacebook = (config, props) => {
-    const newProps = (0, config_1.getMergePropsWithConfig)(config, props);
+    // Convert ExpoConfig to ExpoConfigFacebook format
+    const facebookConfig = getExpoFacebookConfig(config);
+    // Merge the configs
+    const newProps = (0, config_1.getMergePropsWithConfig)(facebookConfig, props);
+    // Validation
     if (!newProps.appID) {
         throw new Error('missing appID in the plugin properties');
     }

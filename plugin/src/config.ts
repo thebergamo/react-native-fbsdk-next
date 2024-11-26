@@ -1,14 +1,17 @@
-import {ExpoConfig} from '@expo/config-types';
+type FacebookPluginConfig = {
+  scheme?: string;
+  advertiserIDCollectionEnabled?: boolean;
+  appId?: string;
+  autoInitEnabled?: boolean;
+  autoLogAppEventsEnabled?: boolean;
+  displayName?: string;
+};
 
-export type ExpoConfigFacebook = Pick<
-  ExpoConfig,
-  | 'facebookScheme'
-  | 'facebookAdvertiserIDCollectionEnabled'
-  | 'facebookAppId'
-  | 'facebookAutoInitEnabled'
-  | 'facebookAutoLogAppEventsEnabled'
-  | 'facebookDisplayName'
->;
+export type ExpoConfigFacebook = {
+  plugins: {
+    facebook: FacebookPluginConfig;
+  };
+};
 
 export type ConfigProps = {
   /**
@@ -49,13 +52,13 @@ export function getMergePropsWithConfig(
   props: ConfigProps | void,
 ): ConfigProps {
   const {
-    facebookAppId,
-    facebookDisplayName,
-    facebookScheme,
-    facebookAutoInitEnabled,
-    facebookAutoLogAppEventsEnabled,
-    facebookAdvertiserIDCollectionEnabled,
-  } = config;
+    appId: facebookAppId,
+    displayName: facebookDisplayName,
+    scheme: facebookScheme,
+    autoInitEnabled: facebookAutoInitEnabled,
+    autoLogAppEventsEnabled: facebookAutoLogAppEventsEnabled,
+    advertiserIDCollectionEnabled: facebookAdvertiserIDCollectionEnabled,
+  } = config.plugins.facebook;
   const {
     appID = facebookAppId,
     clientToken,

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFacebookAdvertiserIDCollection = exports.getFacebookAutoLogAppEvents = exports.getFacebookAutoInitEnabled = exports.getFacebookDisplayName = exports.getFacebookScheme = exports.getFacebookClientToken = exports.getFacebookAppId = exports.getMergePropsWithConfig = void 0;
 function getMergePropsWithConfig(config, props) {
-    const { facebookAppId, facebookDisplayName, facebookScheme, facebookAutoInitEnabled, facebookAutoLogAppEventsEnabled, facebookAdvertiserIDCollectionEnabled, } = config;
+    const { appId: facebookAppId, displayName: facebookDisplayName, scheme: facebookScheme, autoInitEnabled: facebookAutoInitEnabled, autoLogAppEventsEnabled: facebookAutoLogAppEventsEnabled, advertiserIDCollectionEnabled: facebookAdvertiserIDCollectionEnabled, } = config.plugins.facebook;
     const { appID = facebookAppId, clientToken, displayName = facebookDisplayName, scheme = facebookScheme ?? (appID ? `fb${appID}` : undefined), isAutoInitEnabled = facebookAutoInitEnabled ?? false, autoLogAppEventsEnabled = facebookAutoLogAppEventsEnabled ?? false, advertiserIDCollectionEnabled = facebookAdvertiserIDCollectionEnabled ??
         false, iosUserTrackingPermission, } = (props ?? {});
     return {
