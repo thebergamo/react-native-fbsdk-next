@@ -1,7 +1,7 @@
 /**
  * @format
  */
-import { Platform, NativeModules } from 'react-native';
+import {Platform, NativeModules} from 'react-native';
 
 const Profile = NativeModules.FBProfile;
 
@@ -14,14 +14,14 @@ export type ProfileMap = {
   userID?: string | null;
   email?: string | null;
   name?: string | null;
-  refreshDate?: number | null,
-  friendIDs?: Array<string> | null,
-  birthday?: number | null,
-  ageRange?: { min: number, max: number } | null,
-  hometown?: { id: string, name: string } | null,
-  location?: { id: string, name: string } | null,
-  gender?: string | null,
-  permissions?: Array<string> | null
+  refreshDate?: number | null;
+  friendIDs?: Array<string> | null;
+  birthday?: number | null;
+  ageRange?: {min: number; max: number} | null;
+  hometown?: {id: string; name: string} | null;
+  location?: {id: string; name: string} | null;
+  gender?: string | null;
+  permissions?: Array<string> | null;
 };
 
 /**
@@ -95,21 +95,21 @@ class FBProfile {
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_age_range' permission and
    * limited login flow is used on iOS
    */
-  ageRange?: { min: number, max: number } | null;
+  ageRange?: {min: number; max: number} | null;
 
   /**
    * The user’s hometown.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_hometown' permission and
    * limited login flow is used on iOS
    */
-  hometown?: { id: string, name: string } | null;
+  hometown?: {id: string; name: string} | null;
 
   /**
    * The user’s location.
    * IMPORTANT: This field will only be populated if your user has granted your application the 'user_location' permission and
    * limited login flow is used on iOS
    */
-  location?: { id: string, name: string } | null;
+  location?: {id: string; name: string} | null;
 
   /**
    * The user’s gender.
@@ -134,7 +134,9 @@ class FBProfile {
       this.email = profileMap.email;
     }
     this.name = profileMap.name;
-    this.refreshDate = profileMap.refreshDate ? new Date(profileMap.refreshDate) : null;
+    this.refreshDate = profileMap.refreshDate
+      ? new Date(profileMap.refreshDate)
+      : null;
     this.friendIDs = profileMap.friendIDs;
     this.birthday = profileMap.birthday ? new Date(profileMap.birthday) : null;
     this.ageRange = profileMap.ageRange;
