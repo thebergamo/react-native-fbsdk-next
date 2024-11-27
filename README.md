@@ -279,6 +279,8 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
     If you’re also using App Tester for internal releases, you’ll need to run the same command for the SHA-1 from **Release** > **Internal app sharing** > **Internal test certificate** and save that hash as well.
 
     Once you have your hashes, return [here](https://developers.facebook.com/docs/facebook-login/android#6--provide-the-development-and-release-key-hashes-for-your-app) and enter them under **Key Hashes**.
+  
+  9. You are forced to use the `limited` option when trying to login in iOS. Although, the official documentation has nothing to say about this issue, the permission `App Tracking Transparency` is required to use the non-limited/default login in iOS devices (NOTE: it works fine in android without the permission). Ask for this permission and if the user allows it, the default facebook login page will open. If this permission is disabled, then the limited version of login will be opened which makes the Graph API endpoints unusable.
 
 ## Usage
 
