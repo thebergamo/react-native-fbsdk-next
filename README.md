@@ -178,6 +178,7 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
   return NO;
 }
 ```
+**NOTE:** Always ensure that the `RCTLinkingManager` condition is added as the last condition in your deep linking logic. If placed before `FBSDKApplicationDelegate` condition, it will intercept the Facebook SSO link, treating it as a standard deep link. This misconfiguration will break the Facebook Single Sign-On (SSO) functionality, leading to unexpected behavior in your app. Proper ordering is critical for seamless SSO integration..
 
 ### Troubleshooting
 
