@@ -100,7 +100,7 @@ sed -i -e 's/<\/activity>/<\/activity>\n      <activity android:name="com.facebo
 rm -f android/app/src/main/AndroidManifest.xml??
 
 # This is required for login to work on android and is listed as a requirement for the iOS SDK
-sed -i -e 's/<\/resources>/    <string name="fb_login_protocol_scheme">'${FacebookAppId}'<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
+sed -i -e 's/<\/resources>/    <string name="fb_login_protocol_scheme">fb'${FacebookAppId}'<\/string>\n<\/resources>/' android/app/src/main/res/values/strings.xml
 rm -f android/app/src/main/res/values/strings.xml??
 
 sed -i -e 's/^<\/dict>/  <key>LSApplicationQueriesSchemes<\/key>\n  <array>\n    <string>fb-messenger-share-api<\/string>\n    <string>fbauth2<\/string>\n    <string>fbapi<\/string>\n  <\/array>\n<\/dict>/' ios/RNFBSDKExample/Info.plist
