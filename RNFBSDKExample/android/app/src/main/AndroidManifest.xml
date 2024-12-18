@@ -41,7 +41,6 @@
       <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
       <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false"/>
       <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="false"/>
-      <!-- <provider android:name="com.facebook.FacebookContentProvider" android:authorities="com.facebook.app.FacebookContentProvider355198514515820" android:exported="true" /> -->
     </application>
     <queries>
       <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
