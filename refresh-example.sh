@@ -28,7 +28,7 @@ pushd RNFBSDKExample
 rm -f Gemfile Gemfile.lock .ruby-version
 touch yarn.lock
 yarn
-yarn add react-native-fbsdk-next@github:thebergamo/react-native-fbsdk-next
+yarn add react-native-fbsdk-next
 
 #########################################################################
 #
