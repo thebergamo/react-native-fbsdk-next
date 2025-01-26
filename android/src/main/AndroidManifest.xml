@@ -18,6 +18,13 @@
     CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<manifest
-    package="com.facebook.reactnative.androidsdk">
+<manifest package="com.facebook.reactnative.androidsdk"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/ad_services_config"
+            tools:replace="android:resource" />
+    </application>
 </manifest>
