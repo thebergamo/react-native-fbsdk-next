@@ -18,6 +18,29 @@
     CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<manifest
-    package="com.facebook.reactnative.androidsdk">
+      <!--
+          This may generate a warning during your build:
+          
+           > property#android.adservices.AD_SERVICES_CONFIG@android:resource
+           > was tagged at AndroidManifest.xml:23 to replace other declarations
+           > but no other declaration present
+           
+           You may safely ignore this warning.
+           
+           We must include this in case you also use something else
+           that may also include this file, because if two modules include it, they
+           will collide and cause a build error if we don't set this one to take
+           priority via replacement.
+           
+           https://github.com/thebergamo/react-native-fbsdk-next/issues/597
+      -->
+<manifest package="com.facebook.reactnative.androidsdk"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/ad_services_config"
+            tools:replace="android:resource" />
+    </application>
 </manifest>
