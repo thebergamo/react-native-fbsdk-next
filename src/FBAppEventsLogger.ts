@@ -156,7 +156,7 @@ export default {
    * logEvent(eventName: string, valueToSum: number);
    * logEvent(eventName: string, parameters: {[key:string]:string|number});
    * logEvent(eventName: string, valueToSum: number, parameters: {[key:string]:string|number});
-   * See https://developers.facebook.com/docs/app-events/android for detail.
+   * See https://developers.facebook.com/docs/app-events/getting-started-app-events-android for detail.
    */
   logEvent(eventName: string, ...args: Array<number | Params>) {
     let valueToSum = 0;
