@@ -33,11 +33,6 @@ RCT_EXPORT_METHOD(setAdvertiserTrackingEnabled:(BOOL)ATE resolver:(RCTPromiseRes
   resolve(@(true)); // true means successfully changed
 }
 
-RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSArray<NSString *> *)options)
-{
-  [FBSDKSettings.sharedSettings setDataProcessingOptions:options];
-}
-
 RCT_EXPORT_METHOD(setDataProcessingOptions:(nullable NSArray<NSString *> *)options country:(int)country state:(int)state)
 {
   [FBSDKSettings.sharedSettings setDataProcessingOptions:options country:country state:state];
