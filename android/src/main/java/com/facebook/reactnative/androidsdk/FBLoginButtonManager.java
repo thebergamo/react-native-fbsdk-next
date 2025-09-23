@@ -49,7 +49,8 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
 
     @Override
     public RCTLoginButton createViewInstance(ThemedReactContext context) {
-        return new RCTLoginButton(context, mActivityEventListener.getCallbackManager());
+        RCTLoginButton loginButton = new RCTLoginButton(context, mActivityEventListener.getCallbackManager());
+        return loginButton;
     }
 
     @ReactProp(name = "loginBehaviorAndroid")

@@ -49,7 +49,8 @@ public class RCTLoginButton extends LoginButton {
         super(context);
         this.setToolTipMode(ToolTipMode.NEVER_DISPLAY);
         mCallbackManager = callbackManager;
-        mEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((ReactContext) getContext(), getId());
+        // Don't initialize EventDispatcher here - it will be null until the view is mounted
+        mEventDispatcher = null;
         init();
     }
 
@@ -62,9 +63,7 @@ public class RCTLoginButton extends LoginButton {
                 if (currentAccessToken == null) {
                     WritableMap event = Arguments.createMap();
                     event.putString("type", "logoutFinished");
-                    ReactContext context = (ReactContext) getContext();
-                    mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
-
+                    dispatchEvent(event);
                 }
             }
         };
@@ -85,8 +84,7 @@ public class RCTLoginButton extends LoginButton {
                         Arguments.fromJavaArgs(
                                 setToStringArray(loginResult.getRecentlyDeniedPermissions())));
                 event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+                dispatchEvent(event);
             }
 
             @Override
@@ -97,8 +95,7 @@ public class RCTLoginButton extends LoginButton {
                 WritableMap result = Arguments.createMap();
                 result.putBoolean("isCancelled", false);
                 event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+                dispatchEvent(event);
             }
 
             @Override
@@ -109,8 +106,7 @@ public class RCTLoginButton extends LoginButton {
                 WritableMap result = Arguments.createMap();
                 result.putBoolean("isCancelled", true);
                 event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+                dispatchEvent(event);
             }
         });
     }
@@ -122,5 +118,34 @@ public class RCTLoginButton extends LoginButton {
             array[i++] = e;
         }
         return array;
+    }
+
+    public void initializeEventDispatcher() {
+        if (mEventDispatcher == null) {
+            ReactContext context = (ReactContext) getContext();
+            // Only try to get the EventDispatcher if we have a valid ID
+            if (getId() != -1) {
+                mEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(context, getId());
+            }
+        }
+    }
+
+    private void dispatchEvent(WritableMap event) {
+        initializeEventDispatcher();
+        if (mEventDispatcher != null && getId() != -1 && isAttachedToWindow()) {
+            ReactContext context = (ReactContext) getContext();
+            try {
+                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+            } catch (Exception e) {
+                // Silently handle any remaining edge cases to prevent crashes
+                android.util.Log.w("RCTLoginButton", "Failed to dispatch event: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        initializeEventDispatcher();
     }
 }

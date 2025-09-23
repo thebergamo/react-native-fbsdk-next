@@ -137,6 +137,14 @@
     "parser": "typescript"
   },
   "react-native": "src/index.ts",
+  "codegenConfig": {
+    "name": "RNFBSDKSpec",
+    "type": "components",
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "com.facebook.reactnative.androidsdk"
+    }
+  },
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
