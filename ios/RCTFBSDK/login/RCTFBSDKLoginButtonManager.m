@@ -41,23 +41,32 @@ RCT_EXPORT_MODULE(RCTFBLoginButton)
 
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
-RCT_EXPORT_VIEW_PROPERTY(permissions, NSStringArray)
-
-RCT_EXPORT_VIEW_PROPERTY(defaultAudience, FBSDKDefaultAudience)
-
-RCT_CUSTOM_VIEW_PROPERTY(nonceIOS, NSString, FBSDKLoginButton)
+RCT_CUSTOM_VIEW_PROPERTY(permissions, NSStringArray, RCTFBSDKLoginButtonView)
 {
-    [view setNonce:json ? json : nil];
+    [view.loginButton setPermissions:json ? json : nil];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(loginTrackingIOS, NSString, FBSDKLoginButton)
+RCT_CUSTOM_VIEW_PROPERTY(defaultAudience, FBSDKDefaultAudience, RCTFBSDKLoginButtonView)
 {
-    [view setLoginTracking:([json isEqualToString:@"limited"]) ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled];
+    if (json)
+    {
+        [view.loginButton setDefaultAudience:[RCTConvert FBSDKDefaultAudience:json]];
+    }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(tooltipBehaviorIOS, FBSDKLoginButtonTooltipBehavior, FBSDKLoginButton)
+RCT_CUSTOM_VIEW_PROPERTY(nonceIOS, NSString, RCTFBSDKLoginButtonView)
 {
-  [view setTooltipBehavior:json ? [RCTConvert FBSDKLoginButtonTooltipBehavior:json] : FBSDKLoginButtonTooltipBehaviorAutomatic];
+    [view.loginButton setNonce:json ? json : nil];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(loginTrackingIOS, NSString, RCTFBSDKLoginButtonView)
+{
+    [view.loginButton setLoginTracking:([json isEqualToString:@"limited"]) ? FBSDKLoginTrackingLimited : FBSDKLoginTrackingEnabled];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(tooltipBehaviorIOS, FBSDKLoginButtonTooltipBehavior, RCTFBSDKLoginButtonView)
+{
+  [view.loginButton setTooltipBehavior:json ? [RCTConvert FBSDKLoginButtonTooltipBehavior:json] : FBSDKLoginButtonTooltipBehaviorAutomatic];
 }
 
 
