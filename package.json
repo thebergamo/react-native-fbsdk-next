@@ -1,13 +1,13 @@
 {
-  "name": "react-native-fbsdk-next",
-  "version": "13.4.1",
-  "description": "Facebook SDK support for React Native apps.",
+  "name": "@holy-gd/react-native-fbsdk-next",
+  "version": "13.4.2",
+  "description": "Facebook SDK support for React Native apps. (Custom build with Expo fixes)",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",
   "sideEffects": false,
   "author": {
-    "name": "Marcos Bérgamo"
+    "name": "Holy GD"
   },
   "contributors": [
     {
@@ -34,9 +34,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thebergamo/react-native-fbsdk-next.git"
+    "url": "git+https://github.com/holy-gd/react-native-fbsdk-next.git"
   },
-  "homepage": "https://github.com/thebergamo/react-native-fbsdk-next/",
+  "homepage": "https://github.com/holy-gd/react-native-fbsdk-next#readme",
   "keywords": [
     "react",
     "react-native",
