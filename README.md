@@ -123,6 +123,8 @@ Before you can run the project, follow the [Getting Started Guide](https://devel
 
 Follow ***steps 2, 3 and 4*** in the [Getting Started Guide](https://developers.facebook.com/docs/ios/use-cocoapods) for Facebook SDK for iOS. 
 
+### Setup Instructions by React Native Version
+#### React Native <= 0.76 (Objective-C)
 **NOTE:** The above link (Step 3 and 4) contains Swift code instead of Objective-C which is inconvenient since `react-native` ecosystem still relies
    on Objective-C. To make it work in Objective-C you need to do the following in `/ios/PROJECT/AppDelegate.m`:
    1. Add
@@ -179,6 +181,206 @@ The `AppDelegate.m` file can only have one method for `openUrl`. If you're also 
 }
 ```
 **NOTE:** Always ensure that the `RCTLinkingManager` condition is added as the last condition in your deep linking logic. If placed before `FBSDKApplicationDelegate` condition, it will intercept the Facebook SSO link, treating it as a standard deep link. This misconfiguration will break the Facebook Single Sign-On (SSO) functionality, leading to unexpected behavior in your app. Proper ordering is critical for seamless SSO integration..
+
+#### React Native >= 0.77 (Swift)
+
+**NOTE:** Since React Native 0.77, the ecosystem also supports Swift natively. To make it work in Swift you need to do the following in `/ios/PROJECT/AppDelegate.swift`:
+
+##### 1. Add Required Imports
+
+At the top of your `AppDelegate.swift` file:
+
+```swift
+import FBSDKCoreKit              // <- Add This Import
+import AppTrackingTransparency   // <- Add This Import
+
+// Remove this if present:
+// import FacebookCore           // <- REMOVE if present
+```
+
+##### 2. Initialize Facebook SDK in `didFinishLaunchingWithOptions`
+
+```swift
+public override func application(
+  _ application: UIApplication,
+  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+) -> Bool {
+  
+  // ... your existing code ...
+  
+  // Initialize Facebook SDK
+  ApplicationDelegate.shared.application(
+    application,
+    didFinishLaunchingWithOptions: launchOptions
+  )
+  
+  // Request App Tracking Transparency authorization (iOS 14+)
+  if #available(iOS 14, *) {
+    ATTrackingManager.requestTrackingAuthorization { _ in
+      AppEvents.shared.activateApp()
+    }
+  } else {
+    AppEvents.shared.activateApp()
+  }
+  
+  // ... rest of your code ...
+  
+  return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+}
+```
+
+##### 3. Add `openURL` Method for Facebook SSO
+
+**CRITICAL:** This method is required for Facebook login to work when the Facebook app is installed on the device.
+
+```swift
+public override func application(
+  _ app: UIApplication,
+  open url: URL,
+  options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+) -> Bool {
+  // Facebook SDK must be checked FIRST
+  let handledByFB = ApplicationDelegate.shared.application(
+    app, open: url, options: options)
+  
+  // Then call super
+  let handledBySuper = super.application(
+    app, open: url, options: options)
+  
+  return handledByFB || handledBySuper
+}
+```
+
+**If you're using React Native's RCTLinkingManager for Deep Links:**
+
+```swift
+public override func application(
+  _ app: UIApplication,
+  open url: URL,
+  options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+) -> Bool {
+  // IMPORTANT: Facebook SDK must be checked FIRST
+  let handledByFB = ApplicationDelegate.shared.application(
+    app, open: url, options: options)
+  
+  // Then React Native Linking
+  let handledByRN = RCTLinkingManager.application(
+    app, open: url, options: options)
+  
+  // Finally super
+  let handledBySuper = super.application(
+    app, open: url, options: options)
+  
+  return handledByFB || handledByRN || handledBySuper
+}
+```
+
+**NOTE:** The order is critical: `FBSDKApplicationDelegate` **must be checked before** `RCTLinkingManager`. If `RCTLinkingManager` is placed first, it will intercept the Facebook SSO callback URL and treat it as a regular deep link, breaking Facebook Single Sign-On functionality.
+
+##### 4. (Optional) Activate App When It Becomes Active
+
+```swift
+open override func applicationDidBecomeActive(_ application: UIApplication) {
+  super.applicationDidBecomeActive(application)
+  AppEvents.shared.activateApp()
+}
+```
+
+---
+
+### Expo Bare Workflow Setup
+
+If you're using **Expo in Bare Workflow**, your `AppDelegate.swift` will extend `ExpoAppDelegate` instead of the standard React Native app delegate. The setup is similar but with some Expo-specific considerations:
+
+##### Required Imports
+
+```swift
+import Expo
+import React
+import FBSDKCoreKit              // <- Add This
+import AppTrackingTransparency   // <- Add This
+```
+
+##### Example Implementation
+
+```swift
+import Expo
+import React
+import FBSDKCoreKit
+import AppTrackingTransparency
+
+@UIApplicationMain
+public class AppDelegate: ExpoAppDelegate {
+  
+  public override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+  ) -> Bool {
+    
+    // Your existing Expo setup code...
+    
+    // Initialize Facebook SDK
+    ApplicationDelegate.shared.application(
+      application,
+      didFinishLaunchingWithOptions: launchOptions
+    )
+    
+    // Request tracking authorization
+    if #available(iOS 14, *) {
+      ATTrackingManager.requestTrackingAuthorization { _ in
+        AppEvents.shared.activateApp()
+      }
+    } else {
+      AppEvents.shared.activateApp()
+    }
+    
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+  
+  // CRITICAL: Required for Facebook SSO to work
+  public override func application(
+    _ app: UIApplication,
+    open url: URL,
+    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+  ) -> Bool {
+    let handledByFB = ApplicationDelegate.shared.application(
+      app, open: url, options: options)
+    let handledByRN = RCTLinkingManager.application(
+      app, open: url, options: options)
+    let handledBySuper = super.application(
+      app, open: url, options: options)
+    
+    return handledByFB || handledByRN || handledBySuper
+  }
+  
+  // Optional: Activate app when it becomes active
+  open override func applicationDidBecomeActive(_ application: UIApplication) {
+    super.applicationDidBecomeActive(application)
+    AppEvents.shared.activateApp()
+  }
+}
+```
+
+**Important Notes for Expo Bare Workflow:**
+
+- Make sure you're using the correct Expo modules and that your app is properly ejected to bare workflow
+- The `ExpoAppDelegate` already handles many React Native bridge initialization tasks
+- Always call `super` methods to maintain Expo functionality
+- The Facebook SDK integration works the same way as in standard React Native, just ensure compatibility with Expo's setup
+
+### Common Issues
+
+1. **"Undefined symbols for architecture" error**: Create an empty `File.swift` in your project and accept the Bridging Header prompt from Xcode.
+
+2. **Login doesn't work when Facebook app is installed**: Make sure you've implemented the `openURL` method correctly. Without it, the Facebook app cannot redirect back to your app after authentication.
+
+3. **Deep linking conflicts with Facebook SSO**: Always check Facebook SDK **before** RCTLinkingManager in the `openURL` method.
+
+4. **App Tracking Transparency**: Since iOS 14, you need to request tracking permission. Make sure to add the `NSUserTrackingUsageDescription` key to your `Info.plist`.
+
+For more information, see: https://github.com/thebergamo/react-native-fbsdk-next/issues/59
+
+---
 
 ### Troubleshooting
 
