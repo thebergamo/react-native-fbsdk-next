@@ -5,6 +5,8 @@
 
 @interface RCTFBSDKLoginButtonView: UIView<FBSDKLoginButtonDelegate>
 
+@property (nonatomic, strong) FBSDKLoginButton *loginButton;
+
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;
 
 @end

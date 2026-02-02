@@ -8,8 +8,6 @@
 
 @interface RCTFBSDKLoginButtonView ()
 
-@property (nonatomic, strong) FBSDKLoginButton *loginButton;
-
 @end
 
 @implementation RCTFBSDKLoginButtonView
