@@ -2,6 +2,9 @@ name: Release
 on: workflow_dispatch
 jobs:
   release:
+    permissions:
+      contents: write # For git operations
+      id-token: write # < REQUIRED FOR OIDC / Trusted Publish
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -9,10 +12,11 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
       - uses: actions/cache@v5
         name: Yarn Cache
         id: yarn-cache
