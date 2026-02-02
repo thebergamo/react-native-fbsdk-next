@@ -6,7 +6,6 @@ jobs:
       contents: write # For git operations
       id-token: write # < REQUIRED FOR OIDC
     if: github.event.repository.fork == false && github.ref == 'refs/heads/master'
-    needs: test
     name: Release
     runs-on: ubuntu-latest
     steps:
