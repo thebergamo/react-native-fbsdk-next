@@ -4,33 +4,29 @@ jobs:
   release:
     permissions:
       contents: write # For git operations
-      id-token: write # < REQUIRED FOR OIDC / Trusted Publish
+      id-token: write # < REQUIRED FOR OIDC
+    if: github.event.repository.fork == false && github.ref == 'refs/heads/master'
+    needs: test
     name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          persist-credentials: false
+      - run: corepack enable
+      - name: git config
+        run: |
+          git config --global user.name 'Semantic Release Bot'
+          git config --global user.email 'semantic-release-bot@martynus.net'
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/cache@v5
-        name: Yarn Cache
-        id: yarn-cache
-        with:
-          path: .yarn/cache
-          key: ${{ runner.os }}-release-yarn-v1-${{ hashFiles('yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-v1
       - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          command: rm -rf node_modules && yarn install --frozen-lockfile
+        run: yarn install
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
