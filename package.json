@@ -150,7 +150,7 @@
     "node_modules/",
     "lib/"
   ],
-  "packageManager": "yarn@4.5.1",
+  "packageManager": "yarn@4.12.0",
   "engines": {
     "node": ">=18"
   }
