@@ -10,6 +10,7 @@ Functionality is provided through one single npm package so you can use it for b
 - [Usage](#usage)
 - [Contributing](#join-the-react-native-community)
 - [License](#license)
+- [For Latest React Native Follow this setup guide 🚀](https://gist.github.com/shuvo-me/cb218557e932c02f518b204f096a63ed)
 
 ---
 
@@ -1131,6 +1132,8 @@ import { LoginManager } from "react-native-fbsdk-next"
 jest.spyOn(LoginManager, "logInWithPermissions").mockImplementation(() => Promise.resolve({ isCancelled: false }))
 
 ```
+
+
 
 
 ## Join the React Native community
