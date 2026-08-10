@@ -16,6 +16,10 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Android Limited Login / OIDC: classic logIn(permissions) ignored JS "limited"+nonce
+ * and discarded LoginResult.getAuthenticationToken(). This uses LoginConfiguration
+ * (openid + nonce) and bridges authenticationToken+nonce to JS.
  */
 
 package com.facebook.reactnative.androidsdk;
@@ -23,8 +27,10 @@ package com.facebook.reactnative.androidsdk;
 import android.app.Activity;
 
 import com.facebook.AccessToken;
+import com.facebook.AuthenticationToken;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginConfiguration;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.react.bridge.Arguments;
@@ -37,6 +43,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -48,23 +55,59 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
 
     public static final String NAME = "FBLoginManager";
 
+    /**
+     * Callback that resolves login results including OIDC AuthenticationToken when present.
+     */
     private class LoginManagerCallback extends ReactNativeFacebookSDKCallback<LoginResult> {
 
-        public LoginManagerCallback(Promise promise) {
+        private final String mExpectedNonce;
+
+        /**
+         * @param promise Promise to resolve/reject for the JS caller
+         * @param expectedNonce Nonce from LoginConfiguration (may be null for classic login)
+         */
+        public LoginManagerCallback(Promise promise, String expectedNonce) {
             super(promise);
+            mExpectedNonce = expectedNonce;
         }
 
         @Override
         public void onSuccess(LoginResult loginResult) {
             if (mPromise != null) {
                 AccessToken accessToken = loginResult.getAccessToken();
-                AccessToken.setCurrentAccessToken(accessToken);
+                if (accessToken != null) {
+                    AccessToken.setCurrentAccessToken(accessToken);
+                }
+
+                AuthenticationToken authenticationToken = loginResult.getAuthenticationToken();
+                if (authenticationToken != null) {
+                    AuthenticationToken.setCurrentAuthenticationToken(authenticationToken);
+                }
+
                 WritableMap result = Arguments.createMap();
                 result.putBoolean("isCancelled", false);
                 result.putArray("grantedPermissions",
                         setToWritableArray(loginResult.getRecentlyGrantedPermissions()));
                 result.putArray("declinedPermissions",
                         setToWritableArray(loginResult.getRecentlyDeniedPermissions()));
+
+                if (authenticationToken != null) {
+                    result.putString("authenticationToken", authenticationToken.getToken());
+                    String resolvedNonce = authenticationToken.getExpectedNonce();
+                    if (resolvedNonce == null || resolvedNonce.isEmpty()) {
+                        resolvedNonce = mExpectedNonce;
+                    }
+                    if (resolvedNonce != null) {
+                        result.putString("nonce", resolvedNonce);
+                    }
+                    result.putString("graphDomain", "facebook");
+                } else {
+                    result.putNull("authenticationToken");
+                    if (mExpectedNonce != null) {
+                        result.putString("nonce", mExpectedNonce);
+                    }
+                }
+
                 mPromise.resolve(result);
                 mPromise = null;
             }
@@ -130,20 +173,55 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
     }
 
     /**
-     * Attempts a Facebook login with the specified permissions.
-     * @param permissions must be one of the provided permissions. See
-     *                    <a href="https://developers.facebook.com/docs/facebook-login/permissions">
-     *                    Facebook login permissions</a>.
-     * @param promise Use promise to pass login result to JS after login finish.
+     * Facebook login with optional Limited Login / OIDC tracking.
+     * When {@code loginTracking} is {@code "limited"} or a non-empty {@code nonce} is provided,
+     * uses {@link LoginConfiguration} (adds {@code openid} + nonce) so
+     * {@link LoginResult#getAuthenticationToken()} can return a JWT.
+     * Android SDK has no {@code LoginTracking.LIMITED} enum; LoginConfiguration+nonce is the OIDC path.
+     *
+     * Single {@code @ReactMethod} only: TurboModule interop rejects overloaded method names.
+     * JS must always pass loginTracking and nonce (null/undefined for classic AccessToken login).
+     *
+     * @param permissions Facebook permissions (email, public_profile, ...)
+     * @param loginTracking {@code "limited"} for OIDC AuthenticationToken, or {@code "enabled"}/null for classic
+     * @param nonce Ceremony-binding nonce for OIDC; may be null/empty for classic
+     * @param promise Promise resolved with grantedPermissions and optionally authenticationToken+nonce
      */
     @ReactMethod
-    public void logInWithPermissions(ReadableArray permissions, final Promise promise) {
+    public void logInWithPermissions(
+            ReadableArray permissions,
+            String loginTracking,
+            String nonce,
+            final Promise promise) {
         final LoginManager loginManager = LoginManager.getInstance();
-        loginManager.registerCallback(getCallbackManager(), new LoginManagerCallback(promise));
         Activity activity = getCurrentActivity();
-        if (activity != null) {
-            loginManager.logIn(activity,
-                    Utility.reactArrayToStringList(permissions));
+        if (activity == null) {
+            promise.reject("E_NO_ACTIVITY", "Facebook login requires a foreground Activity");
+            return;
+        }
+
+        List<String> permissionList = Utility.reactArrayToStringList(permissions);
+        boolean useOidc =
+                (loginTracking != null && loginTracking.equalsIgnoreCase("limited"))
+                        || (nonce != null && !nonce.isEmpty());
+
+        if (useOidc) {
+            LoginConfiguration configuration;
+            if (nonce != null && !nonce.isEmpty()) {
+                configuration = new LoginConfiguration(permissionList, nonce);
+            } else {
+                configuration = new LoginConfiguration(permissionList);
+            }
+            String expectedNonce = configuration.getNonce();
+            loginManager.registerCallback(
+                    getCallbackManager(),
+                    new LoginManagerCallback(promise, expectedNonce));
+            loginManager.logIn(activity, configuration);
+        } else {
+            loginManager.registerCallback(
+                    getCallbackManager(),
+                    new LoginManagerCallback(promise, null));
+            loginManager.logIn(activity, permissionList);
         }
     }
 
@@ -154,7 +232,7 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
     @ReactMethod
     public void reauthorizeDataAccess(final Promise promise) {
         final LoginManager loginManager = LoginManager.getInstance();
-        loginManager.registerCallback(getCallbackManager(), new LoginManagerCallback(promise));
+        loginManager.registerCallback(getCallbackManager(), new LoginManagerCallback(promise, null));
         Activity activity = getCurrentActivity();
         if (activity != null) {
             loginManager.reauthorizeDataAccess(activity);
