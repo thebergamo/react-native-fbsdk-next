@@ -18,6 +18,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @format
+ *
+ * Pass limited+nonce on Android (previously iOS-only).
  */
 import {RNFBSDKCallback} from './models/FBSDKCallback';
 import {NativeModules, Platform} from 'react-native';
@@ -53,10 +55,14 @@ export type LoginBehaviorIOS =
   'browser';
 /**
  * Shows the results of a login operation.
+ * Android OIDC login may also return authenticationToken + nonce.
  */
 export type LoginResult = RNFBSDKCallback & {
   grantedPermissions?: Array<string>;
   declinedPermissions?: Array<string>;
+  authenticationToken?: string | null;
+  nonce?: string;
+  graphDomain?: string;
 };
 
 export type LoginTracking = 'enabled' | 'limited';
@@ -64,22 +70,20 @@ export type LoginTracking = 'enabled' | 'limited';
 export default {
   /**
    * Log in with the requested permissions.
-   * @param loginTrackingIOS IOS only: loginTracking: 'enabled' | 'limited', default 'enabled'.
-   * @param nonceIOS IOS only: Nonce that the configuration was created with. A unique nonce will be used if none is provided to the factory method.
+   * @param loginTracking loginTracking: 'enabled' | 'limited', default 'enabled'.
+   *   On Android, 'limited' (or a nonce) uses LoginConfiguration (openid + OIDC JWT).
+   * @param nonce Nonce for Limited Login / OIDC; a unique nonce is used if omitted on native SDK.
    */
   logInWithPermissions(
     permissions: Array<string>,
-    loginTrackingIOS?: LoginTracking,
-    nonceIOS?: string,
+    loginTracking?: LoginTracking,
+    nonce?: string,
   ): Promise<LoginResult> {
-    if (Platform.OS === 'ios') {
-      return LoginManager.logInWithPermissions(
-        permissions,
-        loginTrackingIOS,
-        nonceIOS,
-      );
-    }
-    return LoginManager.logInWithPermissions(permissions);
+    return LoginManager.logInWithPermissions(
+      permissions,
+      loginTracking,
+      nonce,
+    );
   },
 
   /**
