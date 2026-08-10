@@ -79,10 +79,12 @@ export default {
     loginTracking?: LoginTracking,
     nonce?: string,
   ): Promise<LoginResult> {
+    // Always pass tracking+nonce so Android has a single @ReactMethod arity
+    // (TurboModule rejects overloaded native method names).
     return LoginManager.logInWithPermissions(
       permissions,
-      loginTracking,
-      nonce,
+      loginTracking ?? null,
+      nonce ?? null,
     );
   },
 

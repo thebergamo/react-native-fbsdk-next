@@ -173,25 +173,17 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
     }
 
     /**
-     * Classic Facebook login (AccessToken only). Kept for API compatibility.
-     *
-     * @param permissions Facebook permissions
-     * @param promise Promise for login result
-     */
-    @ReactMethod
-    public void logInWithPermissions(ReadableArray permissions, final Promise promise) {
-        logInWithPermissions(permissions, "enabled", null, promise);
-    }
-
-    /**
      * Facebook login with optional Limited Login / OIDC tracking.
      * When {@code loginTracking} is {@code "limited"} or a non-empty {@code nonce} is provided,
      * uses {@link LoginConfiguration} (adds {@code openid} + nonce) so
      * {@link LoginResult#getAuthenticationToken()} can return a JWT.
      * Android SDK has no {@code LoginTracking.LIMITED} enum; LoginConfiguration+nonce is the OIDC path.
      *
+     * Single {@code @ReactMethod} only: TurboModule interop rejects overloaded method names.
+     * JS must always pass loginTracking and nonce (null/undefined for classic AccessToken login).
+     *
      * @param permissions Facebook permissions (email, public_profile, ...)
-     * @param loginTracking {@code "limited"} for OIDC AuthenticationToken, or {@code "enabled"} for classic
+     * @param loginTracking {@code "limited"} for OIDC AuthenticationToken, or {@code "enabled"}/null for classic
      * @param nonce Ceremony-binding nonce for OIDC; may be null/empty for classic
      * @param promise Promise resolved with grantedPermissions and optionally authenticationToken+nonce
      */
