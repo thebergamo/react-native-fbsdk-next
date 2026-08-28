@@ -39,13 +39,13 @@ public class FBSDKPackage implements ReactPackage {
                 new FBAccessTokenModule(reactContext),
                 new FBAppEventsLoggerModule(reactContext),
                 new FBAppLinkModule(reactContext),
-                new FBGameRequestDialogModule(reactContext, mActivityEventListener),
+                new FBGameRequestDialogModule(reactContext),
                 new FBGraphRequestModule(reactContext),
                 new FBLoginManagerModule(reactContext, mActivityEventListener),
-                new FBMessageDialogModule(reactContext, mActivityEventListener),
+                new FBMessageDialogModule(reactContext),
                 new FBProfileModule(reactContext),
                 new FBSettingsModule(),
-                new FBShareDialogModule(reactContext, mActivityEventListener)
+                new FBShareDialogModule(reactContext)
         );
     }
 

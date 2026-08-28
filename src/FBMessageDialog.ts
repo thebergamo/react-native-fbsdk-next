@@ -26,7 +26,7 @@ import {NativeModules} from 'react-native';
 const MessageDialog = NativeModules.FBMessageDialog;
 
 export type MessageDialogResult = RNFBSDKCallback & {
-  postId: string;
+  postId?: string | null;
 };
 
 export default {

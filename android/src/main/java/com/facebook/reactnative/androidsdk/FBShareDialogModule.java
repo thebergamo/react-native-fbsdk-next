@@ -32,32 +32,35 @@ import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
 
 @ReactModule(name = FBShareDialogModule.NAME)
-public class FBShareDialogModule extends FBSDKCallbackManagerBaseJavaModule {
+public class FBShareDialogModule extends FBDialogModule {
 
     public static final String NAME = "FBShareDialog";
 
-    private class ShareDialogCallback extends ReactNativeFacebookSDKCallback<Sharer.Result> {
+    private class ShareDialogCallback extends DialogCallback<Sharer.Result> {
 
         public ShareDialogCallback(Promise promise) {
             super(promise);
         }
 
         @Override
-        public void onSuccess(Sharer.Result result) {
-            if (mPromise != null) {
-                WritableMap shareResult = Arguments.createMap();
-                shareResult.putString("postId", result.getPostId());
-                mPromise.resolve(shareResult);
-                mPromise = null;
-            }
+        protected WritableMap buildResult(Sharer.Result result) {
+            WritableMap shareResult = Arguments.createMap();
+            shareResult.putString("postId", result.getPostId());
+            return shareResult;
         }
     }
 
     private ShareDialog.Mode mShareDialogMode;
     private boolean mShouldFailOnError;
 
+    public FBShareDialogModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
+
+    /** @deprecated Dialogs now own their activity listener for the duration of each request. */
+    @Deprecated
     public FBShareDialogModule(ReactApplicationContext reactContext, FBActivityEventListener activityEventListener) {
-        super(reactContext, activityEventListener);
+        this(reactContext);
     }
 
     @Override
@@ -67,32 +70,26 @@ public class FBShareDialogModule extends FBSDKCallbackManagerBaseJavaModule {
 
     @ReactMethod
     public void canShow(ReadableMap shareContent, Promise promise) {
-        if (getCurrentActivity() != null) {
-            ShareDialog shareDialog = new ShareDialog(getCurrentActivity());
-            promise.resolve(
-                mShareDialogMode == null
+        canShowDialog(promise, activity -> {
+            ShareDialog shareDialog = new ShareDialog(activity);
+            return mShareDialogMode == null
                 ? shareDialog.canShow(Utility.buildShareContent(shareContent))
-                : shareDialog.canShow(Utility.buildShareContent(shareContent), mShareDialogMode)
-            );
-        } else {
-            promise.reject("No current activity.");
-        }
+                : shareDialog.canShow(Utility.buildShareContent(shareContent), mShareDialogMode);
+        });
     }
 
     @ReactMethod
     public void show(ReadableMap shareContent, final Promise promise) {
-        if (getCurrentActivity() != null) {
-            ShareDialog shareDialog = new ShareDialog(getCurrentActivity());
-            shareDialog.registerCallback(getCallbackManager(), new ShareDialogCallback(promise));
+        showDialog(new ShareDialogCallback(promise), (activity, manager, callback) -> {
+            ShareDialog shareDialog = new ShareDialog(activity);
+            shareDialog.registerCallback(manager, callback);
             shareDialog.setShouldFailOnDataError(mShouldFailOnError);
             if (mShareDialogMode != null) {
                 shareDialog.show(Utility.buildShareContent(shareContent), mShareDialogMode);
             } else {
                 shareDialog.show(Utility.buildShareContent(shareContent));
             }
-        } else {
-            promise.reject("No current activity.");
-        }
+        });
     }
 
     @ReactMethod
@@ -101,7 +98,12 @@ public class FBShareDialogModule extends FBSDKCallbackManagerBaseJavaModule {
     }
 
     @ReactMethod
+    public void setShouldFailOnDataError(boolean shouldFailOnDataError) {
+        mShouldFailOnError = shouldFailOnDataError;
+    }
+
+    @ReactMethod
     public void setShouldFailOnError(boolean shouldFailOnError) {
-        mShouldFailOnError = shouldFailOnError;
+        setShouldFailOnDataError(shouldFailOnError);
     }
 }

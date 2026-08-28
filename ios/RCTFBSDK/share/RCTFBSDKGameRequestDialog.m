@@ -96,39 +96,61 @@ RCT_EXPORT_METHOD(show:(FBSDKGameRequestContent *)gameRequestContent
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
+  if (_showResolve) {
+    reject(@"E_DIALOG_IN_PROGRESS", @"A game request dialog is already in progress.", nil);
+    return;
+  }
+  _dialog = [[FBSDKGameRequestDialog alloc] initWithContent:gameRequestContent delegate:self];
   _showResolve = resolve;
   _showReject = reject;
-  [_dialog setContent:gameRequestContent];
-  [_dialog show];
+  if (![_dialog show] && _showReject) {
+    _showResolve = nil;
+    _showReject = nil;
+    reject(@"FacebookSDK", @"Game request dialog could not be shown.", nil);
+  }
 }
 
 #pragma mark - FBSDKSharingDelegate
 
 - (void)gameRequestDialog:(FBSDKGameRequestDialog *)gameRequestDialog didCompleteWithResults:(NSDictionary *)results
 {
-  if (_showResolve) {
-    _showResolve(results);
-    _showResolve = nil;
+  if (gameRequestDialog != _dialog) {
+    return;
   }
+  RCTPromiseResolveBlock resolve = _showResolve;
+  _showResolve = nil;
   _showReject = nil;
+  if (resolve) {
+    NSMutableDictionary *result = [results mutableCopy] ?: [NSMutableDictionary new];
+    result[@"isCancelled"] = @NO;
+    resolve(result);
+  }
 }
 
 - (void)gameRequestDialog:(FBSDKGameRequestDialog *)gameRequestDialog didFailWithError:(NSError *)error
 {
-  if (_showReject) {
-    _showReject(@"FacebookSDK", @"Game Request Dialog encounters error.", error);
-    _showReject = nil;
+  if (gameRequestDialog != _dialog) {
+    return;
   }
+  RCTPromiseRejectBlock reject = _showReject;
+  _showReject = nil;
   _showResolve = nil;
+  if (reject) {
+    reject(@"FacebookSDK", @"Game Request Dialog encounters error.", error);
+  }
 }
 
 - (void)gameRequestDialogDidCancel:(FBSDKGameRequestDialog *)gameRequestDialog
 {
-  if (_showResolve) {
-    _showResolve(@{@"isCancelled": @YES});
-    _showResolve = nil;
+  if (gameRequestDialog != _dialog) {
+    return;
   }
+  RCTPromiseResolveBlock resolve = _showResolve;
+  _showResolve = nil;
   _showReject = nil;
+  if (resolve) {
+    resolve(@{@"isCancelled": @YES});
+  }
 }
 
 @end

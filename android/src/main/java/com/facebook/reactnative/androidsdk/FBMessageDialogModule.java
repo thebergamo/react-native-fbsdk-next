@@ -34,30 +34,33 @@ import com.facebook.share.widget.MessageDialog;
  * Provides functionality to send content via the Facebook Message Dialog
  */
 @ReactModule(name = FBMessageDialogModule.NAME)
-public class FBMessageDialogModule extends FBSDKCallbackManagerBaseJavaModule {
+public class FBMessageDialogModule extends FBDialogModule {
     public static final String NAME = "FBMessageDialog";
 
-    private class MessageDialogCallback extends ReactNativeFacebookSDKCallback<MessageDialog.Result> {
+    private class MessageDialogCallback extends DialogCallback<MessageDialog.Result> {
 
         public MessageDialogCallback(Promise promise) {
             super(promise);
         }
 
         @Override
-        public void onSuccess(MessageDialog.Result result) {
-            if (mPromise != null) {
-                WritableMap messageDialogResult = Arguments.createMap();
-                messageDialogResult.putString("postId", result.getPostId());
-                mPromise.resolve(messageDialogResult);
-                mPromise = null;
-            }
+        protected WritableMap buildResult(MessageDialog.Result result) {
+            WritableMap messageDialogResult = Arguments.createMap();
+            messageDialogResult.putString("postId", result.getPostId());
+            return messageDialogResult;
         }
     }
 
     private boolean mShouldFailOnDataError;
 
+    public FBMessageDialogModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
+
+    /** @deprecated Dialogs now own their activity listener for the duration of each request. */
+    @Deprecated
     public FBMessageDialogModule(ReactApplicationContext reactContext, FBActivityEventListener activityEventListener) {
-        super(reactContext, activityEventListener);
+        this(reactContext);
     }
 
     @Override
@@ -72,13 +75,11 @@ public class FBMessageDialogModule extends FBSDKCallbackManagerBaseJavaModule {
      */
     @ReactMethod
     public void canShow(ReadableMap shareContentMap, Promise promise) {
-        if (getCurrentActivity() != null) {
+        canShowDialog(promise, activity -> {
             ShareContent shareContent = Utility.buildShareContent(shareContentMap);
-            MessageDialog messageDialog = new MessageDialog(getCurrentActivity());
-            promise.resolve(messageDialog.canShow(shareContent));
-        } else {
-            promise.reject("No current activity.");
-        }
+            MessageDialog messageDialog = new MessageDialog(activity);
+            return messageDialog.canShow(shareContent);
+        });
     }
 
     /**
@@ -88,15 +89,13 @@ public class FBMessageDialogModule extends FBSDKCallbackManagerBaseJavaModule {
      */
     @ReactMethod
     public void show(ReadableMap shareContentMap, Promise promise) {
-        if (getCurrentActivity() != null) {
+        showDialog(new MessageDialogCallback(promise), (activity, manager, callback) -> {
             ShareContent shareContent = Utility.buildShareContent(shareContentMap);
-            MessageDialog messageDialog = new MessageDialog(getCurrentActivity());
+            MessageDialog messageDialog = new MessageDialog(activity);
             messageDialog.setShouldFailOnDataError(mShouldFailOnDataError);
-            messageDialog.registerCallback(getCallbackManager(), new MessageDialogCallback(promise));
+            messageDialog.registerCallback(manager, callback);
             messageDialog.show(shareContent);
-        } else {
-            promise.reject("No current activity.");
-        }
+        });
     }
 
     /**
