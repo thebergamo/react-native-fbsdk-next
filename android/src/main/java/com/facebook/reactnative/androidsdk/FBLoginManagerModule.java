@@ -35,6 +35,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.module.annotations.ReactModule;
 
 import java.util.Locale;
@@ -47,16 +48,48 @@ import java.util.Set;
 public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
 
     public static final String NAME = "FBLoginManager";
+    private LoginManagerCallback mPendingLogin;
+    private volatile boolean mInvalidated;
 
     private class LoginManagerCallback extends ReactNativeFacebookSDKCallback<LoginResult> {
+        private final LoginManager mLoginManager;
 
-        public LoginManagerCallback(Promise promise) {
+        public LoginManagerCallback(LoginManager loginManager, Promise promise) {
             super(promise);
+            mLoginManager = loginManager;
+        }
+
+        private boolean finish() {
+            if (mInvalidated || mPendingLogin != this) {
+                return false;
+            }
+            mPendingLogin = null;
+            mLoginManager.unregisterCallback(getCallbackManager());
+            return true;
+        }
+
+        @Override
+        public void onCancel() {
+            if (finish()) {
+                super.onCancel();
+            }
+        }
+
+        @Override
+        public void onError(com.facebook.FacebookException error) {
+            reject(error);
+        }
+
+        void reject(Exception error) {
+            if (finish()) {
+                mPromise.reject(error);
+                mPromise = null;
+            }
         }
 
         @Override
         public void onSuccess(LoginResult loginResult) {
-            if (mPromise != null) {
+            if (finish()) {
                 AccessToken accessToken = loginResult.getAccessToken();
                 AccessToken.setCurrentAccessToken(accessToken);
                 WritableMap result = Arguments.createMap();
@@ -138,13 +171,7 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
      */
     @ReactMethod
     public void logInWithPermissions(ReadableArray permissions, final Promise promise) {
-        final LoginManager loginManager = LoginManager.getInstance();
-        loginManager.registerCallback(getCallbackManager(), new LoginManagerCallback(promise));
-        Activity activity = getCurrentActivity();
-        if (activity != null) {
-            loginManager.logIn(activity,
-                    Utility.reactArrayToStringList(permissions));
-        }
+        startLogin(permissions, false, promise);
     }
 
     /**
@@ -153,12 +180,64 @@ public class FBLoginManagerModule extends FBSDKCallbackManagerBaseJavaModule {
      */
     @ReactMethod
     public void reauthorizeDataAccess(final Promise promise) {
-        final LoginManager loginManager = LoginManager.getInstance();
-        loginManager.registerCallback(getCallbackManager(), new LoginManagerCallback(promise));
-        Activity activity = getCurrentActivity();
-        if (activity != null) {
-            loginManager.reauthorizeDataAccess(activity);
-        }
+        startLogin(null, true, promise);
+    }
+
+    private void startLogin(ReadableArray permissions, boolean reauthorize, Promise promise) {
+        UiThreadUtil.runOnUiThread(() -> {
+            if (mInvalidated) {
+                return;
+            }
+            if (mPendingLogin != null) {
+                promise.reject("E_LOGIN_IN_PROGRESS", "A Facebook login is already in progress.");
+                return;
+            }
+            Activity activity = getCurrentActivity();
+            if (activity == null) {
+                promise.reject("E_NO_ACTIVITY", "No current activity.");
+                return;
+            }
+            LoginManagerCallback callback = null;
+            try {
+                LoginManager loginManager = LoginManager.getInstance();
+                callback = new LoginManagerCallback(loginManager, promise);
+                mPendingLogin = callback;
+                loginManager.registerCallback(getCallbackManager(), callback);
+                if (reauthorize) {
+                    loginManager.reauthorizeDataAccess(activity);
+                } else {
+                    loginManager.logIn(activity, Utility.reactArrayToStringList(permissions));
+                }
+            } catch (Exception error) {
+                if (callback == null) {
+                    promise.reject(error);
+                } else {
+                    callback.reject(error);
+                }
+            }
+        });
+    }
+
+    public void invalidate() {
+        super.invalidate();
+        clearPendingLogin();
+    }
+
+    @SuppressWarnings("removal")
+    public void onCatalystInstanceDestroy() {
+        super.onCatalystInstanceDestroy();
+        clearPendingLogin();
+    }
+
+    private void clearPendingLogin() {
+        mInvalidated = true;
+        UiThreadUtil.runOnUiThread(() -> {
+            if (mPendingLogin != null) {
+                mPendingLogin.mLoginManager.unregisterCallback(getCallbackManager());
+                mPendingLogin.mPromise = null;
+                mPendingLogin = null;
+            }
+        });
     }
 
     private WritableArray setToWritableArray(Set<String> set) {
