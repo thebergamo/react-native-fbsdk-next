@@ -1107,8 +1107,15 @@ To update the example app, you should be able to just run the refresh script:
 refresh-example.sh
 ```
 
-This will create a new app in the `RNFBSDKExample` directory, using the latest version of React Native.
-Next, it will patch the necessary files so you may run the example app.
+This builds a candidate with React Native 0.76.5 and CLI 15.0.1, matching the
+Objective-C templates used by the script, then patches and installs it. It does
+not upgrade the example to the latest React Native release.
+
+The original example is untouched until the candidate is ready. After success,
+the entire original directory is retained under the printed
+`.fbsdk-example-refresh.*/previous-example` path, including untracked files.
+Failed candidates are also retained for inspection. Review and remove these
+temporary directories yourself when they are no longer needed.
 
 Occasionally react-native version changes mean that there is some incompatibility
 between what the script expects to find in the fresh react-native app as it does

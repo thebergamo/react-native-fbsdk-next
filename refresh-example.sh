@@ -1,29 +1,29 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-echo "You should run this from directory where you have cloned the react-native-fbsdk-next repo"
-echo "You should only do this when your git working set is completely clean (e.g., git reset --hard)"
-echo "You must have already run \`yarn\` in the repository so \`npx react-native\` will work"
-echo "This scaffolding refresh has been tested on macOS, if you use it on linux, it might not work"
-
-# Copy the important files out temporarily
-if [ -d TEMP ]; then
-  echo "TEMP directory already exists - we use that to store files while refreshing."
+cd -- "$(dirname -- "$0")"
+if [[ ! -f react-native-fbsdk-next.podspec || ! -d RNFBSDKExample || -L RNFBSDKExample ]]; then
+  echo "Expected the repository and a non-symlink RNFBSDKExample directory." >&2
   exit 1
-else
-  echo "Saving files to TEMP while refreshing scaffolding..."
-  mkdir -p TEMP/android/
-  mkdir -p TEMP/ios/RNFBSDKExample
-  cp RNFBSDKExample/README.md TEMP/
-  cp RNFBSDKExample/android/local.properties TEMP/android/ || true
-  cp RNFBSDKExample/App.tsx TEMP/
 fi
 
-# Purge the old sample
-\rm -fr RNFBSDKExample
+echo "The original example will be retained as a backup after a successful refresh."
+echo "The scaffolding version is pinned to match this script's Objective-C templates."
+echo "This scaffolding refresh has been tested on macOS, if you use it on linux, it might not work"
 
-# Make the new example
-npm_config_yes=true npx react-native@latest init RNFBSDKExample --skip-install --skip-git-init
+refresh_workspace="$(mktemp -d "$PWD/.fbsdk-example-refresh.XXXXXX")"
+trap 'echo "Refresh files and any original-example backup are retained at: $refresh_workspace"' EXIT
+
+# Copy only the files intended to survive regeneration into the new example.
+mkdir -p "$refresh_workspace/persistent/android"
+cp RNFBSDKExample/README.md RNFBSDKExample/App.tsx "$refresh_workspace/persistent/"
+if [[ -f RNFBSDKExample/android/local.properties ]]; then
+  cp RNFBSDKExample/android/local.properties "$refresh_workspace/persistent/android/"
+fi
+
+# Build and configure a candidate without changing the original example.
+pushd "$refresh_workspace"
+npm_config_yes=true npx @react-native-community/cli@15.0.1 init RNFBSDKExample --version 0.76.5 --skip-install --skip-git-init
 pushd RNFBSDKExample
 rm -f Gemfile Gemfile.lock .ruby-version
 touch yarn.lock
@@ -136,7 +136,13 @@ pushd ios && pod deintegrate && pod install && popd
 # Copy the important files back in
 popd
 echo "Copying persistent example files into refreshed example..."
-cp -frv TEMP/* RNFBSDKExample/
+cp -Rv persistent/. RNFBSDKExample/
+popd
 
-# Clean up after ourselves
-\rm -fr TEMP
+# Keep the entire original, including untracked files, recoverable.
+mv RNFBSDKExample "$refresh_workspace/previous-example"
+if ! mv "$refresh_workspace/RNFBSDKExample" RNFBSDKExample; then
+  mv "$refresh_workspace/previous-example" RNFBSDKExample
+  exit 1
+fi
+echo "Refresh completed. The original example is in $refresh_workspace/previous-example"
