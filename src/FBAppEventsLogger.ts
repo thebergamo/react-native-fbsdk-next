@@ -352,7 +352,9 @@ export default {
    * @platform ios
    */
   setPushNotificationsDeviceToken(deviceToken: string) {
-    AppEventsLogger.setPushNotificationsDeviceToken(deviceToken);
+    if (Platform.OS === 'ios') {
+      AppEventsLogger.setPushNotificationsDeviceToken(deviceToken);
+    }
   },
 
   /**
@@ -360,7 +362,9 @@ export default {
    * @platform Android
    */
   setPushNotificationsRegistrationId(registrationId: string) {
-    AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
+    if (Platform.OS === 'android') {
+      AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
+    }
   },
 
   /**
