@@ -27,14 +27,22 @@ import {
 } from './FBLoginManager';
 import {PropsOf} from './utils';
 import * as React from 'react';
-import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
+import {
+  requireNativeComponent,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
+type LoginButtonError = Record<string, unknown> | string | null;
 export type Event = {
-  nativeEvent?: {
-    type?: 'loginFinished' | 'logoutFinished';
-    error: Record<string, unknown>;
-    result: LoginResult;
-  };
+  nativeEvent?:
+    | {
+        type: 'loginFinished';
+        error: LoginButtonError;
+        result: LoginResult | null;
+      }
+    | {type: 'logoutFinished'};
 };
 export type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
 
@@ -52,8 +60,8 @@ class LoginButton extends React.Component<{
    * The callback invoked upon error/completion of a login request.
    */
   onLoginFinished?: (
-    error: Record<string, unknown>,
-    result: LoginResult,
+    error: LoginButtonError,
+    result: LoginResult | null,
   ) => void;
 
   /**
@@ -94,7 +102,7 @@ class LoginButton extends React.Component<{
   /**
    * View style, if any.
    */
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 
   /**
    * testID, if any.
@@ -105,7 +113,7 @@ class LoginButton extends React.Component<{
     style: typeof styles.defaultButtonStyle;
   };
 
-  _eventHandler(event: Event) {
+  _eventHandler = (event: Event) => {
     if (typeof event !== 'object' || !event || !event.nativeEvent) {
       return;
     }
@@ -119,15 +127,10 @@ class LoginButton extends React.Component<{
         this.props.onLogoutFinished();
       }
     }
-  }
+  };
 
   render() {
-    return (
-      <RCTFBLoginButton
-        {...this.props}
-        onChange={this._eventHandler.bind(this)}
-      />
-    );
+    return <RCTFBLoginButton {...this.props} onChange={this._eventHandler} />;
   }
 }
 

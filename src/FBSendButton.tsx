@@ -22,7 +22,12 @@
 import {ShareContent} from './models/FBShareContent';
 import {PropsOf} from './utils';
 import * as React from 'react';
-import {requireNativeComponent, StyleSheet, ViewStyle} from 'react-native';
+import {
+  requireNativeComponent,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 class SendButton extends React.Component<{
   /**
@@ -33,7 +38,7 @@ class SendButton extends React.Component<{
   /**
    * View style, if any.
    */
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 }> {
   static defaultProps: {
     style: typeof styles.defaultButtonStyle;

@@ -44,8 +44,6 @@ public class FBSendButtonManager extends SimpleViewManager<SendButton> {
     @ReactProp(name = "shareContent")
     public void setShareContent(SendButton sendButton, ReadableMap shareContentMap) {
         ShareContent shareContent = Utility.buildShareContent(shareContentMap);
-        if (shareContent != null) {
-            sendButton.setShareContent(shareContent);
-        }
+        sendButton.setShareContent(shareContent);
     }
 }

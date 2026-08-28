@@ -31,6 +31,7 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
 import java.util.Locale;
+import java.util.Collections;
 
 public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
 
@@ -78,6 +79,8 @@ public class FBLoginButtonManager extends SimpleViewManager<RCTLoginButton> {
     public void setPermissions(
             RCTLoginButton loginButton,
             @Nullable ReadableArray publishPermissions) {
-        loginButton.setPermissions(Utility.reactArrayToStringList(publishPermissions));
+        loginButton.setPermissions(publishPermissions == null
+                ? Collections.emptyList()
+                : Utility.reactArrayToStringList(publishPermissions));
     }
 }
