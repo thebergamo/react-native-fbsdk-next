@@ -70,7 +70,7 @@
   },
   "files": [
     "android/src/main/AndroidManifest.xml",
-    "android/src/main/java/",
+    "android/src/main/java/**/*",
     "android/build.gradle",
     "ios",
     "lib",
@@ -82,7 +82,7 @@
     "tsconfig.json",
     "app.plugin.js",
     "expo-module.config.json",
-    "plugin/build/"
+    "plugin/build/**/*"
   ],
   "peerDependencies": {
     "expo": ">=47.0.0",
