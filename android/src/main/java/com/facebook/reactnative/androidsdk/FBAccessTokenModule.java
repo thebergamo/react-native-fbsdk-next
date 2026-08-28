@@ -102,9 +102,10 @@ public class FBAccessTokenModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getCurrentAccessToken(Callback callback) {
         //Return the accessToken object as a ReactMap.
-        callback.invoke(AccessToken.getCurrentAccessToken() == null
+        AccessToken currentToken = AccessToken.getCurrentAccessToken();
+        callback.invoke(currentToken == null
                 ? null
-                : Utility.accessTokenToReactMap(AccessToken.getCurrentAccessToken()));
+                : Utility.accessTokenToReactMap(currentToken));
     }
 
     /**

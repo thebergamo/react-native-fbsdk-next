@@ -51,11 +51,18 @@ RCT_EXPORT_METHOD(setCurrentAccessToken:(FBSDKAccessToken *)token)
 
 RCT_EXPORT_METHOD(refreshCurrentAccessTokenAsync:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
+  FBSDKAccessToken *requestToken = [FBSDKAccessToken currentAccessToken];
   [FBSDKAccessToken refreshCurrentAccessTokenWithCompletion:^(id<FBSDKGraphRequestConnecting> connection, id result, NSError *error) {
     if (error) {
       reject(@"FacebookSDK", error.localizedDescription, error);
     } else {
-      resolve(result);
+      FBSDKAccessToken *currentToken = [FBSDKAccessToken currentAccessToken];
+      if (!currentToken || ![currentToken.userID isEqualToString:requestToken.userID] ||
+          ![currentToken.appID isEqualToString:requestToken.appID]) {
+        reject(@"E_ACCESS_TOKEN_CHANGED", @"The current account changed while refreshing the access token.", nil);
+        return;
+      }
+      resolve(RCTBuildAccessTokenDict(currentToken));
     }
   }];
 }
