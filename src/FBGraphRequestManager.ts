@@ -19,24 +19,27 @@
  *
  * @format
  */
-import GraphRequest, {GraphRequestParameters} from './FBGraphRequest';
+import GraphRequest, {
+  GraphRequestCallback,
+  GraphRequestParameters,
+} from './FBGraphRequest';
 import {NativeModules} from 'react-native';
 
 const NativeGraphRequestManager = NativeModules.FBGraphRequest;
 
 export type Callback = (
-  error?: Record<string, unknown>,
-  result?: Record<string, unknown>,
+  error?: Record<string, unknown> | null,
+  result?: Record<string, unknown> | null,
 ) => void;
 
 function _verifyParameters(request: GraphRequest) {
   if (request.config?.parameters) {
-    for (const key in request.config.parameters) {
+    for (const key of Object.keys(request.config.parameters)) {
       const param = request.config.parameters[key];
 
       if (
         typeof param === 'object' &&
-        (param as GraphRequestParameters)?.string
+        typeof (param as GraphRequestParameters)?.string === 'string'
       ) {
         continue;
       }
@@ -52,7 +55,7 @@ function _verifyParameters(request: GraphRequest) {
 
 class FBGraphRequestManager {
   requestBatch: Array<GraphRequest> = [];
-  requestCallbacks: Array<Callback | undefined> = [];
+  requestCallbacks: Array<GraphRequestCallback | undefined> = [];
   batchCallback: Callback | null = null;
 
   /**
@@ -70,12 +73,7 @@ class FBGraphRequestManager {
    * Note that invocation of the batch callback does not indicate success of every
    * graph request made, only that the entire batch has finished executing.
    */
-  addBatchCallback(
-    callback: (
-      error?: Record<string, unknown>,
-      result?: Record<string, unknown>,
-    ) => void,
-  ): FBGraphRequestManager {
+  addBatchCallback(callback: Callback): FBGraphRequestManager {
     this.batchCallback = callback;
     return this;
   }
@@ -89,28 +87,46 @@ class FBGraphRequestManager {
    * after the batch time out. This is because detecting network status requires
    * extra permission and it's unncessary for the sdk. Instead, you can use the NetInfo module
    * in react-native to get the network status.
+   * @param timeout Timeout in milliseconds on both platforms. Zero or omission
+   * retains the native SDK default. Must be an integer from 0 to 2147483647.
    */
   start(timeout?: number) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const that = this;
+    if (
+      timeout !== undefined &&
+      (!Number.isInteger(timeout) || timeout < 0 || timeout > 2147483647)
+    ) {
+      throw new Error('Timeout must be an integer from 0 to 2147483647 ms.');
+    }
+    if (this.requestBatch.length === 0) {
+      throw new Error(
+        'Add at least one graph request before starting a batch.',
+      );
+    }
+    const requestCallbacks = this.requestCallbacks.slice();
+    const batchCallback = this.batchCallback;
     const callback = (
-      error: Record<string, unknown>,
-      result: Record<string, unknown>,
-      response: Array<Array<Record<string, unknown>>>,
+      error: Record<string, unknown> | null,
+      result: Record<string, unknown> | null,
+      response: Record<string, Parameters<GraphRequestCallback>>,
     ) => {
       if (response) {
-        that.requestCallbacks.forEach((innerCallback, index) => {
-          if (innerCallback) {
-            innerCallback(response[index][0], response[index][1]);
+        requestCallbacks.forEach((innerCallback, index) => {
+          const requestResponse = response[index];
+          if (innerCallback && requestResponse) {
+            innerCallback(requestResponse[0], requestResponse[1]);
           }
         });
       }
-      if (that.batchCallback) {
-        that.batchCallback(error, result);
+      if (batchCallback) {
+        batchCallback(error, result);
       }
     };
 
-    NativeGraphRequestManager.start(this.requestBatch, timeout || 0, callback);
+    NativeGraphRequestManager.start(
+      this.requestBatch.slice(),
+      timeout || 0,
+      callback,
+    );
   }
 }
 
