@@ -21,8 +21,8 @@
  */
 
 export type GraphRequestCallback = (
-  error?: Record<string, unknown>,
-  result?: Record<string, unknown>,
+  error?: Record<string, unknown> | null,
+  result?: Record<string, unknown> | unknown[] | null,
 ) => void;
 export type GraphRequestConfig = {
   /**
@@ -80,9 +80,8 @@ class FBGraphRequest {
    * Adds a string parameter to the request.
    */
   addStringParameter(paramString: string, key: string) {
-    if (this.config != null && this.config.parameters != null) {
-      this.config.parameters[key] = {string: paramString};
-    }
+    this.config.parameters ??= {};
+    this.config.parameters[key] = {string: paramString};
   }
 }
 

@@ -21,7 +21,6 @@
 package com.facebook.reactnative.androidsdk;
 
 import android.os.Bundle;
-import android.util.SparseArray;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookRequestError;
@@ -29,6 +28,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphRequestBatch;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.internal.Logger;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -45,7 +45,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -56,15 +55,13 @@ import java.util.Iterator;
 public class FBGraphRequestModule extends ReactContextBaseJavaModule {
     public static final String NAME = "FBGraphRequest";
 
-    private SparseArray<WritableMap> mResponses;
-
     private class GraphRequestBatchCallback implements GraphRequestBatch.Callback {
 
-        private int mBatchID;
-        private Callback mCallback;
+        private final WritableMap mResponses;
+        private final Callback mCallback;
 
-        public GraphRequestBatchCallback(int batchID, Callback callback) {
-            mBatchID = batchID;
+        public GraphRequestBatchCallback(WritableMap responses, Callback callback) {
+            mResponses = responses;
             mCallback = callback;
         }
 
@@ -72,33 +69,35 @@ public class FBGraphRequestModule extends ReactContextBaseJavaModule {
         public void onBatchCompleted(GraphRequestBatch batch) {
             WritableMap result = Arguments.createMap();
             result.putString("result", "batch finished executing or timed out");
-            mCallback.invoke(null, result, mResponses.get(mBatchID));
-            mResponses.remove(mBatchID);
+            mCallback.invoke(null, result, mResponses);
         }
     }
 
     private class GraphRequestCallback implements GraphRequest.Callback {
 
-        private String mIndex;
-        private int mBatchID;
+        private final String mIndex;
+        private final WritableMap mResponses;
 
-        public GraphRequestCallback(int index, int batchID) {
+        public GraphRequestCallback(int index, WritableMap responses) {
             mIndex = String.valueOf(index);
-            mBatchID = batchID;
+            mResponses = responses;
         }
 
         @Override
         public void onCompleted(GraphResponse response) {
             WritableArray responseArray = Arguments.createArray();
             responseArray.pushMap(buildFacebookRequestError(response.getError()));
-            responseArray.pushMap(buildGraphResponse(response));
-            mResponses.get(mBatchID).putArray(mIndex, responseArray);
+            if (response.getJSONArray() != null) {
+                responseArray.pushArray(convertJSONArray(response.getJSONArray()));
+            } else {
+                responseArray.pushMap(buildGraphResponse(response));
+            }
+            mResponses.putArray(mIndex, responseArray);
         }
     }
 
     public FBGraphRequestModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        mResponses = new SparseArray<WritableMap>();
     }
 
     @Override
@@ -115,21 +114,14 @@ public class FBGraphRequestModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void start(ReadableArray requestBatch, int timeout, Callback batchCallback) {
         GraphRequestBatch batch = new GraphRequestBatch();
-        int potentialID = 0;
-        int batchID = 0;
-        synchronized (this) {
-            do {
-                batchID = potentialID++;
-            } while (mResponses.get(batchID) != null);
-            mResponses.put(batchID, Arguments.createMap());
-        }
+        WritableMap responses = Arguments.createMap();
         for (int i = 0; i < requestBatch.size(); i++) {
             GraphRequest request = buildRequest(requestBatch.getMap(i));
-            request.setCallback(new GraphRequestCallback(i, batchID));
+            request.setCallback(new GraphRequestCallback(i, responses));
             batch.add(request);
         }
         batch.setTimeout(timeout);
-        GraphRequestBatchCallback callback = new GraphRequestBatchCallback(batchID, batchCallback);
+        GraphRequestBatchCallback callback = new GraphRequestBatchCallback(responses, batchCallback);
         batch.addCallback(callback);
         batch.executeAsync();
     }
@@ -156,17 +148,26 @@ public class FBGraphRequestModule extends ReactContextBaseJavaModule {
             graphRequest.setVersion(configMap.getString("version"));
         }
         if (configMap.hasKey("accessToken")) {
-            graphRequest.setAccessToken(new AccessToken(
-                configMap.getString("accessToken"),
-                AccessToken.getCurrentAccessToken().getApplicationId(),
-                AccessToken.getCurrentAccessToken().getUserId(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null));
+            AccessToken currentToken = AccessToken.getCurrentAccessToken();
+            String token = configMap.getString("accessToken");
+            if (currentToken != null) {
+                graphRequest.setAccessToken(new AccessToken(
+                    token,
+                    currentToken.getApplicationId(),
+                    currentToken.getUserId(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null));
+            } else if (!graphRequest.getParameters().containsKey("access_token")) {
+                // A raw token does not provide the user ID required by AccessToken.
+                // The SDK also accepts an explicit access_token parameter.
+                graphRequest.getParameters().putString("access_token", token);
+                Logger.registerAccessToken(token);
+            }
         } else {
             graphRequest.setAccessToken(AccessToken.getCurrentAccessToken());
         }
@@ -246,8 +247,10 @@ public class FBGraphRequestModule extends ReactContextBaseJavaModule {
                 result.pushInt((int) object);
             } else if (object instanceof Boolean) {
                 result.pushBoolean((Boolean) object);
-            } else if (object instanceof Double) {
-                result.pushDouble((Double) object);
+            } else if (object instanceof Number) {
+                result.pushDouble(((Number) object).doubleValue());
+            } else if (object == JSONObject.NULL) {
+                result.pushNull();
             }
         }
         return result;
@@ -274,8 +277,10 @@ public class FBGraphRequestModule extends ReactContextBaseJavaModule {
                 result.putInt(key, (int) value);
             } else if (value instanceof Boolean) {
                 result.putBoolean(key, (Boolean) value);
-            } else if (value instanceof Double) {
-                result.putDouble(key, (Double) value);
+            } else if (value instanceof Number) {
+                result.putDouble(key, ((Number) value).doubleValue());
+            } else if (value == JSONObject.NULL) {
+                result.putNull(key);
             }
         }
         return result;

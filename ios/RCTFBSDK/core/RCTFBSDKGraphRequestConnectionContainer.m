@@ -62,7 +62,6 @@ static NSArray<FBSDKGraphRequest *> *FBSDKGraphRequestArray(id json)
 {
   NSArray<FBSDKGraphRequest *> *_requestBatch;
   RCTResponseSenderBlock _batchCallback;
-  NSInteger _timeout;
   FBSDKGraphRequestConnection *_connection;
   NSMutableDictionary *_response;
 }
@@ -82,7 +81,9 @@ static NSArray<FBSDKGraphRequest *> *FBSDKGraphRequestArray(id json)
     _connection.delegate = self;
     _requestBatch = FBSDKGraphRequestArray(requestBatch);
     _batchCallback = callback;
-    _timeout = timeout;
+    if (timeout > 0) {
+      _connection.timeout = timeout / 1000.0;
+    }
     _response = [[NSMutableDictionary alloc] init];
   }
   return self;
@@ -90,7 +91,9 @@ static NSArray<FBSDKGraphRequest *> *FBSDKGraphRequestArray(id json)
 
 - (void)start
 {
-  g_pendingConnection = [[NSMutableArray alloc] init];
+  if (!g_pendingConnection) {
+    g_pendingConnection = [[NSMutableArray alloc] init];
+  }
   [g_pendingConnection addObject:self];
   for (int i = 0; i < _requestBatch.count; i++) {
     FBSDKGraphRequestCompletion completion = ^(id<FBSDKGraphRequestConnecting> connection, id result, NSError *error) {
@@ -107,17 +110,25 @@ static NSArray<FBSDKGraphRequest *> *FBSDKGraphRequestArray(id json)
 - (void)requestConnectionDidFinishLoading:(FBSDKGraphRequestConnection *)connection
 {
   if (_batchCallback) {
-    _batchCallback(@[[NSNull null], @{@"result": @"success"}, _response]);
+    RCTResponseSenderBlock callback = _batchCallback;
+    _batchCallback = nil;
+    callback(@[[NSNull null], @{@"result": @"success"}, _response]);
   }
+  _connection.delegate = nil;
+  _connection = nil;
   [g_pendingConnection removeObject:self];
 }
 
 - (void)requestConnection:(FBSDKGraphRequestConnection *)connection didFailWithError:(NSError *)error
 {
   if (_batchCallback) {
+    RCTResponseSenderBlock callback = _batchCallback;
+    _batchCallback = nil;
     NSDictionary *errorDict = error ? RCTJSErrorFromNSError(error) : nil;
-    _batchCallback(@[@[RCTNullIfNil(errorDict)], [NSNull null], _response]);
+    callback(@[RCTNullIfNil(errorDict), [NSNull null], _response]);
   }
+  _connection.delegate = nil;
+  _connection = nil;
   [g_pendingConnection removeObject:self];
 }
 

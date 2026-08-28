@@ -950,24 +950,36 @@ import { GraphRequest, GraphRequestManager } from 'react-native-fbsdk-next';
 // ...
 
 // Create response callback.
-_responseInfoCallback(error, result) {
+function responseInfoCallback(error, result) {
   if (error) {
     console.log("Error fetching data: " + error.toString());
   } else {
-    console.log("Success fetching data: " + result.toString());
+    console.log("Success fetching data: " + JSON.stringify(result));
   }
 }
 
 // Create a graph request asking for user information with a callback to handle the response.
 const infoRequest = new GraphRequest(
   "/me",
-  null,
-  this._responseInfoCallback,
+  {},
+  responseInfoCallback,
 );
 
 // Start the graph request.
 new GraphRequestManager().addRequest(infoRequest).start();
 ```
+
+`start(timeout)` accepts milliseconds on Android and iOS. Omit it or pass `0`
+to retain the native SDK default. Explicit timeouts must be integers from `0`
+to `2147483647`; invalid values throw before starting a request. iOS now honors
+positive timeouts, which were previously ignored.
+Calling `start()` without adding a request also throws instead of leaving an
+empty native batch pending indefinitely.
+
+Graph callbacks receive a nullable error and an object, array, or null result.
+The batch callback reports a connection-level outcome; inspect each request's
+error separately. Adding requests or replacing callbacks after `start()` does
+not change the callbacks for the already-started batch.
 
 ## Expo installation
 
