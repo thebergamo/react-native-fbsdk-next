@@ -40,36 +40,74 @@ const SHARE_LINK_CONTENT: ShareLinkContent = {
 // Possibly only do this for iOS if no need to handle a GDPR-type flow
 Settings.initializeSDK();
 
-export default class App extends Component<{}> {
-  _reauthorizeDataAccess = async () => {
-    try {
-      const result = await LoginManager.reauthorizeDataAccess();
-      Alert.alert(
-        'Reauthorize data access result',
-        JSON.stringify(result, null, 2),
-      );
-    } catch (error) {
-      Alert.alert('Reauthorize data access fail with error:', error as string);
-    }
-  };
+export default class App extends Component<
+  Record<string, never>,
+  {busy: boolean}
+> {
+  state = {busy: false};
+  _busy = false;
+  _mounted = false;
 
-  _shareLinkWithShareDialog = async () => {
-    const canShow = await ShareDialog.canShow(SHARE_LINK_CONTENT);
-    if (canShow) {
-      try {
-        const {isCancelled, postId} = await ShareDialog.show(
-          SHARE_LINK_CONTENT,
+  componentDidMount() {
+    this._mounted = true;
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  _runAction = async (action: () => Promise<string>, errorTitle: string) => {
+    if (this._busy || !this._mounted) {
+      return;
+    }
+    this._busy = true;
+    this.setState({busy: true});
+    try {
+      const message = await action();
+      if (this._mounted) {
+        Alert.alert(message);
+      }
+    } catch (error) {
+      if (this._mounted) {
+        Alert.alert(
+          errorTitle,
+          error instanceof Error ? error.message : String(error),
         );
-        if (isCancelled) {
-          Alert.alert('Share cancelled');
-        } else {
-          Alert.alert('Share success with postId: ' + postId);
-        }
-      } catch (error) {
-        Alert.alert('Share fail with error: ' + error);
+      }
+    } finally {
+      this._busy = false;
+      if (this._mounted) {
+        this.setState({busy: false});
       }
     }
   };
+
+  _reauthorizeDataAccess = () =>
+    this._runAction(async () => {
+      const result = await LoginManager.reauthorizeDataAccess();
+      return (
+        'Reauthorize data access result: ' + JSON.stringify(result, null, 2)
+      );
+    }, 'Reauthorize data access failed');
+
+  _shareLinkWithShareDialog = () =>
+    this._runAction(async () => {
+      const canShow = await ShareDialog.canShow(SHARE_LINK_CONTENT);
+      if (!this._mounted) {
+        return '';
+      }
+      if (canShow) {
+        const {isCancelled, postId} =
+          await ShareDialog.show(SHARE_LINK_CONTENT);
+        if (isCancelled) {
+          return 'Share cancelled';
+        }
+        return postId
+          ? 'Share success with postId: ' + postId
+          : 'Share successful';
+      }
+      return 'Sharing is unavailable on this device';
+    }, 'Sharing failed');
 
   render() {
     return (
@@ -80,12 +118,23 @@ export default class App extends Component<{}> {
             Alert.alert(JSON.stringify(error || data, null, 2));
           }}
         />
-        <TouchableHighlight onPress={this._shareLinkWithShareDialog}>
+        <TouchableHighlight
+          accessibilityRole="button"
+          accessibilityState={{disabled: this.state.busy}}
+          disabled={this.state.busy}
+          onPress={this._shareLinkWithShareDialog}>
           <Text style={styles.buttonText}>Share link with ShareDialog</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this._reauthorizeDataAccess}>
+        <TouchableHighlight
+          accessibilityRole="button"
+          accessibilityState={{disabled: this.state.busy}}
+          disabled={this.state.busy}
+          onPress={this._reauthorizeDataAccess}>
           <Text style={styles.buttonText}>Reauthorize Data Access</Text>
         </TouchableHighlight>
+        <Text accessibilityLiveRegion="polite">
+          {this.state.busy ? 'Working…' : ''}
+        </Text>
       </View>
     );
   }
