@@ -20,6 +20,8 @@
 
 package com.facebook.reactnative.androidsdk;
 
+import android.net.Uri;
+
 import com.facebook.applinks.AppLinkData;
 import com.facebook.internal.Utility;
 import com.facebook.react.bridge.Promise;
@@ -58,11 +60,8 @@ public class FBAppLinkModule extends ReactContextBaseJavaModule {
         return new AppLinkData.CompletionHandler() {
             @Override
             public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-                if (appLinkData == null) {
-                    promise.resolve(null);
-                } else {
-                    promise.resolve(appLinkData.getTargetUri().toString());
-                }
+                Uri targetUri = appLinkData == null ? null : appLinkData.getTargetUri();
+                promise.resolve(targetUri == null ? null : targetUri.toString());
             }
         };
     }
