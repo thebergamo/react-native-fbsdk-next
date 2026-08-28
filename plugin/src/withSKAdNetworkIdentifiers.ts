@@ -22,16 +22,20 @@ export const withSKAdNetworkIdentifiers: ConfigPlugin<string[]> = (
   }
 
   // Get ids
-  let existingIds = config.ios.infoPlist.SKAdNetworkItems.map(
-    (item: any) => item?.SKAdNetworkIdentifier ?? null,
-  ).filter(Boolean) as string[];
-  // remove duplicates
-  existingIds = [...new Set(existingIds)];
+  const existingIds = new Set<string>();
+  for (const item of config.ios.infoPlist.SKAdNetworkItems as Array<{
+    SKAdNetworkIdentifier?: string;
+  } | null>) {
+    if (item?.SKAdNetworkIdentifier) {
+      existingIds.add(item.SKAdNetworkIdentifier);
+    }
+  }
 
   for (const id of identifiers) {
     // Must be lowercase
     const lower = id.toLowerCase();
-    if (!existingIds.includes(lower)) {
+    if (!existingIds.has(lower)) {
+      existingIds.add(lower);
       config.ios.infoPlist.SKAdNetworkItems.push({
         SKAdNetworkIdentifier: lower,
       });
