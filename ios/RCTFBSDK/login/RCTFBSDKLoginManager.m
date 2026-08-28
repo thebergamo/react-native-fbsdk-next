@@ -143,7 +143,7 @@ static NSString *DefaultAudienceToString(FBSDKDefaultAudience defaultAudience)
       result = @"everyone";
       break;
     case FBSDKDefaultAudienceOnlyMe:
-      result = @"only-me";
+      result = @"only_me";
       break;
     default:
       break;

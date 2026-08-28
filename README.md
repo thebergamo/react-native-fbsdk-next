@@ -576,6 +576,11 @@ export default class Login extends Component {
 
 You can also use the Login Manager with custom UI to perform Login.
 
+On Android, await a pending login or reauthorization before starting another.
+Overlapping calls reject with `E_LOGIN_IN_PROGRESS`; a missing foreground
+Activity rejects with `E_NO_ACTIVITY`. `getDefaultAudience()` returns `only_me`
+on both platforms, matching `setDefaultAudience()`.
+
 ```js
 // ...
 
