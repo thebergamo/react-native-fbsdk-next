@@ -21,6 +21,11 @@ public class RCTLoginButtonEvent extends Event<RCTLoginButtonEvent> {
     }
 
     @Override
+    public boolean canCoalesce() {
+        return false;
+    }
+
+    @Override
     protected WritableMap getEventData() {
         return mEvent;
     }

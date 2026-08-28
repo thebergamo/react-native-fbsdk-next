@@ -46,8 +46,6 @@ public class FBShareButtonManager extends SimpleViewManager<ShareButton> {
     @ReactProp(name = "shareContent")
     public void setShareContent(ShareButton shareButton, ReadableMap shareContentMap) {
         ShareContent shareContent = Utility.buildShareContent(shareContentMap);
-        if (shareContent != null) {
-            shareButton.setShareContent(shareContent);
-        }
+        shareButton.setShareContent(shareContent);
     }
 }

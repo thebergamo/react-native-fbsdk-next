@@ -35,6 +35,7 @@ import com.facebook.react.uimanager.UIManagerHelper;
 import com.facebook.react.uimanager.events.EventDispatcher;
 
 import java.util.Set;
+import java.lang.ref.WeakReference;
 
 /**
  * A Log In/Log Out button that maintains login state and logs in/out for the app.
@@ -43,18 +44,18 @@ import java.util.Set;
 public class RCTLoginButton extends LoginButton {
 
     private final CallbackManager mCallbackManager;
-    private final EventDispatcher mEventDispatcher;
+    private AccessTokenTracker mAccessTokenTracker;
+    private FacebookCallback<LoginResult> mLoginCallback;
 
     public RCTLoginButton(ThemedReactContext context, CallbackManager callbackManager) {
         super(context);
         this.setToolTipMode(ToolTipMode.NEVER_DISPLAY);
         mCallbackManager = callbackManager;
-        mEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((ReactContext) getContext(), getId());
         init();
     }
 
     public void init() {
-        new AccessTokenTracker() {
+        mAccessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
@@ -62,60 +63,103 @@ public class RCTLoginButton extends LoginButton {
                 if (currentAccessToken == null) {
                     WritableMap event = Arguments.createMap();
                     event.putString("type", "logoutFinished");
-                    ReactContext context = (ReactContext) getContext();
-                    mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
-
+                    dispatchEvent(event);
                 }
             }
         };
-        this.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                WritableMap event = Arguments.createMap();
-                event.putString("type", "loginFinished");
-                event.putString("error", null);
-                WritableMap result = Arguments.createMap();
-                result.putBoolean("isCancelled", false);
-                result.putArray(
-                        "grantedPermissions",
-                        Arguments.fromJavaArgs(
-                                setToStringArray(loginResult.getRecentlyGrantedPermissions())));
-                result.putArray(
-                        "declinedPermissions",
-                        Arguments.fromJavaArgs(
-                                setToStringArray(loginResult.getRecentlyDeniedPermissions())));
-                event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                WritableMap event = Arguments.createMap();
-                event.putString("type", "loginFinished");
-                event.putString("error", error.toString());
-                WritableMap result = Arguments.createMap();
-                result.putBoolean("isCancelled", false);
-                event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
-            }
-
-            @Override
-            public void onCancel() {
-                WritableMap event = Arguments.createMap();
-                event.putString("type", "loginFinished");
-                event.putString("error", null);
-                WritableMap result = Arguments.createMap();
-                result.putBoolean("isCancelled", true);
-                event.putMap("result", result);
-                ReactContext context = (ReactContext) getContext();
-                mEventDispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
-            }
-        });
+        mAccessTokenTracker.stopTracking();
+        mLoginCallback = new LoginCallback(this);
+        registerCallback(mCallbackManager, mLoginCallback);
+        // Facebook invokes the external click listener before starting login.
+        // Route the shared callback manager to the button actually pressed.
+        setOnClickListener(view -> registerCallback(mCallbackManager, mLoginCallback));
     }
 
-    private String[] setToStringArray(Set<String> set) {
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        mAccessTokenTracker.startTracking();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        mAccessTokenTracker.stopTracking();
+        super.onDetachedFromWindow();
+    }
+
+    private void dispatchEvent(WritableMap event) {
+        if (getWindowToken() == null) {
+            return;
+        }
+        ReactContext context = (ReactContext) getContext();
+        EventDispatcher dispatcher = UIManagerHelper.getEventDispatcherForReactTag(context, getId());
+        if (dispatcher != null) {
+            dispatcher.dispatchEvent(new RCTLoginButtonEvent(UIManagerHelper.getSurfaceId(context), getId(), event));
+        }
+    }
+
+    private static class LoginCallback implements FacebookCallback<LoginResult> {
+        private final WeakReference<RCTLoginButton> mButton;
+
+        LoginCallback(RCTLoginButton button) {
+            mButton = new WeakReference<>(button);
+        }
+
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            RCTLoginButton button = mButton.get();
+            if (button == null) {
+                return;
+            }
+            WritableMap event = Arguments.createMap();
+            event.putString("type", "loginFinished");
+            event.putString("error", null);
+            WritableMap result = Arguments.createMap();
+            result.putBoolean("isCancelled", false);
+            result.putArray(
+                    "grantedPermissions",
+                    Arguments.fromJavaArgs(
+                            setToStringArray(loginResult.getRecentlyGrantedPermissions())));
+            result.putArray(
+                    "declinedPermissions",
+                    Arguments.fromJavaArgs(
+                            setToStringArray(loginResult.getRecentlyDeniedPermissions())));
+            event.putMap("result", result);
+            button.dispatchEvent(event);
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+            RCTLoginButton button = mButton.get();
+            if (button == null) {
+                return;
+            }
+            WritableMap event = Arguments.createMap();
+            event.putString("type", "loginFinished");
+            event.putString("error", error.toString());
+            WritableMap result = Arguments.createMap();
+            result.putBoolean("isCancelled", false);
+            event.putMap("result", result);
+            button.dispatchEvent(event);
+        }
+
+        @Override
+        public void onCancel() {
+            RCTLoginButton button = mButton.get();
+            if (button == null) {
+                return;
+            }
+            WritableMap event = Arguments.createMap();
+            event.putString("type", "loginFinished");
+            event.putString("error", null);
+            WritableMap result = Arguments.createMap();
+            result.putBoolean("isCancelled", true);
+            event.putMap("result", result);
+            button.dispatchEvent(event);
+        }
+    }
+
+    private static String[] setToStringArray(Set<String> set) {
         String[] array = new String[set.size()];
         int i = 0;
         for (String e : set) {

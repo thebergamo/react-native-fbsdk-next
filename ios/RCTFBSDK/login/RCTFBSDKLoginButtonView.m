@@ -42,7 +42,9 @@
     },
   };
 
-  self.onChange(body);
+  if (self.onChange) {
+    self.onChange(body);
+  }
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
@@ -51,7 +53,9 @@
     @"type": @"logoutFinished",
   };
 
-  self.onChange(body);
+  if (self.onChange) {
+    self.onChange(body);
+  }
 }
 
 @end

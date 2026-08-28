@@ -55,8 +55,8 @@ export type LoginBehaviorIOS =
  * Shows the results of a login operation.
  */
 export type LoginResult = RNFBSDKCallback & {
-  grantedPermissions?: Array<string>;
-  declinedPermissions?: Array<string>;
+  grantedPermissions?: Array<string> | null;
+  declinedPermissions?: Array<string> | null;
 };
 
 export type LoginTracking = 'enabled' | 'limited';
