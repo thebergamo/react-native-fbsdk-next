@@ -145,21 +145,53 @@ function ensureFacebookActivity({
   mainApplication: AndroidConfig.Manifest.ManifestApplication;
   scheme: string | null;
 }) {
-  if (Array.isArray(mainApplication.activity)) {
-    // Remove all Facebook CustomTabActivities first
-    mainApplication.activity = mainApplication.activity.filter((activity) => {
-      return ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(
-        activity.$?.['android:name'],
-      );
-    });
-  } else {
-    mainApplication.activity = [];
+  const activities = mainApplication.activity ?? [];
+  mainApplication.activity = activities;
+  if (!scheme) {
+    mainApplication.activity = activities.filter(
+      (activity) =>
+        ![FACEBOOK_ACTIVITY, CUSTOM_TAB_ACTIVITY].includes(
+          activity.$['android:name'],
+        ),
+    );
+    return mainApplication;
   }
 
-  // If a new scheme is defined, append it to the activity.
-  if (scheme) {
-    mainApplication.activity.push(getFacebookActivity());
-    mainApplication.activity.push(getCustomTabActivity());
+  for (const required of [getFacebookActivity(), getCustomTabActivity()]) {
+    const existing = activities.find(
+      (activity) => activity.$['android:name'] === required.$['android:name'],
+    );
+    if (!existing) {
+      activities.push(required);
+      continue;
+    }
+    existing.$ = {...required.$, ...existing.$};
+    if (required['intent-filter']) {
+      const filters = existing['intent-filter'] ?? [];
+      const hasLoginFilter = filters.some(
+        (filter) =>
+          filter.data?.some(
+            (data) =>
+              data.$['android:scheme'] === '@string/fb_login_protocol_scheme',
+          ) &&
+          filter.action?.some(
+            (action) =>
+              action.$['android:name'] === 'android.intent.action.VIEW',
+          ) &&
+          [
+            'android.intent.category.DEFAULT',
+            'android.intent.category.BROWSABLE',
+          ].every((name) =>
+            filter.category?.some(
+              (category) => category.$['android:name'] === name,
+            ),
+          ),
+      );
+      if (!hasLoginFilter) {
+        filters.push(...required['intent-filter']);
+      }
+      existing['intent-filter'] = filters;
+    }
   }
   return mainApplication;
 }

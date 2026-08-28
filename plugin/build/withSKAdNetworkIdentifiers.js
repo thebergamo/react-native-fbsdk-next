@@ -19,13 +19,17 @@ const withSKAdNetworkIdentifiers = (config, identifiers) => {
         config.ios.infoPlist.SKAdNetworkItems = [];
     }
     // Get ids
-    let existingIds = config.ios.infoPlist.SKAdNetworkItems.map((item) => item?.SKAdNetworkIdentifier ?? null).filter(Boolean);
-    // remove duplicates
-    existingIds = [...new Set(existingIds)];
+    const existingIds = new Set();
+    for (const item of config.ios.infoPlist.SKAdNetworkItems) {
+        if (item?.SKAdNetworkIdentifier) {
+            existingIds.add(item.SKAdNetworkIdentifier);
+        }
+    }
     for (const id of identifiers) {
         // Must be lowercase
         const lower = id.toLowerCase();
-        if (!existingIds.includes(lower)) {
+        if (!existingIds.has(lower)) {
+            existingIds.add(lower);
             config.ios.infoPlist.SKAdNetworkItems.push({
                 SKAdNetworkIdentifier: lower,
             });

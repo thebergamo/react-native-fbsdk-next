@@ -153,32 +153,11 @@ export function setFacebookApplicationQuerySchemes(
 ): InfoPlist {
   const facebookAppId = getFacebookAppId(config);
 
-  const existingSchemes = infoPlist.LSApplicationQueriesSchemes || [];
-
-  if (facebookAppId && existingSchemes.includes('fbapi')) {
-    // already included, no need to add again
-    return infoPlist;
-  } else if (!facebookAppId && !existingSchemes.length) {
-    // already removed, no need to strip again
-    const {LSApplicationQueriesSchemes, ...restInfoPlist} = infoPlist;
-    if (LSApplicationQueriesSchemes?.length) {
-      return infoPlist;
-    } else {
-      // Return without the empty LSApplicationQueriesSchemes array.
-      return restInfoPlist;
-    }
-  }
-
-  // Remove all schemes
-  for (const scheme of fbSchemes) {
-    const index = existingSchemes.findIndex((s) => s === scheme);
-    if (index > -1) {
-      existingSchemes.splice(index, 1);
-    }
-  }
+  const existingSchemes = (infoPlist.LSApplicationQueriesSchemes || []).filter(
+    (scheme) => !fbSchemes.includes(scheme),
+  );
 
   if (!facebookAppId) {
-    // Run again to ensure the LSApplicationQueriesSchemes array is stripped if needed.
     infoPlist.LSApplicationQueriesSchemes = existingSchemes;
     if (!infoPlist.LSApplicationQueriesSchemes.length) {
       delete infoPlist.LSApplicationQueriesSchemes;
