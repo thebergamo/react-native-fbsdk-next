@@ -553,13 +553,13 @@ export default class Login extends Component {
           onLoginFinished={
             (error, result) => {
               if (error) {
-                console.log("login has error: " + result.error);
-              } else if (result.isCancelled) {
+                console.log("login has error: " + JSON.stringify(error));
+              } else if (result?.isCancelled) {
                 console.log("login is cancelled.");
               } else {
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
-                    console.log(data.accessToken.toString())
+                    console.log(data ? "Access token available" : "No current access token")
                   }
                 )
               }
@@ -677,17 +677,17 @@ export default class Login extends Component {
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
-              console.log("login has error: " + result.error);
-            } else if (result.isCancelled) {
+              console.log("login has error: " + JSON.stringify(error));
+            } else if (result?.isCancelled) {
               console.log("login is cancelled.");
             } else {
               if (Platform.OS === "ios") {
                 AuthenticationToken.getAuthenticationTokenIOS().then((data) => {
-                  console.log(data?.authenticationToken);
+                  console.log(data ? "Authentication token available" : "No authentication token");
                 });
               } else {
                 AccessToken.getCurrentAccessToken().then((data) => {
-                  console.log(data?.accessToken.toString());
+                  console.log(data ? "Access token available" : "No current access token");
                 });
               }
             }
@@ -713,8 +713,11 @@ export default class Login extends Component {
     LoginManager,
   } from "react-native-fbsdk-next";
 
+  import { Platform } from "react-native";
+
   //...
 
+  async function loginWithLimitedTracking() {
   try {
     const result = await LoginManager.logInWithPermissions(
       [
@@ -724,19 +727,23 @@ export default class Login extends Component {
       "limited",
       "my_nonce", // Optional
     );
-    console.log(result);
+    if (result.isCancelled) {
+      console.log("Login cancelled");
+      return;
+    }
     if (Platform.OS === "ios") {
       // This token **cannot** be used to access the Graph API.
       // https://developers.facebook.com/docs/facebook-login/limited-login/
       const result = await AuthenticationToken.getAuthenticationTokenIOS();
-      console.log(result?.authenticationToken);
+      console.log(result ? "Authentication token available" : "No authentication token");
     } else {
       // This token can be used to access the Graph API.
       const result = await AccessToken.getCurrentAccessToken();
-      console.log(result?.accessToken);
+      console.log(result ? "Access token available" : "No current access token");
     }
   } catch (error) {
     console.log(error);
+  }
   }
 
   //...
@@ -764,109 +771,68 @@ const shareLinkContent = {
 // ...
 
 // Share the link using the share dialog.
-shareLinkWithShareDialog() {
-  var tmp = this;
-  ShareDialog.canShow(this.state.shareLinkContent).then(
-    function(canShow) {
-      if (canShow) {
-        return ShareDialog.show(tmp.state.shareLinkContent);
-      }
+async function shareLinkWithShareDialog() {
+  try {
+    if (!(await ShareDialog.canShow(shareLinkContent))) {
+      console.log("Sharing is unavailable on this device");
+      return;
     }
-  ).then(
-    function(result) {
-      if (result.isCancelled) {
-        console.log("Share cancelled");
-      } else {
-        console.log("Share successful with postId: " + result.postId);
-      }
-    },
-    function(error) {
-      console.log("Share failed with error: " + error);
-    }
-  );
+    const result = await ShareDialog.show(shareLinkContent);
+    console.log(result.isCancelled ? "Share cancelled" : "Share successful");
+  } catch (error) {
+    console.log("Share failed with error: " + error);
+  }
 }
 ```
 
 #### Share Photos
 
-See [SharePhotoContent](/js/models/FBSharePhotoContent.js) and [SharePhoto](/js/models/FBSharePhoto.js) to refer other options.
+See [SharePhotoContent](./src/models/FBSharePhotoContent.ts) and [SharePhoto](./src/models/FBSharePhoto.ts) for other options.
 
 ```js
 // ...
 
-import { ShareApi } from "react-native-fbsdk-next";
+import { ShareDialog } from "react-native-fbsdk-next";
 
 // ...
 
 const photoUri = "file://" + "/path/of/photo.png";
 const sharePhotoContent = {
-  contentType = "photo",
+  contentType: "photo",
   photos: [{ imageUrl: photoUri }],
 };
 
 // ...
 
-ShareDialog.show(tmp.state.sharePhotoContent);
+ShareDialog.show(sharePhotoContent).catch(console.error);
 ```
 
 #### Share Videos
 
-See [ShareVideoContent](/js/models/FBShareVideoContent.js) and [ShareVideo](/js/models/FBShareVideo.js) to refer other options.
+See [ShareVideoContent](./src/models/FBShareVideoContent.ts) and [ShareVideo](./src/models/FBShareVideo.ts) for other options.
 
 ```js
 // ...
 
-import { ShareApi } from "react-native-fbsdk-next";
+import { ShareDialog } from "react-native-fbsdk-next";
 
 // ...
 
 const videoUri = "file://" + "/path/of/video.mp4";
 const shareVideoContent = {
-  contentType = "video",
+  contentType: "video",
   video: { localUrl: videoUri },
 };
 
 // ...
 
-ShareDialog.show(tmp.state.shareVideoContent);
+ShareDialog.show(shareVideoContent).catch(console.error);
 ```
 
 #### Share API
 
-Your app must have the `publish_actions` permission approved to share through the share API. You should prefer to use the Share Dialogs for an easier and more consistent experience.
-
-```js
-// ...
-
-import { ShareApi } from 'react-native-fbsdk-next';
-
-// ...
-
-// Build up a shareable link.
-const shareLinkContent = {
-  contentType: "link",
-  contentUrl: "https://facebook.com",
-};
-
-// ...
-
-// Share using the share API.
-ShareApi.canShare(this.state.shareLinkContent).then(
-  var tmp = this;
-  function(canShare) {
-    if (canShare) {
-      return ShareApi.share(tmp.state.shareLinkContent, "/me", "Some message.");
-    }
-  }
-).then(
-  function(result) {
-    console.log("Share with ShareApi success.");
-  },
-  function(error) {
-    console.log("Share with ShareApi failed with error: " + error);
-  }
-);
-```
+This package does not export `ShareApi`. Use the [share dialogs](#share-dialogs)
+instead of examples for the older Facebook-maintained package.
 
 ### [App Events](https://developers.facebook.com/docs/app-events)
 
@@ -1054,7 +1020,7 @@ The [expo-facebook](https://github.com/expo/expo-facebook) module was deprecated
 | expo-facebook | Supported | react-native-fbsdk-next |
 | --- | --- | --- |
 | [flushAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#flushasync) | ✅ | AppEventsLogger.flush() |
-| [getAdvertiserIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getadvertiseridasync) | ❌ | Not supported |
+| [getAdvertiserIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getadvertiseridasync) | ✅ (Android) | AppEventsLogger.getAdvertiserID() |
 | [getAnonymousIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getanonymousidasync) | ✅ | AppEventsLogger.getAnonymousID() |
 | [getAttributionIDAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getattributionidasync) | ✅ | AppEventsLogger.getAttributionID() |
 | [getAuthenticationCredentialAsync()](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/#getauthenticationcredentialasync) | ✅ | AccessToken.accessToken |
