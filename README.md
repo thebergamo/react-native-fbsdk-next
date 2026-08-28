@@ -603,6 +603,13 @@ LoginManager.logInWithPermissions(["public_profile"]).then(
 
 #### Get profile information
 
+`AccessToken.refreshCurrentAccessTokenAsync()` resolves with an `AccessTokenMap`
+on both platforms. On iOS, this replaces the raw permissions response returned
+by earlier versions. If the account changes or logs out during an iOS refresh,
+the promise rejects with `E_ACCESS_TOKEN_CHANGED` instead of returning another
+account's token. Neither token getter nor refresh is available for Limited Login;
+use `AuthenticationToken.getAuthenticationTokenIOS()` for that login mode.
+
 You can retrieve the profile information after a successful login attempt. The data returned will be related to the type of
 authentication you are using (limited or not) and the permission granted by the login method.
 
