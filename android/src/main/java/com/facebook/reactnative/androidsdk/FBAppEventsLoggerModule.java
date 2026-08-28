@@ -116,7 +116,6 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "FBAppEventsLogger";
 
     private AppEventsLogger mAppEventLogger;
-    private AttributionIdentifiers mAttributionIdentifiers;
     private ReactApplicationContext mReactContext;
 
     public FBAppEventsLoggerModule(ReactApplicationContext reactContext) {
@@ -126,8 +125,8 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
 
     @Override
     public void initialize() {
+        super.initialize();
         mAppEventLogger = AppEventsLogger.newLogger(mReactContext);
-        mAttributionIdentifiers = AttributionIdentifiers.getAttributionIdentifiers(mReactContext);
     }
 
     @Override
@@ -300,7 +299,8 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      @ReactMethod
      public void getAdvertiserID(Promise promise) {
        try {
-         promise.resolve(mAttributionIdentifiers.getAndroidAdvertiserId());
+         AttributionIdentifiers identifiers = AttributionIdentifiers.getAttributionIdentifiers(mReactContext);
+         promise.resolve(identifiers == null ? null : identifiers.getAndroidAdvertiserId());
        } catch (Exception e) {
          promise.reject("E_ADVERTISER_ID_ERROR", "Can not get advertiserID", e);
        }
@@ -312,7 +312,8 @@ public class FBAppEventsLoggerModule extends ReactContextBaseJavaModule {
      @ReactMethod
      public void getAttributionID(Promise promise) {
        try {
-         promise.resolve(mAttributionIdentifiers.getAttributionId());
+         AttributionIdentifiers identifiers = AttributionIdentifiers.getAttributionIdentifiers(mReactContext);
+         promise.resolve(identifiers == null ? null : identifiers.getAttributionId());
        } catch (Exception e) {
          promise.reject("E_ATTRIBUTION_ID_ERROR", "Can not get attributionID", e);
        }
