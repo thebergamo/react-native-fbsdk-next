@@ -748,6 +748,11 @@ export default class Login extends Component {
 
 All of the dialogs included are used in a similar way, with differing content types.
 
+Only one `show()` call per dialog module can be pending. Await it before opening
+another; overlapping calls reject with `E_DIALOG_IN_PROGRESS`. Success includes
+`isCancelled: false`, but a `postId` is not guaranteed. On Android, calls that
+require an Activity reject with `E_NO_ACTIVITY` when none is available.
+
 ```js
 // ...
 

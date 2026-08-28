@@ -42,6 +42,11 @@ RCT_ENUM_CONVERTER(FBSDKShareDialogMode, (@{
 
 RCT_EXPORT_MODULE(FBShareDialog);
 
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_get_main_queue();
+}
+
 #pragma mark - Object Lifecycle
 
 - (instancetype)init
@@ -61,35 +66,40 @@ RCT_EXPORT_MODULE(FBShareDialog);
 
 RCT_EXPORT_METHOD(canShow:(RCTFBSDKSharingContent)content resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-  _shareDialog.shareContent = nil;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    if ([self->_shareDialog canShow]) {
-      self->_shareDialog.shareContent = content;
-      NSError *error;
-      if ([self->_shareDialog validateWithError:&error]) {
-        resolve(@YES);
-      } else {
-        reject(@"FacebookSDK", @"SharingContent is invalid", error);
-      }
+  FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] initWithViewController:nil content:content delegate:nil];
+  dialog.mode = _shareDialog.mode;
+  dialog.shouldFailOnDataError = _shareDialog.shouldFailOnDataError;
+  if ([dialog canShow]) {
+    NSError *error;
+    if ([dialog validateWithError:&error]) {
+      resolve(@YES);
     } else {
-      resolve(@NO);
+      reject(@"FacebookSDK", @"SharingContent is invalid", error);
     }
-  });
+  } else {
+    resolve(@NO);
+  }
 }
 
 RCT_EXPORT_METHOD(show:(RCTFBSDKSharingContent)content
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
+  if (_showResolve) {
+    reject(@"E_DIALOG_IN_PROGRESS", @"A share dialog is already in progress.", nil);
+    return;
+  }
+  FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] initWithViewController:RCTPresentedViewController() content:content delegate:self];
+  dialog.mode = _shareDialog.mode;
+  dialog.shouldFailOnDataError = _shareDialog.shouldFailOnDataError;
+  _shareDialog = dialog;
   _showResolve = resolve;
   _showReject = reject;
-  _shareDialog.shareContent = content;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    if (!self->_shareDialog.fromViewController) {
-      self->_shareDialog.fromViewController = RCTPresentedViewController();
-    }
-    [self->_shareDialog show];
-  });
+  if (![_shareDialog show] && _showReject) {
+    _showResolve = nil;
+    _showReject = nil;
+    reject(@"FacebookSDK", @"ShareDialog could not be shown.", nil);
+  }
 }
 
 RCT_EXPORT_METHOD(setMode:(FBSDKShareDialogMode)mode)
@@ -106,29 +116,43 @@ RCT_EXPORT_METHOD(setShouldFailOnDataError:(BOOL)shouldFailOnDataError)
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
 {
-  if (_showResolve) {
-    _showResolve(results);
-    _showResolve = nil;
+  if (sharer != _shareDialog) {
+    return;
   }
+  RCTPromiseResolveBlock resolve = _showResolve;
+  _showResolve = nil;
   _showReject = nil;
+  if (resolve) {
+    NSMutableDictionary *result = [results mutableCopy] ?: [NSMutableDictionary new];
+    result[@"isCancelled"] = @NO;
+    resolve(result);
+  }
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
 {
-  if (_showReject) {
-    _showReject(@"FacebookSDK", @"ShareDialog encounters error", error);
-    _showReject = nil;
+  if (sharer != _shareDialog) {
+    return;
   }
+  RCTPromiseRejectBlock reject = _showReject;
+  _showReject = nil;
   _showResolve = nil;
+  if (reject) {
+    reject(@"FacebookSDK", @"ShareDialog encounters error", error);
+  }
 }
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer
 {
-  if (_showResolve) {
-    _showResolve(@{@"isCancelled": @YES});
-    _showResolve = nil;
+  if (sharer != _shareDialog) {
+    return;
   }
+  RCTPromiseResolveBlock resolve = _showResolve;
+  _showResolve = nil;
   _showReject = nil;
+  if (resolve) {
+    resolve(@{@"isCancelled": @YES});
+  }
 }
 
 @end

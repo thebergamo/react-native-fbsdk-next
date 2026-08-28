@@ -35,30 +35,33 @@ import com.facebook.gamingservices.GameRequestDialog;
  * See https://developers.facebook.com/docs/games/requests
  */
 @ReactModule(name = FBGameRequestDialogModule.NAME)
-public class FBGameRequestDialogModule extends FBSDKCallbackManagerBaseJavaModule {
+public class FBGameRequestDialogModule extends FBDialogModule {
 
     public static final String NAME = "FBGameRequestDialog";
 
-    private class GameRequestDialogCallback extends ReactNativeFacebookSDKCallback<GameRequestDialog.Result> {
+    private class GameRequestDialogCallback extends DialogCallback<GameRequestDialog.Result> {
 
         public GameRequestDialogCallback(Promise promise) {
             super(promise);
         }
 
         @Override
-        public void onSuccess(GameRequestDialog.Result result) {
-            if (mPromise != null) {
-                WritableMap gameRequestDialogResult = Arguments.createMap();
-                gameRequestDialogResult.putString("requestId", result.getRequestId());
-                gameRequestDialogResult.putArray("to", Utility.listToReactArray(result.getRequestRecipients()));
-                mPromise.resolve(gameRequestDialogResult);
-                mPromise = null;
-            }
+        protected WritableMap buildResult(GameRequestDialog.Result result) {
+            WritableMap gameRequestDialogResult = Arguments.createMap();
+            gameRequestDialogResult.putString("requestId", result.getRequestId());
+            gameRequestDialogResult.putArray("to", Utility.listToReactArray(result.getRequestRecipients()));
+            return gameRequestDialogResult;
         }
     }
 
+    public FBGameRequestDialogModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
+
+    /** @deprecated Dialogs now own their activity listener for the duration of each request. */
+    @Deprecated
     public FBGameRequestDialogModule(ReactApplicationContext reactContext, FBActivityEventListener activityEventListener) {
-        super(reactContext, activityEventListener);
+        this(reactContext);
     }
 
     @Override
@@ -82,13 +85,11 @@ public class FBGameRequestDialogModule extends FBSDKCallbackManagerBaseJavaModul
      */
     @ReactMethod
     public void show(ReadableMap gameRequestContentMap, Promise promise) {
-        if (getCurrentActivity() != null) {
-            GameRequestDialog gameRequestDialog = new GameRequestDialog(getCurrentActivity());
+        showDialog(new GameRequestDialogCallback(promise), (activity, manager, callback) -> {
+            GameRequestDialog gameRequestDialog = new GameRequestDialog(activity);
             GameRequestContent gameRequestContent = Utility.buildGameRequestContent(gameRequestContentMap);
-            gameRequestDialog.registerCallback(getCallbackManager(), new GameRequestDialogCallback(promise));
+            gameRequestDialog.registerCallback(manager, callback);
             gameRequestDialog.show(gameRequestContent);
-        } else {
-            promise.reject("No current activity.");
-        }
+        });
     }
 }

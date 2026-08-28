@@ -62,7 +62,7 @@ export type ShareDialogModeIOS =
   | 'native';
 
 export type ShareDialogResult = RNFBSDKCallback & {
-  postId: string;
+  postId?: string | null;
 };
 
 export default {
