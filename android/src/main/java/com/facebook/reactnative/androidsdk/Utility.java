@@ -108,10 +108,10 @@ public final class Utility {
         Utility.putStringOrNull(map, "middleName", middleName);
 
         Uri profilePictureUri = profile.getProfilePictureUri(100, 100);
-        Utility.putStringOrNull(map, "imageURL", profilePictureUri.toString());
+        Utility.putStringOrNull(map, "imageURL", profilePictureUri == null ? null : profilePictureUri.toString());
 
         Uri linkUri = profile.getLinkUri();
-        Utility.putStringOrNull(map, "linkURL", linkUri.toString());
+        Utility.putStringOrNull(map, "linkURL", linkUri == null ? null : linkUri.toString());
 
         String userId = profile.getId();
         Utility.putStringOrNull(map, "userID", userId);

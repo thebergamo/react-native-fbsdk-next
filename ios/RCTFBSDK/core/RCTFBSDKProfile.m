@@ -22,36 +22,37 @@ RCT_EXPORT_METHOD(getCurrentProfile:(RCTResponseSenderBlock)callback)
 
 static NSDictionary *RCTBuildProfileDict(void)
 {
-    if (!FBSDKProfile.currentProfile) {
+    FBSDKProfile *profile = FBSDKProfile.currentProfile;
+    if (!profile) {
         return nil;
     }
 
     return @{
-        @"name": FBSDKProfile.currentProfile.name ? FBSDKProfile.currentProfile.name : [NSNull null],
-        @"firstName": FBSDKProfile.currentProfile.firstName ? FBSDKProfile.currentProfile.firstName : [NSNull null],
-        @"lastName": FBSDKProfile.currentProfile.lastName ? FBSDKProfile.currentProfile.lastName : [NSNull null],
-        @"middleName": FBSDKProfile.currentProfile.middleName ? FBSDKProfile.currentProfile.middleName : [NSNull null],
-        @"imageURL": FBSDKProfile.currentProfile.imageURL ? FBSDKProfile.currentProfile.imageURL.relativeString : [NSNull null],
-        @"linkURL": FBSDKProfile.currentProfile.linkURL ? FBSDKProfile.currentProfile.linkURL.relativeString : [NSNull null],
-        @"userID": FBSDKProfile.currentProfile.userID ? FBSDKProfile.currentProfile.userID : [NSNull null],
-        @"email": FBSDKProfile.currentProfile.email ? FBSDKProfile.currentProfile.email : [NSNull null],
-        @"refreshDate": FBSDKProfile.currentProfile.refreshDate ? @(FBSDKProfile.currentProfile.refreshDate.timeIntervalSince1970 * 1000) : [NSNull null],
-        @"friendIDs": FBSDKProfile.currentProfile.friendIDs ? FBSDKProfile.currentProfile.friendIDs : [NSNull null],
-        @"birthday": FBSDKProfile.currentProfile.birthday ? @(FBSDKProfile.currentProfile.birthday.timeIntervalSince1970 * 1000) : [NSNull null],
-        @"ageRange": FBSDKProfile.currentProfile.ageRange ? @{
-            @"min": FBSDKProfile.currentProfile.ageRange.min,
-            @"max": FBSDKProfile.currentProfile.ageRange.max
+        @"name": RCTNullIfNil(profile.name),
+        @"firstName": RCTNullIfNil(profile.firstName),
+        @"lastName": RCTNullIfNil(profile.lastName),
+        @"middleName": RCTNullIfNil(profile.middleName),
+        @"imageURL": RCTNullIfNil(profile.imageURL.relativeString),
+        @"linkURL": RCTNullIfNil(profile.linkURL.relativeString),
+        @"userID": RCTNullIfNil(profile.userID),
+        @"email": RCTNullIfNil(profile.email),
+        @"refreshDate": profile.refreshDate ? @(profile.refreshDate.timeIntervalSince1970 * 1000) : [NSNull null],
+        @"friendIDs": RCTNullIfNil(profile.friendIDs),
+        @"birthday": profile.birthday ? @(profile.birthday.timeIntervalSince1970 * 1000) : [NSNull null],
+        @"ageRange": profile.ageRange ? @{
+            @"min": RCTNullIfNil(profile.ageRange.min),
+            @"max": RCTNullIfNil(profile.ageRange.max)
         } : [NSNull null],
-        @"hometown": FBSDKProfile.currentProfile.hometown ? @{
-            @"id": FBSDKProfile.currentProfile.hometown.id,
-            @"name": FBSDKProfile.currentProfile.hometown.name
+        @"hometown": profile.hometown ? @{
+            @"id": profile.hometown.id,
+            @"name": profile.hometown.name
         } : [NSNull null],
-        @"location": FBSDKProfile.currentProfile.location ? @{
-            @"id": FBSDKProfile.currentProfile.location.id,
-            @"name": FBSDKProfile.currentProfile.location.name
+        @"location": profile.location ? @{
+            @"id": profile.location.id,
+            @"name": profile.location.name
         } : [NSNull null],
-        @"gender": FBSDKProfile.currentProfile.gender ? FBSDKProfile.currentProfile.gender : [NSNull null],
-        @"permissions": FBSDKProfile.currentProfile.permissions ? FBSDKProfile.currentProfile.permissions.allObjects : [NSNull null]
+        @"gender": RCTNullIfNil(profile.gender),
+        @"permissions": RCTNullIfNil(profile.permissions.allObjects)
     };
 }
 
