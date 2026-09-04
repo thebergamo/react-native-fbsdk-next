@@ -54,7 +54,7 @@ jobs:
           max_attempts: 3
           command: yarn install --frozen-lockfile
       - name: Install JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
           distribution: 'temurin'
           java-version: '17'
