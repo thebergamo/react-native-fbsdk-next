@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-      - uses: actions/cache@v5
+      - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-      - uses: actions/cache@v5
+      - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -83,14 +83,14 @@ jobs:
         with:
           key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
           max-size: 750M
-      - uses: actions/cache@v5
+      - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         name: Yarn Cache
         id: yarn-cache
         with:
           path: .yarn/cache
           key: ${{ runner.os }}-ios-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-v1
-      - uses: actions/cache@v5
+      - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         name: Cache Pods
         id: pods-cache
         with:
