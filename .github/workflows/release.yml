@@ -20,7 +20,7 @@ jobs:
           git config --global user.name 'Semantic Release Bot'
           git config --global user.email 'semantic-release-bot@martynus.net'
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
