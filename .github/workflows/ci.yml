@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-android-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: ${{ runner.os }}-js-yarn-v1
       - name: Install dependencies
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -47,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-android-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: ${{ runner.os }}-android-yarn-v1
       - name: Install dependencies
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
@@ -98,7 +98,7 @@ jobs:
           key: ${{ runner.os }}-pods-v1-${{ hashFiles('RNFBSDKExample/ios/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-pods-v1
       - name: Install dependencies
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 30
