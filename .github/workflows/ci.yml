@@ -78,7 +78,7 @@ jobs:
         run: gem install cocoapods
       - name: Install xcbeautify
         run: brew install xcbeautify
-      - uses: hendrikmuhs/ccache-action@v1
+      - uses: hendrikmuhs/ccache-action@5ebbd400eff9e74630f759d94ddd7b6c26299639 # v1
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-v1 # makes a unique key w/related restore key internally
