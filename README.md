@@ -984,6 +984,8 @@ After installing this npm package, add the [config plugin](https://docs.expo.io/
 ```
 
 Unless you are managing your own native code, the config plugin must be configured per the following "API" section.
+
+On Android the plugin also declares [package visibility](https://developers.facebook.com/docs/android/troubleshooting/#faq_267321845055988) for the Facebook and Messenger apps (`com.facebook.katana` and `com.facebook.orca`), which Android 11+ requires before the SDK can reach them for login, sharing and app events attribution.
          
 Next, rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
 

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setFacebookConfig = exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
+exports.withAndroidPermissions = exports.withFacebookManifest = exports.withFacebookAppIdString = void 0;
+exports.setFacebookConfig = setFacebookConfig;
 const config_1 = require("./config");
 const config_plugins_1 = require("@expo/config-plugins");
 const { buildResourceItem } = config_plugins_1.AndroidConfig.Resources;
@@ -8,6 +9,8 @@ const { removeStringItem, setStringItem } = config_plugins_1.AndroidConfig.Strin
 const { addMetaDataItemToMainApplication, getMainApplicationOrThrow, prefixAndroidKeys, removeMetaDataItemFromMainApplication, } = config_plugins_1.AndroidConfig.Manifest;
 const FACEBOOK_ACTIVITY = 'com.facebook.FacebookActivity';
 const CUSTOM_TAB_ACTIVITY = 'com.facebook.CustomTabActivity';
+const FACEBOOK_APP_PACKAGE = 'com.facebook.katana';
+const MESSENGER_APP_PACKAGE = 'com.facebook.orca';
 const STRING_FACEBOOK_APP_ID = 'facebook_app_id';
 const STRING_FB_LOGIN_PROTOCOL_SCHEME = 'fb_login_protocol_scheme';
 const STRING_FACEBOOK_CLIENT_TOKEN = 'facebook_client_token';
@@ -96,6 +99,26 @@ function getCustomTabActivity() {
         },
     });
 }
+function ensurePackageVisibility(androidManifest) {
+    /**
+  <queries>
+      <package android:name="com.facebook.katana" />
+      <package android:name="com.facebook.orca" />
+  </queries>
+     */
+    const queries = androidManifest.manifest.queries ?? [];
+    const declaredPackages = queries.flatMap((query) => query.package ?? []);
+    const missingPackages = [FACEBOOK_APP_PACKAGE, MESSENGER_APP_PACKAGE].filter((packageName) => !declaredPackages.some((declaredPackage) => declaredPackage.$['android:name'] === packageName));
+    if (missingPackages.length > 0) {
+        queries.push({
+            package: missingPackages.map((packageName) => ({
+                $: { 'android:name': packageName },
+            })),
+        });
+    }
+    androidManifest.manifest.queries = queries;
+    return androidManifest;
+}
 function ensureFacebookActivity({ mainApplication, scheme, }) {
     if (Array.isArray(mainApplication.activity)) {
         // Remove all Facebook CustomTabActivities first
@@ -152,6 +175,7 @@ function setFacebookConfig(props, androidManifest) {
     const autoInitEnabled = (0, config_1.getFacebookAutoInitEnabled)(props);
     const autoLogAppEvents = (0, config_1.getFacebookAutoLogAppEvents)(props);
     const advertiserIdCollection = (0, config_1.getFacebookAdvertiserIDCollection)(props);
+    androidManifest = ensurePackageVisibility(androidManifest);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let mainApplication = getMainApplicationOrThrow(androidManifest);
     mainApplication = ensureFacebookActivity({ scheme, mainApplication });
@@ -194,4 +218,3 @@ function setFacebookConfig(props, androidManifest) {
     }
     return androidManifest;
 }
-exports.setFacebookConfig = setFacebookConfig;

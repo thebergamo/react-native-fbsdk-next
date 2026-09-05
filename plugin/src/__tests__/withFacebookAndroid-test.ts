@@ -64,6 +64,24 @@ const filledManifest = `<manifest xmlns:android="http://schemas.android.com/apk/
 `;
 
 describe('Android facebook config', () => {
+  it('declares package visibility for the Facebook and Messenger apps', async () => {
+    let androidManifestJson =
+      await readAndroidManifestAsync(sampleManifestPath);
+
+    androidManifestJson = setFacebookConfig({}, androidManifestJson);
+    // Applying the config twice must not duplicate the declarations.
+    androidManifestJson = setFacebookConfig({}, androidManifestJson);
+
+    const declaredPackages = androidManifestJson.manifest.queries
+      .flatMap((query) => query.package ?? [])
+      .map((declaredPackage) => declaredPackage.$['android:name']);
+
+    expect(declaredPackages).toEqual([
+      'com.facebook.katana',
+      'com.facebook.orca',
+    ]);
+  });
+
   it(`returns null from all getters if no value provided`, () => {
     expect(getFacebookScheme({})).toBe(null);
     expect(getFacebookAppId({})).toBe(null);

@@ -26,6 +26,8 @@ const {
 
 const FACEBOOK_ACTIVITY = 'com.facebook.FacebookActivity';
 const CUSTOM_TAB_ACTIVITY = 'com.facebook.CustomTabActivity';
+const FACEBOOK_APP_PACKAGE = 'com.facebook.katana';
+const MESSENGER_APP_PACKAGE = 'com.facebook.orca';
 const STRING_FACEBOOK_APP_ID = 'facebook_app_id';
 const STRING_FB_LOGIN_PROTOCOL_SCHEME = 'fb_login_protocol_scheme';
 const STRING_FACEBOOK_CLIENT_TOKEN = 'facebook_client_token';
@@ -138,6 +140,36 @@ function getCustomTabActivity() {
   }) as AndroidConfig.Manifest.ManifestActivity;
 }
 
+function ensurePackageVisibility(
+  androidManifest: AndroidConfig.Manifest.AndroidManifest,
+) {
+  /**
+<queries>
+    <package android:name="com.facebook.katana" />
+    <package android:name="com.facebook.orca" />
+</queries>
+   */
+  const queries = androidManifest.manifest.queries ?? [];
+  const declaredPackages = queries.flatMap((query) => query.package ?? []);
+  const missingPackages = [FACEBOOK_APP_PACKAGE, MESSENGER_APP_PACKAGE].filter(
+    (packageName) =>
+      !declaredPackages.some(
+        (declaredPackage) => declaredPackage.$['android:name'] === packageName,
+      ),
+  );
+
+  if (missingPackages.length > 0) {
+    queries.push({
+      package: missingPackages.map((packageName) => ({
+        $: {'android:name': packageName},
+      })),
+    });
+  }
+
+  androidManifest.manifest.queries = queries;
+  return androidManifest;
+}
+
 function ensureFacebookActivity({
   mainApplication,
   scheme,
@@ -231,6 +263,8 @@ export function setFacebookConfig(
   const autoInitEnabled = getFacebookAutoInitEnabled(props);
   const autoLogAppEvents = getFacebookAutoLogAppEvents(props);
   const advertiserIdCollection = getFacebookAdvertiserIDCollection(props);
+
+  androidManifest = ensurePackageVisibility(androidManifest);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let mainApplication = getMainApplicationOrThrow(androidManifest);
